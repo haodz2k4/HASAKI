@@ -1,0 +1,38 @@
+header.py-2.border-bottom
+      .container.d-flex.justify-content-between.align-items-center
+        .d-flex.align-items-center
+          // Logo
+          a.text-decoration-none(href='#')
+            img(src='https://upload.wikimedia.org/wikipedia/commons/1/1b/EBay_logo.svg', alt='eBay Logo', height='40')
+          // Shop by category
+          .dropdown.ms-3
+            a#shopCategory.text-decoration-none.text-dark.dropdown-toggle(href='#', data-bs-toggle='dropdown', aria-expanded='false')
+              | Shop by category
+            ul.dropdown-menu(aria-labelledby='shopCategory')
+              li
+                a.dropdown-item(href='#') Category 1
+              li
+                a.dropdown-item(href='#') Category 2
+              li
+                a.dropdown-item(href='#') Category 3
+        // Search bar
+        form.d-flex.flex-grow-1.mx-1
+          input.form-control.rounded-4.border-solid(type='search', placeholder='Search for anything', aria-label='Search')
+          select.form-select.rounded-4.border-solid(id='', aria-label='All Categories')
+            option(selected='') All Categories
+            option(value='1') Category 1
+            option(value='2') Category 2
+            option(value='3') Category 3
+          button.btn.btn-primary.rounded-0(style='margin-left: 10px; margin-right: 10px;', type='submit') Search
+        // User options
+        .d-flex.align-items-center
+          a.me-3.text-decoration-none(href='#')
+            i.fa-solid.fa-cart-shopping(style='font-size: 40px;')
+          a.me-3.text-decoration-none(href='#') &Dstrok;&abreve;ng Nh&#x1EAD;p
+          a.me-3.text-decoration-none(href='#') &Dstrok;&abreve;ng k&yacute;
+        // Icons
+        .d-flex.align-items-center
+          a.text-dark.me-3(href='#')
+            i.bi.bi-bell
+          a.text-dark(href='#')
+            i.bi.bi-cart
