@@ -210,7 +210,7 @@ color: #f1c40f;
     margin: 0 5px;
 }
 .pagination-custom .page-item a {
-    color: #f90;
+    color: black;
     padding: 10px 15px;
     border-radius: 50px;
     border: 1px solid #f90;
@@ -219,16 +219,21 @@ color: #f1c40f;
 .pagination-custom .page-item a:hover {
     background-color: #f90;
     color: white;
-    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 5px 15px #f90(0, 123, 255, 0.3);
 }
 .pagination-custom .page-item.active a {
     background-color: #f90;
     color: white;
-    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 5px 15px #f90(0, 123, 255, 0.3);
 }
 .pagination-custom .page-item.disabled a {
     color: #ddd;
     border-color: #ddd;
+}
+.page-link.active {
+    background-color: #f90;
+    color: white;
+    box-shadow: 0 5px 15px #f90(0, 123, 255, 0.3);
 }
 /* Mobile responsiveness */
 @media (max-width: 576px) {

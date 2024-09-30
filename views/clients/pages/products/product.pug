@@ -66,13 +66,13 @@ block main
             nav(aria-label='Page navigation example')
               ul.pagination.pagination-custom
                 // Previous Button (disabled if on first page)
-                li.page-item.disabled
-                  a.page-link(href='#', aria-label='Previous')
+                li.page-item(class=`${data.pagination.page === 1 ? "disabled" : ""}`)
+                  a.page-link(href='#', aria-label='Previous' btn-pagination=(data.pagination.page - 1))
                     span(aria-hidden='true') &laquo;
-                - for (let i = 1; i < data.pagination.countPage; i++)
+                - for (let i = 1; i <= data.pagination.countPage; i++)
                   li.page-item
-                    a.page-link(href='#') #{i}
+                    a.page-link(btn-pagination=i class=`${data.pagination.page == i ? "active" : ""}`) #{i}
                 // Next Button
-                li.page-item
-                  a.page-link(href='#', aria-label='Next')
+                li.page-item(class=`${data.pagination.page === data.pagination.countPage ? "disabled" : ""}`)
+                  a.page-link(btn-pagination=(data.pagination.page + 1) aria-label='Next')
                     span(aria-hidden='true') &raquo;
