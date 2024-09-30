@@ -3,7 +3,7 @@ import dotenv from "dotenv"
 dotenv.config()
 import config from "./config/config"
 import { getConnection } from "./config/mongodb"
-
+import clientRouter from "./routers/client/index.router"
 
 
 
@@ -14,6 +14,8 @@ const bootstrap = () => {
     app.use(express.static('public'))
     //connect to database 
     getConnection()
+    //Client router 
+    clientRouter(app)
     //PORT 
     const port = config.port;
     app.listen(port,() => {
