@@ -1,10 +1,12 @@
-import catchAsync from "../../utils/catchAsync";
 import { Request, Response } from "express";
-
+import { IProductService } from "../../services/product.service";
 
 export class HomeController {
-
+    constructor(private productService: IProductService) {}
     async home(req: Request, res: Response) {
-        res.render("clients/pages/home/home.pug")
+        const products = await this.productService.getProducts();
+        res.render("clients/pages/home/home.pug",{
+            products
+        })
     }
 }

@@ -1,8 +1,10 @@
 import { Router } from "express";
-const router: Router = Router()
 import { HomeController } from "../../controllers/client/home.controller";
-const homeController = new HomeController();
-import catchAsync from "../../utils/catchAsync";
-router.get("/",catchAsync(homeController.home))
+import { ProductService } from "../../services/product.service";
 
+const router: Router = Router();
+const productService = new ProductService();
+const homeController = new HomeController(productService); 
+
+router.get("/", homeController.home.bind(homeController)); 
 export default router;
