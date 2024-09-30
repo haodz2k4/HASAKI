@@ -8,7 +8,7 @@ export class ProductService implements IProductService  {
     constructor(private productRepository: IProductRepository) {}
 
     async getProducts(): Promise<IProduct[]>{
-        return await this.productRepository.findAll();
+        return await this.productRepository.findAll({});
     }
     
 }

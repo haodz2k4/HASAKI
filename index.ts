@@ -4,7 +4,7 @@ dotenv.config()
 import config from "./config/config"
 import { getConnection } from "./config/mongodb"
 import clientRouter from "./routers/client/index.router"
-
+import { TransFormDataResponse } from "./middleware/transform-response.middleware"
 
 
 const bootstrap = () => {
@@ -14,6 +14,8 @@ const bootstrap = () => {
     app.use(express.static('public'))
     //connect to database 
     getConnection()
+    //Transform Response local here 
+    app.use(TransFormDataResponse)
     //Client router 
     clientRouter(app)
     //PORT 
