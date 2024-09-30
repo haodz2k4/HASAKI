@@ -1,5 +1,6 @@
 import { IProduct } from './../models/product.model';
 import { IProductRepository, IProductQuery } from "../repository/product.repository"
+import { CacheService } from './cache.service';
 
 export interface IProductService {
     getProducts(productQuery: IProductQuery): Promise<IProduct[]>;
@@ -7,7 +8,7 @@ export interface IProductService {
     getProductBySlug(slug: string): Promise<IProduct | null>;
 }
 export class ProductService implements IProductService  {
-    constructor(private productRepository: IProductRepository) {}
+    constructor(private productRepository: IProductRepository,private cacheService: CacheService) {}
     async getProductBySlug(slug: string): Promise<IProduct | null> {
         const product = await this.productRepository.getProductBySlug(slug)
 
@@ -15,7 +16,15 @@ export class ProductService implements IProductService  {
     }
 
     async getProducts(productQuery: IProductQuery){
-        return await this.productRepository.findAll(productQuery);
+        this.cacheService.setCacheKey(`:${JSON.stringify(productQuery)}`) 
+        const cached = await this.cacheService.getCache();
+        if(cached){
+           return cached 
+        }
+        
+        const products = await this.productRepository.findAll(productQuery);
+        await this.cacheService.setCache(7200,products)
+        return products
     }
     
     async getTotalDocument(filter?: Record<string, any>): Promise<number> {
