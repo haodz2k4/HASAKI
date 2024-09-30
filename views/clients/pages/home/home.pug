@@ -11,55 +11,17 @@ block main
             // Product Slide
             .carousel-item.active
               .row
+               each item in data.hightlightedProducts
                 .col-md-3
                   .card
-                    .badge.bg-danger.position-absolute Gi&#x1EA3;m 23%
-                    img.card-img-top(src='https://via.placeholder.com/250x150', alt='Product 1')
-                    .card-body
-                      h6.text-danger i5-12500H | RTX 3050
-                      p.card-text Laptop ASUS Gaming VivoBook K3605ZC-RP564W
-                      h5.text-danger 19.490.000&#x20AB;
-                      p.text-muted
-                        s 25.290.000&#x20AB;
-                      p
-                        span.text-warning &starf;&starf;&starf;&starf;&starf;
-                      a.btn.btn-light.border(href='#') Y&ecirc;u th&iacute;ch &#x2764;&#xFE0F;
-                .col-md-3
-                  .card
-                    .badge.bg-danger.position-absolute Gi&#x1EA3;m 3%
-                    img.card-img-top(src='https://via.placeholder.com/250x150', alt='Product 2')
-                    .card-body
-                      h6.text-danger i5-1235U | Intel Iris Xe
-                      p.card-text Laptop Dell Inspiron 15 3520
-                      h5.text-danger 16.490.000&#x20AB;
-                      p.text-muted
-                        s 16.990.000&#x20AB;
-                      p
-                        span.text-warning &starf;&starf;&starf;&starf;&starf;
-                      a.btn.btn-light.border(href='#') Y&ecirc;u th&iacute;ch &#x2764;&#xFE0F;
-                .col-md-3
-                  .card
-                    .badge.bg-danger.position-absolute Gi&#x1EA3;m 8%
-                    img.card-img-top(src='https://via.placeholder.com/250x150', alt='Product 3')
-                    .card-body
-                      h6.text-danger i5-12450H | Intel UHD
-                      p.card-text Laptop Lenovo Ideapad Slim 5 14IAH8
-                      h5.text-danger 15.890.000&#x20AB;
-                      p.text-muted
-                        s 17.290.000&#x20AB;
-                      p
-                        span.text-warning &starf;&starf;&starf;&starf;&starf;
-                      a.btn.btn-light.border(href='#') Y&ecirc;u th&iacute;ch &#x2764;&#xFE0F;
-                .col-md-3
-                  .card
-                    .badge.bg-danger.position-absolute Gi&#x1EA3;m 24%
+                    .badge.bg-danger.position-absolute Gi&#x1EA3;m #{item.discountPercentage}%
                     img.card-img-top(src='https://via.placeholder.com/250x150', alt='Product 4')
                     .card-body
-                      h6.text-danger i5-1334U | Intel Iris Xe
-                      p.card-text Laptop HP 15-FD0237TU
-                      h5.text-danger 13.990.000&#x20AB;
+                      h6.text-danger #{item.title}
+                      p.card-text #{item.description}
+                      h5.text-danger #{item.newPrice}
                       p.text-muted
-                        s 18.390.000&#x20AB;
+                        s #{item.oldPrice}
                       p
                         span.text-warning &starf;&starf;&starf;&starf;&starf;
                       a.btn.btn-light.border(href='#') Y&ecirc;u th&iacute;ch &#x2764;&#xFE0F;
@@ -83,7 +45,7 @@ block main
         .col
           .category-item
             img(src='https://via.placeholder.com/100x100', alt='Điện Thoại & Phụ Kiện')
-            h6 &Dstrok;i&#x1EC7;n Tho&#x1EA1;i &amp; Ph&#x1EE5; Ki&#x1EC7;n
+            h6 &Dstrok;i&#x1E;C7;n Tho&#x1EA1;i &amp; Ph&#x1EE5; Ki&#x1EC7;n
         // Danh mục 3
         .col
           .category-item
@@ -132,116 +94,16 @@ block main
     section.container.my-4
       h2.text-center.mb-4 G&#x1EE2;I &Yacute; H&Ocirc;M NAY
       .row.row-cols-5.g-3
+       each item in data.products
         // Product 1
         .col
           .product-item
-            span.product-label -71%
-            img(src='https://via.placeholder.com/200x200', alt='Sữa Rửa Mặt Cerave')
-            h6 S&#x1EEF;a R&#x1EED;a M&#x1EB7;t Cerave D&#x1ECB;u Nh&#x1EB9; D&agrave;nh Cho M&#x1ECD;i Lo&#x1EA1;i Da
-            .product-price 100.000&dstrok;
-            .product-discount 350.000&dstrok;
+            span.product-label -#{item.discountPercentage}%
+            img(src='https://via.placeholder.com/200x200', alt=item.title)
+            h6 #{item.title}
+            .product-price #{item.newPrice}
+            .product-discount #{item.oldPrice}
             .product-tags
-              span &Dstrok;ang b&aacute;n ch&#x1EA1;y
+              span Đang bán chạy
             button.btn-buy Mua ngay
-        // Product 2
-        .col
-          .product-item
-            span.product-label -47%
-            img(src='https://via.placeholder.com/200x200', alt='Áo Thun AM AMOUR Nữ Form Rộng Tay Lỡ')
-            h6 &Aacute;o Thun AM AMOUR N&#x1EEF; Form R&#x1ED9;ng Tay L&#x1EE1;
-            .product-price 37.000&dstrok;
-            .product-discount 70.000&dstrok;
-            .product-tags
-              span FreeShip
-              |  
-              span Shop Verified
-            button.btn-buy Mua ngay
-        // Product 3
-        .col
-          .product-item
-            span.product-label -33%
-            img(src='https://via.placeholder.com/200x200', alt='Móc Khóa Mini Dễ Thương')
-            h6 1/3 Chi&#x1EBF;c M&oacute;c Kh&oacute;a Mini D&#x1EC5; Th&#x1B0;&#x1A1;ng BB K&#x1EB9;p T&oacute;c
-            .product-price 2.000&dstrok;
-            .product-tags
-              span Y&ecirc;u th&iacute;ch
-            button.btn-buy Mua ngay
-        // Product 4
-        .col
-          .product-item
-            span.product-label -24%
-            img(src='https://via.placeholder.com/200x200', alt='Khoai lang sấy dẻo')
-            h6 1kg khoai lang m&#x1EAD;t s&#x1EA5;y d&#x1EBB;o
-            .product-price 34.000&dstrok;
-            button.btn-buy Mua ngay
-        // Product 5
-        .col
-          .product-item
-            span.product-label -28%
-            img(src='https://via.placeholder.com/200x200', alt='Máy giặt mini')
-            h6 [CH&Iacute;NH H&Atilde;NG] M&aacute;y gi&#x1EB7;t mini t&#x1EF1; &dstrok;&#x1ED9;ng BH 4 n&abreve;m
-            .product-price 2.320.000&dstrok;
-            .product-discount 3.220.000&dstrok;
-            .product-tags
-              span FreeShip
-              |  
-              span Voucher
-              |  
-              span &Dstrok;&atilde; ki&#x1EC3;m ch&#x1EE9;ng
-            button.btn-buy Mua ngay
-        .col
-          .product-item
-            span.product-label -28%
-            img(src='https://via.placeholder.com/200x200', alt='Máy giặt mini')
-            h6 [CH&Iacute;NH H&Atilde;NG] M&aacute;y gi&#x1EB7;t mini t&#x1EF1; &dstrok;&#x1ED9;ng BH 4 n&abreve;m
-            .product-price 2.320.000&dstrok;
-            .product-discount 3.220.000&dstrok;
-            .product-tags
-              span FreeShip
-              |  
-              span Voucher
-              |  
-              span &Dstrok;&atilde; ki&#x1EC3;m ch&#x1EE9;ng
-            button.btn-buy Mua ngay
-        .col
-          .product-item
-            span.product-label -28%
-            img(src='https://via.placeholder.com/200x200', alt='Máy giặt mini')
-            h6 [CH&Iacute;NH H&Atilde;NG] M&aacute;y gi&#x1EB7;t mini t&#x1EF1; &dstrok;&#x1ED9;ng BH 4 n&abreve;m
-            .product-price 2.320.000&dstrok;
-            .product-discount 3.220.000&dstrok;
-            .product-tags
-              span FreeShip
-              |  
-              span Voucher
-              |  
-              span &Dstrok;&atilde; ki&#x1EC3;m ch&#x1EE9;ng
-            button.btn-buy Mua ngay
-        .col
-          .product-item
-            span.product-label -28%
-            img(src='https://via.placeholder.com/200x200', alt='Máy giặt mini')
-            h6 [CH&Iacute;NH H&Atilde;NG] M&aacute;y gi&#x1EB7;t mini t&#x1EF1; &dstrok;&#x1ED9;ng BH 4 n&abreve;m
-            .product-price 2.320.000&dstrok;
-            .product-discount 3.220.000&dstrok;
-            .product-tags
-              span FreeShip
-              |  
-              span Voucher
-              |  
-              span &Dstrok;&atilde; ki&#x1EC3;m ch&#x1EE9;ng
-            button.btn-buy Mua ngay
-        .col
-          .product-item
-            span.product-label -28%
-            img(src='https://via.placeholder.com/200x200', alt='Máy giặt mini')
-            h6 [CH&Iacute;NH H&Atilde;NG] M&aacute;y gi&#x1EB7;t mini t&#x1EF1; &dstrok;&#x1ED9;ng BH 4 n&abreve;m
-            .product-price 2.320.000&dstrok;
-            .product-discount 3.220.000&dstrok;
-            .product-tags
-              span FreeShip
-              |  
-              span Voucher
-              |  
-              span &Dstrok;&atilde; ki&#x1EC3;m ch&#x1EE9;ng
-            button.btn-buy Mua ngay
+        

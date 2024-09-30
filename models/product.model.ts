@@ -1,7 +1,7 @@
 import {Model, ObjectId, Schema, model, plugin, Document} from "mongoose"
 import { isURL } from "validator"
 import { COLLECTION_CATEGORY_NAME } from "./category.model"
-
+import { formatPrice } from "../utils/format.utils"
 export const COLLECTION_PRODUCT_NAME = 'Product'
 export interface IProduct extends Document{
     id: string 
@@ -65,9 +65,10 @@ export const productSchema = new Schema<IProduct>({
     timestamps: true
 })
 
-productSchema.virtual('newPrice').get(function(): number {
-    return this.price - (100 - this.discountPercentage) / 100
+productSchema.virtual('oldPrice').get(function(): string {
+    return formatPrice(this.price)
 })
-
-
+productSchema.virtual('newPrice').get(function(): string {
+    return formatPrice(this.price - (100 - this.discountPercentage) / 100)
+})
 export default model<IProduct>(COLLECTION_PRODUCT_NAME,productSchema)
