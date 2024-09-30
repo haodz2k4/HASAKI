@@ -10,9 +10,13 @@ export interface IProductQuery {
 export interface IProductRepository {
     findAll(productQuery: IProductQuery): Promise<IProduct[]>;
     getTotalDocument(filter?: Record<string, any>):Promise<number>;
+    getProductBySlug(slug: string) :Promise<IProduct | null>;
 }
 
 export class ProductRepository implements IProductRepository {
+    async getProductBySlug(slug: string): Promise<IProduct | null> {
+        return await ProductModel.findOne({slug, deleted: false})
+    }
     async findAll(productQuery: IProductQuery): Promise<IProduct[]> {
         const {pagination,filter, sortKey = "position", sortValue = "desc"} = productQuery;
         const {limit , skip = 0} = pagination;

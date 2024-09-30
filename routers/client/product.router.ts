@@ -8,5 +8,5 @@ const productController = new ProductController(new ProductService(new ProductRe
 
 
 router.get("/",productController.getProducts.bind(productController))
-
+router.get("/:slug",productController.getProduct.bind(productController))
 export default router

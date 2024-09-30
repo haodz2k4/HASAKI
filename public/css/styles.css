@@ -242,3 +242,28 @@ color: #f1c40f;
     }
 }
 /* PAGINATION */
+
+/* DETAIL PRODUCT*/
+.product-image {
+    max-width: 100%;
+    height: auto;
+}
+.product-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.product-price {
+    font-size: 1.25rem;
+    color: #28a745;
+}
+.btn-custom {
+    background-color: #dc3545;
+    color: white;
+}
+.btn-custom:hover {
+    background-color: #c82333;
+}
+.product-description {
+    font-size: 1rem;
+    color: #6c757d;
+}

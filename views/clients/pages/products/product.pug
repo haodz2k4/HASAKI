@@ -53,7 +53,7 @@ block main
           .row
             // Product Card
             each item in data.products 
-              .col-md-3.mb-4
+              a(href="/products/"+item.slug).text-decoration-none.col-md-3.mb-4
                 .card.product-card.p-2
                   img.card-img-top.product-image(src=`${item.thumbnail ? item.thumbnail : "https://via.placeholder.com/250"}`, alt='iPhone')
                   .card-body
