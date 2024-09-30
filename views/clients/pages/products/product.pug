@@ -27,9 +27,11 @@ block main
                 input#saver.form-check-input(type='checkbox')
                 label.form-check-label(for='saver') Ti&#x1EBF;t Ki&#x1EC7;m
             .mb-3
-              label.form-label Kho&#x1EA3;ng Gi&aacute;
-              input.form-control(type='number', placeholder='Từ')
-              input.form-control.mt-2(type='number', placeholder='Đến')
+              label.form-label Khoảng giá 
+              input.form-control(type='number', inp-min-price,min=0 ,placeholder='Từ')
+              input.form-control.mt-2(type='number', inp-max-price,min=0 placeholder='Đến')
+            .mb-3(style='display: flex; justiy-content: center')
+              button.btn.btn-warning(style='width: 100%;' btn-range-price) Tính 
             .mb-3
               label.form-label T&igrave;nh Tr&#x1EA1;ng
               .form-check

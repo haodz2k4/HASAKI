@@ -36,3 +36,28 @@ if(selectSort){
         window.location.href = url.href
     })
 }
+
+//Range Price 
+const btnRangePrice = document.querySelector("[btn-range-price]")
+if(btnRangePrice){
+    btnRangePrice.addEventListener("click",() => {
+        const inpMinPrice = document.querySelector("[inp-min-price]").value;
+        const inpMaxPrice = document.querySelector("[inp-max-price]").value; 
+        
+        url.searchParams.set("minPrice",inpMinPrice)
+        
+        url.searchParams.set("maxPrice",inpMaxPrice)
+        
+        const minPrice = url.searchParams.get("minPrice")
+        console.log(minPrice)
+        if(!minPrice){
+            url.searchParams.delete("minPrice")
+        }
+        const maxPrice = url.searchParams.get("maxPrice")
+        console.log(maxPrice)
+        if(!maxPrice){
+            url.searchParams.delete("maxPrice")
+        }
+        window.location.href = url.href
+    })
+}
