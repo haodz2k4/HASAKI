@@ -5,7 +5,7 @@ import config from "./config/config"
 import { getConnection } from "./config/mongodb"
 import clientRouter from "./routers/client/index.router"
 import { TransFormDataResponse } from "./middleware/transform-response.middleware"
-
+import redis from "./config/redis"
 
 const bootstrap = () => {
     
@@ -16,6 +16,7 @@ const bootstrap = () => {
     getConnection()
     //Transform Response local here 
     app.use(TransFormDataResponse)
+    redis
     //Client router 
     clientRouter(app)
     //PORT 

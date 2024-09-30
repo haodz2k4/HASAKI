@@ -8,10 +8,13 @@ block main
         .col-md-6
           h1.product-title #{data.product.title}
           p.product-description
-          | 
+          strong Danh Mục: 
+          | #{data.product.categoryId.title}
           p.product-price #{data.product.newPrice}
           p.rating &#x2B50; 4.6 (2,100 &Dstrok;&aacute;nh Gi&aacute;)
           p.stock-info S&#x1ED1; l&#x1B0;&#x1EE3;ng t&#x1ED3;n kho: 100
+          p.product-description
+          | B&#x1EA3;o h&agrave;nh 15 ng&agrave;y. &Dstrok;&#x1ED5;i &yacute; mi&#x1EC5;n ph&iacute;. B&#x1EA3;o hi&#x1EC3;m r&#x1A1;i v&#x1EE1; . Mi&#x1EC5;n ph&iacute; v&#x1EAD;n chuy&#x1EC3;n.
           .input-group(style='marign-bottom: 5px')
             input(type='number',placeholder='Số lượng', min='1', max='10', value='1',)
           button.btn.btn-custom.btn-lg Mua Ngay

@@ -15,7 +15,7 @@ export interface IProductRepository {
 
 export class ProductRepository implements IProductRepository {
     async getProductBySlug(slug: string): Promise<IProduct | null> {
-        return await ProductModel.findOne({slug, deleted: false})
+        return await ProductModel.findOne({slug, deleted: false}).populate('categoryId','title')
     }
     async findAll(productQuery: IProductQuery): Promise<IProduct[]> {
         const {pagination,filter, sortKey = "position", sortValue = "desc"} = productQuery;

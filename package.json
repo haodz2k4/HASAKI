@@ -18,6 +18,7 @@
     "express": "^4.21.0",
     "hasaki": "file:",
     "i": "^0.3.7",
+    "ioredis": "^5.4.1",
     "mongoose": "^8.7.0",
     "nodemon": "^3.1.7",
     "npm": "^10.8.3",

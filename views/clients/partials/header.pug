@@ -17,19 +17,15 @@ header.py-2.border-bottom
                 a.dropdown-item(href='#') Category 3
         // Search bar
         form.d-flex.flex-grow-1.mx-1
-          input.form-control.rounded-4.border-solid(type='search', placeholder='Search for anything', aria-label='Search')
-          select.form-select.rounded-4.border-solid(id='', aria-label='All Categories')
-            option(selected='') All Categories
-            option(value='1') Category 1
-            option(value='2') Category 2
-            option(value='3') Category 3
+          input.form-control.rounded-4.border-solid(type='search', placeholder='Search for anything', aria-label='Search', style='width: 80%')
+          
           button.btn.btn-primary.rounded-0(style='margin-left: 10px; margin-right: 10px;', type='submit') Search
         // User options
         .d-flex.align-items-center
           a.me-3.text-decoration-none(href='#')
-            i.fa-solid.fa-cart-shopping(style='font-size: 40px;')
-          a.me-3.text-decoration-none(href='#') &Dstrok;&abreve;ng Nh&#x1EAD;p
-          a.me-3.text-decoration-none(href='#') &Dstrok;&abreve;ng k&yacute;
+            i.fa-solid.fa-cart-shopping(style='font-size: 30px;')
+          a.me-3.text-decoration-none(href='/users/login').btn.btn-warning Đăng Nhập 
+          a.me-3.text-decoration-none(href='/users/register').btn.btn-danger Đăng ký 
         // Icons
         .d-flex.align-items-center
           a.text-dark.me-3(href='#')
