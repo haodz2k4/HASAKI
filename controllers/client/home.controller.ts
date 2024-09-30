@@ -6,7 +6,8 @@ export class HomeController {
     async home(req: Request, res: Response) {
         const products = await this.productService.getProducts();
         res.render("clients/pages/home/home.pug",{
-            products
+            products,
+            pageTitle: "Trang Chủ"
         })
     }
 }

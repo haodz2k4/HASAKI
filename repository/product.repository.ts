@@ -13,11 +13,14 @@ export interface IProductRepository {
 
 export class ProductRepository implements IProductRepository {
     async findAll(productQuery: Partial<IProductQuery>): Promise<IProduct[]> {
-        const {page = 1, limit = 25, filter = {status: "active"}, sortKey = "position", sortBy = "desc"} = productQuery
+        const {page = 1, limit = 25, filter, sortKey = "position", sortBy = "desc"} = productQuery
 
+        const skip = (page - 1) * limit 
         return await ProductModel
         .find({...filter, deleted: false})
         .sort({[sortKey]: sortBy})
+        .skip(skip)
+        .limit(limit)
         
 
     }

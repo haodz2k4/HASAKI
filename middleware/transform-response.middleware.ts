@@ -9,6 +9,7 @@ export const TransFormDataResponse = (req: Request, res: Response, next: NextFun
             success: true,
             message: 'Rendered successfully',
             data: locals,
+            pageTitle: locals?.pageTitle || "HASAGHI"
         };
 
         return originalRender(view, transformedLocals);
