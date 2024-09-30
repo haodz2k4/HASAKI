@@ -1,9 +1,10 @@
 import { Router } from "express";
 import { HomeController } from "../../controllers/client/home.controller";
 import { ProductService } from "../../services/product.service";
-
+import { ProductRepository } from "../../repository/product.repository";
 const router: Router = Router();
-const productService = new ProductService();
+const productRepository = new ProductRepository()
+const productService = new ProductService(productRepository);
 const homeController = new HomeController(productService); 
 
 router.get("/", homeController.home.bind(homeController)); 

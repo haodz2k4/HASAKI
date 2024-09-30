@@ -1,14 +1,14 @@
-import { Model } from "mongoose";
-import ProductModel, {IProduct} from "../models/product.model";
+import { IProduct } from './../models/product.model';
+import { IProductRepository } from "../repository/product.repository"
 
 export interface IProductService {
     getProducts(): Promise<IProduct[]>
 }
 export class ProductService implements IProductService  {
-    constructor(private productModel: Model<IProduct> = ProductModel) {}
+    constructor(private productRepository: IProductRepository) {}
 
     async getProducts(): Promise<IProduct[]>{
-        return await this.productModel.find()
+        return await this.productRepository.findAll();
     }
     
 }

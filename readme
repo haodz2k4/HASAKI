@@ -1,0 +1,6 @@
+Tầng trình bày (Presentation Layer): 
+Nơi mà người dùng tương tác với ứng dụng (ví dụ: controllers, views).
+Tầng ứng dụng (Application Layer):
+Nơi chứa các quy tắc nghiệp vụ và logic của ứng dụng (ví dụ: services).
+Tầng dữ liệu (Data Layer): 
+Nơi xử lý tương tác với cơ sở dữ liệu và lưu trữ dữ liệu (ví dụ: repositories).
