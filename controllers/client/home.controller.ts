@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { IProductService } from "../../services/product.service";
 import pick from "../../utils/pick";
-
+import paginationHelper from "../../helpers/pagination.helper";
 export class HomeController {
     constructor(private productService: IProductService) {}
     //[GET] "/"
@@ -12,8 +12,8 @@ export class HomeController {
                 filter:  {
                     status: "active",
                     highlighted: "1"
-                }, limit: 4}),
-            products: await this.productService.getProducts({limit: 20, filter: {status: "active"}}),
+                }, pagination: {limit: 4}}),
+            products: await this.productService.getProducts({pagination: {limit: 20}, filter: {status: "active"}}),
             pageTitle: "Trang Chủ"
         })
     }

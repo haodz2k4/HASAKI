@@ -61,4 +61,18 @@ block main
                     .rating-stars
                       | &starf;&starf;&starf;&starf;&starf;
               // Additional Product Cards
-              // Add more product cards here by copying the div above and changing the content
+              // Add more product cards here by copying the div above and changing the content 
+          .container.mt-5
+            nav(aria-label='Page navigation example')
+              ul.pagination.pagination-custom
+                // Previous Button (disabled if on first page)
+                li.page-item.disabled
+                  a.page-link(href='#', aria-label='Previous')
+                    span(aria-hidden='true') &laquo;
+                - for (let i = 1; i < data.pagination.countPage; i++)
+                  li.page-item
+                    a.page-link(href='#') #{i}
+                // Next Button
+                li.page-item
+                  a.page-link(href='#', aria-label='Next')
+                    span(aria-hidden='true') &raquo;
