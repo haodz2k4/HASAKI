@@ -157,4 +157,44 @@ header a:hover {
     border-radius: 5px;
     cursor: pointer;
 }
-/* End List Product  */
+/* End List Product  */ 
+
+/* PRODUCTS CARD*/
+.product-card {
+transition: transform 0.2s;
+}
+.product-card:hover {
+transform: scale(1.05);
+}
+.price {
+color: #e31e25;
+font-size: 1.2rem;
+}
+.sale-tag {
+background-color: #f90;
+color: #fff;
+font-size: 0.8rem;
+padding: 2px 6px;
+border-radius: 5px;
+}
+.filter-section {
+background-color: #fff;
+padding: 15px;
+border-radius: 10px;
+box-shadow: 0 0 10px rgba(0,0,0,0.1);
+margin-bottom: 30px;
+}
+.product-image {
+height: 180px;
+object-fit: cover;
+border-radius: 8px;
+}
+.product-title {
+font-size: 1rem;
+font-weight: 600;
+margin-top: 10px;
+}
+.rating-stars {
+color: #f1c40f;
+}
+/* END PRODUCT CARD  */
