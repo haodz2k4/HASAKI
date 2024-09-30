@@ -1,6 +1,8 @@
 import express from "express"
 import dotenv from "dotenv"
+dotenv.config()
 import config from "./config/config"
+import { getConnection } from "./config/mongodb"
 
 
 
@@ -8,10 +10,9 @@ import config from "./config/config"
 const bootstrap = () => {
     
     const app = express()
-    //Config Dotenv 
-    dotenv.config()
 
-
+    //connect to database 
+    getConnection()
     //PORT 
     const port = config.port;
     app.listen(port,() => {
