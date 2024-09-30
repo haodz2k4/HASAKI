@@ -20,11 +20,26 @@ export class ProductController {
         const sortKey = req.query.sortKey as string;
         const sortValue = req.query.sortValue as "asc" | "desc";
         //range price 
+        const minPrice = parseInt(req.query.minPrice as string) 
+        const maxPrice = parseInt(req.query.maxPrice as string);
+        const rangePrice: Record<string, any> = [];
+
+        if (minPrice) {
+            rangePrice.push({ price: { $gte: minPrice } });
+        }
+        if (maxPrice) {
+            rangePrice.push({ price: { $lte: maxPrice } }); 
+        }
+        if(rangePrice.length > 0){
+            filter.$and = rangePrice;
+        }
         
         res.render("clients/pages/products/product.pug",{       
             products: await this.productService.getProducts({pagination, filter, sortKey, sortValue}),
             pagination,  
-            sortString: `${sortKey}-${sortValue}`
+            sortString: `${sortKey}-${sortValue}`,
+            minPrice,
+            maxPrice
         })
     }
 }

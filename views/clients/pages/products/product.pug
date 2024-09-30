@@ -28,8 +28,8 @@ block main
                 label.form-check-label(for='saver') Ti&#x1EBF;t Ki&#x1EC7;m
             .mb-3
               label.form-label Khoảng giá 
-              input.form-control(type='number', inp-min-price,min=0 ,placeholder='Từ')
-              input.form-control.mt-2(type='number', inp-max-price,min=0 placeholder='Đến')
+              input.form-control(type='number', inp-min-price,min=0, value=data.minPrice ? data.minPrice : 0 ,placeholder='Từ')
+              input.form-control.mt-2(type='number', inp-max-price,min=0, value=data.maxPrice placeholder='Đến')
             .mb-3(style='display: flex; justiy-content: center')
               button.btn.btn-warning(style='width: 100%;' btn-range-price) Tính 
             .mb-3
