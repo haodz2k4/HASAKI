@@ -4,8 +4,8 @@ import ProductModel from "../models/product.model";
 export interface IProductQuery {
     pagination: PaginationResult;
     filter?: Record<string, any>;
-    sortKey?: keyof IProduct;
-    sortBy?: "asc" | "desc"
+    sortKey?: string;
+    sortValue?: "asc" | "desc"
 }
 export interface IProductRepository {
     findAll(productQuery: IProductQuery): Promise<IProduct[]>;
@@ -14,11 +14,11 @@ export interface IProductRepository {
 
 export class ProductRepository implements IProductRepository {
     async findAll(productQuery: IProductQuery): Promise<IProduct[]> {
-        const {pagination,filter, sortKey = "position", sortBy = "desc"} = productQuery;
+        const {pagination,filter, sortKey = "position", sortValue = "desc"} = productQuery;
         const {limit , skip = 0} = pagination;
         return await ProductModel
         .find({...filter, deleted: false})
-        .sort({[sortKey]: sortBy})
+        .sort({[sortKey]: sortValue})
         .skip(skip)
         .limit(limit)
     }

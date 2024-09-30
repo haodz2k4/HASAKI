@@ -18,3 +18,15 @@ if(btnPagination.length > 0){
         })
     }) 
 }
+
+//SORT 
+const selectSort = document.querySelector("[select-sort]");
+if(selectSort){
+    selectSort.addEventListener("change",() => {
+        const value = selectSort.value
+        const [sortKey, sortValue] = value.split("-");
+        url.searchParams.set("sortKey",sortKey)
+        url.searchParams.set("sortValue", sortValue); 
+        window.location.href = url.href
+    })
+}

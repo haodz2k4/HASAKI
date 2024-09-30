@@ -15,9 +15,13 @@ export class ProductController {
         const page = parseInt(req.query.page as string) || 1;
         const limit = parseInt(req.query.limit as string) || 20;
         const total = await this.productService.getTotalDocument()
-        const pagination = paginationHelper({page, limit,total })
+        const pagination = paginationHelper({page, limit,total}) 
+        //SORTING 
+        const sortKey = req.query.sortKey as string;
+        const sortValue = req.query.sortValue as "asc" | "desc";
+        
         res.render("clients/pages/products/product.pug",{       
-            products: await this.productService.getProducts({pagination, filter}),
+            products: await this.productService.getProducts({pagination, filter, sortKey, sortValue}),
             pagination,  
         })
     }
