@@ -19,10 +19,10 @@ export class ProductController {
         //SORTING 
         const sortKey = req.query.sortKey as string;
         const sortValue = req.query.sortValue as "asc" | "desc";
-        
         res.render("clients/pages/products/product.pug",{       
             products: await this.productService.getProducts({pagination, filter, sortKey, sortValue}),
             pagination,  
+            sortString: `${sortKey}-${sortValue}`
         })
     }
 }
