@@ -10,7 +10,8 @@ import { getConnection } from "./config/mongodb"
 const bootstrap = () => {
     
     const app = express()
-
+    app.set('view engine', 'pug')
+    app.use(express.static('public'))
     //connect to database 
     getConnection()
     //PORT 
