@@ -1,8 +1,8 @@
 import {Model, ObjectId, Schema, model, plugin, Document} from "mongoose"
 import { isURL } from "validator"
+import { COLLECTION_CATEGORY_NAME } from "./category.model"
 
-
-export const COLLECTION_NAME = 'Product'
+export const COLLECTION_PRODUCT_NAME = 'Product'
 export interface IProduct extends Document{
     id: string 
     title: string
@@ -28,7 +28,7 @@ const productSchema = new Schema<IProduct>({
         maxlength: 200 
     },
     categoryId: {
-        type: Schema.Types.ObjectId, ref: 'category',
+        type: Schema.Types.ObjectId, ref: COLLECTION_CATEGORY_NAME,
         required: true,
         validate: {
             validator: async function(val: string) {
@@ -40,7 +40,7 @@ const productSchema = new Schema<IProduct>({
         
     },  
     position: {type: Number, min: 1, default: async function():Promise<number> {
-        const count = await model(COLLECTION_NAME).countDocuments({ deleted: false });
+        const count = await model(COLLECTION_PRODUCT_NAME).countDocuments({ deleted: false });
         return count + 1
     }},
     description: String,
@@ -70,4 +70,4 @@ productSchema.virtual('newPrice').get(function(): number {
 })
 
 
-export default model<IProduct>(COLLECTION_NAME,productSchema)
+export default model<IProduct>(COLLECTION_PRODUCT_NAME,productSchema)
