@@ -1,6 +1,6 @@
 import { IProduct } from "../models/product.model";
 import ProductModel from "../models/product.model";
-interface IProductQuery {
+export interface IProductQuery {
     page: number;
     limit: number;
     filter: Record<string, any>,
