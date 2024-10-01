@@ -6,17 +6,21 @@ import { ResponseError } from "../../utils/error.utils";
 export class UserController {
 
     constructor(private userService: IUserService) {}
-    //[GET]  "/user/login"
+    //[GET]  "/users/login"
     async login(req: Request, res: Response) {
         
-        res.render("clients/pages/users/login.pug")
+        res.render("clients/pages/users/login.pug",{
+            pageTitle: "Đăng nhập"
+        })
     }
     //[POST] "/user/login"
     async loginPost(req: Request, res: Response) {
         const {email, password} = req.body;
         const user = await this.userService.findOneByEmail(email);
         if(!user){
-            throw new ResponseError(404,"User is not found");
+            req.flash('error', 'Email or password is not found');
+            res.redirect("back");
+            return;
         }
         res.redirect("back")
     }

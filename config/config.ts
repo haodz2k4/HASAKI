@@ -7,6 +7,7 @@ export default {
         username: process.env.REDIS_USERNAME,
         password: process.env.REDIS_PASSWORD,
         db: 0
-    }
+    },
+    session_secret: process.env.SESSION_SECRET 
 
 }

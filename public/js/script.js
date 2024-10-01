@@ -61,3 +61,10 @@ if(btnRangePrice){
         window.location.href = url.href
     })
 }
+
+const timeOutAlert = document.querySelector("[time-out-alert]");
+if(timeOutAlert){
+    setTimeout(() => {
+        timeOutAlert.classList.add("d-none")
+    }, 5000)
+}

@@ -1,0 +1,10 @@
+mixin alertSuccess()
+    - if (messages.success)
+        .message.success
+            .alert.alert-success(role='alert' time-out-alert)
+                | #{messages.success} 
+mixin alertError()
+    -if (messages.error)
+        .message.error 
+            .alert.alert-danger(role='alert' time-out-alert) 
+                | #{messages.error}

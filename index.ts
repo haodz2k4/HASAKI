@@ -8,6 +8,9 @@ import { TransFormDataResponse } from "./middleware/transform-response.middlewar
 import redis from "./config/redis"
 import bodyParser from "body-parser"
 import { handleErrorMiddleware } from "./middleware/error.middleware"
+import flash from "express-flash"
+import cookieParser from "cookie-parser"
+import session from "express-session"
 const bootstrap = () => {
     
     const app = express()
@@ -15,7 +18,20 @@ const bootstrap = () => {
     app.use(express.static('public'))
     app.use(bodyParser.urlencoded({ extended: false }))
 
-    
+    //Express flash (For Show Alert)
+    app.use(cookieParser('keyboard cat'));
+    app.use(session({
+        secret: config.session_secret as string,
+        resave: false,
+        saveUninitialized: false,
+        cookie: { 
+            maxAge: 5000, 
+            secure: process.env.NODE_ENV === 'production',
+            httpOnly: true,
+            sameSite: 'lax'
+        }
+    }))
+    app.use(flash());
     //connect to database 
     getConnection()
     //Transform Response local here 
