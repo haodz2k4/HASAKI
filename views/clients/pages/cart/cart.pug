@@ -1,0 +1,53 @@
+extends ../../layouts/default.pug 
+
+block main 
+
+    .container.my-5
+      h2 Gi&#x1ECF; H&agrave;ng
+      .row
+        .col-12
+          .card.p-3
+            .row
+              .col-md-1
+                img.product-img(src='https://via.placeholder.com/80', alt='Product Image')
+              .col-md-5
+                p.product-name &Aacute;o thun oversize nam n&#x1EEF; cao c&#x1EA5;p v&#x1EA3;i waffle h&agrave;ng hi&#x1EC7;u
+                p.product-options Ph&acirc;n Lo&#x1EA1;i H&agrave;ng: N&acirc;u, XL
+              .col-md-2
+                span.price-original 230.000&dstrok;
+                span.price-sale 138.000&dstrok;
+              .col-md-2
+                .input-group
+                  button.btn.btn-outline-secondary -
+                  input.form-control.text-center(type='text', value='1', style='max-width: 50px;')
+                  button.btn.btn-outline-secondary +
+              .col-md-2.cart-action
+                a.remove-link(href='#') X&oacute;a
+            hr
+            .row
+              .col-md-1
+                img.product-img(src='https://via.placeholder.com/80', alt='Product Image')
+              .col-md-5
+                p.product-name &Aacute;o thun oversize nam n&#x1EEF; cao c&#x1EA5;p v&#x1EA3;i waffle h&agrave;ng hi&#x1EC7;u
+                p.product-options Ph&acirc;n Lo&#x1EA1;i H&agrave;ng: X&aacute;m, XL
+              .col-md-2
+                span.price-original 230.000&dstrok;
+                span.price-sale 138.000&dstrok;
+              .col-md-2
+                .input-group
+                  button.btn.btn-outline-secondary -
+                  input.form-control.text-center(type='text', value='1', style='max-width: 50px;')
+                  button.btn.btn-outline-secondary +
+              .col-md-2.cart-action
+                a.remove-link(href='#') X&oacute;a
+          .row.mt-4
+            .col-md-8
+              .voucher-input
+                input.form-control(type='text', placeholder='Nhập mã giảm giá')
+                button.btn.btn-warning Ch&#x1ECD;n ho&#x1EB7;c nh&#x1EAD;p m&atilde;
+            .col-md-4.total-section
+              | T&#x1ED5;ng ti&#x1EC1;n: 
+              span 276.000&dstrok;
+          .row.mt-4
+            .col-md-4.offset-md-8
+              button.btn.buy-btn Mua H&agrave;ng

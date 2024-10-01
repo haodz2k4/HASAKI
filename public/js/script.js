@@ -67,4 +67,11 @@ if(timeOutAlert){
     setTimeout(() => {
         timeOutAlert.classList.add("d-none")
     }, 5000)
+} 
+
+const btnLogout = document.querySelector("[btn-logout]")
+if(btnLogout){
+    btnLogout.addEventListener("click",() => {
+        window.location.href = "/users/logout"
+    })
 }

@@ -2,12 +2,12 @@ header.py-2.border-bottom
       .container.d-flex.justify-content-between.align-items-center
         .d-flex.align-items-center
           // Logo
-          a.text-decoration-none(href='#')
+          a.text-decoration-none(href='/')
             img(src='https://upload.wikimedia.org/wikipedia/commons/1/1b/EBay_logo.svg', alt='eBay Logo', height='40')
           // Shop by category
           .dropdown.ms-3
-            a#shopCategory.text-decoration-none.text-dark.dropdown-toggle(href='#', data-bs-toggle='dropdown', aria-expanded='false')
-              | Shop by category
+            a#shopCategory.text-decoration-none.text-dark.dropdown-toggle(href='/products', data-bs-toggle='dropdown', aria-expanded='false')
+              | Sản phẩm 
             ul.dropdown-menu(aria-labelledby='shopCategory')
               li
                 a.dropdown-item(href='#') Category 1
@@ -22,10 +22,13 @@ header.py-2.border-bottom
           button.btn.btn-primary.rounded-0(style='margin-left: 10px; margin-right: 10px;', type='submit') Search
         // User options
         .d-flex.align-items-center
-          a.me-3.text-decoration-none(href='#')
+          a.me-3.text-decoration-none(href='/cart')
             i.fa-solid.fa-cart-shopping(style='font-size: 30px;')
-          a.me-3.text-decoration-none(href='/users/login').btn.btn-warning Đăng Nhập 
-          a.me-3.text-decoration-none(href='/users/register').btn.btn-danger Đăng ký 
+          if user 
+            a.me-3.text-decoration-none(href='/users/profiles').btn #{user.fullName}
+          else 
+            a.me-3.text-decoration-none(href='/users/login').btn.btn-warning Đăng Nhập 
+            a.me-3.text-decoration-none(href='/users/register').btn.btn-danger Đăng ký 
         // Icons
         .d-flex.align-items-center
           a.text-dark.me-3(href='#')

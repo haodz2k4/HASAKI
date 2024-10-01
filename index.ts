@@ -11,6 +11,7 @@ import { handleErrorMiddleware } from "./middleware/error.middleware"
 import flash from "express-flash"
 import cookieParser from "cookie-parser"
 import session from "express-session"
+import { loggerMiddleware } from "./middleware/logger.middleware"
 const bootstrap = () => {
     
     const app = express()
@@ -34,6 +35,7 @@ const bootstrap = () => {
     app.use(flash());
     //connect to database 
     getConnection()
+    app.use(loggerMiddleware)
     //Transform Response local here 
     app.use(TransFormDataResponse)
     redis
