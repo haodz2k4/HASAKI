@@ -1,24 +1,27 @@
-import express from "express"
+import express, {Express} from "express"
 import dotenv from "dotenv"
 dotenv.config()
 import config from "./config/config"
 import { getConnection } from "./config/mongodb"
 import clientRouter from "./routers/client/index.router"
-import { TransFormDataResponse } from "./middleware/transform-response.middleware"
 import redis from "./config/redis"
 import bodyParser from "body-parser"
-import { handleErrorMiddleware } from "./middleware/error.middleware"
+import { handleErrorMiddleware } from "./middleware/error.middleware";
 import flash from "express-flash"
 import cookieParser from "cookie-parser"
 import session from "express-session"
 import { loggerMiddleware } from "./middleware/logger.middleware"
 const bootstrap = () => {
     
-    const app = express()
+    const app: Express = express()
     app.set('view engine', 'pug')
     app.use(express.static('public'))
     app.use(bodyParser.urlencoded({ extended: false }))
-
+    
+    //Client router 
+    clientRouter(app)
+    //redis
+    redis
     //Express flash (For Show Alert)
     app.use(cookieParser('keyboard cat'));
     app.use(session({
@@ -36,13 +39,6 @@ const bootstrap = () => {
     //connect to database 
     getConnection()
     app.use(loggerMiddleware)
-    //Transform Response local here 
-    app.use(TransFormDataResponse)
-    redis
-    //Client router 
-    clientRouter(app)
-    //Handle error
-    app.use(handleErrorMiddleware)
     //PORT 
     const port = config.port;
     app.listen(port,() => {
