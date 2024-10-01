@@ -1,7 +1,42 @@
 doctype html
-html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Document
-    body 
+html(lang='vi')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title Form &Dstrok;&abreve;ng K&yacute; Ng&#x1B0;&#x1EDD;i D&ugrave;ng
+    // Link đến Bootstrap CSS
+    link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css', rel='stylesheet')
+  body
+    .container
+      .row.justify-content-center.mt-5
+        .col-md-6
+          .card
+            .card-header.bg-primary.text-white
+              h4.mb-0 &Dstrok;&abreve;ng K&yacute; Ng&#x1B0;&#x1EDD;i D&ugrave;ng
+            .card-body
+              // Form đăng ký
+              form(action='/users/register', method='POST')
+                // Full Name
+                .mb-3
+                  label.form-label(for='fullName') H&#x1ECD; v&agrave; T&ecirc;n
+                  input#fullName.form-control(type='text', name='fullName', placeholder='Nhập họ và tên', required='')
+                // Email
+                .mb-3
+                  label.form-label(for='email') &Dstrok;&#x1ECB;a ch&#x1EC9; Email
+                  input#email.form-control(type='email', name='email', placeholder='Nhập email', required='')
+                // Password
+                .mb-3
+                  label.form-label(for='password') M&#x1EAD;t Kh&#x1EA9;u
+                  input#password.form-control(type='password', name='password', placeholder='Nhập mật khẩu', required='', minlength='8')
+                // Phone
+                .mb-3
+                  label.form-label(for='phone') S&#x1ED1; &Dstrok;i&#x1EC7;n Tho&#x1EA1;i
+                  input#phone.form-control(type='tel', name='phone', placeholder='Nhập số điện thoại', required='', pattern='[0-9]{8,10}')
+                // Birthdate
+                .mb-3
+                  label.form-label(for='birthDate') Ng&agrave;y Sinh
+                  input#birthDate.form-control(type='date', name='birthDate', required='')
+                // Submit Button
+                button.btn.btn-primary.w-100(type='submit') &Dstrok;&abreve;ng K&yacute;
+    // Bootstrap JS (optional)
+    script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js')

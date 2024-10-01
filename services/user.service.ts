@@ -1,15 +1,19 @@
 // user.service.ts
-import { IUserDocument } from "../models/user.model";
+import { IUser, IUserDocument } from "../models/user.model";
 import { IUserRepository } from "../repository/user.repository";
 
 export interface IUserService {
     findAll(): Promise<IUserDocument[]>;
     findOneById(id: string): Promise<IUserDocument | null>;
     findOneByEmail(email: string): Promise<IUserDocument | null>;
+    create(bodyUser: IUser): Promise<IUserDocument>;
 }
 
 export class UserService implements IUserService {
     constructor(private userRepository: IUserRepository) {}
+    async create(bodyUser: IUser): Promise<IUserDocument> {
+        return await this.userRepository.create(bodyUser)
+    }
 
     findAll(): Promise<IUserDocument[]> {
         throw new Error("Method not implemented.");

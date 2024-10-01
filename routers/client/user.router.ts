@@ -11,5 +11,6 @@ const userController = new UserController(new UserService(new UserRepository()))
 
 router.get("/login", catchAsync(userController.login.bind(userController)));
 router.post("/login", catchAsync(userController.loginPost.bind(userController)));
-
+router.get("/register",catchAsync(userController.register.bind(userController)));
+router.post("/register",catchAsync(userController.registerPost.bind(userController)))
 export default router;

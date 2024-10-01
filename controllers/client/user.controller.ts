@@ -13,15 +13,31 @@ export class UserController {
             pageTitle: "Đăng nhập"
         })
     }
-    //[POST] "/user/login"
+    //[POST] "/users/login"
     async loginPost(req: Request, res: Response) {
         const {email, password} = req.body;
+        console.log(email, password)
         const user = await this.userService.findOneByEmail(email);
-        if(!user){
+        console.log(user)
+        if(!user || !user.isPasswordMatch(password)){
             req.flash('error', 'Email or password is not found');
             res.redirect("back");
             return;
         }
-        res.redirect("back")
+        res.redirect("/")
+    }
+    //[GET] "/users/register"
+    async register(req: Request, res: Response) {
+        res.render("clients/pages/users/register.pug",{
+            pageTitle: "Đăng Ký Tài Khoản"
+        })
+    }
+    //[POST] "/users/register"
+    async registerPost(req: Request, res: Response) {
+        const body = req.body;
+
+        const user = await this.userService.create(body);
+        req.flash('success',"Register successfully")
+        res.redirect("/users/login")
     }
 }
