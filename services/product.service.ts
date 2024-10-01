@@ -10,8 +10,14 @@ export interface IProductService {
 export class ProductService implements IProductService  {
     constructor(private productRepository: IProductRepository,private cacheService: CacheService) {}
     async getProductBySlug(slug: string): Promise<IProduct | null> {
+        this.cacheService.setCacheKey(`:slug:${JSON.stringify(slug)}`) 
+        const cached = await this.cacheService.getCache();
+        if(cached){
+           return cached 
+        }
+        
         const product = await this.productRepository.getProductBySlug(slug)
-
+        await this.cacheService.setCache(7200,product)
         return product
     }
 

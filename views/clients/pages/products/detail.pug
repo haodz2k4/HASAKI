@@ -6,7 +6,7 @@ block main
         .col-md-6
           img.product-image(src="https://via.placeholder.com/600x500",style='width: 600px; height: 500px',alt='Product Image')
         .col-md-6
-          h1.product-title #{data.product.title}
+          h1.product-title(style='font-size: 40px') #{data.product.title}
           p.product-description
           strong Danh Mục: 
           | #{data.product.categoryId.title}

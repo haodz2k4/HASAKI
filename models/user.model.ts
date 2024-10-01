@@ -1,9 +1,9 @@
-import { Schema, model, Model } from "mongoose";
-import {isURL, isMobilePhone, isEmail} from "validator"
+// user.model.ts
+import { Schema, model, Document, Model } from "mongoose";
+import { isURL, isMobilePhone, isEmail } from "validator";
 import { compare, hash } from "bcrypt";
 
 export interface IUser {
-    _id: Schema.Types.ObjectId
     fullName: string;
     avatar: string;
     email: string;
@@ -11,26 +11,28 @@ export interface IUser {
     phone: string;
     birthDate: Date;
     gender: "nam" | "nữ";
-    status: "active" | "inactive"
+    status: "active" | "inactive";
     deleted: boolean;
 }
 
-
-interface IUserMethod {
-    isPasswordMatch(password: string): Promise<boolean>
+export interface IUserMethods {
+    isPasswordMatch(password: string): Promise<boolean>;
 }
-type UserModel = Model<IUser, UserModel, IUserMethod>
-const userSchema = new Schema<IUser,UserModel,IUserMethod>({
-    fullName: {type: String, required: true},
+
+export interface IUserDocument extends IUser, IUserMethods, Document {}
+
+// Định nghĩa Schema với các phương thức
+const userSchema = new Schema<IUserDocument, Model<IUserDocument>, IUserMethods>({
+    fullName: { type: String, required: true },
     email: {
-        type: String, 
+        type: String,
         required: true,
-        minlength: 6, 
-        maxlength: 50, 
+        minlength: 6,
+        maxlength: 50,
         unique: true,
         validate: {
-            validator: function(val: string): boolean {
-                return isEmail(val)
+            validator: function (val: string): boolean {
+                return isEmail(val);
             },
             message: 'Invalid email'
         }
@@ -38,60 +40,51 @@ const userSchema = new Schema<IUser,UserModel,IUserMethod>({
     avatar: {
         type: String,
         validate: {
-            validator: function(val: string): boolean {
-                return isURL(val)
+            validator: function (val: string): boolean {
+                return isURL(val);
             },
             message: 'Invalid URL'
         }
     },
     password: {
-        type: String, 
+        type: String,
         required: true,
         minlength: 8,
         validate: {
-            validator: function(value: string): boolean {
-                if(!value.match(/\d/) || !value.match(/[a-zA-Z]/)){
-                    return false 
-                }
-                return true
+            validator: function (value: string): boolean {
+                return /\d/.test(value) && /[a-zA-Z]/.test(value);
             },
-            message: 'Password must contain at least one letter and one numbe'
+            message: 'Password must contain at least one letter and one number'
         },
         select: false
     },
     phone: {
-        type: String, 
+        type: String,
         required: true,
-        minlength: 8, 
+        minlength: 8,
         maxlength: 10,
-        validate:{
-            validator: function(val: string): boolean {
-                return isMobilePhone(val)
+        validate: {
+            validator: function (val: string): boolean {
+                return isMobilePhone(val, 'vi-VN'); // Specify locale if needed
             },
-            message: 'Invalid Mobile From'
+            message: 'Invalid Mobile Form'
         }
     },
-    birthDate: Date,
-    gender: {type: String, enum: ["nam","nữ"]},
-    status: {type: String, enum: ["active","inactive"], default: "active"},
-    deleted: {
-        type: Boolean,
-        default: false
+    birthDate: { type: Date },
+    gender: { type: String, enum: ["nam", "nữ"] },
+    status: { type: String, enum: ["active", "inactive"], default: "active" },
+    deleted: { type: Boolean, default: false }
+}, { timestamps: true });
+
+userSchema.methods.isPasswordMatch = async function (password: string): Promise<boolean> {
+    return await compare(password, this.password);
+};
+
+userSchema.pre<IUserDocument>('save', async function (next) {
+    if (this.isModified('password')) {
+        this.password = await hash(this.password, 10);
     }
-},{timestamps: true}) 
+    next();
+});
 
-userSchema.methods.isPasswordMatch = async function(password: string) :Promise<boolean> {
-    return await compare(password,this.password)
-} 
-
-userSchema.pre('save', async function(next) {
-
-    if(this.isModified('password')){
-        this.password = await hash(this.password, 10)
-    }
-
-    next()
-})
-
-
-export default model<IUser,UserModel>('user',userSchema)
+export default model<IUserDocument>('User', userSchema);
