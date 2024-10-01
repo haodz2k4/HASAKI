@@ -12,10 +12,10 @@ block main
             .carousel-item.active
               .row
                if hightlightedProducts.length > 0
-                each item in hightlightedProducts
-                  .col-md-3
+                each item, index in hightlightedProducts
+                  .col-md-3(class=`${index >= 4 ? "d-none" : ""}` feature-item=item.slug)
                     .card
-                      .badge.bg-danger.position-absolute Gi&#x1EA3;m #{item.discountPercentage}%
+                      .badge.bg-danger.position-absolute Gi&#x1EA3;m #{item.discountPercentage}% 
                       img.card-img-top(src='https://via.placeholder.com/250x150', alt='Product 4')
                       .card-body
                         h6.text-danger #{item.title}
@@ -28,10 +28,10 @@ block main
                         a.btn.btn-light.border(href='#') Y&ecirc;u th&iacute;ch &#x2764;&#xFE0F;
             // Add more carousel-item for more products
           // Carousel Controls
-          button.carousel-control-prev(type='button', data-bs-target='#featuredProductsCarousel', data-bs-slide='prev')
+          button.carousel-control-prev(type='button', data-bs-target='#featuredProductsCarousel', data-bs-slide='prev' btn-prev)
             span.carousel-control-prev-icon(aria-hidden='true')
             span.visually-hidden Previous
-          button.carousel-control-next(type='button', data-bs-target='#featuredProductsCarousel', data-bs-slide='next')
+          button.carousel-control-next(type='button', data-bs-target='#featuredProductsCarousel', data-bs-slide='next' btn-next)
             span.carousel-control-next-icon(aria-hidden='true')
             span.visually-hidden Next
     section.container.my-4
@@ -97,11 +97,11 @@ block main
       .row.row-cols-5.g-3
        each item in products
         // Product 1
-        .col
+        a(href=`/products/${item.slug}` style='color: black').text-decoration-none.col
           .product-item
             span.product-label -#{item.discountPercentage}%
             img(src='https://via.placeholder.com/200x200', alt=item.title)
-            h6 #{item.title}
+            h5 #{item.title}
             .product-price #{item.newPrice}
             .product-discount #{item.oldPrice}
             .product-tags

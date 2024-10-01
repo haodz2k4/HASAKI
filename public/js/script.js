@@ -74,4 +74,41 @@ if(btnLogout){
     btnLogout.addEventListener("click",() => {
         window.location.href = "/users/logout"
     })
+} 
+
+const btnNext = document.querySelector("[btn-next]")
+if(btnNext) {
+    btnNext.addEventListener("click",() => {
+        const featureItem = document.querySelectorAll("[feature-item]")
+        featureItem.forEach((item, index) => {
+            item.classList.add("d-none")
+            if(index >= 4 && index <= 7) {
+                item.classList.remove("d-none")
+            }
+        })
+    })
+}
+
+
+const btnPre = document.querySelector("[btn-prev]")
+if(btnPre) {
+    btnPre.addEventListener("click",() => {
+        const featureItem = document.querySelectorAll("[feature-item]")
+        featureItem.forEach((item, index) => {
+            item.classList.add("d-none")
+            if(index >= 0 && index <= 3) {
+                item.classList.remove("d-none")
+            }
+        })
+    })
+}
+
+const featureItem = document.querySelectorAll("[feature-item]");
+if(featureItem.length > 0){
+    featureItem.forEach((item) => {
+        item.addEventListener("click",() => {
+            const value = item.getAttribute("feature-item");
+            window.location.href = "/products/"+value
+        })
+    })
 }
