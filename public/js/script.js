@@ -113,12 +113,42 @@ if(featureItem.length > 0){
     })
 }
 //Suggestion keyword 
-const inpSearch = document.querySelector("[inp-search]")
-console.log(inpSearch)
-if(inpSearch){
-    inpSearch.addEventListener("keyup",() => {
-        console.log(1)
+const inpSearch = document.querySelector("[inp-search]");
+if (inpSearch) {
+    inpSearch.addEventListener("keyup", () => {
+        const query = inpSearch.value.trim(); 
+        const url = new URL(window.location.href);
+        const path = `${url.origin}/api/products?keyword=${encodeURIComponent(query)}&status=active&limit=4`;
+        console.log(path)
+
+        fetch(path)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json(); 
+            })
+            .then(data => {
+                const suggestions = data.data.items || []; 
+                console.log(suggestions)
+                const suggetionKeyword = document.querySelector("[suggestion-keyword]");
+                suggetionKeyword.innerHTML = '';
+                suggestions.forEach(item => {
+                    const link = document.createElement('a');
+                    link.classList.add('list-group-item', 'list-group-item-action');
+                    link.href = `/products?keyword=${item.title}`; 
+                    link.textContent = item.title; 
+                    suggetionKeyword.appendChild(link); 
+                });
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    });
+    inpSearch.addEventListener("blur", () => {
         const suggetionKeyword = document.querySelector("[suggestion-keyword]");
-        suggetionKeyword.classList.remove("d-none")
+        setTimeout(() => {
+            suggetionKeyword.classList.add("d-none")
+        }, 200)
     })
 }

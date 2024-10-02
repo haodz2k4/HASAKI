@@ -1,5 +1,11 @@
 import { NextFunction, Request, Response } from "express";
-
+/*
+{
+  statusCode: <statusCode>,
+  message: data.message,
+  data
+}
+*/
 export default (req: Request, res: Response, next: NextFunction) => {
 
     const originalJSON = res.json.bind(res);

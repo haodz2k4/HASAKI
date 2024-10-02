@@ -20,13 +20,7 @@ header.py-2.border-bottom
           input.form-control.rounded-4.border-solid(type='search',value=keyword, placeholder='Search for anything',name='keyword' aria-label='Search',inp-search style='width: 80%')
           
           button.btn.btn-primary.rounded-0(style='margin-left: 10px; margin-right: 10px;', type='submit') Search 
-          #suggestions.list-group.position-absolute(style='width: 41%; top: 50px; z-index: 100;' suggestion-keyword).d-none
-            // Example options (can be dynamically generated in practice)
-            a.list-group-item.list-group-item-action(href='#') Siu Black
-            a.list-group-item.list-group-item-action(href='#') Siu White
-            a.list-group-item.list-group-item-action(href='#') Siu Football
-            a.list-group-item.list-group-item-action(href='#') Siu Ronaldo
-            a.list-group-item.list-group-item-action(href='#') Siu Gaming
+          #suggestions.list-group.position-absolute(style='width: 41%; top: 50px; z-index: 100;' suggestion-keyword)
        
         // User options
         .d-flex.align-items-center
