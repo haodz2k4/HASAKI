@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getAllProductsByQuery, getTotalDocument } from "../../services/product.service";
+import { getAllProductsByQuery, getProductBySlug, getTotalDocument } from "../../services/product.service";
 import paginationHelper from "../../helpers/pagination.helper";
 import rangePriceHelper from "../../helpers/range-price.helper";
 //[GET] "/products"
@@ -41,4 +41,11 @@ export const products = async (req: Request, res: Response) => {
         keyword
         
     })
+}
+//[GET] "/products/:slug"
+export const detail = async (req: Request, res: Response) => {
+    const {slug} = req.params;
+    
+    const product = await getProductBySlug(slug)
+    res.render("clients/pages/products/detail.pug", {product})
 }

@@ -6,11 +6,11 @@ block main
         .col-md-6
           img.product-image(src="https://via.placeholder.com/600x500",style='width: 600px; height: 500px',alt='Product Image')
         .col-md-6
-          h1.product-title(style='font-size: 40px') #{data.product.title}
+          h1.product-title(style='font-size: 40px') #{product.title}
           p.product-description
           strong Danh Mục: 
-          | #{data.product.categoryId.title}
-          p.product-price #{data.product.newPrice}
+          | #{product.categoryId.title}
+          p.product-price #{product.newPrice}
           p.rating &#x2B50; 4.6 (2,100 &Dstrok;&aacute;nh Gi&aacute;)
           p.stock-info S&#x1ED1; l&#x1B0;&#x1EE3;ng t&#x1ED3;n kho: 100
           p.product-description
@@ -23,7 +23,7 @@ block main
         .col-12
           h2 Mô Tả 
           p.product-description
-            | #{data.product.description}
+            | #{product.description}
       .row.mt-4
         .col-12
           h2 Th&ocirc;ng Tin Chi Ti&#x1EBF;t
