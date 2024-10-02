@@ -28,8 +28,8 @@ block main
                 label.form-check-label(for='saver') Ti&#x1EBF;t Ki&#x1EC7;m
             .mb-3
               label.form-label Khoảng giá 
-              input.form-control(type='number', inp-min-price,min=0, value=data.minPrice ? data.minPrice : 0 ,placeholder='Từ')
-              input.form-control.mt-2(type='number', inp-max-price,min=0, value=data.maxPrice placeholder='Đến')
+              input.form-control(type='number', inp-min-price,min=0, value=minPrice ? minPrice : 0 ,placeholder='Từ')
+              input.form-control.mt-2(type='number', inp-max-price,min=0, value=maxPrice placeholder='Đến')
             .mb-3(style='display: flex; justiy-content: center')
               button.btn.btn-warning(style='width: 100%;' btn-range-price) Tính 
             .mb-3
@@ -43,16 +43,18 @@ block main
         // Products Grid
         .col-lg-9
           .d-flex.justify-content-between.align-items-center.mb-3
-            h4 #{keyword}
+            if keyword 
+              h4 có #{products.length} kết quả tìm kiếm cho 
+                strong #{keyword}
             select.form-select.w-25(select-sort)
               option(value='') Sắp xếp theo 
-              option(value="createdAt-asc" selected=(data.sortString === "createdAt-asc" )) Mới nhất 
-              option(value="createdAt-desc" selected=(data.sortString === "createdAt-desc")) Cũ nhất 
-              option(value="price-asc" selected=(data.sortString === "price-asc" )) Giá rẻ nhất 
-              option(value="price-desc" selected=(data.sortString === "price-desc")) Giá rẻ nhất 
+              option(value="createdAt-asc" selected=(sortString === "createdAt-asc" )) Mới nhất 
+              option(value="createdAt-desc" selected=(sortString === "createdAt-desc")) Cũ nhất 
+              option(value="price-asc" selected=(sortString === "price-asc" )) Giá từ thấp đến cao  
+              option(value="price-desc" selected=(sortString === "price-desc")) Giá từ cao đến thấp 
           .row
             // Product Card
-            each item in data.products 
+            each item in products 
               a(href="/products/"+item.slug).text-decoration-none.col-md-3.mb-4
                 .card.product-card.p-2
                   img.card-img-top.product-image(src=`${item.thumbnail ? item.thumbnail : "https://via.placeholder.com/250"}`,style='width: 250px; height: 250px', alt='iPhone')
@@ -65,17 +67,18 @@ block main
                       | &starf;&starf;&starf;&starf;&starf;
               // Additional Product Cards
               // Add more product cards here by copying the div above and changing the content 
-          .container.mt-5
+          if pagination 
+           .container.mt-5
             nav(aria-label='Page navigation example')
               ul.pagination.pagination-custom
                 // Previous Button (disabled if on first page)
-                li.page-item(class=`${data.pagination.page === 1 ? "disabled" : ""}`)
-                  a.page-link(href='#', aria-label='Previous' btn-pagination=(data.pagination.page - 1))
+                li.page-item(class=`${pagination.page === 1 ? "disabled" : ""}`)
+                  a.page-link(href='#', aria-label='Previous' btn-pagination=(pagination.page - 1))
                     span(aria-hidden='true') &laquo;
-                - for (let i = 1; i <= data.pagination.countPage; i++)
+                - for (let i = 1; i <= pagination.countPage; i++)
                   li.page-item
-                    a.page-link(btn-pagination=i class=`${data.pagination.page == i ? "active" : ""}`) #{i}
+                    a.page-link(btn-pagination=i class=`${pagination.page == i ? "active" : ""}`) #{i}
                 // Next Button
-                li.page-item(class=`${data.pagination.page === data.pagination.countPage ? "disabled" : ""}`)
-                  a.page-link(btn-pagination=(data.pagination.page + 1) aria-label='Next')
+                li.page-item(class=`${pagination.page === pagination.countPage ? "disabled" : ""}`)
+                  a.page-link(btn-pagination=(pagination.page + 1) aria-label='Next')
                     span(aria-hidden='true') &raquo;

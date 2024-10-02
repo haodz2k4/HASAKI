@@ -112,3 +112,13 @@ if(featureItem.length > 0){
         })
     })
 }
+//Suggestion keyword 
+const inpSearch = document.querySelector("[inp-search]")
+console.log(inpSearch)
+if(inpSearch){
+    inpSearch.addEventListener("keyup",() => {
+        console.log(1)
+        const suggetionKeyword = document.querySelector("[suggestion-keyword]");
+        suggetionKeyword.classList.remove("d-none")
+    })
+}

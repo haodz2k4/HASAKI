@@ -11,6 +11,7 @@ import flash from "express-flash"
 import cookieParser from "cookie-parser"
 import session from "express-session"
 import { loggerMiddleware } from "./middleware/logger.middleware"
+import api from "./api/routers/index.router"
 const bootstrap = () => {
     
     const app: Express = express()
@@ -35,6 +36,8 @@ const bootstrap = () => {
             sameSite: 'lax'
         }
     }))
+    //Api 
+    api(app)
     app.use(flash());
     //connect to database 
     getConnection()

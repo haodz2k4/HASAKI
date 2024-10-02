@@ -1,11 +1,13 @@
-import { Request, Response } from "express";
-import { getAllProductsByQuery, getTotalDocument } from "../../services/product.service";
-import paginationHelper from "../../helpers/pagination.helper";
-import rangePriceHelper from "../../helpers/range-price.helper";
-//[GET] "/products"
-export const products = async (req: Request, res: Response) => {
+import { Request, Response } from "express"
+import { getAllProductsByQuery, getTotalDocument } from "../../services/product.service"
+import pick from "../../utils/pick"
+import paginationHelper from "../../helpers/pagination.helper"
+import rangePriceHelper from "../../helpers/range-price.helper"
+//[GET] "/api/products"
+export const getProducts = async (req: Request, res: Response) => {
     
-    const filter: Record<string, any> = {status: "active"}
+    const query = pick(req.query,["status", "highlighted"]);
+    const filter: Record<string, any> = {...query}
     
     //Sort
     const sortKey = req.query.sortKey as string;
@@ -32,13 +34,5 @@ export const products = async (req: Request, res: Response) => {
     const totalDocument = await getTotalDocument({...filter})
     const pagination = paginationHelper(page, limit,totalDocument)
     const products = await getAllProductsByQuery({filter, limit, skip, sort}) 
-    res.render("clients/pages/products/product.pug",{
-        products,
-        pagination,
-        sortString,
-        minPrice,
-        maxPrice,
-        keyword
-        
-    })
+    res.json({items: products, pagination})
 }
