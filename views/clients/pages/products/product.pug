@@ -5,7 +5,7 @@ block main
     .container.mt-4
       .row
         // Sidebar Filters
-        .col-lg-3
+        .col-lg-3(style='margin-top: 50px')
           .filter-section
             h5 B&#x1ED9; L&#x1ECD;c T&igrave;m Ki&#x1EBF;m
             .mb-3
@@ -41,7 +41,7 @@ block main
                 input#used.form-check-input(type='checkbox')
                 label.form-check-label(for='used') &Dstrok;&atilde; S&#x1EED; D&#x1EE5;ng
         // Products Grid
-        .col-lg-9
+        .col-lg-9(style='margin-top: 50px')
           .d-flex.justify-content-between.align-items-center.mb-3
             if keyword 
               h4 có #{products.length} kết quả tìm kiếm cho 

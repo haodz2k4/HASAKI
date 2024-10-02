@@ -12,6 +12,8 @@ import cookieParser from "cookie-parser"
 import session from "express-session"
 import { loggerMiddleware } from "./middleware/logger.middleware"
 import api from "./api/routers/index.router"
+import adminRouter from "./routers/admin/index.router"
+
 const bootstrap = () => {
     
     const app: Express = express()
@@ -19,6 +21,8 @@ const bootstrap = () => {
     app.use(express.static('public'))
     app.use(bodyParser.urlencoded({ extended: false }))
     
+    //admin router 
+    adminRouter(app)
     //Client router 
     clientRouter(app)
     //redis
