@@ -16,21 +16,3 @@ if(btnPagination.length > 0){
         })
     })
 }
-
-const btnToggleTool = document.querySelector("[btn-toggle-tool]");
-if(btnToggleTool){
-    btnToggleTool.addEventListener("click", () => {
-        const toolManage = document.querySelector("[tool-manage]");
-        if(toolManage.classList.contains("d-none")) {
-            // Nếu có, thì hiển thị toolManage
-            toolManage.classList.remove("d-none");
-            btnToggleTool.classList.remove("show-tool");
-            btnToggleTool.innerHTML = `v`;  
-        } else {
-            // Nếu không, thì ẩn toolManage
-            toolManage.classList.add("d-none");
-            btnToggleTool.classList.add("show-tool");
-            btnToggleTool.innerHTML = `^`;  
-        }
-    });
-}

@@ -1,10 +1,54 @@
 
 extends ../../layouts/default.pug 
-include ../../mixins/rangePrice.pug
 include ../../mixins/pagination.pug 
 block main 
     h1.text-center(style='margin-top: 30px;font-weight: 30px;') Quản lý sản phẩm 
-    button(style='position: absolute; right: 20px' btn-toggle-tool).btn-danger.btn V
+    .my-tool
+      .tool-container
+        .row.tool-section
+          // Hàng 1: Tìm kiếm, Bộ lọc, Sắp xếp
+          .col-md-4.mb-3
+            .input-group
+              input.form-control(type='text', placeholder='Tìm kiếm sản phẩm')
+              .input-group-append
+                button.btn.btn-dark(type='button') Tìm 
+          .col-md-4.mb-3
+            select.form-control
+              option B&#x1ED9; l&#x1ECD;c 1
+              option B&#x1ED9; l&#x1ECD;c 2
+              option B&#x1ED9; l&#x1ECD;c 3
+          .col-md-4.mb-3
+            select.form-control
+              option S&#x1EAF;p x&#x1EBF;p A-Z
+              option S&#x1EAF;p x&#x1EBF;p Z-A
+              option Gi&aacute; t&abreve;ng d&#x1EA7;n
+              option Gi&aacute; gi&#x1EA3;m d&#x1EA7;n
+        .row.tool-section
+          // Hàng 2: Chọn với nút, Lọc giá, Nút hành động
+          .col-md-4.mb-3
+            .input-group
+              select.form-control
+                option L&#x1EF1;a ch&#x1ECD;n 1
+                option L&#x1EF1;a ch&#x1ECD;n 2
+                option L&#x1EF1;a ch&#x1ECD;n 3
+              .input-group-append
+                button.btn.btn-dark(type='button') &Aacute;p d&#x1EE5;ng
+          .col-md-4.mb-3
+            .d-flex
+              input.form-control.mr-2(type='number', placeholder='Giá từ')
+              input.form-control.mr-2(type='number', placeholder='Giá đến')
+              button.btn.btn-dark(type='button') L&#x1ECD;c
+          .col-md-4.mb-3
+            .action-buttons.d-flex.justify-content-md-end
+              button.btn.btn-success(type='button')
+                i.fa-solid.fa-plus 
+                |  Thêm 
+              button.btn.btn-warning(type='button') 
+                i.fa-solid.fa-square-plus
+                |  Thêm sll
+              button.btn.btn-secondary(type='button') 
+                i.fa-solid.fa-file-excel 
+                |  Xu&#x1EA5;t Excel
     
 
     .table-responsive
