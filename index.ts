@@ -21,7 +21,8 @@ const bootstrap = () => {
     app.set('view engine', 'pug')
     app.use(express.static('public'))
     app.use(bodyParser.urlencoded({ extended: false }))
-    
+    //Logger 
+    app.use(loggerMiddleware)
     //admin router 
     adminRouter(app)
     //Client router 
@@ -49,7 +50,6 @@ const bootstrap = () => {
     app.use(flash());
     //connect to database 
     getConnection()
-    app.use(loggerMiddleware)
     //PORT 
     const port = config.port;
     app.listen(port,() => {

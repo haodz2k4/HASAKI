@@ -3,7 +3,8 @@ extends ../../layouts/default.pug
 include ../../mixins/rangePrice.pug
 block main 
     h1.text-center(style='margin-top: 30px;font-weight: 30px;') Quản lý sản phẩm 
-    .toolbar.p-3.bg-light.border.rounded(style='margin-bottom: 20px;')
+    button(style='position: absolute; right: 20px' btn-toggle-tool).btn-danger.btn V
+    .toolbar.p-3.bg-light.border.rounded(style='margin-bottom: 20px;' tool-manage)
       .row
         // Search Box
         .col-md-3.mb-3
@@ -47,6 +48,7 @@ block main
               button.btn.btn-warning.mr-2 Th&ecirc;m
               button.btn.btn-dark.mr-2 Th&ecirc;m Excel
               button.btn.btn-success.mr-2 Xu&#x1EA5;t Excel 
+          
 
     .table-responsive
       table.table.table-striped.table-bordered
@@ -71,7 +73,7 @@ block main
               td #{index + 1}
               td #{item.title}
               td 
-                img(src=`${item.thumbnail ? item.thumbnail : 'https://via.placeholder.com/70x70'}`, alt="" style='width: 70px; height: 70px')
+                img(src=`${item.thumbnail.length > 0 ? item.thumbnail[0] : 'https://via.placeholder.com/70x70'}`, alt="" style='width: 70px; height: 70px')
               td #{item.newPrice}
               td 
                 span.badge(class=`${item.highlighted === "1" ? "badge-warning" : "badge-info"}` style='padding: 10px;') #{item.highlighted === "1" ? "Có" : "Không"}
@@ -84,4 +86,19 @@ block main
                 button.btn.btn-sm.btn-info
                   i.fas.fa-edit
                 button.btn.btn-sm.btn-danger
-                  i.fas.fa-trash
+                  i.fas.fa-trash 
+                button.btn.btn-sm.btn-warning 
+                  i.fa-solid.fa-magnifying-glass
+    if pagination 
+      .container.mt-5
+        nav(aria-label='Page navigation')
+          ul.pagination.justify-content-center
+            li.page-item
+              a.page-link( aria-label='Previous' btn-pagination=`${pagination.page - 1}` class=`${1 === pagination.page ? "d-none" : ""}`)
+                span(aria-hidden='true') &laquo;
+            - for (let i = 1; i <= pagination.countPage; i++)
+                  li.page-item()
+                    a.page-link(btn-pagination=i class=`${i === pagination.page ? "active-page" : ""}`) #{i}
+            li.page-item
+              a.page-link(aria-label='Next' btn-pagination=`${pagination.page + 1}` class=`${pagination.countPage === pagination.page ? "d-none" : ""}`)
+                span(aria-hidden='true') &raquo;

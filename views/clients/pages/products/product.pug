@@ -57,7 +57,7 @@ block main
             each item in products 
               a(href="/products/"+item.slug).text-decoration-none.col-md-3.mb-4
                 .card.product-card.p-2
-                  img.card-img-top.product-image(src=`${item.thumbnail ? item.thumbnail : "https://via.placeholder.com/250"}`,style='width: 250px; height: 250px', alt='iPhone')
+                  img.card-img-top.product-image(src=`${item.thumbnail.length > 0 ? item.thumbnail[0] : "https://via.placeholder.com/250"}`,style='width: 250px; height: 250px', alt='iPhone')
                   .card-body
                     h6.product-title(style='font-size: 20px') #{item.title}
                     .d-flex.justify-content-between.align-items-center
@@ -81,4 +81,4 @@ block main
                 // Next Button
                 li.page-item(class=`${pagination.page === pagination.countPage ? "disabled" : ""}`)
                   a.page-link(btn-pagination=(pagination.page + 1) aria-label='Next')
-                    span(aria-hidden='true') &raquo;
+                    span(aria-hidden='true') &raquo; 

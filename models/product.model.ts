@@ -10,7 +10,7 @@ export interface IProduct extends Document{
     description: string
     highlighted: string
     position?: number 
-    thumbnail: string 
+    thumbnail: string[] 
     price: number
     discountPercentage: number 
     deleted: boolean
@@ -46,7 +46,7 @@ export const productSchema = new Schema<IProduct>({
     description: String,
     highlighted: {type: String, enum: ["0","1"],default: "0"},
     thumbnail: {
-        type: String, 
+        type: [String], 
         validate: {
             validator: function(v: string) {
                 return isURL(v)

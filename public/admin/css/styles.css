@@ -73,3 +73,45 @@ text-transform: uppercase;
 .toolbar .form-group {
 margin-bottom: 0;
 }
+
+/*PAGINATION*/
+.pagination {
+  margin-top: 20px;
+}
+
+.pagination .page-item .page-link {
+  background-color: #343a40; /* Màu nền cho các nút phân trang */
+  color: white; /* Màu chữ trắng */
+  border: none; /* Không viền */
+  border-radius: 5px;
+  margin: 5px;
+  transition: background-color 0.3s;
+  border-radius: 50px;
+}
+
+.pagination .page-item .page-link:hover {
+  background-color: #ffffff; /* Màu khi hover */
+  color: rgb(0, 0, 0); /* Màu chữ trắng */
+  border: solid;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #007bff; /* Màu nền cho nút đang hoạt động */
+  color: white; /* Màu chữ trắng */
+}
+
+.pagination .page-item.disabled .page-link {
+  background-color: #6c757d; /* Màu nền cho nút vô hiệu hóa */
+  color: #fff; /* Màu chữ trắng */
+}
+.active-page  {
+  background-color: yellow !important;
+  color: black !important;
+  border: solid black !important;
+}
+/*END PAGINATIOn*/
+/*Show tool*/
+.show-tool {
+  color: black !important;
+  background-color: rgb(0, 255, 251) !important;
+}
