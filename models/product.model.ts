@@ -70,5 +70,6 @@ productSchema.virtual('oldPrice').get(function(): string {
 })
 productSchema.virtual('newPrice').get(function(): string {
     return formatPrice(this.price - (100 - this.discountPercentage) / 100)
-})
+}) 
+
 export default model<IProduct>(COLLECTION_PRODUCT_NAME,productSchema)

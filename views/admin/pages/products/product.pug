@@ -52,24 +52,36 @@ block main
       table.table.table-striped.table-bordered
         thead.thead-dark
           tr
+            th 
+              input(type="checkbox", name="")
             th #
-            th T&ecirc;n
-            th Email
-            th Tu&#x1ED5;i
-            th Tr&#x1EA1;ng th&aacute;i
-            th Nh&oacute;m Quy&#x1EC1;n
-            th Thao t&aacute;c
+            th Tiêu đề 
+            th Ảnh
+            th Giá tiền 
+            th Nổi bậc 
+            th trạng thái 
+            th vị trí 
+            th Ngày tạo
+            th Thao tác 
         tbody
-          // Dữ liệu sẽ được điền vào đây
-          tr
-            td 1
-            td Nguy&#x1EC5;n V&abreve;n A
-            td nguyenvana@example.com
-            td 25
-            td Ho&#x1EA1;t &dstrok;&#x1ED9;ng
-            td Admin
-            td
-              button.btn.btn-sm.btn-info
-                i.fas.fa-edit
-              button.btn.btn-sm.btn-danger
-                i.fas.fa-trash
+          each item, index in products 
+            tr
+              td 
+                input(type="checkbox", name="")
+              td #{index + 1}
+              td #{item.title}
+              td 
+                img(src=`${item.thumbnail ? item.thumbnail : 'https://via.placeholder.com/70x70'}`, alt="" style='width: 70px; height: 70px')
+              td #{item.newPrice}
+              td 
+                span.badge(class=`${item.highlighted === "1" ? "badge-warning" : "badge-info"}` style='padding: 10px;') #{item.highlighted === "1" ? "Có" : "Không"}
+              td 
+                span.badge(class=`${item.status === "active" ? "badge-success" : "badge-danger"}` style='padding: 10px;') #{item.status}
+              td 
+                input(type="number" value=item.position style='width: 70px') 
+              td !{moment(item.createdAt).format(' dddd,DD/MM/YYYY </br> HH:mm:ss')}
+              td
+                button.btn.btn-sm.btn-info
+                  i.fas.fa-edit
+                button.btn.btn-sm.btn-danger
+                  i.fas.fa-trash

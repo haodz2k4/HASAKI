@@ -13,6 +13,7 @@ import session from "express-session"
 import { loggerMiddleware } from "./middleware/logger.middleware"
 import api from "./api/routers/index.router"
 import adminRouter from "./routers/admin/index.router"
+import moment from "moment"
 
 const bootstrap = () => {
     
@@ -40,6 +41,9 @@ const bootstrap = () => {
             sameSite: 'lax'
         }
     }))
+    //moment 
+    moment.locale('vi');
+    app.locals.moment = moment
     //Api 
     api(app)
     app.use(flash());
