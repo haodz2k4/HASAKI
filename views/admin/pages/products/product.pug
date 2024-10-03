@@ -1,0 +1,75 @@
+
+extends ../../layouts/default.pug 
+include ../../mixins/rangePrice.pug
+block main 
+    h1.text-center(style='margin-top: 30px;font-weight: 30px;') Quản lý sản phẩm 
+    .toolbar.p-3.bg-light.border.rounded(style='margin-bottom: 20px;')
+      .row
+        // Search Box
+        .col-md-3.mb-3
+          .form-group
+            label(for='search') T&igrave;m ki&#x1EBF;m
+            .d-flex
+              input#search.form-control.mr-2(type='text', placeholder='Nhập từ khóa...')
+              button.btn.btn-primary T&igrave;m
+        // Price Range Inputs
+        +rangePrice()
+        // Sort Dropdown
+        .col-md-2.mb-3
+          .form-group
+            label(for='sort') S&#x1EAF;p x&#x1EBF;p theo
+            select#sort.form-control
+              option(value='') Ch&#x1ECD;n s&#x1EAF;p x&#x1EBF;p
+              option(value='asc') Gi&aacute; t&abreve;ng d&#x1EA7;n
+              option(value='desc') Gi&aacute; gi&#x1EA3;m d&#x1EA7;n
+        // Filter Dropdown
+        .col-md-2.mb-3
+          .form-group
+            label(for='filter') Tr&#x1EA1;ng th&aacute;i
+            select#filter.form-control
+              option(value='') Ch&#x1ECD;n tr&#x1EA1;ng th&aacute;i
+              option(value='active') Ho&#x1EA1;t &dstrok;&#x1ED9;ng
+              option(value='inactive') Kh&ocirc;ng ho&#x1EA1;t &dstrok;&#x1ED9;ng
+        .col-md-3.mb-3
+          .form-group
+            label(for='filter') Thay &dstrok;&#x1ED5;i nhi&#x1EC1;u s&#x1EA3;n ph&#x1EA9;m
+            .d-flex
+              select#filter.form-control.mr-2
+                option(value='') Ch&#x1ECD;n t&ugrave;y ch&#x1ECD;n
+                option(value='option1') T&ugrave;y ch&#x1ECD;n 1
+                option(value='option2') T&ugrave;y ch&#x1ECD;n 2
+                option(value='option3') T&ugrave;y ch&#x1ECD;n 3
+              button.btn.btn-secondary o
+        .col-md-4.mb-2
+          .form-group
+            label Thao t&aacute;c
+            .d-flex
+              button.btn.btn-warning.mr-2 Th&ecirc;m
+              button.btn.btn-dark.mr-2 Th&ecirc;m Excel
+              button.btn.btn-success.mr-2 Xu&#x1EA5;t Excel 
+
+    .table-responsive
+      table.table.table-striped.table-bordered
+        thead.thead-dark
+          tr
+            th #
+            th T&ecirc;n
+            th Email
+            th Tu&#x1ED5;i
+            th Tr&#x1EA1;ng th&aacute;i
+            th Nh&oacute;m Quy&#x1EC1;n
+            th Thao t&aacute;c
+        tbody
+          // Dữ liệu sẽ được điền vào đây
+          tr
+            td 1
+            td Nguy&#x1EC5;n V&abreve;n A
+            td nguyenvana@example.com
+            td 25
+            td Ho&#x1EA1;t &dstrok;&#x1ED9;ng
+            td Admin
+            td
+              button.btn.btn-sm.btn-info
+                i.fas.fa-edit
+              button.btn.btn-sm.btn-danger
+                i.fas.fa-trash

@@ -2,11 +2,11 @@
       h2 Admin Panel
       ul.nav.flex-column
         li.nav-item
-          a.nav-link.show(href='#')
+          a.nav-link(href='#' class=`${activePages === 'dashboard' ? 'show' : ''}`)
             i.fas.fa-tachometer-alt
             |  Dashboard
         li.nav-item
-          a.nav-link(href='#')
+          a.nav-link(href='#' class=`${activePages === 'products' ? 'show' : ''}`)
             i.fas.fa-box
             |  S&#x1EA3;n ph&#x1EA9;m
         li.nav-item
