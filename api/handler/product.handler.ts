@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { getAllProductsByQuery, getTotalDocument } from "../../services/product.service"
+import { getAllProductsByQuery, getTotalDocument, updateProductById } from "../../services/product.service"
 import pick from "../../utils/pick"
 import paginationHelper from "../../helpers/pagination.helper"
 import rangePriceHelper from "../../helpers/range-price.helper"
@@ -35,4 +35,11 @@ export const getProducts = async (req: Request, res: Response) => {
     const pagination = paginationHelper(page, limit,totalDocument)
     const products = await getAllProductsByQuery({filter, limit, skip, sort}) 
     res.json({items: products, pagination})
+}
+//[PATCH] "/api/products/:id"
+export const updateProduct = async (req: Request, res: Response) => {
+    const {id} = req.params;
+    const body = req.body 
+    const product = await updateProductById(id,body);
+    res.status(200).json({product})
 }

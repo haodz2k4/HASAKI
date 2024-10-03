@@ -1,0 +1,14 @@
+mixin pagination(pagination) 
+    if pagination 
+      .container.mt-5
+        nav(aria-label='Page navigation')
+          ul.pagination.justify-content-center
+            li.page-item
+              a.page-link( aria-label='Previous' btn-pagination=`${pagination.page - 1}` class=`${1 === pagination.page ? "d-none" : ""}`)
+                span(aria-hidden='true') &laquo;
+            - for (let i = 1; i <= pagination.countPage; i++)
+                  li.page-item()
+                    a.page-link(btn-pagination=i class=`${i === pagination.page ? "active-page" : ""}`) #{i}
+            li.page-item
+              a.page-link(aria-label='Next' btn-pagination=`${pagination.page + 1}` class=`${pagination.countPage === pagination.page ? "d-none" : ""}`)
+                span(aria-hidden='true') &raquo;

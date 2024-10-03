@@ -52,12 +52,15 @@ export const getProductBySlug = async (slug: string) => {
     return await Product.findOne({slug,deleted: false}).populate('categoryId','title thumbnail')
 }
 
-// export const updateProductById = async (id: string,productBody: Partial<IProduct>) => {
-//     const product = await getProductByid(id);
-//     Object.assign(product, productBody)
-//     await product.save() 
-//     return product
-// } 
+export const updateProductById = async (id: string,productBody: Partial<IProduct>) => {
+    const product = await getProductByid(id);
+    if(!product){
+        throw new Error("Product is not found")
+    }
+    Object.assign(product, productBody)
+    await product.save() 
+    return product
+} 
 
 export const createProduct = async (productBody: IProduct) => {
     
