@@ -41,8 +41,6 @@ export const getProducts = catchAsync(async (req: Request, res: Response) => {
 export const updateProduct = catchAsync(async (req: Request, res: Response) => {
     const {id} = req.params;
     const body = req.body
-    console.log(body, id) 
     const product = await updateProductById(id,body);
-    console.log(product)
     res.status(200).json({product})
 })

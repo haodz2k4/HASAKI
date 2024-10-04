@@ -40,7 +40,26 @@ if (btnChangeStatus.length > 0) {
                 return response.json();
             })
             .then(data => {
-                alert("Cập nhật sản phẩm thành công")
+                const status = data.product?.status;
+                if (!status) {
+                    console.error('Trạng thái sản phẩm không tồn tại.');
+                    return;
+                }
+            
+                item.innerHTML = status; 
+                const inactiveClass = "badge-success";
+                const activeClass = "badge-danger";
+                console.log(status)
+                if (status === "inactive") {
+                    console.log("run here")
+                    item.classList.remove(inactiveClass);
+                    item.classList.add(activeClass);
+                    
+                } else {
+                    item.classList.remove(activeClass);
+                    item.classList.add(inactiveClass);
+                }
+                item.setAttribute("status",status)
             })
             .catch(error => {
                 console.error('Lỗi:', error); 
