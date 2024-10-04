@@ -1,7 +1,7 @@
 import { Express } from "express"
-import responseTransformerMiddleware from "../middlewares/response-transformer.middleware"
 import productRouter from "./product.router"
+import { handleErrorMiddleware } from "../middlewares/error.middleware";
 export default (app: Express) => {
-    app.use(responseTransformerMiddleware)
     app.use("/api/products", productRouter)
+    app.use(handleErrorMiddleware);
 }

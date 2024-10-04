@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import catchAsync from "../../utils/catchAsync"; 
 import { getAllProductsByQuery } from "../../services/product.service";
 //[GET] "/home"
 export const home = async (req: Request, res: Response) => {

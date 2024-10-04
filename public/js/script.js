@@ -129,8 +129,7 @@ if (inpSearch) {
                 return response.json(); 
             })
             .then(data => {
-                const suggestions = data.data.items || []; 
-                console.log(suggestions)
+                const suggestions = data.products|| []; 
                 const suggetionKeyword = document.querySelector("[suggestion-keyword]");
                 suggetionKeyword.innerHTML = '';
                 suggestions.forEach(item => {

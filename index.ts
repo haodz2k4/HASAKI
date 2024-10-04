@@ -6,7 +6,6 @@ import { getConnection } from "./config/mongodb"
 import clientRouter from "./routers/client/index.router"
 import redis from "./config/redis"
 import bodyParser from "body-parser"
-import { handleErrorMiddleware } from "./middleware/error.middleware";
 import flash from "express-flash"
 import cookieParser from "cookie-parser"
 import session from "express-session"
@@ -23,6 +22,8 @@ const bootstrap = () => {
     app.use(bodyParser.urlencoded({ extended: false }))
     //Logger 
     app.use(loggerMiddleware)
+    //Router Api 
+    api(app) 
     //admin router 
     adminRouter(app)
     //Client router 
@@ -45,8 +46,7 @@ const bootstrap = () => {
     //moment 
     moment.locale('vi');
     app.locals.moment = moment
-    //Api 
-    api(app)
+    //express flash
     app.use(flash());
     //connect to database 
     getConnection()
