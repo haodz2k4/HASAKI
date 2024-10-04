@@ -10,96 +10,10 @@ import { ApiError } from "../utils/error"
  * @swagger
  * /api/products:
  *   get:
- *     summary: Lấy danh sách sản phẩm với bộ lọc, phân trang và sắp xếp
- *     description: Trả về danh sách các sản phẩm với các bộ lọc khác nhau, bao gồm phân trang, tìm kiếm theo từ khóa, sắp xếp, và khoảng giá.
- *     parameters:
- *       - in: query
- *         name: status
- *         schema:
- *           type: string
- *         description: Trạng thái của sản phẩm (ví dụ: "available", "out of stock")
- *       - in: query
- *         name: highlighted
- *         schema:
- *           type: boolean
- *         description: Lọc các sản phẩm nổi bật (highlighted)
- *       - in: query
- *         name: sortKey
- *         schema:
- *           type: string
- *         description: Thuộc tính để sắp xếp (ví dụ: "price", "name")
- *       - in: query
- *         name: sortValue
- *         schema:
- *           type: string
- *           enum: [asc, desc]
- *         description: Giá trị sắp xếp (tăng dần "asc", giảm dần "desc")
- *       - in: query
- *         name: minPrice
- *         schema:
- *           type: integer
- *         description: Giá tối thiểu để lọc
- *       - in: query
- *         name: maxPrice
- *         schema:
- *           type: integer
- *         description: Giá tối đa để lọc
- *       - in: query
- *         name: keyword
- *         schema:
- *           type: string
- *         description: Từ khóa để tìm kiếm sản phẩm
- *       - in: query
- *         name: page
- *         schema:
- *           type: integer
- *         description: Số trang (pagination)
- *       - in: query
- *         name: limit
- *         schema:
- *           type: integer
- *         description: Số lượng sản phẩm trên mỗi trang (pagination)
- *       - in: query
- *         name: only
- *         schema:
- *           type: string
- *         description: Chỉ chọn các trường cụ thể (ví dụ: "name,price")
+ *     summary: Return a list of products 
  *     responses:
  *       200:
- *         description: Thành công, trả về danh sách các sản phẩm và thông tin phân trang
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 products:
- *                   type: array
- *                   items:
- *                     type: object
- *                     properties:
- *                       id:
- *                         type: string
- *                         example: "615c5e91d97eeb001dee7f98"
- *                       name:
- *                         type: string
- *                         example: "Sản phẩm A"
- *                       price:
- *                         type: integer
- *                         example: 100000
- *                 pagination:
- *                   type: object
- *                   properties:
- *                     page:
- *                       type: integer
- *                       example: 1
- *                     totalPages:
- *                       type: integer
- *                       example: 10
- *                     totalDocuments:
- *                       type: integer
- *                       example: 200
- *       400:
- *         description: Lỗi dữ liệu đầu vào không hợp lệ
+ *         description: A successful response
  */
 
 export const getProducts = catchAsync(async (req: Request, res: Response) => {

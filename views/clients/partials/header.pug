@@ -1,39 +1,134 @@
-header.py-2.border-bottom(style='position: fixed;z-index: 9999;top: 0; width: 100%')
-      .container.d-flex.justify-content-between.align-items-center
-        .d-flex.align-items-center
-          // Logo
-          a.text-decoration-none(href='/')
-            img(src='https://upload.wikimedia.org/wikipedia/commons/1/1b/EBay_logo.svg', alt='eBay Logo', height='40')
-          // Shop by category
-          .dropdown.ms-3
-            a#shopCategory.text-decoration-none.text-dark.dropdown-toggle(href='/products', data-bs-toggle='dropdown', aria-expanded='false')
-              | Sản phẩm 
-            ul.dropdown-menu(aria-labelledby='shopCategory')
-              li
-                a.dropdown-item(href='#') Category 1
-              li
-                a.dropdown-item(href='#') Category 2
-              li
-                a.dropdown-item(href='#') Category 3
-        // Search bar
-        form(action="/products").d-flex.flex-grow-1.mx-1
-          input.form-control.rounded-4.border-solid(type='search',value=keyword, placeholder='Search for anything',name='keyword' aria-label='Search',inp-search style='width: 80%')
-          
-          button.btn.btn-primary.rounded-0(style='margin-left: 10px; margin-right: 10px;', type='submit') Search 
-          #suggestions.list-group.position-absolute(style='width: 41%; top: 50px; z-index: 100;' suggestion-keyword)
-       
-        // User options
-        .d-flex.align-items-center
-          a.me-3.text-decoration-none(href='/cart')
-            i.fa-solid.fa-cart-shopping(style='font-size: 30px;')
-          if user 
-            a.me-3.text-decoration-none(href='/users/profiles').btn #{user.fullName}
-          else 
-            a.me-3.text-decoration-none(href='/users/login').btn.btn-warning Đăng Nhập 
-            a.me-3.text-decoration-none(href='/users/register').btn.btn-danger Đăng ký 
-        // Icons
-        .d-flex.align-items-center
-          a.text-dark.me-3(href='#')
-            i.bi.bi-bell
-          a.text-dark(href='#')
-            i.bi.bi-cart
+#myHeader.header.scrolling
+      .grid.wide
+        .header__top
+          .navbar-icon
+            span
+            span
+            span
+          a.header__logo(href='index.html')
+            img(src='./assets/logo.png', alt='')
+          .header__search
+            .header__search-wrap
+              input.header__search-input(type='text', placeholder='Tìm kiếm')
+              a.header__search-icon(href='#')
+                i.fas.fa-search
+          .header__account
+            a.header__account-login(href='#my-Login') &Dstrok;&abreve;ng Nh&#x1EAD;p
+            a.header__account-register(href='#my-Register') &Dstrok;&abreve;ng K&iacute;
+          // Cart
+          .header__cart.have(href='#')
+            i.fas.fa-shopping-basket
+            .header__cart-amount
+              | 3
+            .header__cart-wrap
+              ul.order__list
+                li.item-order
+                  .order-wrap
+                    a.order-img(href='product.html')
+                      img(src='./assets/img/product/product1.jpg', alt='')
+                    .order-main
+                      a.order-main-name(href='product.html') &Aacute;o s&#x1A1; mi  caro k&egrave;m belt caro k&egrave;m belt &Aacute;o s&#x1A1; mi caro k&egrave;m belt
+                      .order-main-price 2 x 45,000 &#x20AB;
+                    a.order-close(href='product.html')
+                      i.far.fa-times-circle
+                li.item-order
+                  .order-wrap
+                    a.order-img(href='product.html')
+                      img(src='./assets/img/product/product1.jpg', alt='')
+                    .order-main
+                      a.order-main-name(href='product.html') &Aacute;o s&#x1A1; mi  caro k&egrave;m belt caro k&egrave;m belt &Aacute;o s&#x1A1; mi caro k&egrave;m belt
+                      .order-main-price 2 x 45,000 &#x20AB;
+                    a.order-close(href='product.html')
+                      i.far.fa-times-circle
+                li.item-order
+                  .order-wrap
+                    a.order-img(href='product.html')
+                      img(src='./assets/img/product/product1.jpg', alt='')
+                    .order-main
+                      a.order-main-name(href='product.html') &Aacute;o s&#x1A1; mi  caro k&egrave;m belt caro k&egrave;m belt &Aacute;o s&#x1A1; mi caro k&egrave;m belt
+                      .order-main-price 2 x 45,000 &#x20AB;
+                    a.order-close(href='product.html')
+                      i.far.fa-times-circle
+              .total-money T&#x1ED5;ng c&#x1ED9;ng: 120.000&dstrok;
+              a.btn.btn--default.cart-btn(href='cart.html') Xem gi&#x1ECF; h&agrave;ng
+              a.btn.btn--default.cart-btn.orange(href='pay.html') Thanh to&aacute;n
+              // norcart
+              // <img class="header__cart-img-nocart" src="http://www.giaybinhduong.com/images/empty-cart.png" alt="">
+      // Menu
+      .header__nav
+        ul.header__nav-list
+          li.header__nav-item.nav__search
+            .nav__search-wrap
+              input.nav__search-input(type='text', name='', id='', placeholder='Tìm sản phẩm...')
+            .nav__search-btn
+              i.fas.fa-search
+          li.header__nav-item.authen-form
+            a.header__nav-link(href='#') T&agrave;i Kho&#x1EA3;n
+            ul.sub-nav
+              li.sub-nav__item
+                a.sub-nav__link(href='#my-Login') &Dstrok;&abreve;ng Nh&#x1EAD;p
+              li.sub-nav__item
+                a.sub-nav__link(href='#my-Register') &Dstrok;&abreve;ng K&iacute;
+          li.header__nav-item.index
+            a.header__nav-link(href='index.html') Trang ch&#x1EE7;
+          li.header__nav-item
+            a.header__nav-link(href='#') Gi&#x1EDB;i Thi&#x1EC7;u
+          li.header__nav-item
+            a.header__nav-link(href='#') S&#x1EA3;n Ph&#x1EA9;m
+            .sub-nav-wrap.grid.wide
+              ul.sub-nav
+                li.sub-nav__item
+                  a.sub-nav__link.heading(href='') N&#x1B0;&#x1EDB;c hoa
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c to&agrave;n th&acirc;n vvv
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Khuy&#x1EBF;n m&atilde;i
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c c&#x1A1; th&#x1EC3;
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') N&#x1B0;&#x1EDB;c hoa
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c mi&#x1EC7;ng
+              ul.sub-nav
+                li.sub-nav__item
+                  a.sub-nav__link.heading(href='') N&#x1B0;&#x1EDB;c hoa
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c to&agrave;n th&acirc;n vvv
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Khuy&#x1EBF;n m&atilde;i
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c c&#x1A1; th&#x1EC3;
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') N&#x1B0;&#x1EDB;c hoa
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c mi&#x1EC7;ng
+              ul.sub-nav
+                li.sub-nav__item
+                  a.sub-nav__link.heading(href='') N&#x1B0;&#x1EDB;c hoa
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c to&agrave;n th&acirc;n vvv
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Khuy&#x1EBF;n m&atilde;i
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c c&#x1A1; th&#x1EC3;
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') N&#x1B0;&#x1EDB;c hoa
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c mi&#x1EC7;ng
+              ul.sub-nav
+                li.sub-nav__item
+                  a.sub-nav__link.heading(href='') N&#x1B0;&#x1EDB;c hoa
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c to&agrave;n th&acirc;n vvv
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Khuy&#x1EBF;n m&atilde;i
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c c&#x1A1; th&#x1EC3;
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') N&#x1B0;&#x1EDB;c hoa
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c mi&#x1EC7;ng
+          li.header__nav-item
+            a.header__nav-link(href='news.html') Tin T&#x1EE9;c
+          li.header__nav-item
+            a.header__nav-link(href='contact.html') Li&ecirc;n H&#x1EC7;
