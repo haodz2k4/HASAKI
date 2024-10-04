@@ -79,10 +79,10 @@ block main
               td 
                 span.badge(class=`${item.highlighted === "1" ? "badge-warning" : "badge-info"}` btn-ch-highlighted=item.id style='padding: 10px;') #{item.highlighted === "1" ? "Có" : "Không"}
               td 
-                span.badge(class=`${item.status === "active" ? "badge-success" : "badge-danger"}` btn-ch-status=item.id status=item.status style='padding: 10px;') #{item.status}
+                span.badge(class=`${item.status === "active" ? "badge-success" : "badge-danger"}` btn-ch-status=item.id status=item.status endpoint='api/products' style='padding: 10px;') #{item.status}
               td 
-                input(type="number" value=item.position style='width: 70px') 
-              td !{moment(item.createdAt).format(' dddd,DD/MM/YYYY </br> HH:mm:ss')}
+                input(type="number" value=item.position inp-position=item.id style='width: 70px') 
+              td !{moment(item.createdAt).format(' dddd,DD/MM/YYYY </br> HH:mm:ss')}  
               td
                 button.btn.btn-sm.btn-info
                   i.fas.fa-edit
@@ -90,4 +90,6 @@ block main
                   i.fas.fa-trash 
                 button.btn.btn-sm.btn-warning 
                   i.fa-solid.fa-magnifying-glass
-    +pagination(pagination)
+    +pagination(pagination) 
+
+    div(end-point='api/products')

@@ -1,5 +1,6 @@
 const url = new URL(window.location.href)
 const domain = `http://localhost:3000`
+const endpoint = document.querySelector("[end-point]").getAttribute("end-point")
 //Pagination
 const btnPagination = document.querySelectorAll("[btn-pagination]");
 if(btnPagination.length > 0){
@@ -24,7 +25,7 @@ if (btnChangeStatus.length > 0) {
             const id = item.getAttribute("btn-ch-status"); 
             const status = item.getAttribute("status"); 
             const updateStatus = status === "active" ? "inactive" : "active"
-            const path = `${window.location.origin}/api/products/${id}`;
+            const path = `${window.location.origin}/${endpoint}/${id}`;
             console.log(path)
             fetch(path, {
                 method: "PATCH", 
@@ -60,6 +61,36 @@ if (btnChangeStatus.length > 0) {
                     item.classList.add(inactiveClass);
                 }
                 item.setAttribute("status",status)
+            })
+            .catch(error => {
+                console.error('Lỗi:', error); 
+            });
+        });
+    });
+}
+
+const inpPosition = document.querySelectorAll("[inp-position]");
+if (inpPosition.length > 0) {
+    inpPosition.forEach((item) => {
+        item.addEventListener("change", () => {
+            const value = item.value;
+            const id = item.getAttribute("inp-position"); 
+            const path = `${domain}/${endpoint}/${id}`; 
+            fetch(path, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json" 
+                },
+                body: JSON.stringify({ position: value }) 
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Có lỗi xảy ra khi cập nhật vị trí.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Cập nhật vị trí thành công:', data); 
             })
             .catch(error => {
                 console.error('Lỗi:', error); 
