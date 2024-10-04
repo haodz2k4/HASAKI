@@ -3,7 +3,7 @@ import { isURL } from "validator"
 import { COLLECTION_CATEGORY_NAME } from "./category.model"
 import { formatPrice } from "../utils/format.utils"
 export const COLLECTION_PRODUCT_NAME = 'Product'
-export interface IProduct extends Document{
+export interface IProduct {
     id: string 
     title: string
     categoryId: ObjectId
@@ -27,18 +27,7 @@ export const productSchema = new Schema<IProduct>({
         minlength: 2,
         maxlength: 200 
     },
-    categoryId: {
-        type: Schema.Types.ObjectId, ref: COLLECTION_CATEGORY_NAME,
-        required: true,
-        validate: {
-            validator: async function(val: string) {
-                const category = await model('category').findOne({_id: val, deleted: false})
-                return category !!
-            },
-            message: 'category is not exists',
-        },
-        
-    },  
+    categoryId: {type: Schema.Types.ObjectId, ref: COLLECTION_CATEGORY_NAME},  
     position: {type: Number, min: 1, default: async function():Promise<number> {
         const count = await model(COLLECTION_PRODUCT_NAME).countDocuments({ deleted: false });
         return count + 1
@@ -48,8 +37,9 @@ export const productSchema = new Schema<IProduct>({
     thumbnail: {
         type: [String], 
         validate: {
-            validator: function(v: string) {
-                return isURL(v)
+            validator:  async function(v: string[]) {
+                const length = (await Promise.all(v.map(item => isURL(item)))).length;
+                return length === v.length;
             },
             message: 'invalid thumbnail'
         }

@@ -20,6 +20,7 @@ const bootstrap = () => {
     app.set('view engine', 'pug')
     app.use(express.static('public'))
     app.use(bodyParser.urlencoded({ extended: false }))
+    app.use(bodyParser.json())
     //Logger 
     app.use(loggerMiddleware)
     //Router Api 

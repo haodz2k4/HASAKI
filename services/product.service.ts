@@ -1,3 +1,4 @@
+import { ApiError } from "../api/utils/error";
 import Product, {IProduct} from "../models/product.model"
 
 interface PriceRange {
@@ -55,7 +56,7 @@ export const getProductBySlug = async (slug: string) => {
 export const updateProductById = async (id: string,productBody: Partial<IProduct>) => {
     const product = await getProductByid(id);
     if(!product){
-        throw new Error("Product is not found")
+        throw new ApiError(404,"Product is not found");
     }
     Object.assign(product, productBody)
     await product.save() 
