@@ -1,3 +1,4 @@
+import { SwaggerUiOptions } from './node_modules/@types/swagger-ui-express/index.d';
 import express, {Express} from "express"
 import dotenv from "dotenv"
 dotenv.config()
@@ -13,7 +14,8 @@ import { loggerMiddleware } from "./middleware/logger.middleware"
 import api from "./api/routers/index.router"
 import adminRouter from "./routers/admin/index.router"
 import moment from "moment"
-
+import {serve, setup} from "swagger-ui-express"
+import { specs } from './swagger';
 const bootstrap = () => {
     
     const app: Express = express()
@@ -21,6 +23,7 @@ const bootstrap = () => {
     app.use(express.static('public'))
     app.use(bodyParser.urlencoded({ extended: false }))
     app.use(bodyParser.json())
+    app.use('/api-docs', serve, setup(specs));
     //Logger 
     app.use(loggerMiddleware)
     //Router Api 
