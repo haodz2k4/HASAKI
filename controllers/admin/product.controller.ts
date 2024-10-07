@@ -14,28 +14,28 @@ export const products = catchAsync(async (req: Request, res: Response) => {
     
     const filters = filterHelper([
         {
-            result: "1",
-            name: "Nổi bậc",
+            name: "1",
             value: 'highlighted-1',
             selected: false
         },
         {
-            result: "0",
-            name: "Không nổi bậc",
-            value: 'highlighted-10',
+            name: "0",
+            value: 'highlighted-0',
             selected: false
         }
     ])
+    
     const status = req.query.status as string 
     if(status as string){
         filter.status = status 
-        const index = filters.findIndex((item) => item.result = status)
+        const index = filters.findIndex((item) => item.name === status)
         filters[index].selected = true 
     }
+    
     const highlighted = req.query.highlighted as string;
     if(highlighted){
         filter.highlighted = highlighted  
-        const index = filters.findIndex((item) => item.result = status)
+        const index = filters.findIndex((item) => item.name === highlighted)
         filters[index].selected = true 
     }
     //Pagination 
@@ -56,7 +56,5 @@ export const products = catchAsync(async (req: Request, res: Response) => {
         pagination,
         keyword,
         filters
-        
-        
     })
 })

@@ -1,35 +1,45 @@
 doctype html
-html(lang='en')
+html(lang="en")
   head
-    meta(charset='utf-8')
-    | &#x9;
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    | &#x9;
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    // The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
-    title #{pageTitle}
-    // Google font
-    link(href='https://fonts.googleapis.com/css?family=Cabin:400,700', rel='stylesheet')
-    | &#x9;
-    link(href='https://fonts.googleapis.com/css?family=Montserrat:900', rel='stylesheet')
-    // Custom stlylesheet
-    link(type='text/css', rel='stylesheet', href='/css/common.css')
-    // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
-    // WARNING: Respond.js doesn't work if you view the page via file://
-    //if lt IE 9
-      script(src='https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js')
-      | &#x9;&#x9;  
-      script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
-  body
-    #notfound
-      .notfound
-        .notfound-404
-          h3 Oops! Page not found
-          | &#x9;&#x9;&#x9;&#x9;
-          h1
-            span 4
-            span 0
-            span 4
-        | &#x9;&#x9;&#x9;
-        h2(style='color: red') #{pageTitle}
-  // This templates was made by Colorlib (https://colorlib.com)
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", href="/common/styles.css")
+    title Document
+  body 
+  .about
+      a.bg_links.social.portfolio(href='https://www.rafaelalucas.com', target='_blank')
+        span.icon
+      a.bg_links.social.dribbble(href='https://dribbble.com/rafaelalucas', target='_blank')
+        span.icon
+      a.bg_links.social.linkedin(href='https://www.linkedin.com/in/rafaelalucas/', target='_blank')
+        span.icon
+      a.bg_links.logo
+  section.wrapper
+    .container
+      #scene.scene(data-hover-only='false')
+        .circle(data-depth='1.2')
+        .one(data-depth='0.9')
+          .content
+            span.piece
+            span.piece
+            span.piece
+        .two(data-depth='0.60')
+          .content
+            span.piece
+            span.piece
+            span.piece
+        .three(data-depth='0.40')
+          .content
+            span.piece
+            span.piece
+            span.piece
+        p.p404(data-depth='0.50') 404
+        p.p404(data-depth='0.10') 404
+      .text
+        article
+          p
+            | Uh oh! 
+            strong #{message}
+            br
+            | Go back to the homepage if you dare!
+          button i dare!

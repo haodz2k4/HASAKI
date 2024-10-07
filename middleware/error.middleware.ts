@@ -3,10 +3,13 @@ import { RenderError } from "../utils/error";
 
 
 export default (err: ErrorRequestHandler, req: Request, res: Response, next: NextFunction) => {
+    console.error(err)
     if(err instanceof RenderError){
         switch(err.statusCode) {
             case 404: 
-            res.render("common/404.pug")
+            res.render("common/404.pug", {
+                message: err.message
+            })
             break;
             case 500: 
             res.render("common/500.pug");
@@ -16,6 +19,8 @@ export default (err: ErrorRequestHandler, req: Request, res: Response, next: Nex
             break;
         }
     }else {
-        res.render("common/500.pug")
+        res.render("common/500.pug", {
+            err
+        })
     }
 }

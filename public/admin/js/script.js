@@ -98,3 +98,22 @@ if (inpPosition.length > 0) {
         });
     });
 }
+
+//Filter 
+const btnSelectFilter = document.querySelectorAll("[btn-select-filter]");
+if(btnSelectFilter.length > 0){
+    btnSelectFilter.forEach((item) => {
+        item.addEventListener("click",() => {
+            const value = item.getAttribute("btn-select-filter");
+            
+            const [keyFil, valFil] = value.split("-");
+            if(value){
+                url.searchParams.set(`${keyFil}`, valFil);
+            }else {
+                url.searchParams.delete(`${keyFil}`)
+            }
+            window.location.href = url.href
+            
+        })
+    })
+}

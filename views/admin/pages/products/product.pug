@@ -13,10 +13,10 @@ block main
               .input-group-append
                 button.btn.btn-dark(type='submit') Tìm 
           .col-md-4.mb-3
-            select.form-control
-              option Lọc theo 
-              each item in filters 
-                option(value=item.value selected=item.selected) #{item.name}
+            .btn-group(role='group', aria-label='Basic example')
+              each item in filters
+                button.btn.btn-outline-success(type='button' btn-select-filter=item.value style='width: 90px' class=`${item.selected ? 'active' : ""}`) #{item.name}
+                
           .col-md-4.mb-3
             select.form-control
               option S&#x1EAF;p x&#x1EBF;p A-Z

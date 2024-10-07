@@ -1,6 +1,5 @@
 
 interface IFilter {
-    result: string;
     name: string;
     value: string;
     selected: boolean
@@ -11,14 +10,12 @@ export default (filters: IFilter[]) :IFilter[] => {
     return [
         ...filters,
         {
-            result: "active",
-            name: "Hoạt động",
+            name: "active",
             value: 'status-active',
             selected: false
         },
         {
-            result: "inactive",
-            name: "Không Hoạt động",
+            name: "inactive",
             value: 'status-inactive',
             selected: false
         }
