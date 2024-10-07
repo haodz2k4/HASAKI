@@ -9,7 +9,8 @@ export const products = catchAsync(async (req: Request, res: Response) => {
     const keyword = req.query.keyword as string 
     const filter: Record<string, unknown> = {deleted: false}
     if(keyword){
-        filter.keyword = keyword 
+        console.log(keyword)
+        filter.title = new RegExp(keyword,"i") 
     }
     
     const filters = filterHelper([
@@ -44,12 +45,20 @@ export const products = catchAsync(async (req: Request, res: Response) => {
     const totalDocument = await productModel.countDocuments(filter)
     const pagination = paginationHelper(page, limit, totalDocument)
     const {skip} = pagination
-    
+    //Sorting 
+    const sortKey = req.query.sortKey as string;
+    const sortValue = req.query.sortValue as "desc" | "asc";
+    const sort: Record<string, "desc" | "asc"> = {}
+    if(sortKey && sortValue){
+        sort[sortKey] = sortValue
+    }else{
+        sort.position = 'desc'
+    }
     const products = await productModel
         .find(filter)
         .limit(limit)
         .skip(skip)
-    console.log(filters)
+        .sort(sort)
     res.render("admin/pages/products/product.pug",{
         activePages: "products",
         products,

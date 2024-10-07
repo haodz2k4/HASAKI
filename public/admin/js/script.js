@@ -107,7 +107,10 @@ if(btnSelectFilter.length > 0){
             const value = item.getAttribute("btn-select-filter");
             
             const [keyFil, valFil] = value.split("-");
-            if(value){
+            const isSelected =url.searchParams.get(`${keyFil}`)
+            if(isSelected && isSelected === valFil){
+                url.searchParams.delete(`${keyFil}`)
+            }else if(value){
                 url.searchParams.set(`${keyFil}`, valFil);
             }else {
                 url.searchParams.delete(`${keyFil}`)
@@ -115,5 +118,24 @@ if(btnSelectFilter.length > 0){
             window.location.href = url.href
             
         })
+    })
+}
+
+//Sorting
+const formSelectSorting = document.querySelector("[form-select-sorting]");
+
+if(formSelectSorting){
+    formSelectSorting.addEventListener("change",() => {
+        const value = formSelectSorting.value;
+        const [sortKey, sortValue] = value.split("-")
+        if(value){
+            url.searchParams.set("sortKey", sortKey);
+            url.searchParams.set("sortValue", sortValue)
+        }else {
+            url.searchParams.delete("sortKey")
+            url.searchParams.delete("sortValue")
+        }
+        window.location.href = url.href
+
     })
 }

@@ -18,11 +18,12 @@ block main
                 button.btn.btn-outline-success(type='button' btn-select-filter=item.value style='width: 90px' class=`${item.selected ? 'active' : ""}`) #{item.name}
                 
           .col-md-4.mb-3
-            select.form-control
-              option S&#x1EAF;p x&#x1EBF;p A-Z
-              option S&#x1EAF;p x&#x1EBF;p Z-A
-              option Gi&aacute; t&abreve;ng d&#x1EA7;n
-              option Gi&aacute; gi&#x1EA3;m d&#x1EA7;n
+            select.form-control(form-select-sorting)
+              option(value='') Sắp Xếp Theo 
+              option(value='title-asc') Tiêu đề từ A - Z
+              option(value='title-desc') Tiêu đề từ Z - A 
+              option(value='price-asc') Giá tiền A - Z 
+              option(value="price-desc") Giá tiền Z - A
         .row.tool-section
           // Hàng 2: Chọn với nút, Lọc giá, Nút hành động
           .col-md-4.mb-3
