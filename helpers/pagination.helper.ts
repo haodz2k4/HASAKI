@@ -1,10 +1,10 @@
 
 export interface PaginationResult {
-    page?: number;
+    page: number;
     limit: number;
-    skip?: number;
-    countPage?: number;
-    total?: number
+    skip: number;
+    countPage: number;
+    total: number
 }
 
 export default (page: number, limit: number, total: number): PaginationResult => {

@@ -5,7 +5,7 @@ import productModel from "../../models/product.model";
 import catchAsync from "../../api/utils/catchAsync";
 import { RenderError } from "../../utils/error";
 //[GET] "/products"
-export const products = async (req: Request, res: Response) => {
+export const products = catchAsync(async (req: Request, res: Response) => {
     
     const filter: Record<string, any> = {status: "active", deleted: false}
     
@@ -49,7 +49,7 @@ export const products = async (req: Request, res: Response) => {
         keyword
         
     })
-}
+})
 //[GET] "/products/:slug"
 export const detail = catchAsync(async (req: Request, res: Response) => {
     const {slug} = req.params;

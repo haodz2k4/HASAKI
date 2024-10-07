@@ -1,4 +1,3 @@
-import { SwaggerUiOptions } from './node_modules/@types/swagger-ui-express/index.d';
 import express, {Express} from "express"
 import dotenv from "dotenv"
 dotenv.config()
@@ -11,7 +10,6 @@ import flash from "express-flash"
 import cookieParser from "cookie-parser"
 import session from "express-session"
 import { loggerMiddleware } from "./middleware/logger.middleware"
-import api from "./api/routers/index.router"
 import adminRouter from "./routers/admin/index.router"
 import moment from "moment"
 import {serve, setup} from "swagger-ui-express"
@@ -28,7 +26,7 @@ const bootstrap = () => {
     //Logger 
     app.use(loggerMiddleware)
     //Router Api 
-    api(app) 
+    //api(app) 
     //admin router 
     adminRouter(app)
     //Client router 

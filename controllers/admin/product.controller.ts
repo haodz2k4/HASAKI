@@ -2,11 +2,12 @@ import { Request, Response } from "express";
 import paginationHelper from "../../helpers/pagination.helper";
 import filterHelper from "../../helpers/filter.helper";
 import productModel from "../../models/product.model";
+import catchAsync from "../../api/utils/catchAsync";
 //[GET] "/admin/products"
-export const products = async (req: Request, res: Response) => {
+export const products = catchAsync(async (req: Request, res: Response) => {
     
     const keyword = req.query.keyword as string 
-    const filter: Record<string, any> = {deleted: false}
+    const filter: Record<string, unknown> = {deleted: false}
     if(keyword){
         filter.keyword = keyword 
     }
@@ -44,7 +45,10 @@ export const products = async (req: Request, res: Response) => {
     const pagination = paginationHelper(page, limit, totalDocument)
     const {skip} = pagination
     
-    const products = await productModel.find(filter).limit(limit).skip(skip as number)
+    const products = await productModel
+        .find(filter)
+        .limit(limit)
+        .skip(skip)
     console.log(filters)
     res.render("admin/pages/products/product.pug",{
         activePages: "products",
@@ -55,4 +59,4 @@ export const products = async (req: Request, res: Response) => {
         
         
     })
-}
+})
