@@ -1,84 +1,370 @@
 extends ../../layouts/default.pug 
 
-
 block main 
-    .container.mt-4
-      .row
-        // Sidebar Filters
-        .col-lg-3(style='margin-top: 50px')
-          .filter-section
-            h5 B&#x1ED9; L&#x1ECD;c T&igrave;m Ki&#x1EBF;m
-            .mb-3
-              label.form-label N&#x1A1;i B&aacute;n
-              select.form-select
-                option(selected='') H&agrave; N&#x1ED9;i
-                option TP. H&#x1ED3; Ch&iacute; Minh
-                option Th&aacute;i Nguy&ecirc;n
-                option V&itilde;nh Ph&uacute;c
-            .mb-3
-              label.form-label &Dstrok;&#x1A1;n V&#x1ECB; V&#x1EAD;n Chuy&#x1EC3;n
-              .form-check
-                input#express.form-check-input(type='checkbox')
-                label.form-check-label(for='express') H&#x1ECF;a T&#x1ED1;c
-              .form-check
-                input#fast.form-check-input(type='checkbox')
-                label.form-check-label(for='fast') Nhanh
-              .form-check
-                input#saver.form-check-input(type='checkbox')
-                label.form-check-label(for='saver') Ti&#x1EBF;t Ki&#x1EC7;m
-            .mb-3
-              label.form-label Khoảng giá 
-              input.form-control(type='number', inp-min-price,min=0, value=minPrice ? minPrice : 0 ,placeholder='Từ')
-              input.form-control.mt-2(type='number', inp-max-price,min=0, value=maxPrice placeholder='Đến')
-            .mb-3(style='display: flex; justiy-content: center')
-              button.btn.btn-warning(style='width: 100%;' btn-range-price) Tính 
-            .mb-3
-              label.form-label T&igrave;nh Tr&#x1EA1;ng
-              .form-check
-                input#new.form-check-input(type='checkbox')
-                label.form-check-label(for='new') M&#x1EDB;i
-              .form-check
-                input#used.form-check-input(type='checkbox')
-                label.form-check-label(for='used') &Dstrok;&atilde; S&#x1EED; D&#x1EE5;ng
-        // Products Grid
-        .col-lg-9(style='margin-top: 50px')
-          .d-flex.justify-content-between.align-items-center.mb-3
-            if keyword 
-              h4 có #{products.length} kết quả tìm kiếm cho 
-                strong #{keyword}
-            select.form-select.w-25(select-sort)
-              option(value='') Sắp xếp theo 
-              option(value="createdAt-asc" selected=(sortString === "createdAt-asc" )) Mới nhất 
-              option(value="createdAt-desc" selected=(sortString === "createdAt-desc")) Cũ nhất 
-              option(value="price-asc" selected=(sortString === "price-asc" )) Giá từ thấp đến cao  
-              option(value="price-desc" selected=(sortString === "price-desc")) Giá từ cao đến thấp 
-          .row
-            // Product Card
-            each item in products 
-              a(href="/products/"+item.slug).text-decoration-none.col-md-3.mb-4
-                .card.product-card.p-2
-                  img.card-img-top.product-image(src=`${item.thumbnail.length > 0 ? item.thumbnail[0] : "https://via.placeholder.com/250"}`,style='width: 250px; height: 250px', alt='iPhone')
-                  .card-body
-                    h6.product-title(style='font-size: 20px') #{item.title}
-                    .d-flex.justify-content-between.align-items-center
-                      span.price #{item.newPrice}
-                      span.sale-tag -#{item.discountPercentage}%
-                    .rating-stars
-                      | &starf;&starf;&starf;&starf;&starf;
-              // Additional Product Cards
-              // Add more product cards here by copying the div above and changing the content 
-          if pagination 
-           .container.mt-5
-            nav(aria-label='Page navigation example')
-              ul.pagination.pagination-custom
-                // Previous Button (disabled if on first page)
-                li.page-item(class=`${pagination.page === 1 ? "disabled" : ""}`)
-                  a.page-link(href='#', aria-label='Previous' btn-pagination=(pagination.page - 1))
-                    span(aria-hidden='true') &laquo;
-                - for (let i = 1; i <= pagination.countPage; i++)
-                  li.page-item
-                    a.page-link(btn-pagination=i class=`${pagination.page == i ? "active" : ""}`) #{i}
-                // Next Button
-                li.page-item(class=`${pagination.page === pagination.countPage ? "disabled" : ""}`)
-                  a.page-link(btn-pagination=(pagination.page + 1) aria-label='Next')
-                    span(aria-hidden='true') &raquo; 
+    #myHeader.header.scrolling
+      .grid.wide
+        .header__top
+          .navbar-icon
+            span
+            span
+            span
+          a.header__logo(href='index.html')
+            img(src='./assets/logo.png', alt='')
+          .header__search
+            .header__search-wrap
+              input.header__search-input(type='text', placeholder='Tìm kiếm')
+              a.header__search-icon(href='#')
+                i.fas.fa-search
+          .header__account
+            a.header__account-login(href='#my-Login') &Dstrok;&abreve;ng Nh&#x1EAD;p
+            a.header__account-register(href='#my-Register') &Dstrok;&abreve;ng K&iacute;
+          // Cart
+          .header__cart.have(href='#')
+            i.fas.fa-shopping-basket
+            .header__cart-amount
+              | 3
+            .header__cart-wrap
+              ul.order__list
+                li.item-order
+                  .order-wrap
+                    a.order-img(href='product.html')
+                      img(src='./assets/img/product/product1.jpg', alt='')
+                    .order-main
+                      a.order-main-name(href='product.html') &Aacute;o s&#x1A1; mi  caro k&egrave;m belt caro k&egrave;m belt &Aacute;o s&#x1A1; mi caro k&egrave;m belt
+                      .order-main-price 2 x 45,000 &#x20AB;
+                    a.order-close(href='product.html')
+                      i.far.fa-times-circle
+                li.item-order
+                  .order-wrap
+                    a.order-img(href='product.html')
+                      img(src='./assets/img/product/product1.jpg', alt='')
+                    .order-main
+                      a.order-main-name(href='product.html') &Aacute;o s&#x1A1; mi  caro k&egrave;m belt caro k&egrave;m belt &Aacute;o s&#x1A1; mi caro k&egrave;m belt
+                      .order-main-price 2 x 45,000 &#x20AB;
+                    a.order-close(href='product.html')
+                      i.far.fa-times-circle
+                li.item-order
+                  .order-wrap
+                    a.order-img(href='product.html')
+                      img(src='./assets/img/product/product1.jpg', alt='')
+                    .order-main
+                      a.order-main-name(href='product.html') &Aacute;o s&#x1A1; mi  caro k&egrave;m belt caro k&egrave;m belt &Aacute;o s&#x1A1; mi caro k&egrave;m belt
+                      .order-main-price 2 x 45,000 &#x20AB;
+                    a.order-close(href='product.html')
+                      i.far.fa-times-circle
+              .total-money T&#x1ED5;ng c&#x1ED9;ng: 120.000&dstrok;
+              a.btn.btn--default.cart-btn(href='cart.html') Xem gi&#x1ECF; h&agrave;ng
+              a.btn.btn--default.cart-btn.orange(href='pay.html') Thanh to&aacute;n
+              // norcart
+              // <img class="header__cart-img-nocart" src="http://www.giaybinhduong.com/images/empty-cart.png" alt="">
+      // Menu
+      .header__nav
+        ul.header__nav-list
+          li.header__nav-item.nav__search
+            .nav__search-wrap
+              input.nav__search-input(type='text', name='', id='', placeholder='Tìm sản phẩm...')
+            .nav__search-btn
+              i.fas.fa-search
+          li.header__nav-item.authen-form
+            a.header__nav-link(href='#') T&agrave;i Kho&#x1EA3;n
+            ul.sub-nav
+              li.sub-nav__item
+                a.sub-nav__link(href='#my-Login') &Dstrok;&abreve;ng Nh&#x1EAD;p
+              li.sub-nav__item
+                a.sub-nav__link(href='#my-Register') &Dstrok;&abreve;ng K&iacute;
+          li.header__nav-item.index
+            a.header__nav-link(href='index.html') Trang ch&#x1EE7;
+          li.header__nav-item
+            a.header__nav-link(href='#') Gi&#x1EDB;i Thi&#x1EC7;u
+          li.header__nav-item
+            a.header__nav-link(href='#') S&#x1EA3;n Ph&#x1EA9;m
+            .sub-nav-wrap.grid.wide
+              ul.sub-nav
+                li.sub-nav__item
+                  a.sub-nav__link.heading(href='') N&#x1B0;&#x1EDB;c hoa
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c to&agrave;n th&acirc;n vvv
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Khuy&#x1EBF;n m&atilde;i
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c c&#x1A1; th&#x1EC3;
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') N&#x1B0;&#x1EDB;c hoa
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c mi&#x1EC7;ng
+              ul.sub-nav
+                li.sub-nav__item
+                  a.sub-nav__link.heading(href='') N&#x1B0;&#x1EDB;c hoa
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c to&agrave;n th&acirc;n vvv
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Khuy&#x1EBF;n m&atilde;i
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c c&#x1A1; th&#x1EC3;
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') N&#x1B0;&#x1EDB;c hoa
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c mi&#x1EC7;ng
+              ul.sub-nav
+                li.sub-nav__item
+                  a.sub-nav__link.heading(href='') N&#x1B0;&#x1EDB;c hoa
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c to&agrave;n th&acirc;n vvv
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Khuy&#x1EBF;n m&atilde;i
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c c&#x1A1; th&#x1EC3;
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') N&#x1B0;&#x1EDB;c hoa
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c mi&#x1EC7;ng
+              ul.sub-nav
+                li.sub-nav__item
+                  a.sub-nav__link.heading(href='') N&#x1B0;&#x1EDB;c hoa
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c to&agrave;n th&acirc;n vvv
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Khuy&#x1EBF;n m&atilde;i
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c c&#x1A1; th&#x1EC3;
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') N&#x1B0;&#x1EDB;c hoa
+                li.sub-nav__item
+                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c mi&#x1EC7;ng
+          li.header__nav-item
+            a.header__nav-link(href='news.html') Tin T&#x1EE9;c
+          li.header__nav-item
+            a.header__nav-link(href='contact.html') Li&ecirc;n H&#x1EC7;
+    .main
+      .grid.wide
+        .main__taskbar
+          .main__breadcrumb
+            .breadcrumb__item
+              a.breadcrumb__link(href='#') Trang ch&#x1EE7;
+            .breadcrumb__item
+              a.breadcrumb__link(href='#') C&#x1EED;a h&agrave;ng
+            .breadcrumb__item
+              a.breadcrumb__link(href='#') H&atilde;ng DHC
+          .main__sort
+            h3.sort__title
+              | Hi&#x1EC3;n th&#x1ECB; k&#x1EBF;t qu&#x1EA3; theo
+            select.sort__select
+              | name=&quot;&quot; id=&quot;&quot;&gt;
+              option(value='1') Th&#x1EE9; t&#x1EF1; m&#x1EB7;c &dstrok;&#x1ECB;nh
+              option(value='2') M&#x1EE9;c &dstrok;&#x1ED9; ph&#x1ED5; bi&#x1EBF;n
+              option(value='3') &Dstrok;i&#x1EC3;m &dstrok;&aacute;nh gi&aacute;
+              option(value='4') M&#x1EDB;i c&#x1EAD;p nh&#x1EAD;t
+              option(value='5') Gi&aacute; : Cao &dstrok;&#x1EBF;n th&#x1EA5;p
+              option(value='6') Gi&aacute; Th&#x1EA5;p &dstrok;&#x1EBF;n cao
+        .productList
+          .listProduct
+            .row
+              .col.l-2.m-4.s-6
+                .product
+                  .product__avt(style='background-image: url(assets/img/product/product1.jpg)')
+                  .product__info
+                    h3.product__name Framed-Sleeve Tops Group
+                    .product__price
+                      .price__old
+                        | 340.000 
+                        span.price__unit &dstrok;
+                      .price__new
+                        | 320.000 
+                        span.price__unit &dstrok;
+                  .product__sale
+                    span.product__sale-percent 22%
+                    span.product__sale-text Gi&#x1EA3;m
+                  a.viewDetail(href='#') Xem chi ti&#x1EBF;t
+                  a.addToCart(href='#') Th&ecirc;m v&agrave;o gi&#x1ECF;
+              .col.l-2.m-4.s-6
+                .product
+                  .product__avt(style='background-image: url(assets/img/product/product1.jpg)')
+                  .product__info
+                    h3.product__name Framed-Sleeve Tops Group
+                    .product__price
+                      .price__old
+                        | 340.000 
+                        span.price__unit &dstrok;
+                      .price__new
+                        | 320.000 
+                        span.price__unit &dstrok;
+                  .product__sale
+                    span.product__sale-percent 22%
+                    span.product__sale-text Gi&#x1EA3;m
+                  a.viewDetail(href='#') Xem chi ti&#x1EBF;t
+                  a.addToCart(href='#') Th&ecirc;m v&agrave;o gi&#x1ECF;
+              .col.l-2.m-4.s-6
+                .product
+                  .product__avt(style='background-image: url(assets/img/product/product1.jpg)')
+                  .product__info
+                    h3.product__name Framed-Sleeve Tops Group
+                    .product__price
+                      .price__old
+                        | 340.000 
+                        span.price__unit &dstrok;
+                      .price__new
+                        | 320.000 
+                        span.price__unit &dstrok;
+                  .product__sale
+                    span.product__sale-percent 22%
+                    span.product__sale-text Gi&#x1EA3;m
+                  a.viewDetail(href='#') Xem chi ti&#x1EBF;t
+                  a.addToCart(href='#') Th&ecirc;m v&agrave;o gi&#x1ECF;
+              .col.l-2.m-4.s-6
+                .product
+                  .product__avt(style='background-image: url(assets/img/product/product1.jpg)')
+                  .product__info
+                    h3.product__name Framed-Sleeve Tops Group
+                    .product__price
+                      .price__old
+                        | 340.000 
+                        span.price__unit &dstrok;
+                      .price__new
+                        | 320.000 
+                        span.price__unit &dstrok;
+                  .product__sale
+                    span.product__sale-percent 22%
+                    span.product__sale-text Gi&#x1EA3;m
+                  a.viewDetail(href='#') Xem chi ti&#x1EBF;t
+                  a.addToCart(href='#') Th&ecirc;m v&agrave;o gi&#x1ECF;
+              .col.l-2.m-4.s-6
+                .product
+                  .product__avt(style='background-image: url(assets/img/product/product1.jpg)')
+                  .product__info
+                    h3.product__name Framed-Sleeve Tops Group
+                    .product__price
+                      .price__old
+                        | 340.000 
+                        span.price__unit &dstrok;
+                      .price__new
+                        | 320.000 
+                        span.price__unit &dstrok;
+                  .product__sale
+                    span.product__sale-percent 22%
+                    span.product__sale-text Gi&#x1EA3;m
+                  a.viewDetail(href='#') Xem chi ti&#x1EBF;t
+                  a.addToCart(href='#') Th&ecirc;m v&agrave;o gi&#x1ECF;
+              .col.l-2.m-4.s-6
+                .product
+                  .product__avt(style='background-image: url(assets/img/product/product1.jpg)')
+                  .product__info
+                    h3.product__name Framed-Sleeve Tops Group
+                    .product__price
+                      .price__old
+                        | 340.000 
+                        span.price__unit &dstrok;
+                      .price__new
+                        | 320.000 
+                        span.price__unit &dstrok;
+                  .product__sale
+                    span.product__sale-percent 22%
+                    span.product__sale-text Gi&#x1EA3;m
+                  a.viewDetail(href='#') Xem chi ti&#x1EBF;t
+                  a.addToCart(href='#') Th&ecirc;m v&agrave;o gi&#x1ECF;
+              .col.l-2.m-4.s-6
+                .product
+                  .product__avt(style='background-image: url(assets/img/product/product1.jpg)')
+                  .product__info
+                    h3.product__name Framed-Sleeve Tops Group
+                    .product__price
+                      .price__old
+                        | 340.000 
+                        span.price__unit &dstrok;
+                      .price__new
+                        | 320.000 
+                        span.price__unit &dstrok;
+                  .product__sale
+                    span.product__sale-percent 22%
+                    span.product__sale-text Gi&#x1EA3;m
+                  a.viewDetail(href='#') Xem chi ti&#x1EBF;t
+                  a.addToCart(href='#') Th&ecirc;m v&agrave;o gi&#x1ECF;
+              .col.l-2.m-4.s-6
+                .product
+                  .product__avt(style='background-image: url(assets/img/product/product1.jpg)')
+                  .product__info
+                    h3.product__name Framed-Sleeve Tops Group
+                    .product__price
+                      .price__old
+                        | 340.000 
+                        span.price__unit &dstrok;
+                      .price__new
+                        | 320.000 
+                        span.price__unit &dstrok;
+                  .product__sale
+                    span.product__sale-percent 22%
+                    span.product__sale-text Gi&#x1EA3;m
+                  a.viewDetail(href='#') Xem chi ti&#x1EBF;t
+                  a.addToCart(href='#') Th&ecirc;m v&agrave;o gi&#x1ECF;
+              .col.l-2.m-4.s-6
+                .product
+                  .product__avt(style='background-image: url(assets/img/product/product1.jpg)')
+                  .product__info
+                    h3.product__name Framed-Sleeve Tops Group
+                    .product__price
+                      .price__old
+                        | 340.000 
+                        span.price__unit &dstrok;
+                      .price__new
+                        | 320.000 
+                        span.price__unit &dstrok;
+                  .product__sale
+                    span.product__sale-percent 22%
+                    span.product__sale-text Gi&#x1EA3;m
+                  a.viewDetail(href='#') Xem chi ti&#x1EBF;t
+                  a.addToCart(href='#') Th&ecirc;m v&agrave;o gi&#x1ECF;
+              .col.l-2.m-4.s-6
+                .product
+                  .product__avt(style='background-image: url(assets/img/product/product1.jpg)')
+                  .product__info
+                    h3.product__name Framed-Sleeve Tops Group
+                    .product__price
+                      .price__old
+                        | 340.000 
+                        span.price__unit &dstrok;
+                      .price__new
+                        | 320.000 
+                        span.price__unit &dstrok;
+                  .product__sale
+                    span.product__sale-percent 22%
+                    span.product__sale-text Gi&#x1EA3;m
+                  a.viewDetail(href='#') Xem chi ti&#x1EBF;t
+                  a.addToCart(href='#') Th&ecirc;m v&agrave;o gi&#x1ECF;
+              .col.l-2.m-4.s-6
+                .product
+                  .product__avt(style='background-image: url(assets/img/product/product1.jpg)')
+                  .product__info
+                    h3.product__name Framed-Sleeve Tops Group
+                    .product__price
+                      .price__old
+                        | 340.000 
+                        span.price__unit &dstrok;
+                      .price__new
+                        | 320.000 
+                        span.price__unit &dstrok;
+                  .product__sale
+                    span.product__sale-percent 22%
+                    span.product__sale-text Gi&#x1EA3;m
+                  a.viewDetail(href='#') Xem chi ti&#x1EBF;t
+                  a.addToCart(href='#') Th&ecirc;m v&agrave;o gi&#x1ECF;
+          .pagination
+            ul.pagination__list
+              li.pagination__item
+                a.pagination__link(href='listFilm.html')
+                  i.fas.fa-chevron-left
+              li.pagination__item.active
+                a.pagination__link(href='listFilm.html') 1
+              li.pagination__item
+                a.pagination__link(href='listFilm.html') 2
+              li.pagination__item
+                a.pagination__link(href='listFilm.html') 3
+              li.pagination__item
+                a.pagination__link(href='listFilm.html') 4
+              li.pagination__item
+                a.pagination__link(href='listFilm.html') 5
+              li.pagination__item
+                a.pagination__link(href='listFilm.html') ...
+              li.pagination__item.active
+                a.pagination__link(href='listFilm.html') 14
+              li.pagination__item
+                a.pagination__link(href='listFilm.html')
+                  i.fas.fa-chevron-right

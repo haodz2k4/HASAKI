@@ -12,3 +12,13 @@ export default <T extends Record<string, any>, K extends keyof T>(object: T, fie
         return result
     }, {} as Partial<T>)
 }
+//INP: {status: "active"}
+//OUT: "status-active"
+export const stringObject = (obj: Record<string, any>): string => {
+    const entries = Object.entries(obj);
+    for(const item of entries){
+        const [key, value] = item;
+        return `${key}-${value}`
+    }
+    return ""
+} 

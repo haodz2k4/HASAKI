@@ -3,19 +3,22 @@ html(lang="en")
     head
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-       
-        // Reset css & grid sytem
-        link(rel='stylesheet', href='./assets/css/library.css')
-        link(href='./assets/owlCarousel/assets/owl.carousel.min.css', rel='stylesheet')
-        // Layout
-        link(rel='stylesheet', href='./assets/css/common.css')
-        // index
-        link(href='./assets/css/home.css', rel='stylesheet')
-        script(src='https://code.jquery.com/jquery-3.6.0.min.js')
-        // Owl caroucel Js
-        script(src='./assets/owlCarousel/owl.carousel.min.js')
-        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css")
+        //Font 
+        link(rel='preconnect', href='https://fonts.gstatic.com')
+        link(href='https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap', rel='stylesheet')
+        // Icon fontanwesome
+        link(rel='stylesheet', href='https://pro.fontawesome.com/releases/v5.10.0/css/all.css', integrity='sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p', crossorigin='anonymous')
+        //common css 
+        link(rel="stylesheet", href="/css/common.css")
+        //library css 
+        link(rel="stylesheet", href="/css/library.css")
+        //product css 
+        link(rel="stylesheet", href="/css/product.css")
+        //styles css 
         link(rel="stylesheet", href="/css/styles.css")
+        //Jquery 
+        script(src='https://code.jquery.com/jquery-3.6.0.min.js')
+        script(src='assets/owlCarousel/owl.carousel.min.js')
         title #{pageTitle}
     body 
 
@@ -23,5 +26,4 @@ html(lang="en")
     block main 
     include ../partials/footer.pug
     script(src="./assets/js/script.js") 
-    script(src='./assets/js/homeScript.js')
     script(src='./assets/js/commonscript.js')

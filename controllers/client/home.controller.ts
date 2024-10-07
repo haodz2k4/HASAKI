@@ -1,13 +1,16 @@
 import { Request, Response } from "express";
-import { getAllProductsByQuery } from "../../services/product.service";
+import productModel from "../../models/product.model";
 //[GET] "/home"
 export const home = async (req: Request, res: Response) => {
     
-    const hightlightedProducts = await getAllProductsByQuery({filter: {status: "active",highlighted: "1" }, limit: 12});
-    const products = await getAllProductsByQuery({filter: {status: "active"}, limit: 20});
+    const hightlightedProducts = await productModel.find({status: 'active', limit: 5, deleted: false})
+    const products = await productModel
+        .find({status: "active", deleted: false})
+        .limit(18)
     res.render("clients/pages/home/home.pug",{
         hightlightedProducts,
-        products
+        products,   
+        pageTitle: "Trang Chủ"
     })
 
 }

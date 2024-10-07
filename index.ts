@@ -16,6 +16,7 @@ import adminRouter from "./routers/admin/index.router"
 import moment from "moment"
 import {serve, setup} from "swagger-ui-express"
 import { specs } from './swagger';
+import errorMiddleware from './middleware/error.middleware';
 const bootstrap = () => {
     
     const app: Express = express()
@@ -32,6 +33,8 @@ const bootstrap = () => {
     adminRouter(app)
     //Client router 
     clientRouter(app)
+    //Error middleware 
+    app.use(errorMiddleware)
     //redis
     redis
     //Express flash (For Show Alert)

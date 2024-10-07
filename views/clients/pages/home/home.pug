@@ -89,111 +89,23 @@ block main
           h3.category__title Ng&#x1ECD;c &Aacute;nh Cometics
           h3.category__heading S&#x1EA2;N PH&#x1EA8;M N&#x1ED4;I B&#x1EAC;T
           .owl-carousel.hight.owl-theme
-            .product
-              .product__avt(style='background-image: url(./assets/img/product/product1.jpg);')
-              .product__info
-                h3.product__name Son m&ocirc;i cao c&#x1EA5;p
-                .product__price
-                  .price__old
-                    | 100.000 &dstrok;
-                  .price__new
-                    | 70.000
-                    span.price__unit &dstrok;
-                .product__sale
-                  span.product__sale-percent 23
-                  span.product__sale-text Gi&#x1EA3;m
-              a.viewDetail(href='product.html') Xem chi ti&#x1EBF;t
-              a.addToCart(href='cart.html') Th&ecirc;m v&agrave;o gi&#x1ECF;
-            .product
-              .product__avt(style='background-image: url(./assets/img/product/product1.jpg);')
-              .product__info
-                h3.product__name Son m&ocirc;i cao c&#x1EA5;p
-                .product__price
-                  .price__old
-                    | 100.000 &dstrok;
-                  .price__new
-                    | 70.000
-                    span.price__unit &dstrok;
-                .product__sale
-                  span.product__sale-percent 23
-                  span.product__sale-text Gi&#x1EA3;m
-              a.viewDetail(href='product.html') Xem chi ti&#x1EBF;t
-              a.addToCart(href='cart.html') Th&ecirc;m v&agrave;o gi&#x1ECF;
-            .product
-              .product__avt(style='background-image: url(./assets/img/product/product1.jpg);')
-              .product__info
-                h3.product__name Son m&ocirc;i cao c&#x1EA5;p
-                .product__price
-                  .price__old
-                    | 100.000 &dstrok;
-                  .price__new
-                    | 70.000
-                    span.price__unit &dstrok;
-                .product__sale
-                  span.product__sale-percent 23
-                  span.product__sale-text Gi&#x1EA3;m
-              a.viewDetail(href='product.html') Xem chi ti&#x1EBF;t
-              a.addToCart(href='cart.html') Th&ecirc;m v&agrave;o gi&#x1ECF;
-            .product
-              .product__avt(style='background-image: url(./assets/img/product/product1.jpg);')
-              .product__info
-                h3.product__name Son m&ocirc;i cao c&#x1EA5;p
-                .product__price
-                  .price__old
-                    | 100.000 &dstrok;
-                  .price__new
-                    | 70.000
-                    span.price__unit &dstrok;
-                .product__sale
-                  span.product__sale-percent 23
-                  span.product__sale-text Gi&#x1EA3;m
-              a.viewDetail(href='product.html') Xem chi ti&#x1EBF;t
-              a.addToCart(href='cart.html') Th&ecirc;m v&agrave;o gi&#x1ECF;
-            .product
-              .product__avt(style='background-image: url(./assets/img/product/product1.jpg);')
-              .product__info
-                h3.product__name Son m&ocirc;i cao c&#x1EA5;p
-                .product__price
-                  .price__old
-                    | 100.000 &dstrok;
-                  .price__new
-                    | 70.000
-                    span.price__unit &dstrok;
-                .product__sale
-                  span.product__sale-percent 23
-                  span.product__sale-text Gi&#x1EA3;m
-              a.viewDetail(href='product.html') Xem chi ti&#x1EBF;t
-              a.addToCart(href='cart.html') Th&ecirc;m v&agrave;o gi&#x1ECF;
-            .product
-              .product__avt(style='background-image: url(./assets/img/product/product1.jpg);')
-              .product__info
-                h3.product__name Son m&ocirc;i cao c&#x1EA5;p
-                .product__price
-                  .price__old
-                    | 100.000 &dstrok;
-                  .price__new
-                    | 70.000
-                    span.price__unit &dstrok;
-                .product__sale
-                  span.product__sale-percent 23
-                  span.product__sale-text Gi&#x1EA3;m
-              a.viewDetail(href='product.html') Xem chi ti&#x1EBF;t
-              a.addToCart(href='cart.html') Th&ecirc;m v&agrave;o gi&#x1ECF;
-            .product
-              .product__avt(style='background-image: url(./assets/img/product/product1.jpg);')
-              .product__info
-                h3.product__name Son m&ocirc;i cao c&#x1EA5;p
-                .product__price
-                  .price__old
-                    | 100.000 &dstrok;
-                  .price__new
-                    | 70.000
-                    span.price__unit &dstrok;
-                .product__sale
-                  span.product__sale-percent 23
-                  span.product__sale-text Gi&#x1EA3;m
-              a.viewDetail(href='product.html') Xem chi ti&#x1EBF;t
-              a.addToCart(href='cart.html') Th&ecirc;m v&agrave;o gi&#x1ECF;
+            each item in hightlightedProducts
+              .product
+                .product__avt(style='background-image: url(./assets/img/product/product1.jpg);')
+                .product__info
+                  h3.product__name #{item.title}
+                  .product__price
+                    .price__old
+                      | 100.000 &dstrok;
+                    .price__new
+                      | 70.000
+                      span.price__unit &dstrok;
+                  .product__sale
+                    span.product__sale-percent 23
+                    span.product__sale-text Gi&#x1EA3;m
+                a.viewDetail(href='product.html') Xem chi ti&#x1EBF;t
+                a.addToCart(href='cart.html') Th&ecirc;m v&agrave;o gi&#x1ECF;
+            
       // Sales Policy
       .main__policy
         .row
@@ -261,114 +173,5 @@ block main
             a.band__item(href='listProduct.html', style='background-image: url(./assets/img/band/band5.png)')
             a.band__item(href='listProduct.html', style='background-image: url(./assets/img/band/band6.png)')
             a.band__item(href='listProduct.html', style='background-image: url(./assets/img/band/band7.png)')
-    .footer
-      .grid.wide
-        .row
-          .col.l-3.m-6.s-12
-            h3.footer__title Menu
-            ul.footer__list
-              li.footer__item
-                a.footer__link(href='#') Trang &dstrok;i&#x1EC3;m
-              li.footer__item
-                a.footer__link(href='#') Ch&abreve;m s&oacute;c da
-              li.footer__item
-                a.footer__link(href='#') Ch&abreve;m s&oacute;c t&oacute;c
-              li.footer__item
-                a.footer__link(href='#') N&#x1B0;&#x1EDB;c hoa
-              li.footer__item
-                a.footer__link(href='#') Ch&abreve;m s&oacute;c to&agrave;n th&acirc;n 
-          .col.l-3.m-6.s-12
-            h3.footer__title H&#x1ED7; tr&#x1EE3; kh&aacute;ch h&agrave;ng
-            ul.footer__list
-              li.footer__item
-                a.footer__link(href='#') H&#x1B0;&#x1EDB;ng d&#x1EAB;n mua h&agrave;ng
-              li.footer__item
-                a.footer__link(href='#') Gi&#x1EA3;i &dstrok;&aacute;p th&#x1EAF;c m&#x1EAF;c
-              li.footer__item
-                a.footer__link(href='#') Ch&iacute;nh s&aacute;ch mua h&agrave;ng
-              li.footer__item
-                a.footer__link(href='#') Ch&iacute;nh s&aacute;ch &dstrok;&#x1ED5;i tr&#x1EA3;
-          .col.l-3.m-6.s-12
-            h3.footer__title Li&ecirc;n h&#x1EC7;
-            ul.footer__list
-              li.footer__item
-                span.footer__text
-                  i.fas.fa-map-marked-alt
-                  |  319 C16 L&yacute; Th&#x1B0;&#x1EDD;ng Ki&#x1EC7;t, Ph&#x1B0;&#x1EDD;ng 15, Qu&#x1EAD;n 11, Tp.HCM
-              li.footer__item
-                a.footer__link(href='#')
-                  i.fas.fa-phone
-                  |  076 922 0162
-              li.footer__item
-                a.footer__link(href='#')
-                  i.fas.fa-envelope
-                  |  phuonggiang150@gmail.com
-              li.footer__item
-                .social-group
-                  a.social-item(href='#')
-                    i.fab.fa-facebook-f
-                  a.social-item(href='#')
-                    i.fab.fa-twitter
-                  a.social-item(href='#')
-                    i.fab.fa-pinterest-p
-                  a.social-item(href='#')
-                    i.fab.fa-invision
-                  a.social-item(href='#')
-                    i.fab.fa-youtube
-          .col.l-3.m-6.s-12
-            h3.footer__title &Dstrok;&abreve;ng k&iacute;
-            ul.footer__list
-              li.footer__item
-                span.footer__text &Dstrok;&abreve;ng k&yacute; &dstrok;&#x1EC3; nh&#x1EAD;n &dstrok;&#x1B0;&#x1EE3;c &dstrok;&#x1B0;&#x1EE3;c th&ocirc;ng tin &#x1B0;u &dstrok;&atilde;i m&#x1EDB;i nh&#x1EA5;t t&#x1EEB; ch&uacute;ng t&ocirc;i.
-              li.footer__item
-                .send-email
-                  input.send-email__input(type='email', placeholder='Nhập Email...')
-                  a.send-email__link(href='#')
-                    i.fas.fa-paper-plane
-      .copyright
-        span.footer__text
-          | &copy; B&#x1EA3;n quy&#x1EC1;n thu&#x1ED9;c v&#x1EC1; 
-          a.footer__link(href='#')  Ph&#x1B0;&#x1A1;ng Giang
-    // Modal Form
-    .ModalForm
-      #my-Register.modal
-        a.overlay-close(href='#')
-        .authen-modal.register
-          h3.authen-modal__title &Dstrok;&abreve;ng K&iacute;
-          .form-group
-            label.form-label(for='account') H&#x1ECD; T&ecirc;n
-            input#account.form-control(name='account', type='text')
-            span.form-message Kh&ocirc;ng h&#x1EE3;p l&#x1EC7; !
-          .form-group
-            label.form-label(for='password') T&agrave;i kho&#x1EA3;n Email *
-            input#password.form-control(name='password', type='text')
-            span.form-message
-          .form-group
-            label.form-label(for='password') M&#x1EAD;t kh&#x1EA9;u *
-            input#password.form-control(name='password', type='text')
-            span.form-message
-          .form-group
-            label.form-label(for='password') Nh&#x1EAD;p l&#x1EA1;i m&#x1EAD;t kh&#x1EA9;u *
-            input#password.form-control(name='password', type='text')
-            span.form-message
-          .authen__btns
-            .btn.btn--default &Dstrok;&abreve;ng K&iacute;
-      #my-Login.modal
-        a.overlay-close(href='#')
-        .authen-modal.login
-          h3.authen-modal__title &Dstrok;&abreve;ng Nh&#x1EAD;p
-          .form-group
-            label.form-label(for='account') &Dstrok;&#x1ECB;a ch&#x1EC9; email *
-            input#account.form-control(name='account', type='text')
-            span.form-message T&agrave;i kho&#x1EA3;n kh&ocirc;ng ch&iacute;nh x&aacute;c !
-          .form-group
-            label.form-label(for='password') M&#x1EAD;t kh&#x1EA9;u *
-            input#password.form-control(name='password', type='text')
-            span.form-message
-          .authen__btns
-            .btn.btn--default &Dstrok;&abreve;ng Nh&#x1EAD;p
-            input.authen-checkbox(type='checkbox')
-            label.form-label Ghi nh&#x1EDB; m&#x1EAD;t kh&#x1EA9;u
-          a.authen__link Qu&ecirc;n m&#x1EAD;t kh&#x1EA9;u ?
-      #upTop.up-top(onclick='goToTop()')
-        i.fas.fa-chevron-up
+      
+    script(src='./assets/js/homeScript.js')

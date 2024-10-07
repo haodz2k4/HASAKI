@@ -1,11 +1,13 @@
 import { Request, Response } from "express";
-import { getAllProductsByQuery, getProductBySlug, getTotalDocument } from "../../services/product.service";
 import paginationHelper from "../../helpers/pagination.helper";
 import rangePriceHelper from "../../helpers/range-price.helper";
+import productModel from "../../models/product.model";
+import catchAsync from "../../api/utils/catchAsync";
+import { RenderError } from "../../utils/error";
 //[GET] "/products"
 export const products = async (req: Request, res: Response) => {
     
-    const filter: Record<string, any> = {status: "active"}
+    const filter: Record<string, any> = {status: "active", deleted: false}
     
     //Sort
     const sortKey = req.query.sortKey as string;
@@ -27,11 +29,17 @@ export const products = async (req: Request, res: Response) => {
     }
     //Pagination 
     const page = parseInt(req.query.page as string) || 1;
-    const limit = parseInt(req.query.limit as string) || 20 
+    const limit = parseInt(req.query.limit as string) || 18 
     const skip = (page - 1) * limit;
-    const totalDocument = await getTotalDocument({...filter})
+    const [products, totalDocument] =await Promise.all([
+        productModel
+            .find(filter)
+            .skip(skip)
+            .limit(limit),
+        productModel.countDocuments(filter)
+    ])
     const pagination = paginationHelper(page, limit,totalDocument)
-    const products = await getAllProductsByQuery({filter, limit, skip, sort}) 
+    
     res.render("clients/pages/products/product.pug",{
         products,
         pagination,
@@ -43,9 +51,12 @@ export const products = async (req: Request, res: Response) => {
     })
 }
 //[GET] "/products/:slug"
-export const detail = async (req: Request, res: Response) => {
+export const detail = catchAsync(async (req: Request, res: Response) => {
     const {slug} = req.params;
     
-    const product = await getProductBySlug(slug)
+    const product = await productModel.findOne({slug, deleted: false})
+    if(!product){
+        throw new RenderError(404,"Product is not found ")
+    }
     res.render("clients/pages/products/detail.pug", {product})
-}
+})

@@ -7,16 +7,16 @@ block main
       .tool-container
         .row.tool-section
           // Hàng 1: Tìm kiếm, Bộ lọc, Sắp xếp
-          .col-md-4.mb-3
+          form(action="").col-md-4.mb-3
             .input-group
-              input.form-control(type='text', placeholder='Tìm kiếm sản phẩm')
+              input.form-control(type='text', placeholder='Tìm kiếm sản phẩm',name='keyword', value=keyword)
               .input-group-append
-                button.btn.btn-dark(type='button') Tìm 
+                button.btn.btn-dark(type='submit') Tìm 
           .col-md-4.mb-3
             select.form-control
-              option B&#x1ED9; l&#x1ECD;c 1
-              option B&#x1ED9; l&#x1ECD;c 2
-              option B&#x1ED9; l&#x1ECD;c 3
+              option Lọc theo 
+              each item in filters 
+                option(value=item.value selected=item.selected) #{item.name}
           .col-md-4.mb-3
             select.form-control
               option S&#x1EAF;p x&#x1EBF;p A-Z
