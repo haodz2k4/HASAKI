@@ -8,7 +8,7 @@
         li.nav-item
           a.nav-link(href='/admin/products' class=`${activePages === 'products' ? 'show' : ''}`)
             i.fas.fa-box
-            |  S&#x1EA3;n ph&#x1EA9;m
+            |  S&#x1EA3;n ph&#x1EA9;m #{partialPage ? `/ ${partialPage}` : ""}
         li.nav-item
           a.nav-link(href='/admin/products' class=`${activePages === 'users' ? 'show' : ''}`)
             i.fas.fa-users

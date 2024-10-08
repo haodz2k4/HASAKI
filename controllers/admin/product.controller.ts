@@ -76,12 +76,15 @@ export const products = catchAsync(async (req: Request, res: Response) => {
         .skip(skip)
         .sort(sort)
     res.render("admin/pages/products/product.pug",{
+        pageTitle: "Quản lý sản phẩm",
         activePages: "products",
         products,
         pagination,
         keyword,
         filters,
-        sortString
+        sortString,
+        minPrice,
+        maxPrice
     })
 })
 
@@ -95,4 +98,13 @@ export const changeMulti = catchAsync(async (req: Request, res: Response) => {
         req.flash("error","Không thể cập nhật hết sản phẩm")
     }
     res.redirect("back")
+})
+
+//[GET] "/admin/products/create"
+export const create = catchAsync(async (req: Request, res: Response) => {
+    res.render("admin/pages/products/create.pug",{
+        pageTitle: "Thêm sản phẩm",
+        activePages: "products",
+        partialPage: "Thêm"
+    })
 })
