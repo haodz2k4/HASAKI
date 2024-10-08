@@ -3,6 +3,7 @@ import paginationHelper from "../../helpers/pagination.helper";
 import filterHelper from "../../helpers/filter.helper";
 import productModel from "../../models/product.model";
 import catchAsync from "../../api/utils/catchAsync";
+import categoryModel from "../../models/category.model";
 //[GET] "/admin/products"
 export const products = catchAsync(async (req: Request, res: Response) => {
     
@@ -102,9 +103,19 @@ export const changeMulti = catchAsync(async (req: Request, res: Response) => {
 
 //[GET] "/admin/products/create"
 export const create = catchAsync(async (req: Request, res: Response) => {
+    const categories = await categoryModel.find({deleted: false}).limit(10)
     res.render("admin/pages/products/create.pug",{
         pageTitle: "Thêm sản phẩm",
         activePages: "products",
-        partialPage: "Thêm"
+        partialPage: "Thêm",
+        categories
     })
+})
+
+//[POST] "/admin/products/create"
+export const createPost = catchAsync(async (req: Request, res: Response) => {
+    const body = req.body;
+    console.log(body)
+    req.flash('successs','Tạo sản phẩm mới thành công')
+    res.redirect("/admin/products")
 })

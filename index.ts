@@ -16,6 +16,7 @@ import { serve, setup } from "swagger-ui-express";
 import { specs } from './swagger';
 import errorMiddleware from './middleware/error.middleware';
 import methodOverride from "method-override";
+import path from "path";
 
 const bootstrap = () => {
     const app: Express = express();
@@ -41,6 +42,9 @@ const bootstrap = () => {
             sameSite: 'lax'
         }
     }));
+
+    //Tiny Mce 
+    app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
 
     // Express Flash 
     app.use(flash());

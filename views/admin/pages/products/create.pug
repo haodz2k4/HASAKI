@@ -4,7 +4,7 @@ block main
     .container
       .form-container
         h2.mb-4.text-center Th&ecirc;m S&#x1EA3;n Ph&#x1EA9;m M&#x1EDB;i
-        form
+        form(method="post")
           // Tiêu đề
           .mb-3
             label.form-label(for='title') Ti&ecirc;u &dstrok;&#x1EC1;
@@ -14,9 +14,8 @@ block main
             label.form-label(for='category') Danh m&#x1EE5;c
             select#category.form-control    (name='categoryId', required='')
               option(selected='', disabled='') Ch&#x1ECD;n danh m&#x1EE5;c
-              option(value='1') Danh m&#x1EE5;c 1
-              option(value='2') Danh m&#x1EE5;c 2
-              option(value='3') Danh m&#x1EE5;c 3
+              each item in categories
+                option(value=item.id) #{item.title}
               // Thêm các danh mục khác tại đây
           // Hình ảnh
           .mb-3
@@ -28,24 +27,24 @@ block main
           // Mô tả
           .mb-3
             label.form-label(for='description') M&ocirc; t&#x1EA3;
-            textarea#description.form-control(name='description', rows='5', placeholder='Nhập mô tả sản phẩm', required='')
+            textarea.form-control( id='my-expressjs-tinymce-app' name='description', rows='5', placeholder='Nhập mô tả sản phẩm', required='')
           // Nổi bật
           .mb-3
             label.form-label.d-block N&#x1ED5;i b&#x1EAD;t
             .form-check.form-check-inline
-              input#featuredYes.form-check-input(type='radio', name='featured', value='yes', required='')
+              input#featuredYes.form-check-input(type='radio', name='highlighted', value='1',)
               label.form-check-label(for='featuredYes') C&oacute;
             .form-check.form-check-inline
-              input#featuredNo.form-check-input(type='radio', name='featured', value='no')
+              input#featuredNo.form-check-input(type='radio', name='highlighted', value='0', checked)
               label.form-check-label(for='featuredNo') Kh&ocirc;ng
           // Giá tiền và Phần trăm giảm giá
           .row.mb-3
             .col-md-6
               label.form-label(for='price') Gi&aacute; ti&#x1EC1;n (VND)
-              input#price.form-control(type='number', name='price', placeholder='Nhập giá tiền', min='0', required='')
+              input#price.form-control(type='number', name='price', placeholder='Nhập giá tiền', min='0', required='', value=0)
             .col-md-6
               label.form-label(for='discount') Ph&#x1EA7;n tr&abreve;m gi&#x1EA3;m gi&aacute; (%)
-              input#discount.form-control(type='number', name='discountPercentage', placeholder='Nhập phần trăm giảm giá', min='0', max='100')
+              input#discount.form-control(type='number', name='discountPercentage', placeholder='Nhập phần trăm giảm giá', min='0', max='100', value=0)
           // Vị trí và Trạng thái
           .row.mb-3
             .col-md-6
@@ -54,11 +53,11 @@ block main
             .col-md-6
               label.form-label.d-block Tr&#x1EA1;ng th&aacute;i
               .form-check.form-check-inline
-                input#active.form-check-input(type='radio', name='status', value='active', required='')
-                label.form-check-label(for='active') Active
+                input#active.form-check-input(type='radio', name='status', value='active', checked)
+                label.form-check-label(for='active') Hoạt động
               .form-check.form-check-inline
                 input#inactive.form-check-input(type='radio', name='status', value='inactive')
-                label.form-check-label(for='inactive') Inactive
+                label.form-check-label(for='inactive') Không hoạt động 
           // Nút Submit
           .d-grid
             button.btn.btn-primary(type='submit') Th&ecirc;m S&#x1EA3;n Ph&#x1EA9;m

@@ -1,6 +1,6 @@
 const url = new URL(window.location.href)
 const domain = `http://localhost:3000`
-const endpoint = document.querySelector(".my-path").getAttribute("path")
+const endpoint = document.querySelector(".my-path")
 //Pagination
 const btnPagination = document.querySelectorAll("[btn-pagination]");
 if(btnPagination.length > 0){
