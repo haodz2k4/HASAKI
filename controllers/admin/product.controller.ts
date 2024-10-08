@@ -54,6 +54,8 @@ export const products = catchAsync(async (req: Request, res: Response) => {
     }else{
         sort.position = 'desc'
     }
+    //Sort string;
+    const sortString = `${sortKey}-${sortValue}`
     const products = await productModel
         .find(filter)
         .limit(limit)
@@ -64,6 +66,8 @@ export const products = catchAsync(async (req: Request, res: Response) => {
         products,
         pagination,
         keyword,
-        filters
+        filters,
+        sortString
     })
 })
+

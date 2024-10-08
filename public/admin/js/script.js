@@ -68,7 +68,7 @@ if (btnChangeStatus.length > 0) {
         });
     });
 }
-
+//Inp position 
 const inpPosition = document.querySelectorAll("[inp-position]");
 if (inpPosition.length > 0) {
     inpPosition.forEach((item) => {
@@ -138,4 +138,31 @@ if(formSelectSorting){
         window.location.href = url.href
 
     })
+}
+
+//select checkbox 
+const tableManage = document.querySelector("[table-manage]")
+if(tableManage){
+    const checkAll = tableManage.querySelector("thead tr th input[type='checkbox']")
+    const checkMulti = tableManage.querySelectorAll("tbody tr td input[type='checkbox']");
+    checkAll.addEventListener("click",() => {
+        if(checkAll.checked){
+            for(const item of checkMulti){
+                item.checked = true 
+            }
+        }else{
+            for(const item of checkMulti){
+                item.checked = false
+            }
+        }
+    })
+    for(const item of checkMulti){
+        item.addEventListener("click",() => {
+            const countChecked = tableManage.querySelectorAll("tbody tr td input[type='checkbox']:checked").length;
+            if(countChecked === checkMulti.length){
+                checkAll.checked = true 
+            }
+        })
+    }
+
 }

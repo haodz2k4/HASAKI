@@ -20,20 +20,23 @@ block main
           .col-md-4.mb-3
             select.form-control(form-select-sorting)
               option(value='') Sắp Xếp Theo 
-              option(value='title-asc') Tiêu đề từ A - Z
-              option(value='title-desc') Tiêu đề từ Z - A 
-              option(value='price-asc') Giá tiền A - Z 
-              option(value="price-desc") Giá tiền Z - A
+              option(value='title-asc' selected=(sortString === "title-asc")) Tiêu đề từ A - Z
+              option(value='title-desc' selected=(sortString === "title-desc")) Tiêu đề từ Z - A 
+              option(value='price-asc' selected=(sortString === "price-asc")) Giá tiền A - Z 
+              option(value="price-desc" selected=(sortString === "price-desc")) Giá tiền Z - A
         .row.tool-section
           // Hàng 2: Chọn với nút, Lọc giá, Nút hành động
-          .col-md-4.mb-3
+          form(action="" form-change-multi).col-md-4.mb-3
             .input-group
               select.form-control
-                option L&#x1EF1;a ch&#x1ECD;n 1
-                option L&#x1EF1;a ch&#x1ECD;n 2
-                option L&#x1EF1;a ch&#x1ECD;n 3
+                option Thay đổi nhiều
+                option(value="status-active") Hoạt động 
+                option(value="status-inactive") Không hoạt động 
+                option(value="highlighted-1") Nổi bậc 
+                option(value="highlighted-0") Không nổi bậc 
+                option(value="delete-true")  Xóa    
               .input-group-append
-                button.btn.btn-dark(type='button') &Aacute;p d&#x1EE5;ng
+                button.btn.btn-dark(type='submit') Áp dụng 
           .col-md-4.mb-3
             .d-flex
               input.form-control.mr-2(type='number', placeholder='Giá từ')
@@ -52,7 +55,7 @@ block main
                 |  Xu&#x1EA5;t Excel
     
 
-    .table-responsive
+    .table-responsive(table-manage)
       table.table.table-striped
         thead.thead-dark
           tr
