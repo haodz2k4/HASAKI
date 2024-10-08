@@ -4,5 +4,5 @@ const router: Router = Router();
 
 
 router.get("/",controller.products)
-
+router.patch("/change-multi",controller.changeMulti)
 export default router

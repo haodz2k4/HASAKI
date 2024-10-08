@@ -1,6 +1,6 @@
 const url = new URL(window.location.href)
 const domain = `http://localhost:3000`
-const endpoint = document.querySelector("[end-point]").getAttribute("end-point")
+const endpoint = document.querySelector(".my-path").getAttribute("path")
 //Pagination
 const btnPagination = document.querySelectorAll("[btn-pagination]");
 if(btnPagination.length > 0){
@@ -165,4 +165,35 @@ if(tableManage){
         })
     }
 
+}
+
+//change multi 
+/*
+    exampleData: 
+    {
+       ids: string[]
+       data: Record<string, any>
+    }
+*/
+const formChangeMulti = document.querySelector("[form-change-multi]");
+if(formChangeMulti){
+    formChangeMulti.addEventListener("submit",(e) => {
+        e.preventDefault()
+        const idsChecked = document.querySelectorAll("tbody tr td input[type='checkbox']:checked");
+        const path = document.querySelector(".my-path").getAttribute("path");
+        const ids = [];
+        for(const item of idsChecked){
+            ids.push(item.value);
+        }
+        const data = formChangeMulti.querySelector("select").value;
+        const result = {
+            ids,
+            data
+        }    
+        const inp = formChangeMulti.querySelector("input");
+        inp.value = JSON.stringify(result)
+        formChangeMulti.action = `/admin/${path}/change-multi?_method=PATCH`
+        
+        formChangeMulti.submit();
+    })
 }

@@ -26,7 +26,7 @@ block main
               option(value="price-desc" selected=(sortString === "price-desc")) Giá tiền Z - A
         .row.tool-section
           // Hàng 2: Chọn với nút, Lọc giá, Nút hành động
-          form(action="" form-change-multi).col-md-4.mb-3
+          form(method="post" action="/admin/products/change-multi?_method=PATCH" form-change-multi).col-md-4.mb-3
             .input-group
               select.form-control
                 option Thay đổi nhiều
@@ -34,14 +34,15 @@ block main
                 option(value="status-inactive") Không hoạt động 
                 option(value="highlighted-1") Nổi bậc 
                 option(value="highlighted-0") Không nổi bậc 
-                option(value="delete-true")  Xóa    
+                option(value="delete-true")  Xóa 
+              input(type="text", name='result').d-none 
               .input-group-append
                 button.btn.btn-dark(type='submit') Áp dụng 
-          .col-md-4.mb-3
+          form(action="").col-md-4.mb-3
             .d-flex
-              input.form-control.mr-2(type='number', placeholder='Giá từ')
-              input.form-control.mr-2(type='number', placeholder='Giá đến')
-              button.btn.btn-dark(type='button') L&#x1ECD;c
+              input.form-control.mr-2(type='number', placeholder='Giá từ', name='minPrice')
+              input.form-control.mr-2(type='number', placeholder='Giá đến' name='maxPrice')
+              button.btn.btn-dark(type='submit') Lọc 
           .col-md-4.mb-3
             .action-buttons.d-flex.justify-content-md-end
               button.btn.btn-success(type='button')
@@ -74,7 +75,7 @@ block main
           each item, index in products 
             tr
               td 
-                input(type="checkbox", name="")
+                input(type="checkbox",value=item.id, name="")
               td #{index + 1}
               td #{item.title}
               td 
@@ -95,5 +96,5 @@ block main
                 button.btn.btn-sm.btn-warning 
                   i.fa-solid.fa-magnifying-glass
     +pagination(pagination) 
-
-    div(end-point='api/products')
+    
+    div(path='products').my-path 

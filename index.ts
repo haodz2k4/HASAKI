@@ -1,42 +1,35 @@
-import express, {Express} from "express"
-import dotenv from "dotenv"
-dotenv.config()
-import config from "./config/config"
-import { getConnection } from "./config/mongodb"
-import clientRouter from "./routers/client/index.router"
-import redis from "./config/redis"
-import bodyParser from "body-parser"
-import flash from "express-flash"
-import cookieParser from "cookie-parser"
-import session from "express-session"
-import { loggerMiddleware } from "./middleware/logger.middleware"
-import adminRouter from "./routers/admin/index.router"
-import moment from "moment"
-import {serve, setup} from "swagger-ui-express"
+import express, { Express } from "express";
+import dotenv from "dotenv";
+dotenv.config();
+import config from "./config/config";
+import { getConnection } from "./config/mongodb";
+import clientRouter from "./routers/client/index.router";
+import redis from "./config/redis";
+import bodyParser from "body-parser";
+import flash from "express-flash";
+import cookieParser from "cookie-parser";
+import session from "express-session";
+import { loggerMiddleware } from "./middleware/logger.middleware";
+import adminRouter from "./routers/admin/index.router";
+import moment from "moment";
+import { serve, setup } from "swagger-ui-express";
 import { specs } from './swagger';
 import errorMiddleware from './middleware/error.middleware';
+import methodOverride from "method-override";
+
 const bootstrap = () => {
-    
-    const app: Express = express()
-    app.set('view engine', 'pug')
-    app.use(express.static('public'))
-    app.use(bodyParser.urlencoded({ extended: false }))
-    app.use(bodyParser.json())
-    app.use('/api-docs', serve, setup(specs));
-    //Logger 
-    app.use(loggerMiddleware)
-    //Router Api 
-    //api(app) 
-    //admin router 
-    adminRouter(app)
-    //Client router 
-    clientRouter(app)
-    //Error middleware 
-    app.use(errorMiddleware)
-    //redis
-    redis
-    //Express flash (For Show Alert)
+    const app: Express = express();
+
+    // viewengine 
+    app.set('view engine', 'pug');
+
+    // Static files
+    app.use(express.static('public'));
+
+    // Cookie Parser
     app.use(cookieParser('keyboard cat'));
+
+    // Session
     app.use(session({
         secret: config.session_secret as string,
         resave: false,
@@ -47,18 +40,46 @@ const bootstrap = () => {
             httpOnly: true,
             sameSite: 'lax'
         }
-    }))
-    //moment 
-    moment.locale('vi');
-    app.locals.moment = moment
-    //express flash
+    }));
+
+    // Express Flash 
     app.use(flash());
-    //connect to database 
-    getConnection()
-    //PORT 
+
+    // Body Parser
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({extended: false}));
+
+    // Method Override 
+    app.use(methodOverride('_method'));
+
+    // Logger Middleware
+    app.use(loggerMiddleware);
+
+    // Swagger
+    app.use('/api-docs', serve, setup(specs));
+
+    // Moment.js
+    moment.locale('vi');
+    app.locals.moment = moment;
+
+    // Router Admin and client 
+    adminRouter(app);
+    clientRouter(app);
+
+    // Redis
+    redis;
+
+    // Error Middleware 
+    app.use(errorMiddleware);
+
+    // Connect to mongodb
+    getConnection();
+
+    // Start server
     const port = config.port;
-    app.listen(port,() => {
-        console.log(`Server is running on port: http://localhost:${port}`)
-    })
+    app.listen(port, () => {
+        console.log(`Server đang chạy trên port: http://localhost:${port}`);
+    });
 }
-bootstrap()
+
+bootstrap();

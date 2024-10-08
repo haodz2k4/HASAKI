@@ -12,6 +12,20 @@ export const products = catchAsync(async (req: Request, res: Response) => {
         console.log(keyword)
         filter.title = new RegExp(keyword,"i") 
     }
+    const minPrice = req.query.minPrice as string;
+    const maxPrice = req.query.maxPrice as string;
+    const rangePrices: Record<string,unknown>[] = [];
+    if(minPrice){
+        rangePrices.push({
+            price: {$gte: minPrice}
+        })
+    }
+    if(maxPrice){
+        rangePrices.push({
+            price: {$lte: maxPrice}
+        })
+    }
+    filter.$and = rangePrices
     
     const filters = filterHelper([
         {
@@ -71,3 +85,14 @@ export const products = catchAsync(async (req: Request, res: Response) => {
     })
 })
 
+//[PATCH] "/admin/products/change-multi"
+export const changeMulti = catchAsync(async (req: Request, res: Response) => {
+    
+    const {ids, data} = JSON.parse(req.body.result)
+    const [key, value] = data.split("-");
+    const infoUpdate = await productModel.updateMany({_id: {$in: ids}},{[key]: value});
+    if(infoUpdate.modifiedCount > 0){
+        req.flash("error","Không thể cập nhật hết sản phẩm")
+    }
+    res.redirect("back")
+})
