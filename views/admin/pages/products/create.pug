@@ -4,7 +4,7 @@ block main
     .container
       .form-container
         h2.mb-4.text-center Th&ecirc;m S&#x1EA3;n Ph&#x1EA9;m M&#x1EDB;i
-        form(method="post")
+        form(method="post" enctype="multipart/form-data")
           // Tiêu đề
           .mb-3
             label.form-label(for='title') Ti&ecirc;u &dstrok;&#x1EC1;
@@ -22,12 +22,12 @@ block main
             label.form-label H&igrave;nh &#x1EA3;nh
             .image-upload-wrapper
               span K&eacute;o th&#x1EA3; ho&#x1EB7;c nh&#x1EA5;p &dstrok;&#x1EC3; ch&#x1ECD;n h&igrave;nh &#x1EA3;nh
-              input#image(type='file', name='images[]', accept='image/*', multiple='')
+              input#image(type='file', name='thumbnail', accept='image/*')
             #imagePreview.image-preview
           // Mô tả
           .mb-3
             label.form-label(for='description') M&ocirc; t&#x1EA3;
-            textarea.form-control( id='my-expressjs-tinymce-app' name='description', rows='5', placeholder='Nhập mô tả sản phẩm', required='')
+            textarea.form-control( id='my-expressjs-tinymce-app' name='description', rows='5', placeholder='Nhập mô tả sản phẩm')
           // Nổi bật
           .mb-3
             label.form-label.d-block N&#x1ED5;i b&#x1EAD;t

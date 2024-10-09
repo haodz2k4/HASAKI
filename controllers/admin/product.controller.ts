@@ -116,6 +116,7 @@ export const create = catchAsync(async (req: Request, res: Response) => {
 export const createPost = catchAsync(async (req: Request, res: Response) => {
     const body = req.body;
     console.log(body)
+    await productModel.create(body);
     req.flash('successs','Tạo sản phẩm mới thành công')
     res.redirect("/admin/products")
 })
