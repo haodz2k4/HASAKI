@@ -1,7 +1,8 @@
-import { Express } from "express"
-import productRouter from "./product.router"
-import { handleErrorMiddleware } from "../middlewares/error.middleware";
+import { Express } from 'express';
+import  productRouter from "../routers/product.router"
+
+//API 
+const API_PREFIX = '/api'
 export default (app: Express) => {
-    app.use("/api/products", productRouter)
-    app.use(handleErrorMiddleware);
+    app.use(`${API_PREFIX}/products`,productRouter)
 }

@@ -1,8 +1,9 @@
 import { Router } from "express";
 const router: Router = Router();
-import * as handler from "../handler/product.handler"
-router.get("/",handler.getProducts)
-router
-    .route("/:id")
-    .patch(handler.updateProduct)
+import * as controller from "../controllers/product.controller"
+router  
+    .route("/")
+    .get(controller.getProducts);
+
+
 export default router

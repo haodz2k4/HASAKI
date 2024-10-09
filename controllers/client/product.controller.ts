@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import paginationHelper from "../../helpers/pagination.helper";
 import rangePriceHelper from "../../helpers/range-price.helper";
 import productModel from "../../models/product.model";
-import catchAsync from "../../api/utils/catchAsync";
+import { catchAsync } from "../../utils/catchAsync";
 import { RenderError } from "../../utils/error";
 //[GET] "/products"
 export const products = catchAsync(async (req: Request, res: Response) => {

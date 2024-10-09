@@ -17,7 +17,7 @@ import { specs } from './swagger';
 import errorMiddleware from './middleware/error.middleware';
 import methodOverride from "method-override";
 import path from "path";
-
+import api from "./api/routers/index.router"
 const bootstrap = () => {
     const app: Express = express();
 
@@ -79,6 +79,10 @@ const bootstrap = () => {
     // Connect to mongodb
     getConnection();
 
+    /*API*/
+    //router
+    api(app)
+    /*END API*/
     // Start server
     const port = config.port;
     app.listen(port, () => {

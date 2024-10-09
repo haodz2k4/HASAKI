@@ -1,12 +1,10 @@
-import { NextFunction, Request, Response } from "express";
-
-
-export default (fn: (req: Request, res: Response, next: NextFunction) => Promise<any>) => {
+import { Request, Response, NextFunction } from "express";
+export const catchAsync = (fn: (req: Request, res: Response, next: NextFunction) => Promise<any> ) => {
     return async (req: Request, res: Response, next: NextFunction) => {
         try {
-            await fn(req, res, next);
+            await fn(req, res,next)
         } catch (error) {
-            next(error)
+            await next(error);
         }
     }
-}
+} 
