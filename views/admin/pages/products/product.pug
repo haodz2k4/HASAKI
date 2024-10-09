@@ -6,7 +6,6 @@ block main
     .my-tool
       .tool-container
         .row.tool-section
-          // Hàng 1: Tìm kiếm, Bộ lọc, Sắp xếp
           form(action="").col-md-4.mb-3
             .input-group
               input.form-control(type='text', placeholder='Tìm kiếm sản phẩm',name='keyword', value=keyword)
@@ -25,7 +24,6 @@ block main
               option(value='price-asc' selected=(sortString === "price-asc")) Giá tiền A - Z 
               option(value="price-desc" selected=(sortString === "price-desc")) Giá tiền Z - A
         .row.tool-section
-          // Hàng 2: Chọn với nút, Lọc giá, Nút hành động
           form(method="post" action="/admin/products/change-multi?_method=PATCH" form-change-multi).col-md-4.mb-3
             .input-group
               select.form-control
@@ -54,7 +52,25 @@ block main
               button.btn.btn-secondary(type='button') 
                 i.fa-solid.fa-file-excel 
                 |  Xu&#x1EA5;t Excel
-    
+        .row.tool-section
+          form().col-md-4.mb-3
+            .input-group
+              select.form-control(select-limit)
+                option Giới hạng 
+                option(value="5") 5
+                option(value="10") 10 
+                option(value="20") 20
+                option(value="50") 50 
+                option(value="100")  100
+          .col-md-4.mb-3
+            select.form-control
+              option(value='') Lọc theo danh mục 
+              each item in categories 
+                option(value=item.id) #{item.title}
+          .col-md-4.mb-3
+            select.form-control
+              option(value='') Lọc theo người tạo 
+              option(value='') 
 
     .table-responsive(table-manage)
       table.table.table-striped
@@ -76,7 +92,7 @@ block main
             tr
               td 
                 input(type="checkbox",value=item.id, name="")
-              td #{index + 1}
+              td #{pagination.skip + 1 + index}
               td #{item.title}
               td 
                 img(src=`${item.thumbnail.length > 0 ? item.thumbnail[0] : 'https://via.placeholder.com/70x70'}`, alt="" style='width: 70px; height: 70px')

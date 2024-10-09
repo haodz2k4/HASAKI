@@ -76,6 +76,7 @@ export const products = catchAsync(async (req: Request, res: Response) => {
         .limit(limit)
         .skip(skip)
         .sort(sort)
+    const categories = await categoryModel.find({deleted: false});
     res.render("admin/pages/products/product.pug",{
         pageTitle: "Quản lý sản phẩm",
         activePages: "products",
@@ -85,7 +86,8 @@ export const products = catchAsync(async (req: Request, res: Response) => {
         filters,
         sortString,
         minPrice,
-        maxPrice
+        maxPrice,
+        categories
     })
 })
 

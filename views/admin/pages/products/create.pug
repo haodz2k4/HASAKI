@@ -12,7 +12,7 @@ block main
           // Danh mục
           .mb-3
             label.form-label(for='category') Danh m&#x1EE5;c
-            select#category.form-control    (name='categoryId', required='')
+            select#category.form-control(name='categoryId')
               option(selected='', disabled='') Ch&#x1ECD;n danh m&#x1EE5;c
               each item in categories
                 option(value=item.id) #{item.title}

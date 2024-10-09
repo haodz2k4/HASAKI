@@ -17,6 +17,19 @@ if(btnPagination.length > 0){
         })
     })
 }
+//Limit 
+const selectLimit = document.querySelector("[select-limit]");
+if(selectLimit){
+    selectLimit.addEventListener("change",() => {
+        const value = selectLimit.value;
+        if(value){
+            url.searchParams.set("limit", value)
+        }else{
+            url.searchParams.delete("limit")
+        }
+        window.location.href = url.href
+    })
+}
 // Change Status
 const btnChangeStatus = document.querySelectorAll("[btn-ch-status]");
 if (btnChangeStatus.length > 0) {
