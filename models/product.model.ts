@@ -1,7 +1,8 @@
-import {Model, ObjectId, Schema, model, plugin, Document} from "mongoose"
+import { ObjectId, Schema, model} from "mongoose"
 import { isURL } from "validator"
 import { COLLECTION_CATEGORY_NAME } from "./category.model"
 import { formatPrice } from "../utils/format.utils"
+import { createUniqueSlug } from "../helpers/slug"
 export const COLLECTION_PRODUCT_NAME = 'Product'
 export interface IProduct {
     id: string 
@@ -28,10 +29,7 @@ export const productSchema = new Schema<IProduct>({
         maxlength: 200 
     },
     categoryId: {type: Schema.Types.ObjectId, ref: COLLECTION_CATEGORY_NAME},  
-    position: {type: Number, min: 1, default: async function():Promise<number> {
-        const count = await model(COLLECTION_PRODUCT_NAME).countDocuments({ deleted: false });
-        return count + 1
-    }},
+    position: {type: Number, min: 1},
     description: String,
     highlighted: {type: String, enum: ["0","1"],default: "0"},
     thumbnail: {
@@ -62,4 +60,15 @@ productSchema.virtual('newPrice').get(function(): string {
     return formatPrice(this.price - (100 - this.discountPercentage) / 100)
 }) 
 
+productSchema.pre('save',async function(next) {
+    //create unique slug 
+    if(this.isModified('title')){
+        this.slug = await createUniqueSlug(this.title, COLLECTION_PRODUCT_NAME);
+    }
+    //default position
+    if(!this.position){
+        this.position = await model(COLLECTION_PRODUCT_NAME).countDocuments({ deleted: false })
+    }
+    next()
+})
 export default model<IProduct>(COLLECTION_PRODUCT_NAME,productSchema)

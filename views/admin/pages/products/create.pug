@@ -22,7 +22,7 @@ block main
             label.form-label H&igrave;nh &#x1EA3;nh
             .image-upload-wrapper
               span K&eacute;o th&#x1EA3; ho&#x1EB7;c nh&#x1EA5;p &dstrok;&#x1EC3; ch&#x1ECD;n h&igrave;nh &#x1EA3;nh
-              input#image(type='file', name='thumbnail', accept='image/*')
+              input#image(type='file', name='thumbnail', accept='image/*', multiple)
             #imagePreview.image-preview
           // Mô tả
           .mb-3
@@ -49,7 +49,7 @@ block main
           .row.mb-3
             .col-md-6
               label.form-label(for='position') V&#x1ECB; tr&iacute;
-              input#position.form-control(type='number', name='position', placeholder='Nhập vị trí', min='1', required='')
+              input#position.form-control(type='number', name='position', placeholder='Nhập vị trí', min='1')
             .col-md-6
               label.form-label.d-block Tr&#x1EA1;ng th&aacute;i
               .form-check.form-check-inline
@@ -60,4 +60,4 @@ block main
                 label.form-check-label(for='inactive') Không hoạt động 
           // Nút Submit
           .d-grid
-            button.btn.btn-primary(type='submit') Th&ecirc;m S&#x1EA3;n Ph&#x1EA9;m
+            button.btn.btn-primary(type='submit' style='width: 100%') Th&ecirc;m S&#x1EA3;n Ph&#x1EA9;m

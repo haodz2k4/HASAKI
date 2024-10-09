@@ -13,3 +13,16 @@ export const uploadSingle = async (req: Request, res: Response, next: NextFuncti
         next(error)
     }
 }
+export const uploadMulti = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const files = req.files;
+        if (files && Array.isArray(files) && files.length > 0) {
+            const fieldName = files[0].fieldname;
+            const urls: string[] = files.map(item => item.path);
+            req.body[fieldName] = urls;
+        }
+        next();
+    } catch (error) {
+        next(error);
+    }
+};
