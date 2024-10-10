@@ -170,3 +170,4 @@ export const detail = catchAsync(async (req: Request, res: Response) => {
         partialPage: "Chi tiết"
     })
 })
+

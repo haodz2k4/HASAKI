@@ -3,7 +3,74 @@ html(lang="en")
     head
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="/common/styles.css")
         title #{500}
     body 
-    h1  Lỗi 500 
-    h1 #{err}
+    .container
+      .error
+        h1 500
+        h2 error
+        p
+          | Ruh-roh, something just isn&apos;t right... Time to paw through your logs and get down and dirty in your
+          | stack-trace;)
+      .stack-container
+        .card-container
+          .perspec(style='--spreaddist: 125px; --scaledist: .75; --vertdist: -25px;')
+            .card
+              .writing
+                .topbar
+                  .red
+                  .yellow
+                  .green
+                .code
+                  ul
+        .card-container
+          .perspec(style='--spreaddist: 100px; --scaledist: .8; --vertdist: -20px;')
+            .card
+              .writing
+                .topbar
+                  .red
+                  .yellow
+                  .green
+                .code
+                  ul
+        .card-container
+          .perspec(style='--spreaddist:75px; --scaledist: .85; --vertdist: -15px;')
+            .card
+              .writing
+                .topbar
+                  .red
+                  .yellow
+                  .green
+                .code
+                  ul
+        .card-container
+          .perspec(style='--spreaddist: 50px; --scaledist: .9; --vertdist: -10px;')
+            .card
+              .writing
+                .topbar
+                  .red
+                  .yellow
+                  .green
+                .code
+                  ul
+        .card-container
+          .perspec(style='--spreaddist: 25px; --scaledist: .95; --vertdist: -5px;')
+            .card
+              .writing
+                .topbar
+                  .red
+                  .yellow
+                  .green
+                .code
+                  ul
+        .card-container
+          .perspec(style='--spreaddist: 0px; --scaledist: 1; --vertdist: 0px;')
+            .card
+              .writing
+                .topbar
+                  .red
+                  .yellow
+                  .green
+                .code
+                  ul
