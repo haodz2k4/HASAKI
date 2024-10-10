@@ -4,6 +4,7 @@ import filterHelper from "../../helpers/filter.helper";
 import productModel from "../../models/product.model";
 import { catchAsync } from "../../utils/catchAsync";
 import categoryModel from "../../models/category.model";
+import { RenderError } from "../../utils/error";
 //[GET] "/admin/products"
 export const products = catchAsync(async (req: Request, res: Response) => {
     
@@ -117,8 +118,24 @@ export const create = catchAsync(async (req: Request, res: Response) => {
 //[POST] "/admin/products/create"
 export const createPost = catchAsync(async (req: Request, res: Response) => {
     const body = req.body;
-    console.log(body)
     await productModel.create(body);
     req.flash('successs','Tạo sản phẩm mới thành công')
     res.redirect("/admin/products")
+})
+
+//[GET] "/admin/products/update/:id"
+export const updateProduct = catchAsync(async (req: Request, res: Response) => {
+    const categories = await categoryModel.find({deleted: false}).limit(10)
+    const {id} = req.params;
+    const product = await productModel.findOne({_id: id, deleted: false})
+    if(!product){
+        throw new RenderError(404,"Product is not found")
+    }
+    res.render("admin/pages/products/update.pug",{
+        pageTitle: "Thêm sản phẩm",
+        activePages: "products",
+        partialPage: "Sửa",
+        categories,
+        product
+    })
 })

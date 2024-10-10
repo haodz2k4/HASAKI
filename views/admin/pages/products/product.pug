@@ -105,7 +105,7 @@ block main
                 input(type="number" value=item.position inp-position=item.id style='width: 70px') 
               td !{moment(item.createdAt).format(' dddd,DD/MM/YYYY </br> HH:mm:ss')}  
               td
-                button.btn.btn-sm.btn-info
+                a(href=`/admin/products/update/${item.id}`).btn.btn-sm.btn-info
                   i.fas.fa-edit
                 button.btn.btn-sm.btn-danger
                   i.fas.fa-trash 

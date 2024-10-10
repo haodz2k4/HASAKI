@@ -11,4 +11,9 @@ router.get("/",controller.products)
 router.patch("/change-multi",controller.changeMulti)
 router.get("/create",controller.create);
 router.post("/create",upload.array('thumbnail', 5),uploadMulti,controller.createPost)
+
+router
+    .route("/update/:id")
+    .get(controller.updateProduct)
+
 export default router

@@ -172,3 +172,9 @@
   border: 1px solid #ced4da;
 }
 /*END FORM CREATE*/
+
+/*IMG PRODUCT*/
+#img-product img {
+  width: 100px;
+  height: 100px;
+}
