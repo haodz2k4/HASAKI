@@ -125,7 +125,7 @@ export const createPost = catchAsync(async (req: Request, res: Response) => {
 
 //[GET] "/admin/products/update/:id"
 export const updateProduct = catchAsync(async (req: Request, res: Response) => {
-    const categories = await categoryModel.find({deleted: false}).limit(10)
+    const categories = await categoryModel.find({deleted: false})
     const {id} = req.params;
     const product = await productModel.findOne({_id: id, deleted: false})
     if(!product){
@@ -138,4 +138,17 @@ export const updateProduct = catchAsync(async (req: Request, res: Response) => {
         categories,
         product
     })
+})
+
+//[PATCH] "/admin/products/update/:id"
+export const updateProductPatch = catchAsync(async (req: Request, res: Response) => {
+    const {id} = req.params;
+    const body = req.body;
+    const product = await productModel.findOne({_id: id, deleted: false});
+    if(!product){
+        throw new RenderError(404,"Product is not found")
+    }
+    Object.assign(product,body);
+    await product.save();
+    res.redirect("/admin/products");
 })

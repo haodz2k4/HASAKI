@@ -3,8 +3,8 @@ extends ../../layouts/default.pug
 block main 
     .container
       .form-container
-        h2.mb-4.text-center Th&ecirc;m S&#x1EA3;n Ph&#x1EA9;m M&#x1EDB;i
-        form(method="post" enctype="multipart/form-data")
+        h2.mb-4.text-center Cập nhật sản phẩm 
+        form(method="post" action="?_method=PATCH" enctype="multipart/form-data")
           // Tiêu đề
           .mb-3
             label.form-label(for='title') Ti&ecirc;u &dstrok;&#x1EC1;
@@ -63,4 +63,4 @@ block main
                 label.form-check-label(for='inactive') Không hoạt động 
           // Nút Submit
           .d-grid
-            button.btn.btn-primary(type='submit' style='width: 100%') Th&ecirc;m S&#x1EA3;n Ph&#x1EA9;m
+            button.btn.btn-success(type='submit' style='width: 100%') Cập nhật sản phẩm 
