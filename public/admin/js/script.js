@@ -233,3 +233,16 @@ if(imageInput){
         }
         });
 }
+
+const selectCategory = document.querySelector("[select-category]");
+if(selectCategory){
+    selectCategory.addEventListener("change",() => {
+        const value = selectCategory.value;
+        if(value){
+            url.searchParams.set("categoryId", value)
+        }else{
+            url.searchParams.delete("categoryId")
+        }
+        window.location.href = url.href
+    })
+}

@@ -28,7 +28,11 @@ export const products = catchAsync(async (req: Request, res: Response) => {
         })
     }
     filter.$and = rangePrices
-    
+    //Filter by category 
+    const categoryId = req.query.categoryId as string;
+    if(categoryId){
+        filter.categoryId = categoryId
+    }
     const filters = filterHelper([
         {
             name: "1",
@@ -55,6 +59,7 @@ export const products = catchAsync(async (req: Request, res: Response) => {
         const index = filters.findIndex((item) => item.name === highlighted)
         filters[index].selected = true 
     }
+    
     //Pagination 
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
@@ -71,6 +76,7 @@ export const products = catchAsync(async (req: Request, res: Response) => {
         sort.position = 'desc'
     }
     //Sort string;
+    
     const sortString = `${sortKey}-${sortValue}`
     const products = await productModel
         .find(filter)
@@ -88,7 +94,8 @@ export const products = catchAsync(async (req: Request, res: Response) => {
         sortString,
         minPrice,
         maxPrice,
-        categories
+        categories,
+        categoryId
     })
 })
 

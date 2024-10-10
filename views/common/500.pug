@@ -11,8 +11,7 @@ html(lang="en")
         h1 500
         h2 error
         p
-          | Ruh-roh, something just isn&apos;t right... Time to paw through your logs and get down and dirty in your
-          | stack-trace;)
+          strong(style='color: yellow') #{err}
       .stack-container
         .card-container
           .perspec(style='--spreaddist: 125px; --scaledist: .75; --vertdist: -25px;')

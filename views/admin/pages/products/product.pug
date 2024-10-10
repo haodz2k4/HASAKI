@@ -63,10 +63,10 @@ block main
                 option(value="50") 50 
                 option(value="100")  100
           .col-md-4.mb-3
-            select.form-control
+            select.form-control(select-category)
               option(value='') Lọc theo danh mục 
               each item in categories 
-                option(value=item.id) #{item.title}
+                option(value=item.id selected=(categoryId === item.id)) #{item.title}
           .col-md-4.mb-3
             select.form-control
               option(value='') Lọc theo người tạo 
