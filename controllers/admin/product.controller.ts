@@ -152,3 +152,21 @@ export const updateProductPatch = catchAsync(async (req: Request, res: Response)
     await product.save();
     res.redirect("/admin/products");
 })
+
+//[GET] "/admin/products/detail/:id"
+export const detail = catchAsync(async (req: Request, res: Response) => {
+    const {id} = req.params;
+    const product = await productModel
+        .findOne({_id: id, deleted: false})
+        .populate('categoryId','title')
+        ;
+    if(!product){
+        throw new RenderError(404,"Product is not found")
+    }
+    res.render("admin/pages/products/detail.pug",{
+        product,
+        pageTitle: product.title,
+        activePages: "products",
+        partialPage: "Chi tiết"
+    })
+})

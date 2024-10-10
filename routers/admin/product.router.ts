@@ -15,6 +15,8 @@ router.post("/create",upload.array('thumbnail', 5),uploadMulti,controller.create
 router
     .route("/update/:id")
     .get(controller.updateProduct)
-    .patch(upload.array('thumbnail', 5),uploadMulti,controller.updateProductPatch)
+    .patch(upload.array('thumbnail', 5),uploadMulti,controller.updateProductPatch) 
+
+router.get("/detail/:id",controller.detail)
 
 export default router

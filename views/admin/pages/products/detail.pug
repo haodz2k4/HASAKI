@@ -1,0 +1,63 @@
+extends ../../layouts/default.pug 
+
+block main 
+    .container.my-5
+      .detail-product
+        .row
+          .col-md-6
+            // Hình ảnh chính
+            img.thumbnail-img.mb-3(src=product.thumbnail[0], alt='Thumbnail Chính')
+            .gallery
+              each item in product.thumbnail 
+                img(src=item, alt='Thumbnail 1')
+              // Thêm nhiều ảnh nếu cần
+          // Thông Tin Sản Phẩm
+          .col-md-6
+            h1.product-title #{product.title}
+            p.text-muted
+              | Danh m&#x1EE5;c: 
+              strong #{product.categoryId.title}
+            .d-flex.align-items-center.mb-3
+              span.old-price #{product.oldPrice}
+              span.price #{product.newPrice}
+              span.discount-badge #{product.discountPercentage}% GI&#x1EA2;M
+            p.description
+              | !{product.description}
+            .mt-4
+              h5 S&#x1ED1; L&#x1B0;&#x1EE3;ng:
+              p 50
+            .mt-4
+              h5 Trạng thái 
+              p.status-active #{product.status} 
+        // Thông Tin Chi Tiết Dành Cho Admin
+        .mt-5
+          h2.section-title Thông tin chi tiết 
+          table.info-table.table.table-bordered
+            tbody
+              tr
+                th ID Sản phẩm 
+                td #{product.id}
+              tr
+                th Slug
+                td #{product.slug}
+              tr
+                th Vị trí 
+                td #{product.position}
+              tr
+                th Giá gốc 
+                td #{product.oldPrice} 
+              tr
+                th Gi&aacute; Sau Khi Gi&#x1EA3;m
+                td #{product.newPrice} 
+              tr
+                th T&#x1EF7; L&#x1EC7; Gi&#x1EA3;m Gi&aacute; (%)
+                td #{product.discountPercentage}%
+              tr
+                th Ng&#x1B0;&#x1EDD;i T&#x1EA1;o
+                td AdminName
+              tr
+                th Ngày tạo 
+                td #{moment(product.createdAt).format(' dddd,DD/MM/YYYY HH:mm:ss')}
+              tr
+                th Cập nhật lần cuối    
+                td #{moment(product.updatedAt).format(' dddd,DD/MM/YYYY HH:mm:ss')}

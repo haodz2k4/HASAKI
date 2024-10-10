@@ -109,7 +109,7 @@ block main
                   i.fas.fa-edit
                 button.btn.btn-sm.btn-danger
                   i.fas.fa-trash 
-                button.btn.btn-sm.btn-warning 
+                a(href=`/admin/products/detail/${item.id}`).btn.btn-sm.btn-warning 
                   i.fa-solid.fa-magnifying-glass
     +pagination(pagination) 
     
