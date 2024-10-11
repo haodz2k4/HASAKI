@@ -56,12 +56,11 @@ block main
           form().col-md-4.mb-3
             .input-group
               select.form-control(select-limit)
-                option Giới hạng 
-                option(value="5" selected=(pagination.limit === 5)) 5
-                option(value="10" selected=(pagination.limit === 10)) 10 
-                option(value="20" selected=(pagination.limit === 20)) 20
-                option(value="50" selected=(pagination.limit === 50)) 50 
-                option(value="100" selected=(pagination.limit === 100))  100
+                option(value="5" selected=(pagination.limit === 5)) Giới hạn 5
+                option(value="10" selected=(pagination.limit === 10)) Giới hạn 10 
+                option(value="20" selected=(pagination.limit === 20)) Giới hạn 20
+                option(value="50" selected=(pagination.limit === 50)) Giới hạn 50 
+                option(value="100" selected=(pagination.limit === 100)) Giới hạn 100
           .col-md-4.mb-3
             select.form-control(select-category)
               option(value='') Lọc theo danh mục 

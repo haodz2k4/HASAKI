@@ -1,6 +1,6 @@
 const url = new URL(window.location.href)
 const domain = `http://localhost:3000`
-const endpoint = document.querySelector(".my-path")
+const route = document.querySelector(".my-path")
 //Pagination
 const btnPagination = document.querySelectorAll("[btn-pagination]");
 if(btnPagination.length > 0){
@@ -38,8 +38,8 @@ if (btnChangeStatus.length > 0) {
             const id = item.getAttribute("btn-ch-status"); 
             const status = item.getAttribute("status"); 
             const updateStatus = status === "active" ? "inactive" : "active"
-            const path = `${window.location.origin}/${endpoint}/${id}`;
-            console.log(path)
+            const ep = route.getAttribute("path");
+            const path = `${domain}/api/${ep}/${id}`;
             fetch(path, {
                 method: "PATCH", 
                 headers: {
@@ -49,7 +49,8 @@ if (btnChangeStatus.length > 0) {
             })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Có lỗi xảy ra khi cập nhật trạng thái.');
+                    alert("Có lỗi xảy ra khi cập nhật trạng thái")
+    
                 }
                 return response.json();
             })
@@ -63,9 +64,7 @@ if (btnChangeStatus.length > 0) {
                 item.innerHTML = status; 
                 const inactiveClass = "badge-success";
                 const activeClass = "badge-danger";
-                console.log(status)
                 if (status === "inactive") {
-                    console.log("run here")
                     item.classList.remove(inactiveClass);
                     item.classList.add(activeClass);
                     
@@ -88,7 +87,8 @@ if (inpPosition.length > 0) {
         item.addEventListener("change", () => {
             const value = item.value;
             const id = item.getAttribute("inp-position"); 
-            const path = `${domain}/${endpoint}/${id}`; 
+            const ep = route.getAttribute("path");
+            const path = `${domain}/api/${ep}/${id}`; 
             fetch(path, {
                 method: "PATCH",
                 headers: {
@@ -248,7 +248,6 @@ if(selectCategory){
 }
 
 const btnExportExcel = document.querySelector("[btn-export-excel]");
-console.log(btnExportExcel)
 if(btnExportExcel){
     btnExportExcel.addEventListener("click",() => {
         const formExportExcel = document.querySelector("[form-export-excel]");
