@@ -12,8 +12,6 @@ import session from "express-session";
 import { loggerMiddleware } from "./middleware/logger.middleware";
 import adminRouter from "./routers/admin/index.router";
 import moment from "moment";
-import { serve, setup } from "swagger-ui-express";
-import { specs } from './swagger';
 import errorMiddleware from './middleware/error.middleware';
 import methodOverride from "method-override";
 import path from "path";
@@ -58,9 +56,6 @@ const bootstrap = () => {
 
     // Logger Middleware
     app.use(loggerMiddleware);
-
-    // Swagger
-    app.use('/api-docs', serve, setup(specs));
 
     // Moment.js
     moment.locale('vi');

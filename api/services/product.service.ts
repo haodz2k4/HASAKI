@@ -3,6 +3,7 @@ import { sortType } from './../utils/types/sort';
 import productModel, {IProduct} from "../../models/product.model"
 import { IPagination, IPaginationResult } from "../utils/types/pagination";
 import { buildRegrex } from '../utils/regrex';
+import { ApiError } from '../utils/error';
 interface IFilterProduct {
     status?: string;
     highlighted?: string;
@@ -55,4 +56,27 @@ export const getProducts = async (queryProduct: IQueryProduct) => {
 
 export const getTotalDocument = async (filter?: IFilterProduct) => {
     return await productModel.countDocuments(filter);
+}
+
+export const createProduct = async (product: IProduct) => {
+    return await productModel.create(product);
+}
+
+export const findProductById = async (id: string) => {
+    return await productModel.findOne({_id: id, deleted: false});
+}
+
+export const updateProductById = async (id: string, updateProduct: Partial<IProduct>) => {
+    const product = await findProductById(id);
+    if(!product){
+        throw new ApiError(404,"Product is not found");
+    }
+    Object.assign(product, updateProduct);
+    await product.save()
+    return product
+}
+export const deleteProduct = async (id: string) => {
+    return await updateProductById(id,{
+        deleted: true
+    })
 }

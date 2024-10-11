@@ -5,15 +5,15 @@ const options = {
     definition: {
       openapi: '3.0.0',
       info: {
-        title: 'Swagger Express API',
+        title: 'HASAKI',
         version: '1.0.0',
-        description: 'A simple Express API with Swagger documentation',
+        description: 'TRANG WEB BÁN MỸ PHẨM SỐ MỘT VIỆT NAM',
       },
     },
     apis: [
         './models/*.ts',       
         './api/routers/*.ts',   
-        './api/handler/*.ts',   
+        './api/controllers/*.ts',   
       ],
   };
 export const specs = swaggerJSDoc(options);
