@@ -1,5 +1,5 @@
 .sidebar
-      h2 Admin Panel
+      h2 Trang quảng trị 
       ul.nav.flex-column
         li.nav-item
           a.nav-link(href='/admin/dashboard' class=`${activePages === 'dashboard' ? 'show' : ''}`)
@@ -10,19 +10,19 @@
             i.fas.fa-box
             |  S&#x1EA3;n ph&#x1EA9;m #{partialPage ? `/ ${partialPage}` : ""}
         li.nav-item
-          a.nav-link(href='/admin/products' class=`${activePages === 'users' ? 'show' : ''}`)
+          a.nav-link(href='/admin/users' class=`${activePages === 'users' ? 'show' : ''}`)
             i.fas.fa-users
             |  Ng&#x1B0;&#x1EDD;i D&ugrave;ng
         li.nav-item
-          a.nav-link(href='/admin/products' class=`${activePages === 'categories' ? 'show' : ''}`)
+          a.nav-link(href='/admin/categories' class=`${activePages === 'categories' ? 'show' : ''}`)
             i.fas.fa-list
             |  Danh m&#x1EE5;c
         li.nav-item
-          a.nav-link(href='/admin/products' class=`${activePages === 'services' ? 'show' : ''}`)
+          a.nav-link(href='/admin/services' class=`${activePages === 'services' ? 'show' : ''}`)
             i.fa-brands.fa-servicestack
             |  D&#x1ECB;ch v&#x1EE5;
         li.nav-item
-        a.nav-link(href='/admin/products' class=`${activePages === 'suppliers' ? 'show' : ''}`)
+        a.nav-link(href='/admin/suppliers' class=`${activePages === 'suppliers' ? 'show' : ''}`)
           i.fa-solid.fa-truck-field-un
           |  Nh&agrave; cung c&#x1EA5;p
         li.nav-item
@@ -34,26 +34,26 @@
               a.nav-link(href='#')
                 | - 
                 i.fas.fa-user
-                |  Kh&aacute;ch h&agrave;ng
+                |  Khách hàng 
             li.nav-item
               a.nav-link(href='#')
                 | - 
                 i.fas.fa-truck
-                |  Nh&agrave; cung c&#x1EA5;p
+                |  Nhà cung cấp
         li.nav-item
-          a.nav-link(href='/admin/products' class=`${activePages === 'permissions' ? 'show' : ''}`)
+          a.nav-link(href='/admin/permissions' class=`${activePages === 'permissions' ? 'show' : ''}`)
             i.fas.fa-user-shield
             |  Nh&oacute;m Quy&#x1EC1;n
         li.nav-item
-          a.nav-link(href='/admin/products' class=`${activePages === 'roles' ? 'show' : ''}`)
+          a.nav-link(href='/admin/roles' class=`${activePages === 'roles' ? 'show' : ''}`)
             i.fas.fa-key
             |  Ph&acirc;n Quy&#x1EC1;n
         li.nav-item
-          a.nav-link(href='/admin/products' class=`${activePages === 'account' ? 'show' : ''}`)
+          a.nav-link(href='/admin/account' class=`${activePages === 'account' ? 'show' : ''}`)
             i.fas.fa-user-cog
             |  T&agrave;i Kho&#x1EA3;n
         li.nav-item
-          a.nav-link(href='/admin/products' class=`${activePages === 'chat' ? 'show' : ''}`)
+          a.nav-link(href='/admin/chat' class=`${activePages === 'chat' ? 'show' : ''}`)
             i.fa-solid.fa-message
             |  Nh&#x1EAF;n tin
       .separator

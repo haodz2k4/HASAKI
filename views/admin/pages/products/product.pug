@@ -2,7 +2,9 @@
 extends ../../layouts/default.pug 
 include ../../mixins/pagination.pug 
 block main 
-    h1.text-center(style='margin-top: 30px;font-weight: 30px;') Quản lý sản phẩm 
+    h1.text-center(style='margin-top: 30px;font-weight: 30px;')
+     i.fa-solid.fa-boxes-stacked
+     |  Quản lý sản phẩm 
     .my-tool
       .tool-container
         .row.tool-section
@@ -85,6 +87,7 @@ block main
             th trạng thái 
             th vị trí 
             th Ngày tạo
+            th Người tạo 
             th Thao tác 
         tbody
           each item, index in products 
@@ -103,6 +106,8 @@ block main
               td 
                 input(type="number" value=item.position inp-position=item.id style='width: 70px') 
               td !{moment(item.createdAt).format(' dddd,DD/MM/YYYY </br> HH:mm:ss')}  
+              td
+                strong Hồ Sơn Hào 
               td
                 a(href=`/admin/products/update/${item.id}`).btn.btn-sm.btn-info
                   i.fas.fa-edit
