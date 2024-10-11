@@ -4,12 +4,15 @@ import productModel, {IProduct} from "../../models/product.model"
 import { IPagination, IPaginationResult } from "../utils/types/pagination";
 import { buildRegrex } from '../utils/regrex';
 import { ApiError } from '../utils/error';
+import pick from '../utils/pick';
+import rangePriceHelper from '../helpers/range-price.helper';
 interface IFilterProduct {
     status?: string;
     highlighted?: string;
     keyword?: string;
     categoryId?: string;
-    title?: RegExp;
+    minPrice?: number;
+    maxPrice?: number;
 }
 interface IQueryProduct extends Partial<IPagination> {
     filter?: IFilterProduct;
@@ -18,9 +21,13 @@ interface IQueryProduct extends Partial<IPagination> {
     selectFields?: string;
 }
 
+export const getProductBySlug = async (slug: string) => {
+    return await productModel.findOne({slug, deleted: false})
+}
+
 export const getProducts = async (queryProduct: IQueryProduct) => {
     const {
-        filter, 
+        filter = {}, 
         sortKey = 'position', 
         sortValue = "desc", 
         selectFields = "",
@@ -28,13 +35,19 @@ export const getProducts = async (queryProduct: IQueryProduct) => {
         limit = 30
     } = queryProduct;
     const skip = (page - 1) * limit;
-    if(filter?.keyword) {
-        filter.title = buildRegrex(filter.keyword);
-        delete filter.keyword
+    const find: Record<string, unknown> = pick(filter,["status","highlighted","categoryId"]);
+    const {keyword, minPrice, maxPrice} = filter;
+    if(keyword){
+        find.title = buildRegrex(keyword);
     }
+    if(minPrice || maxPrice){
+        find.$and =  rangePriceHelper(minPrice, maxPrice)
+        
+    }
+   
     const [products, total] = await Promise.all([
         await productModel
-        .find({...filter,deleted: false })
+        .find({...find,deleted: false })
         .skip(skip)
         .limit(limit)
         .sort({[sortKey]: sortValue})

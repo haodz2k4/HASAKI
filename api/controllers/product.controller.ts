@@ -12,7 +12,7 @@ import { ApiError } from '../utils/error';
 */
 //[GET] "/api/products"
 export const getProducts = catchAsync(async (req: Request, res: Response) => {
-    const filter = pick(req.query,["status", "highlighted","categoryId","keyword"]);
+    const filter = pick(req.query,["status", "highlighted","categoryId","keyword","minPrice","maxPrice"]);
     //Pagination 
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 30;
@@ -34,6 +34,13 @@ export const createProduct = catchAsync(async (req: Request, res: Response) => {
     const body = req.body;
     const product = await productService.createProduct(body);
     res.status(201).json({message: "Create Product successfully",product})
+})
+
+//[GET] "/api/products/slug/:slug"
+export const getProductBySlug = catchAsync(async (req: Request, res: Response) => {
+    const {slug} = req.params;
+    const product = await productService.getProductBySlug(slug);
+    res.json({product})
 })
 
 //[GET] "/api/products/:id"

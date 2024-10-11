@@ -16,7 +16,7 @@ router
     .get(controller.getProductById)
     .patch(controller.updateProduct)
     .delete(controller.deleteProduct)
-
+router.get("/slug/:slug",controller.getProductBySlug)
 router
     .route("/:id/upload")
     .post(upload.single('avatar'),controller.uploadFile)
