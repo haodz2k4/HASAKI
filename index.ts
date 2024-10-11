@@ -61,6 +61,10 @@ const bootstrap = () => {
     moment.locale('vi');
     app.locals.moment = moment;
 
+    /*API*/
+    //router
+    api(app)
+    
     // Router Admin and client 
     adminRouter(app);
     clientRouter(app);
@@ -74,9 +78,6 @@ const bootstrap = () => {
     // Connect to mongodb
     getConnection();
 
-    /*API*/
-    //router
-    api(app)
     /*END API*/
     // Start server
     const port = config.port;

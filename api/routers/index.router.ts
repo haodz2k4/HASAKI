@@ -8,4 +8,5 @@ export default (app: Express) => {
     // Swagger
     app.use('/api-docs', serve, setup(specs));
     app.use(`${API_PREFIX}/products`,productRouter)
+
 }

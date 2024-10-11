@@ -4,7 +4,7 @@ export const catchAsync = (fn: (req: Request, res: Response, next: NextFunction)
         try {
             await fn(req, res,next)
         } catch (error) {
-            await next(error);
+            next(error);
         }
     }
 } 

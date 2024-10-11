@@ -1,5 +1,6 @@
 import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
 import { RenderError } from "../utils/error";
+import { ApiError } from "../api/utils/error";
 
 
 export default (err: ErrorRequestHandler, req: Request, res: Response, next: NextFunction) => {
@@ -18,6 +19,9 @@ export default (err: ErrorRequestHandler, req: Request, res: Response, next: Nex
             res.render("common/500.pug")
             break;
         }
+    }else if (err instanceof ApiError){
+        res.status(err.statusCode).json({statusCode: err.statusCode, message: err.message})
+        
     }else {
         res.render("common/500.pug", {
             err

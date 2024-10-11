@@ -4,7 +4,6 @@ import * as productService from "../services/product.service";
 import pick from '../utils/pick';
 import { sortType } from '../utils/types/sort';
 import { IProduct } from '../../models/product.model';
-import { throwDeprecation } from 'process';
 import { ApiError } from '../utils/error';
 
 /** 
@@ -38,13 +37,27 @@ export const createProduct = catchAsync(async (req: Request, res: Response) => {
 })
 
 //[GET] "/api/products/:id"
-export const findProductById = catchAsync(async (req: Request, res: Response) => {
+export const getProductById = catchAsync(async (req: Request, res: Response) => {
     const {id} = req.params;
     const product = await productService.findProductById(id);
     if(!product){
         throw new ApiError(404,"Product is not found");
     }
     res.json({product});
+})
+
+//[POST] "/api/products/:id/upload"
+export const uploadFile = catchAsync(async (req: Request, res: Response) => {
+    const {id} = req.params;
+    const files = req.files;
+    if (files && Array.isArray(files) && files.length > 0) {
+        const urls: string[] = files.map(item => item.path);
+        const product = await productService.updateProductById(id,{thumbnail: urls});
+        res.status(200).json({message: "upload File successfully", product})
+    }else {
+        throw new ApiError(400,"Files is must provided")
+    }
+    
 })
 
 //[PATCH] "/api/products/:id"
