@@ -18,5 +18,6 @@ router
     .patch(upload.array('thumbnail', 5),uploadMulti,controller.updateProductPatch) 
 
 router.get("/detail/:id",controller.detail)
+router.post("/export/excel",controller.exportExcel);
 
 export default router

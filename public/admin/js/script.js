@@ -233,7 +233,7 @@ if(imageInput){
         }
         });
 }
-
+//Filter by category
 const selectCategory = document.querySelector("[select-category]");
 if(selectCategory){
     selectCategory.addEventListener("change",() => {
@@ -244,5 +244,21 @@ if(selectCategory){
             url.searchParams.delete("categoryId")
         }
         window.location.href = url.href
+    })
+}
+
+const btnExportExcel = document.querySelector("[btn-export-excel]");
+console.log(btnExportExcel)
+if(btnExportExcel){
+    btnExportExcel.addEventListener("click",() => {
+        const formExportExcel = document.querySelector("[form-export-excel]");
+        const input = formExportExcel.querySelector("input");
+        const idsChecked = document.querySelectorAll("tbody tr td input[type='checkbox']:checked");
+        const ids = []
+        for(const item of idsChecked){
+            ids.push(item.value);
+        }
+        input.value = JSON.stringify(ids);
+        formExportExcel.submit()
     })
 }

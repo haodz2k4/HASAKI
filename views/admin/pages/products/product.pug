@@ -49,19 +49,19 @@ block main
               button.btn.btn-warning(type='button') 
                 i.fa-solid.fa-square-plus
                 |  Thêm sll
-              button.btn.btn-secondary(type='button') 
+              button.btn.btn-secondary(type='button' btn-export-excel) 
                 i.fa-solid.fa-file-excel 
-                |  Xu&#x1EA5;t Excel
+                |  Xuất Excel 
         .row.tool-section
           form().col-md-4.mb-3
             .input-group
               select.form-control(select-limit)
                 option Giới hạng 
-                option(value="5") 5
-                option(value="10") 10 
-                option(value="20") 20
-                option(value="50") 50 
-                option(value="100")  100
+                option(value="5" selected=(pagination.limit === 5)) 5
+                option(value="10" selected=(pagination.limit === 10)) 10 
+                option(value="20" selected=(pagination.limit === 20)) 20
+                option(value="50" selected=(pagination.limit === 50)) 50 
+                option(value="100" selected=(pagination.limit === 100))  100
           .col-md-4.mb-3
             select.form-control(select-category)
               option(value='') Lọc theo danh mục 
@@ -114,3 +114,5 @@ block main
     +pagination(pagination) 
     
     div(path='products').my-path 
+    form(action="/admin/products/export/excel" method="POST" form-export-excel).d-none 
+      input(type="text" name='ids') 

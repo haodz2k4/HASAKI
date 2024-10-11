@@ -5,6 +5,7 @@ import productModel from "../../models/product.model";
 import { catchAsync } from "../../utils/catchAsync";
 import categoryModel from "../../models/category.model";
 import { RenderError } from "../../utils/error";
+import excelJs from "exceljs"
 //[GET] "/admin/products"
 export const products = catchAsync(async (req: Request, res: Response) => {
     
@@ -178,3 +179,53 @@ export const detail = catchAsync(async (req: Request, res: Response) => {
     })
 })
 
+//[GET] "/admin/products/export/excel"
+export const exportExcel = catchAsync(async (req: Request, res: Response) => {
+    
+    const ids = JSON.parse(req.body.ids);
+    const products = await productModel.find({_id: {$in: ids}});
+    const workBook = new excelJs.Workbook();
+    const worksheet = workBook.addWorksheet("Products");
+    worksheet.columns = [
+        { header: "Id", key: "_id", width: 15 },
+        { header: "Title", key: "title", width: 20 },
+        { header: "CategoryId", key: "categoryId", width: 20 },
+        { header: "Description", key: "description", width: 30 },
+        { header: "Highlighted", key: "highlighted", width: 20 },
+        { header: "Position", key: "position", width: 10 },
+        { header: "Thumbnail", key: "thumbnail", width: 30 },
+        { header: "Price", key: "price", width: 10 },
+        { header: "Discount (%)", key: "discountPercentage", width: 15 },
+        { header: "Deleted", key: "deleted", width: 10 },
+        { header: "Slug", key: "slug", width: 20 },
+        { header: "Status", key: "status", width: 15 },
+        { header: "Quantity", key: "quantity", width: 10 },
+    ];
+    products.forEach((product) => {
+        worksheet.addRow({
+            _id: product._id,
+            title: product.title,
+            categoryId: product.categoryId ? product.categoryId.toString() : "",
+            description: product.description,
+            highlighted: product.highlighted === "1" ? "có" : "0",
+            position: product.position,
+            thumbnail: product.thumbnail.join(", "), 
+            price: product.price,
+            discountPercentage: product.discountPercentage,
+            deleted: product.deleted ? "Yes" : "No",
+            slug: product.slug,
+            status: product.status,
+            quantity: product.quantity || 0,
+        });
+    });
+    res.setHeader(
+        "Content-Type",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    );
+    res.setHeader(
+        "Content-Disposition",
+        'attachment; filename="products.xlsx"'
+    );
+    await workBook.xlsx.write(res);
+    res.redirect("back");
+})
