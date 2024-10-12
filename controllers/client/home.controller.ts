@@ -1,16 +1,26 @@
 import { Request, Response } from "express";
 import productModel from "../../models/product.model";
+import categoryModel from "../../models/category.model"
 //[GET] "/home"
 export const home = async (req: Request, res: Response) => {
     
-    const hightlightedProducts = await productModel.find({status: 'active', limit: 5, deleted: false})
-    const products = await productModel
-        .find({status: "active", deleted: false})
-        .limit(18)
+    const soldProducts = await productModel.find({
+        deleted: false,
+        status: "active"
+    }).limit(20)
+    
+    const products = await productModel.find({
+        deleted: false, status: "active", highlighted: "1"
+    })
+    .limit(20)
+
+    
+    const categories = await categoryModel.find({deleted: false, status: "active"})
     res.render("clients/pages/home/home.pug",{
-        hightlightedProducts,
         products,   
-        pageTitle: "Trang Chủ"
+        categories,
+        pageTitle: "Trang Chủ",
+        soldProducts
     })
 
 }

@@ -24,79 +24,27 @@ block main
           // Carousel Item 1 (active)
           .carousel-item.active
             .d-flex.justify-content-center
+             each item in soldProducts
               .col-6.col-md-4.col-lg-2
                 .card.product-sold-card
-                  img(src='https://via.placeholder.com/120', alt='Product 1')
-                  .product-sold-title T&#x1EA9;y T&#x1EBF; B&agrave;o Ch&#x1EBF;t Da M&#x1EB7;t
-                  .product-sold-count 1.223M &dstrok;&atilde; b&aacute;n
-                  .product-sold-price 350.000&dstrok;
+                  img(src='https://via.placeholder.com/120', alt=item.title)
+                  .product-sold-title #{item.title}
+                  .product-sold-count 1.223M Đã bán 
+                  .product-sold-price #{item.newPrice}
                   // Giá tiền
-              .col-6.col-md-4.col-lg-2
-                .card.product-sold-card
-                  img(src='https://via.placeholder.com/120', alt='Product 2')
-                  .product-sold-title Son Kem / Tint
-                  .product-sold-count 1.111M &dstrok;&atilde; b&aacute;n
-                  .product-sold-price 250.000&dstrok;
-                  // Giá tiền
-              .col-6.col-md-4.col-lg-2
-                .card.product-sold-card
-                  img(src='https://via.placeholder.com/100', alt='Product 3')
-                  .product-sold-title Son D&#x1B0;&#x1EE1;ng M&ocirc;i
-                  .product-sold-count 1.053M &dstrok;&atilde; b&aacute;n
-                  .product-sold-price 150.000&dstrok;
-                  // Giá tiền
-              .col-6.col-md-4.col-lg-2
-                .card.product-sold-card
-                  img(src='https://via.placeholder.com/100', alt='Product 3')
-                  .product-sold-title Son D&#x1B0;&#x1EE1;ng M&ocirc;i
-                  .product-sold-count 1.053M &dstrok;&atilde; b&aacute;n
-                  .product-sold-price 150.000&dstrok;
-                  // Giá tiền
-              .col-6.col-md-4.col-lg-2
-                .card.product-sold-card
-                  img(src='https://via.placeholder.com/100', alt='Product 6')
-                  .product-sold-title X&#x1ECB;t Kho&aacute;ng
-                  .product-sold-count 0.832M &dstrok;&atilde; b&aacute;n
-                  .product-sold-price 120.000&dstrok;
-                  // Giá tiền
+              
           // Carousel Item 2
           .carousel-item
             .d-flex.justify-content-center
+             each item in categories 
               .col-6.col-md-4.col-lg-2
                 .card.product-sold-card
-                  img(src='https://via.placeholder.com/100', alt='Product 4')
-                  .product-sold-title B&#x1ED9; Ch&abreve;m S&oacute;c Da M&#x1EB7;t
-                  .product-sold-count 0.99M &dstrok;&atilde; b&aacute;n
+                  img(src='https://via.placeholder.com/100', alt=item.title)
+                  .product-sold-title #{item.title}
+                  .product-sold-count 0.99M Đã bán
                   .product-sold-price 450.000&dstrok;
                   // Giá tiền
-              .col-6.col-md-4.col-lg-2
-                .card.product-sold-card
-                  img(src='https://via.placeholder.com/100', alt='Product 3')
-                  .product-sold-title Son D&#x1B0;&#x1EE1;ng M&ocirc;i
-                  .product-sold-count 1.053M &dstrok;&atilde; b&aacute;n
-                  .product-sold-price 150.000&dstrok;
-                  // Giá tiền
-              .col-6.col-md-4.col-lg-2
-                .card.product-sold-card
-                  img(src='https://via.placeholder.com/100', alt='Product 5')
-                  .product-sold-title Kem &Dstrok;&aacute;nh R&abreve;ng
-                  .product-sold-count 0.882M &dstrok;&atilde; b&aacute;n
-                  .product-sold-price 100.000&dstrok;
-                  // Giá tiền
-              .col-6.col-md-4.col-lg-2
-                .card.product-sold-card
-                  img(src='https://via.placeholder.com/100', alt='Product 6')
-                  .product-sold-title X&#x1ECB;t Kho&aacute;ng
-                  .product-sold-count 0.832M &dstrok;&atilde; b&aacute;n
-                  .product-sold-price 120.000&dstrok;
-                  // Giá tiền
-              .col-6.col-md-4.col-lg-2
-                .card.product-sold-card
-                  img(src='https://via.placeholder.com/100', alt='Product 6')
-                  .product-sold-title X&#x1ECB;t Kho&aacute;ng
-                  .product-sold-count 0.832M &dstrok;&atilde; b&aacute;n
-                  .product-sold-price 120.000&dstrok;
-                  // Giá tiền
+              
         // Carousel controls
         button.carousel-control-prev(type='button', data-bs-target='#productCarousel', data-bs-slide='prev')
           span.carousel-control-prev-icon(aria-hidden='true')
@@ -174,15 +122,15 @@ block main
       // Danh Sách Sản Phẩm Đề Xuất
       .container.py-5
         .recommended-section
-          .section-title S&#x1EA3;n Ph&#x1EA9;m &Dstrok;&#x1EC1; Xu&#x1EA5;t
+          .section-title Sản phẩm đề xuất 
           .row.row-cols-1.row-cols-sm-2.row-cols-md-3.row-cols-lg-5.g-4
-            // Sản phẩm 1
+           each item in products 
             .col
               .recommended-product-card
-                img.img-fluid(src='https://via.placeholder.com/300x200', alt='Sản phẩm 1')
-                .recommended-product-title(title='Sản phẩm 1') S&#x1EA3;n ph&#x1EA9;m 1
+                img.img-fluid(src='https://via.placeholder.com/300x200', alt=item.title)
+                .recommended-product-title(title='Sản phẩm 1') #{item.title}
                 .recommended-product-prices
-                  span.recommended-new-price 18.000.000 VND
+                  span.recommended-new-price #{item.oldPrice}
                 .recommended-purchase-info
                   i.fas.fa-shopping-cart
                   span 150 mua
@@ -198,119 +146,4 @@ block main
                 a.recommended-add-to-cart(href='#')
                   i.fas.fa-shopping-cart
                   span Th&ecirc;m v&agrave;o gi&#x1ECF;
-            // Sản phẩm 2
-            .col
-              .recommended-product-card
-                img.img-fluid(src='https://via.placeholder.com/300x200', alt='Sản phẩm 2')
-                .recommended-product-title(title='Sản phẩm 2') S&#x1EA3;n ph&#x1EA9;m 2
-                .recommended-product-prices
-                  span.recommended-old-price 15.000.000 VND
-                  span.recommended-new-price 13.500.000 VND
-                .recommended-purchase-info
-                  i.fas.fa-shopping-cart
-                  span 85 mua
-                .recommended-product-rating
-                  i.fas.fa-star
-                  i.fas.fa-star
-                  i.fas.fa-star
-                  i.fas.fa-star
-                  i.far.fa-star
-                  |  (85 &dstrok;&aacute;nh gi&aacute;)
-                .recommended-stock
-                  | C&ograve;n h&agrave;ng: 40
-                a.recommended-add-to-cart(href='#')
-                  i.fas.fa-shopping-cart
-                  span Th&ecirc;m v&agrave;o gi&#x1ECF;
-            // Sản phẩm 3
-            .col
-              .recommended-product-card
-                img.img-fluid(src='https://via.placeholder.com/300x200', alt='Sản phẩm 3')
-                .recommended-product-title(title='Sản phẩm 3') S&#x1EA3;n ph&#x1EA9;m 3
-                .recommended-product-prices
-                  span.recommended-old-price 10.000.000 VND
-                  span.recommended-new-price 9.500.000 VND
-                .recommended-purchase-info
-                  i.fas.fa-shopping-cart
-                  span 200 mua
-                .recommended-product-rating
-                  i.fas.fa-star
-                  i.fas.fa-star
-                  i.fas.fa-star
-                  i.fas.fa-star-half-alt
-                  i.far.fa-star
-                  |  (200 &dstrok;&aacute;nh gi&aacute;)
-                .recommended-stock
-                  | C&ograve;n h&agrave;ng: 60
-                a.recommended-add-to-cart(href='#')
-                  i.fas.fa-shopping-cart
-                  span Th&ecirc;m v&agrave;o gi&#x1ECF;
-            // Sản phẩm 4
-            .col
-              .recommended-product-card
-                img.img-fluid(src='https://via.placeholder.com/300x200', alt='Sản phẩm 4')
-                .recommended-product-title(title='Sản phẩm 4') S&#x1EA3;n ph&#x1EA9;m 4
-                .recommended-product-prices
-                  span.recommended-old-price 12.000.000 VND
-                  span.recommended-new-price 11.000.000 VND
-                .recommended-purchase-info
-                  i.fas.fa-shopping-cart
-                  span 60 mua
-                .recommended-product-rating
-                  i.fas.fa-star
-                  i.fas.fa-star
-                  i.fas.fa-star
-                  i.fas.fa-star
-                  i.fas.fa-star-half-alt
-                  |  (60 &dstrok;&aacute;nh gi&aacute;)
-                .recommended-stock
-                  | C&ograve;n h&agrave;ng: 30
-                a.recommended-add-to-cart(href='#')
-                  i.fas.fa-shopping-cart
-                  span Th&ecirc;m v&agrave;o gi&#x1ECF;
-            // Sản phẩm 5
-            .col
-              .recommended-product-card
-                img.img-fluid(src='https://via.placeholder.com/300x200', alt='Sản phẩm 5')
-                .recommended-product-title(title='Sản phẩm 5') S&#x1EA3;n ph&#x1EA9;m 5
-                .recommended-product-prices
-                  span.recommended-old-price 25.000.000 VND
-                  span.recommended-new-price 22.000.000 VND
-                .recommended-purchase-info
-                  i.fas.fa-shopping-cart
-                  span 300 mua
-                .recommended-product-rating
-                  i.fas.fa-star
-                  i.fas.fa-star
-                  i.fas.fa-star
-                  i.fas.fa-star
-                  i.fas.fa-star
-                  |  (300 &dstrok;&aacute;nh gi&aacute;)
-                .recommended-stock
-                  | C&ograve;n h&agrave;ng: 50
-                a.recommended-add-to-cart(href='#')
-                  i.fas.fa-shopping-cart
-                  span Th&ecirc;m v&agrave;o gi&#x1ECF;
-            // Sản phẩm 6
-            .col
-              .recommended-product-card
-                img.img-fluid(src='https://via.placeholder.com/300x200', alt='Sản phẩm 6')
-                .recommended-product-title(title='Sản phẩm 6') S&#x1EA3;n ph&#x1EA9;m 6
-                .recommended-product-prices
-                  span.recommended-old-price 14.000.000 VND
-                  span.recommended-new-price 12.000.000 VND
-                .recommended-purchase-info
-                  i.fas.fa-shopping-cart
-                  span 140 mua
-                .recommended-product-rating
-                  i.fas.fa-star
-                  i.fas.fa-star
-                  i.fas.fa-star
-                  i.fas.fa-star
-                  i.far.fa-star
-                  |  (140 &dstrok;&aacute;nh gi&aacute;)
-                .recommended-stock
-                  | C&ograve;n h&agrave;ng: 35
-                a.recommended-add-to-cart(href='#')
-                  i.fas.fa-shopping-cart
-                  span Th&ecirc;m v&agrave;o gi&#x1ECF;
-      // END SUGGESTIONS PRODUCT
+            
