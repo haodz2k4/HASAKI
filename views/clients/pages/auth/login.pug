@@ -1,24 +1,29 @@
 extends ../../layouts/auth.pug 
-
+include ../../mixins/show-alert.pug 
 block main 
-
+    
     .wrapper
       img(src='img.png', alt='')
       h2.text-right Chào mừng 
       .form-wrapper.login
-        form(action='')
+        +alertSuccess(messages)
+        +alertError(messages)
+        form(action='' method="post")
           h2 Đăng nhập 
           .input-box
             span.icon
               ion-icon(name='mail')
-            input(type='email', placeholder='Email của bạn', required='')
+            input(type='email', placeholder='Email của bạn',name='email' required='')
           .input-box
             span.icon
               ion-icon(name='lock-closed')
-            input(type='password', placeholder='Password của bạn', required='')
+            input(type='password', placeholder='Password của bạn', name='password',required='')
           .forgot-pass
             a(href='#') bạn quên mật khẩu?
           button(type='submit') Đăng nhập
+          .input-remember-mes
+            input#remember-me(type='checkbox' name='remember')
+            label(for='remember-me', style='color: #f2f2f2; font-size: .9em;') ghi nhớ tôi 
           .sign-link
             p
               | Bạn chưa có tài khoản 

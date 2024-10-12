@@ -12,6 +12,9 @@ export default (err: ErrorRequestHandler, req: Request, res: Response, next: Nex
                 message: err.message
             })
             break;
+            case 401: 
+                req.flash('error',err.message)
+                res.redirect('back');
             case 500: 
             res.render("common/500.pug");
             break;

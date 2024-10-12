@@ -13,6 +13,13 @@ export default {
         cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
         api_key: process.env.CLOUDINARY_API_KEY,
         api_secret: process.env.CLOUDINARY_API_SECRET,
+    },
+    jwt_user: {
+        jwt_access_secret: process.env.JWT_USER_ACCESS_SECRET,
+        jwt_access_expire: process.env.JWT_USER_ACCESS_EXPIRE,
+
+        jwt_refresh_secret: process.env.JWT_USER_REFRESH_SECRET,
+        jwt_refresh_expire: process.env.JWT_USER_REFRESH_EXPIRE
     }
 
 }
