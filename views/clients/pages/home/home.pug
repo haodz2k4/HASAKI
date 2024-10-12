@@ -1,1 +1,316 @@
 extends ../../layouts/default.pug 
+
+block main 
+    
+    // End Header
+    // Banner
+    .banner-container
+      .banner-slide.active
+        img(src='/images/banner1.png', alt='Slide 1')
+      .banner-slide
+        img(src='/images/banner2.png', alt='Slide 2')
+      .banner-slide
+        img(src='/images/banner3.png', alt='Slide 3')
+      // Nút điều hướng
+      button.prev
+        i.fas.fa-arrow-left
+      button.next
+        i.fas.fa-arrow-right
+    // End Banner
+    .container.mt-4
+      h3#title-sold B&aacute;n ch&#x1EA1;y
+      #productCarousel.carousel.slide(data-bs-ride='carousel')
+        .carousel-inner
+          // Carousel Item 1 (active)
+          .carousel-item.active
+            .d-flex.justify-content-center
+              .col-6.col-md-4.col-lg-2
+                .card.product-sold-card
+                  img(src='https://via.placeholder.com/120', alt='Product 1')
+                  .product-sold-title T&#x1EA9;y T&#x1EBF; B&agrave;o Ch&#x1EBF;t Da M&#x1EB7;t
+                  .product-sold-count 1.223M &dstrok;&atilde; b&aacute;n
+                  .product-sold-price 350.000&dstrok;
+                  // Giá tiền
+              .col-6.col-md-4.col-lg-2
+                .card.product-sold-card
+                  img(src='https://via.placeholder.com/120', alt='Product 2')
+                  .product-sold-title Son Kem / Tint
+                  .product-sold-count 1.111M &dstrok;&atilde; b&aacute;n
+                  .product-sold-price 250.000&dstrok;
+                  // Giá tiền
+              .col-6.col-md-4.col-lg-2
+                .card.product-sold-card
+                  img(src='https://via.placeholder.com/100', alt='Product 3')
+                  .product-sold-title Son D&#x1B0;&#x1EE1;ng M&ocirc;i
+                  .product-sold-count 1.053M &dstrok;&atilde; b&aacute;n
+                  .product-sold-price 150.000&dstrok;
+                  // Giá tiền
+              .col-6.col-md-4.col-lg-2
+                .card.product-sold-card
+                  img(src='https://via.placeholder.com/100', alt='Product 3')
+                  .product-sold-title Son D&#x1B0;&#x1EE1;ng M&ocirc;i
+                  .product-sold-count 1.053M &dstrok;&atilde; b&aacute;n
+                  .product-sold-price 150.000&dstrok;
+                  // Giá tiền
+              .col-6.col-md-4.col-lg-2
+                .card.product-sold-card
+                  img(src='https://via.placeholder.com/100', alt='Product 6')
+                  .product-sold-title X&#x1ECB;t Kho&aacute;ng
+                  .product-sold-count 0.832M &dstrok;&atilde; b&aacute;n
+                  .product-sold-price 120.000&dstrok;
+                  // Giá tiền
+          // Carousel Item 2
+          .carousel-item
+            .d-flex.justify-content-center
+              .col-6.col-md-4.col-lg-2
+                .card.product-sold-card
+                  img(src='https://via.placeholder.com/100', alt='Product 4')
+                  .product-sold-title B&#x1ED9; Ch&abreve;m S&oacute;c Da M&#x1EB7;t
+                  .product-sold-count 0.99M &dstrok;&atilde; b&aacute;n
+                  .product-sold-price 450.000&dstrok;
+                  // Giá tiền
+              .col-6.col-md-4.col-lg-2
+                .card.product-sold-card
+                  img(src='https://via.placeholder.com/100', alt='Product 3')
+                  .product-sold-title Son D&#x1B0;&#x1EE1;ng M&ocirc;i
+                  .product-sold-count 1.053M &dstrok;&atilde; b&aacute;n
+                  .product-sold-price 150.000&dstrok;
+                  // Giá tiền
+              .col-6.col-md-4.col-lg-2
+                .card.product-sold-card
+                  img(src='https://via.placeholder.com/100', alt='Product 5')
+                  .product-sold-title Kem &Dstrok;&aacute;nh R&abreve;ng
+                  .product-sold-count 0.882M &dstrok;&atilde; b&aacute;n
+                  .product-sold-price 100.000&dstrok;
+                  // Giá tiền
+              .col-6.col-md-4.col-lg-2
+                .card.product-sold-card
+                  img(src='https://via.placeholder.com/100', alt='Product 6')
+                  .product-sold-title X&#x1ECB;t Kho&aacute;ng
+                  .product-sold-count 0.832M &dstrok;&atilde; b&aacute;n
+                  .product-sold-price 120.000&dstrok;
+                  // Giá tiền
+              .col-6.col-md-4.col-lg-2
+                .card.product-sold-card
+                  img(src='https://via.placeholder.com/100', alt='Product 6')
+                  .product-sold-title X&#x1ECB;t Kho&aacute;ng
+                  .product-sold-count 0.832M &dstrok;&atilde; b&aacute;n
+                  .product-sold-price 120.000&dstrok;
+                  // Giá tiền
+        // Carousel controls
+        button.carousel-control-prev(type='button', data-bs-target='#productCarousel', data-bs-slide='prev')
+          span.carousel-control-prev-icon(aria-hidden='true')
+          span.visually-hidden Previous
+        button.carousel-control-next(type='button', data-bs-target='#productCarousel', data-bs-slide='next')
+          span.carousel-control-next-icon(aria-hidden='true')
+          span.visually-hidden Next
+    // CATEGORY
+    // Category Carousel
+    .container.my-4.category-carousel
+      h5.category-title Danh m&#x1EE5;c
+      #categoryCarousel.carousel.slide(data-bs-ride='carousel', data-bs-interval='3000')
+        .carousel-inner
+          .carousel-item.active
+            .d-flex.justify-content-between
+              .category-item
+                img(src='https://via.placeholder.com/80', alt='Trang Điểm Môi')
+                h6 Trang &Dstrok;i&#x1EC3;m M&ocirc;i
+              .category-item
+                img(src='https://via.placeholder.com/80', alt='Mặt Nạ')
+                h6 M&#x1EB7;t N&#x1EA1;
+              .category-item
+                img(src='https://via.placeholder.com/80', alt='Trang Điểm Mặt')
+                h6 Trang &Dstrok;i&#x1EC3;m M&#x1EB7;t
+              .category-item
+                img(src='https://via.placeholder.com/80', alt='Sữa Rửa Mặt')
+                h6 S&#x1EEF;a R&#x1EED;a M&#x1EB7;t
+              .category-item
+                img(src='https://via.placeholder.com/80', alt='Dầu Gội & Dầu Xả')
+                h6 D&#x1EA7;u G&#x1ED9;i &amp; D&#x1EA7;u X&#x1EA3;
+              .category-item
+                img(src='https://via.placeholder.com/80', alt='Chống Nắng')
+                h6 Ch&#x1ED1;ng N&#x1EAF;ng
+              .category-item
+                img(src='https://via.placeholder.com/80', alt='Sữa Tắm')
+                h6 S&#x1EEF;a T&#x1EAF;m
+              .category-item
+                img(src='https://via.placeholder.com/80', alt='Dưỡng Thể')
+                h6 D&#x1B0;&#x1EE1;ng Th&#x1EC3;
+          .carousel-item
+            .d-flex.justify-content-between
+              .category-item
+                img(src='https://via.placeholder.com/80', alt='Tẩy Trang')
+                h6 T&#x1EA9;y Trang
+              .category-item
+                img(src='https://via.placeholder.com/80', alt='Sản Phẩm Khác')
+                h6 S&#x1EA3;n Ph&#x1EA9;m Kh&aacute;c
+              .category-item
+                img(src='https://via.placeholder.com/80', alt='Sản Phẩm A')
+                h6 S&#x1EA3;n Ph&#x1EA9;m A
+              .category-item
+                img(src='https://via.placeholder.com/80', alt='Sản Phẩm B')
+                h6 S&#x1EA3;n Ph&#x1EA9;m B
+              .category-item
+                img(src='https://via.placeholder.com/80', alt='Sản Phẩm C')
+                h6 S&#x1EA3;n Ph&#x1EA9;m C
+              .category-item
+                img(src='https://via.placeholder.com/80', alt='Sản Phẩm D')
+                h6 S&#x1EA3;n Ph&#x1EA9;m D
+              .category-item
+                img(src='https://via.placeholder.com/80', alt='Sản Phẩm E')
+                h6 S&#x1EA3;n Ph&#x1EA9;m E
+              .category-item
+                img(src='https://via.placeholder.com/80', alt='Sản Phẩm F')
+                h6 S&#x1EA3;n Ph&#x1EA9;m F
+        // Carousel controls
+        button.carousel-control-prev(type='button', data-bs-target='#categoryCarousel', data-bs-slide='prev')
+          span.carousel-control-prev-icon(aria-hidden='true')
+          span.visually-hidden Previous
+        button.carousel-control-next(type='button', data-bs-target='#categoryCarousel', data-bs-slide='next')
+          span.carousel-control-next-icon(aria-hidden='true')
+          span.visually-hidden Next
+    // SUGGESTIONS PRODUCT LIST
+    .container.py-5
+      // Danh Sách Sản Phẩm Đề Xuất
+      .container.py-5
+        .recommended-section
+          .section-title S&#x1EA3;n Ph&#x1EA9;m &Dstrok;&#x1EC1; Xu&#x1EA5;t
+          .row.row-cols-1.row-cols-sm-2.row-cols-md-3.row-cols-lg-5.g-4
+            // Sản phẩm 1
+            .col
+              .recommended-product-card
+                img.img-fluid(src='https://via.placeholder.com/300x200', alt='Sản phẩm 1')
+                .recommended-product-title(title='Sản phẩm 1') S&#x1EA3;n ph&#x1EA9;m 1
+                .recommended-product-prices
+                  span.recommended-new-price 18.000.000 VND
+                .recommended-purchase-info
+                  i.fas.fa-shopping-cart
+                  span 150 mua
+                .recommended-product-rating
+                  i.fas.fa-star
+                  i.fas.fa-star
+                  i.fas.fa-star
+                  i.fas.fa-star
+                  i.fas.fa-star-half-alt
+                  |  (120 &dstrok;&aacute;nh gi&aacute;)
+                .recommended-stock
+                  | C&ograve;n h&agrave;ng: 25
+                a.recommended-add-to-cart(href='#')
+                  i.fas.fa-shopping-cart
+                  span Th&ecirc;m v&agrave;o gi&#x1ECF;
+            // Sản phẩm 2
+            .col
+              .recommended-product-card
+                img.img-fluid(src='https://via.placeholder.com/300x200', alt='Sản phẩm 2')
+                .recommended-product-title(title='Sản phẩm 2') S&#x1EA3;n ph&#x1EA9;m 2
+                .recommended-product-prices
+                  span.recommended-old-price 15.000.000 VND
+                  span.recommended-new-price 13.500.000 VND
+                .recommended-purchase-info
+                  i.fas.fa-shopping-cart
+                  span 85 mua
+                .recommended-product-rating
+                  i.fas.fa-star
+                  i.fas.fa-star
+                  i.fas.fa-star
+                  i.fas.fa-star
+                  i.far.fa-star
+                  |  (85 &dstrok;&aacute;nh gi&aacute;)
+                .recommended-stock
+                  | C&ograve;n h&agrave;ng: 40
+                a.recommended-add-to-cart(href='#')
+                  i.fas.fa-shopping-cart
+                  span Th&ecirc;m v&agrave;o gi&#x1ECF;
+            // Sản phẩm 3
+            .col
+              .recommended-product-card
+                img.img-fluid(src='https://via.placeholder.com/300x200', alt='Sản phẩm 3')
+                .recommended-product-title(title='Sản phẩm 3') S&#x1EA3;n ph&#x1EA9;m 3
+                .recommended-product-prices
+                  span.recommended-old-price 10.000.000 VND
+                  span.recommended-new-price 9.500.000 VND
+                .recommended-purchase-info
+                  i.fas.fa-shopping-cart
+                  span 200 mua
+                .recommended-product-rating
+                  i.fas.fa-star
+                  i.fas.fa-star
+                  i.fas.fa-star
+                  i.fas.fa-star-half-alt
+                  i.far.fa-star
+                  |  (200 &dstrok;&aacute;nh gi&aacute;)
+                .recommended-stock
+                  | C&ograve;n h&agrave;ng: 60
+                a.recommended-add-to-cart(href='#')
+                  i.fas.fa-shopping-cart
+                  span Th&ecirc;m v&agrave;o gi&#x1ECF;
+            // Sản phẩm 4
+            .col
+              .recommended-product-card
+                img.img-fluid(src='https://via.placeholder.com/300x200', alt='Sản phẩm 4')
+                .recommended-product-title(title='Sản phẩm 4') S&#x1EA3;n ph&#x1EA9;m 4
+                .recommended-product-prices
+                  span.recommended-old-price 12.000.000 VND
+                  span.recommended-new-price 11.000.000 VND
+                .recommended-purchase-info
+                  i.fas.fa-shopping-cart
+                  span 60 mua
+                .recommended-product-rating
+                  i.fas.fa-star
+                  i.fas.fa-star
+                  i.fas.fa-star
+                  i.fas.fa-star
+                  i.fas.fa-star-half-alt
+                  |  (60 &dstrok;&aacute;nh gi&aacute;)
+                .recommended-stock
+                  | C&ograve;n h&agrave;ng: 30
+                a.recommended-add-to-cart(href='#')
+                  i.fas.fa-shopping-cart
+                  span Th&ecirc;m v&agrave;o gi&#x1ECF;
+            // Sản phẩm 5
+            .col
+              .recommended-product-card
+                img.img-fluid(src='https://via.placeholder.com/300x200', alt='Sản phẩm 5')
+                .recommended-product-title(title='Sản phẩm 5') S&#x1EA3;n ph&#x1EA9;m 5
+                .recommended-product-prices
+                  span.recommended-old-price 25.000.000 VND
+                  span.recommended-new-price 22.000.000 VND
+                .recommended-purchase-info
+                  i.fas.fa-shopping-cart
+                  span 300 mua
+                .recommended-product-rating
+                  i.fas.fa-star
+                  i.fas.fa-star
+                  i.fas.fa-star
+                  i.fas.fa-star
+                  i.fas.fa-star
+                  |  (300 &dstrok;&aacute;nh gi&aacute;)
+                .recommended-stock
+                  | C&ograve;n h&agrave;ng: 50
+                a.recommended-add-to-cart(href='#')
+                  i.fas.fa-shopping-cart
+                  span Th&ecirc;m v&agrave;o gi&#x1ECF;
+            // Sản phẩm 6
+            .col
+              .recommended-product-card
+                img.img-fluid(src='https://via.placeholder.com/300x200', alt='Sản phẩm 6')
+                .recommended-product-title(title='Sản phẩm 6') S&#x1EA3;n ph&#x1EA9;m 6
+                .recommended-product-prices
+                  span.recommended-old-price 14.000.000 VND
+                  span.recommended-new-price 12.000.000 VND
+                .recommended-purchase-info
+                  i.fas.fa-shopping-cart
+                  span 140 mua
+                .recommended-product-rating
+                  i.fas.fa-star
+                  i.fas.fa-star
+                  i.fas.fa-star
+                  i.fas.fa-star
+                  i.far.fa-star
+                  |  (140 &dstrok;&aacute;nh gi&aacute;)
+                .recommended-stock
+                  | C&ograve;n h&agrave;ng: 35
+                a.recommended-add-to-cart(href='#')
+                  i.fas.fa-shopping-cart
+                  span Th&ecirc;m v&agrave;o gi&#x1ECF;
+      // END SUGGESTIONS PRODUCT
