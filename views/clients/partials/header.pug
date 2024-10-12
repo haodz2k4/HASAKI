@@ -1,134 +1,67 @@
-#myHeader.header.scrolling
-      .grid.wide
-        .header__top
-          .navbar-icon
-            span
-            span
-            span
-          a.header__logo(href='index.html')
-            img(src='./assets/logo.png', alt='')
-          .header__search
-            .header__search-wrap
-              input.header__search-input(type='text', placeholder='Tìm kiếm')
-              a.header__search-icon(href='#')
-                i.fas.fa-search
-          .header__account
-            a.header__account-login(href='#my-Login') &Dstrok;&abreve;ng Nh&#x1EAD;p
-            a.header__account-register(href='#my-Register') &Dstrok;&abreve;ng K&iacute;
-          // Cart
-          .header__cart.have(href='#')
-            i.fas.fa-shopping-basket
-            .header__cart-amount
-              | 3
-            .header__cart-wrap
-              ul.order__list
-                li.item-order
-                  .order-wrap
-                    a.order-img(href='product.html')
-                      img(src='./assets/img/product/product1.jpg', alt='')
-                    .order-main
-                      a.order-main-name(href='product.html') &Aacute;o s&#x1A1; mi  caro k&egrave;m belt caro k&egrave;m belt &Aacute;o s&#x1A1; mi caro k&egrave;m belt
-                      .order-main-price 2 x 45,000 &#x20AB;
-                    a.order-close(href='product.html')
-                      i.far.fa-times-circle
-                li.item-order
-                  .order-wrap
-                    a.order-img(href='product.html')
-                      img(src='./assets/img/product/product1.jpg', alt='')
-                    .order-main
-                      a.order-main-name(href='product.html') &Aacute;o s&#x1A1; mi  caro k&egrave;m belt caro k&egrave;m belt &Aacute;o s&#x1A1; mi caro k&egrave;m belt
-                      .order-main-price 2 x 45,000 &#x20AB;
-                    a.order-close(href='product.html')
-                      i.far.fa-times-circle
-                li.item-order
-                  .order-wrap
-                    a.order-img(href='product.html')
-                      img(src='./assets/img/product/product1.jpg', alt='')
-                    .order-main
-                      a.order-main-name(href='product.html') &Aacute;o s&#x1A1; mi  caro k&egrave;m belt caro k&egrave;m belt &Aacute;o s&#x1A1; mi caro k&egrave;m belt
-                      .order-main-price 2 x 45,000 &#x20AB;
-                    a.order-close(href='product.html')
-                      i.far.fa-times-circle
-              .total-money T&#x1ED5;ng c&#x1ED9;ng: 120.000&dstrok;
-              a.btn.btn--default.cart-btn(href='cart.html') Xem gi&#x1ECF; h&agrave;ng
-              a.btn.btn--default.cart-btn.orange(href='pay.html') Thanh to&aacute;n
-              // norcart
-              // <img class="header__cart-img-nocart" src="http://www.giaybinhduong.com/images/empty-cart.png" alt="">
-      // Menu
-      .header__nav
-        ul.header__nav-list
-          li.header__nav-item.nav__search
-            .nav__search-wrap
-              input.nav__search-input(type='text', name='', id='', placeholder='Tìm sản phẩm...')
-            .nav__search-btn
-              i.fas.fa-search
-          li.header__nav-item.authen-form
-            a.header__nav-link(href='#') T&agrave;i Kho&#x1EA3;n
-            ul.sub-nav
-              li.sub-nav__item
-                a.sub-nav__link(href='#my-Login') &Dstrok;&abreve;ng Nh&#x1EAD;p
-              li.sub-nav__item
-                a.sub-nav__link(href='#my-Register') &Dstrok;&abreve;ng K&iacute;
-          li.header__nav-item.index
-            a.header__nav-link(href='index.html') Trang ch&#x1EE7;
-          li.header__nav-item
-            a.header__nav-link(href='#') Gi&#x1EDB;i Thi&#x1EC7;u
-          li.header__nav-item
-            a.header__nav-link(href='#') S&#x1EA3;n Ph&#x1EA9;m
-            .sub-nav-wrap.grid.wide
-              ul.sub-nav
-                li.sub-nav__item
-                  a.sub-nav__link.heading(href='') N&#x1B0;&#x1EDB;c hoa
-                li.sub-nav__item
-                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c to&agrave;n th&acirc;n vvv
-                li.sub-nav__item
-                  a.sub-nav__link(href='listProduct.html') Khuy&#x1EBF;n m&atilde;i
-                li.sub-nav__item
-                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c c&#x1A1; th&#x1EC3;
-                li.sub-nav__item
-                  a.sub-nav__link(href='listProduct.html') N&#x1B0;&#x1EDB;c hoa
-                li.sub-nav__item
-                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c mi&#x1EC7;ng
-              ul.sub-nav
-                li.sub-nav__item
-                  a.sub-nav__link.heading(href='') N&#x1B0;&#x1EDB;c hoa
-                li.sub-nav__item
-                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c to&agrave;n th&acirc;n vvv
-                li.sub-nav__item
-                  a.sub-nav__link(href='listProduct.html') Khuy&#x1EBF;n m&atilde;i
-                li.sub-nav__item
-                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c c&#x1A1; th&#x1EC3;
-                li.sub-nav__item
-                  a.sub-nav__link(href='listProduct.html') N&#x1B0;&#x1EDB;c hoa
-                li.sub-nav__item
-                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c mi&#x1EC7;ng
-              ul.sub-nav
-                li.sub-nav__item
-                  a.sub-nav__link.heading(href='') N&#x1B0;&#x1EDB;c hoa
-                li.sub-nav__item
-                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c to&agrave;n th&acirc;n vvv
-                li.sub-nav__item
-                  a.sub-nav__link(href='listProduct.html') Khuy&#x1EBF;n m&atilde;i
-                li.sub-nav__item
-                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c c&#x1A1; th&#x1EC3;
-                li.sub-nav__item
-                  a.sub-nav__link(href='listProduct.html') N&#x1B0;&#x1EDB;c hoa
-                li.sub-nav__item
-                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c mi&#x1EC7;ng
-              ul.sub-nav
-                li.sub-nav__item
-                  a.sub-nav__link.heading(href='') N&#x1B0;&#x1EDB;c hoa
-                li.sub-nav__item
-                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c to&agrave;n th&acirc;n vvv
-                li.sub-nav__item
-                  a.sub-nav__link(href='listProduct.html') Khuy&#x1EBF;n m&atilde;i
-                li.sub-nav__item
-                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c c&#x1A1; th&#x1EC3;
-                li.sub-nav__item
-                  a.sub-nav__link(href='listProduct.html') N&#x1B0;&#x1EDB;c hoa
-                li.sub-nav__item
-                  a.sub-nav__link(href='listProduct.html') Ch&abreve;m s&oacute;c mi&#x1EC7;ng
-          li.header__nav-item
-            a.header__nav-link(href='news.html') Tin T&#x1EE9;c
-          li.header__nav-item
-            a.header__nav-link(href='contact.html') Li&ecirc;n H&#x1EC7;
+nav.navbar.navbar-expand-lg.navbar-dark.bg-green.py-2
+      .container
+        // Brand Logo and Name
+        a.navbar-brand.d-flex.align-items-center(href='#')
+          img.rounded-circle.me-2(src='https://via.placeholder.com/40', alt='Logo')
+          .brand-text
+            span.fw-bold HASAKI.vn
+            br
+            small Ch&#x1EA5;t l&#x1B0;&#x1EE3;ng th&#x1EAD;t - Gi&aacute; tr&#x1ECB; th&#x1EAD;t!
+        // Toggle button for mobile
+        button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarContent', aria-controls='navbarContent', aria-expanded='false', aria-label='Toggle navigation')
+          span.navbar-toggler-icon
+        // Navbar content
+        #navbarContent.collapse.navbar-collapse
+          ul.navbar-nav.ms-auto.mb-2.mb-lg-0.align-items-center
+            // Search bar with icon inside input
+            li.nav-item.mx-2.search-bar.position-relative
+              form.position-relative
+                input#searchInput.form-control.rounded-pill(type='search', placeholder='Tìm kiếm sản phẩm...', aria-label='Search', oninput='showSuggestions()')
+                i.bi.bi-search.position-absolute.search-icon
+                // Suggestions Box
+                #suggestionsBox.suggestions-box.d-none
+                  ul
+                    li
+                      img(src='https://via.placeholder.com/30', alt='Deal 2K')
+                      | Deal 2K &aacute;p d&#x1EE5;ng CN215 Qu&#x1EA3;ng B&igrave;nh
+                    li
+                      img(src='https://via.placeholder.com/30', alt='Mua Gì Cũng Rẻ')
+                      | Mua G&igrave; C&utilde;ng R&#x1EBB; - D&#x1B0;&#x1EDB;i 99K
+                    li
+                      img(src='https://via.placeholder.com/30', alt='Mua 2 Giảm Nửa Giá')
+                      | Mua 2 Gi&#x1EA3;m N&#x1EED;a Gi&aacute;
+                    li
+                      img(src='https://via.placeholder.com/30', alt='Giảm 200K')
+                      | Gi&#x1EA3;m 200K/G&oacute;i Tri&#x1EC7;t L&ocirc;ng Diode Laser
+                    li
+                      img(src='https://via.placeholder.com/30', alt='Chống Nắng Da Mặt')
+                      | Ch&#x1ED1;ng N&#x1EAF;ng Da M&#x1EB7;t
+                    li
+                      img(src='https://via.placeholder.com/30', alt='Làm Sạch Da')
+                      | L&agrave;m S&#x1EA1;ch Da
+            // User Account
+            li.nav-item.dropdown
+              a#navbarDropdown.nav-link.text-white.d-flex.align-items-center(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false')
+                i.bi.bi-person
+                |  Ch&agrave;o H&agrave;o 
+                i.bi.bi-chevron-down.ms-1
+              ul.dropdown-menu.dropdown-menu-end(aria-labelledby='navbarDropdown')
+                li
+                  a.dropdown-item(href='#') T&agrave;i kho&#x1EA3;n c&#x1EE7;a t&ocirc;i
+                li
+                  a.dropdown-item(href='#') &Dstrok;&abreve;ng xu&#x1EA5;t
+            // Store Locator
+            li.nav-item.mx-2
+              a.nav-link.text-white(href='#')
+                i.bi.bi-shop
+                |  H&#x1EC7; th&#x1ED1;ng c&#x1EED;a h&agrave;ng
+            // Customer Support
+            li.nav-item.mx-2
+              a.nav-link.text-white(href='#')
+                i.bi.bi-telephone
+                |  H&#x1ED7; tr&#x1EE3; kh&aacute;ch h&agrave;ng
+            // Cart with notification
+            li.nav-item.mx-2
+              a.nav-link.position-relative.text-white.cart-icon(href='#')
+                i.fa-solid.fa-cart-shopping
+                span.position-absolute.top-0.start-100.translate-middle.badge.rounded-pill.bg-danger 2

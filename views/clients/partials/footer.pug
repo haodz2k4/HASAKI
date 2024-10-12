@@ -1,111 +1,70 @@
-.footer
-  .grid.wide
-    .row
-      .col.l-3.m-6.s-12
-        h3.footer__title Menu
-        ul.footer__list
-          li.footer__item
-            a.footer__link(href='#') Trang &dstrok;i&#x1EC3;m
-          li.footer__item
-            a.footer__link(href='#') Ch&abreve;m s&oacute;c da
-          li.footer__item
-            a.footer__link(href='#') Ch&abreve;m s&oacute;c t&oacute;c
-          li.footer__item
-            a.footer__link(href='#') N&#x1B0;&#x1EDB;c hoa
-          li.footer__item
-            a.footer__link(href='#') Ch&abreve;m s&oacute;c to&agrave;n th&acirc;n 
-      .col.l-3.m-6.s-12
-        h3.footer__title H&#x1ED7; tr&#x1EE3; kh&aacute;ch h&agrave;ng
-        ul.footer__list
-          li.footer__item
-            a.footer__link(href='#') H&#x1B0;&#x1EDB;ng d&#x1EAB;n mua h&agrave;ng
-          li.footer__item
-            a.footer__link(href='#') Gi&#x1EA3;i &dstrok;&aacute;p th&#x1EAF;c m&#x1EAF;c
-          li.footer__item
-            a.footer__link(href='#') Ch&iacute;nh s&aacute;ch mua h&agrave;ng
-          li.footer__item
-            a.footer__link(href='#') Ch&iacute;nh s&aacute;ch &dstrok;&#x1ED5;i tr&#x1EA3;
-      .col.l-3.m-6.s-12
-        h3.footer__title Li&ecirc;n h&#x1EC7;
-        ul.footer__list
-          li.footer__item
-            span.footer__text
-              i.fas.fa-map-marked-alt
-              |  319 C16 L&yacute; Th&#x1B0;&#x1EDD;ng Ki&#x1EC7;t, Ph&#x1B0;&#x1EDD;ng 15, Qu&#x1EAD;n 11, Tp.HCM
-          li.footer__item
-            a.footer__link(href='#')
-              i.fas.fa-phone
-              |  076 922 0162
-          li.footer__item
-            a.footer__link(href='#')
-              i.fas.fa-envelope
-              |  phuonggiang150@gmail.com
-          li.footer__item
-            .social-group
-              a.social-item(href='#')
-                i.fab.fa-facebook-f
-              a.social-item(href='#')
-                i.fab.fa-twitter
-              a.social-item(href='#')
-                i.fab.fa-pinterest-p
-              a.social-item(href='#')
-                i.fab.fa-invision
-              a.social-item(href='#')
-                i.fab.fa-youtube
-      .col.l-3.m-6.s-12
-        h3.footer__title &Dstrok;&abreve;ng k&iacute;
-        ul.footer__list
-          li.footer__item
-            span.footer__text &Dstrok;&abreve;ng k&yacute; &dstrok;&#x1EC3; nh&#x1EAD;n &dstrok;&#x1B0;&#x1EE3;c &dstrok;&#x1B0;&#x1EE3;c th&ocirc;ng tin &#x1B0;u &dstrok;&atilde;i m&#x1EDB;i nh&#x1EA5;t t&#x1EEB; ch&uacute;ng t&ocirc;i.
-          li.footer__item
-            .send-email
-              input.send-email__input(type='email', placeholder='Nhập Email...')
-              a.send-email__link(href='#')
-                i.fas.fa-paper-plane
-  .copyright
-    span.footer__text
-      | &copy; B&#x1EA3;n quy&#x1EC1;n thu&#x1ED9;c v&#x1EC1; 
-      a.footer__link(href='#')  Ph&#x1B0;&#x1A1;ng Giang
-// Modal Form
-.ModalForm
-  #my-Register.modal
-    a.overlay-close(href='#')
-    .authen-modal.register
-      h3.authen-modal__title &Dstrok;&abreve;ng K&iacute;
-      .form-group
-        label.form-label(for='account') H&#x1ECD; T&ecirc;n
-        input#account.form-control(name='account', type='text')
-        span.form-message Kh&ocirc;ng h&#x1EE3;p l&#x1EC7; !
-      .form-group
-        label.form-label(for='password') T&agrave;i kho&#x1EA3;n Email *
-        input#password.form-control(name='password', type='text')
-        span.form-message
-      .form-group
-        label.form-label(for='password') M&#x1EAD;t kh&#x1EA9;u *
-        input#password.form-control(name='password', type='text')
-        span.form-message
-      .form-group
-        label.form-label(for='password') Nh&#x1EAD;p l&#x1EA1;i m&#x1EAD;t kh&#x1EA9;u *
-        input#password.form-control(name='password', type='text')
-        span.form-message
-      .authen__btns
-        .btn.btn--default &Dstrok;&abreve;ng K&iacute;
-  #my-Login.modal
-    a.overlay-close(href='#')
-    .authen-modal.login
-      h3.authen-modal__title &Dstrok;&abreve;ng Nh&#x1EAD;p
-      .form-group
-        label.form-label(for='account') &Dstrok;&#x1ECB;a ch&#x1EC9; email *
-        input#account.form-control(name='account', type='text')
-        span.form-message T&agrave;i kho&#x1EA3;n kh&ocirc;ng ch&iacute;nh x&aacute;c !
-      .form-group
-        label.form-label(for='password') M&#x1EAD;t kh&#x1EA9;u *
-        input#password.form-control(name='password', type='text')
-        span.form-message
-      .authen__btns
-        .btn.btn--default &Dstrok;&abreve;ng Nh&#x1EAD;p
-        input.authen-checkbox(type='checkbox')
-        label.form-label Ghi nh&#x1EDB; m&#x1EAD;t kh&#x1EA9;u
-      a.authen__link Qu&ecirc;n m&#x1EAD;t kh&#x1EA9;u ?
-  #upTop.up-top(onclick='goToTop()')
-    i.fas.fa-chevron-up
+footer.footer.spad
+      .footer-container
+        .row
+          .col-lg-3.col-md-6.col-sm-6
+            .footer__about
+              .footer__about__logo
+                a(href='./index.html')
+                  img(src='img/logo.png', alt='')
+              ul
+                li Hotline: 1800 6324
+                li (mi&#x1EC5;n ph&iacute; , 08-22h k&#x1EC3; c&#x1EA3; T7, CN)
+                li Email: HASAKI@Gmail.com
+          .col-lg-4.col-md-6.col-sm-6.offset-lg-1
+            .footer__widget
+              h6 V&#x1EC1; HASAKI.VN
+              ul
+                li
+                  a(href='#') Gi&#x1EDB;i thi&#x1EC7;u Hasaki.vn
+                li
+                  a(href='#') Ch&iacute;nh s&aacute;ch b&#x1EA3;o m&#x1EAD;t
+                li
+                  a(href='#') &Dstrok;i&#x1EC1;u kho&#x1EA3;n s&#x1EED; d&#x1EE5;ng
+                li
+                  a(href='#') Li&ecirc;n h&#x1EC7;
+                li
+                  a(href='#') G&#x1EED;i y&ecirc;u c&#x1EA7;u h&#x1ED7; tr&#x1EE3;
+              |  
+              ul
+                li
+                  a(href='#') C&aacute;c c&acirc;u h&#x1ECF;i th&#x1B0;&#x1EDD;ng g&#x1EB7;p
+                li
+                  a(href='#') G&#x1EED;i y&ecirc;u c&#x1EA7;u h&#x1ED7; tr&#x1EE3;
+                li
+                  a(href='#') H&#x1B0;&#x1EDB;ng d&#x1EAB;n &dstrok;&#x1EB7;t h&agrave;ng
+                li
+                  a(href='#') Ph&#x1B0;&#x1A1;ng th&#x1EE9;c v&#x1EAD;n chuy&#x1EC3;n
+                li
+                  a(href='#') Ch&iacute;nh s&aacute;ch &dstrok;&#x1ED5;i tr&#x1EA3;
+          .col-lg-4.col-md-12
+            .footer__widget
+              h6 Tham gia b&#x1EA3;n tin c&#x1EE7;a ch&uacute;ng t&ocirc;i ngay
+              p
+                | Nh&#x1EAD;n th&ocirc;ng b&aacute;o qua E-mail v&#x1EC1; c&aacute;c s&#x1EA3;n ph&#x1EA9;m m&#x1EDB;i nh&#x1EA5;t v&agrave; c&aacute;c &#x1B0;u &dstrok;&atilde;i &dstrok;&#x1EB7;c bi&#x1EC7;t c&#x1EE7;a ch&uacute;ng t&ocirc;i.
+              form(action='#')
+                input(type='text', placeholder='Nhập địa chỉ email của bạn')
+                button.site-btn(type='submit') &Dstrok;&abreve;ng k&yacute;
+              .footer__widget__social
+                a(href='#')
+                  i.fa-brands.fa-facebook
+                a(href='#')
+                  i.fa-brands.fa-tiktok
+                a(href='#')
+                  i.fa-brands.fa-twitter
+                a(href='#')
+                  i.fa-brands.fa-instagram
+        .row
+          .col-lg-12
+            .footer__copyright
+              .footer__copyright__text
+                p
+                  // Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+                  | Copyright &copy;
+                  script.
+                    document.write(new Date().getFullYear());
+                  |  T&#x1EA5;t c&#x1EA3; c&aacute;c quy&#x1EC1;n &dstrok;&#x1B0;&#x1EE3;c b&#x1EA3;o l&#x1B0;u | M&#x1EAB;u n&agrave;y &dstrok;&#x1B0;&#x1EE3;c t&#x1EA1;o ra 
+                  i.fa.fa-heart(aria-hidden='true')
+                  |  b&#x1EDF;i 
+                  a(href='https://colorlib.com', target='_blank') HASAKI
+                .footer__copyright__payment
+                  img(src='img/payment-item.png', alt='')
