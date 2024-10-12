@@ -39,17 +39,28 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-green.py-2
                     li
                       img(src='https://via.placeholder.com/30', alt='Làm Sạch Da')
                       | L&agrave;m S&#x1EA1;ch Da
-            // User Account
-            li.nav-item.dropdown
-              a#navbarDropdown.nav-link.text-white.d-flex.align-items-center(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false')
-                i.bi.bi-person
-                |  Ch&agrave;o H&agrave;o 
-                i.bi.bi-chevron-down.ms-1
-              ul.dropdown-menu.dropdown-menu-end(aria-labelledby='navbarDropdown')
-                li
-                  a.dropdown-item(href='#') T&agrave;i kho&#x1EA3;n c&#x1EE7;a t&ocirc;i
-                li
-                  a.dropdown-item(href='#') &Dstrok;&abreve;ng xu&#x1EA5;t
+            if user 
+             li.nav-item.dropdown
+               a#navbarDropdown.nav-link.text-white.d-flex.align-items-center(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false')
+                 i.bi.bi-person
+                 |  Ch&agrave;o H&agrave;o 
+                 i.bi.bi-chevron-down.ms-1
+               ul.dropdown-menu.dropdown-menu-end(aria-labelledby='navbarDropdown')
+                 li
+                   a.dropdown-item(href='#') T&agrave;i kho&#x1EA3;n c&#x1EE7;a t&ocirc;i
+                 li
+                   a.dropdown-item(href='#') &Dstrok;&abreve;ng xu&#x1EA5;t
+            else 
+             li.nav-item.dropdown
+               a#navbarDropdown.nav-link.text-white.d-flex.align-items-center(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false')
+                 i.bi.bi-person
+                 |  Đăng ký / Đăng nhập 
+                 i.bi.bi-chevron-down.ms-1
+               ul.dropdown-menu.dropdown-menu-end(aria-labelledby='navbarDropdown')
+                 li
+                   a.dropdown-item(href='/users/register') Đăng ký 
+                 li
+                   a.dropdown-item(href='/users/login') Đăng nhập 
             // Store Locator
             li.nav-item.mx-2
               a.nav-link.text-white(href='#')
