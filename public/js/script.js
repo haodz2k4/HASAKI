@@ -113,7 +113,7 @@ if (searchInput) {
 
 
 const timeOutAlert = document.querySelector("[timeout-alert]");
-console.log(timeOutAlert)
+
 if(timeOutAlert){
   setTimeout(() => {
     timeOutAlert.classList.add("d-none")

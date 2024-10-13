@@ -4,6 +4,7 @@ import { Request, Response } from "express";
 import { RenderError } from "../../utils/error";
 import { generateUserAccessToken, generateUserRefreshToken } from "../../helpers/token.helper";
 import { ApiError } from "../../api/utils/error";
+import { sendMail } from "../../helpers/mail.helper";
 
 
 //[GET] "/users/login"
@@ -62,9 +63,11 @@ export const forgotPassword = catchAsync(async (req: Request, res: Response) => 
 //[POST] "/users/forgot-password"
 export const forgotPasswordPost = catchAsync(async (req: Request, res: Response) => {
     const {email} = req.body;
+    
     const user = await userModel.findOne({email, deleted: false});
     if(!user){
         throw new RenderError(401,"Email không tồn tại");
     }
+    await sendMail(email,"VUI LÒNG LẤY LẠI MẬT KHẨU",{text: "Mã Otp của bạn là"})
     res.redirect("/users/verify-otp")
 })

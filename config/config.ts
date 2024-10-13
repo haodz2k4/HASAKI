@@ -20,6 +20,13 @@ export default {
 
         jwt_refresh_secret: process.env.JWT_USER_REFRESH_SECRET,
         jwt_refresh_expire: process.env.JWT_USER_REFRESH_EXPIRE
+    },
+    mail: {
+        from: process.env.SMTP_FROM,
+        auth: {
+            user: process.env.SMTP_USERNAME,
+            pass: process.env.SMTP_PASS
+        }
     }
 
 }
