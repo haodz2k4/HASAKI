@@ -9,4 +9,5 @@ router
     .route('/register')
     .get(controller.register)
     .post(controller.registerPost)
+router.post("/logout",controller.logout)
 export default router

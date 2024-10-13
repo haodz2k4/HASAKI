@@ -45,3 +45,10 @@ export const registerPost = catchAsync(async (req: Request, res: Response) => {
     req.flash('success','Đăng ký thành công')
     res.redirect("/users/login")
 })
+
+//[POST] "/users/logout"
+export const logout = catchAsync(async (req: Request, res: Response) => {
+    res.clearCookie('accessToken');
+    res.clearCookie('refreshToken');
+    res.redirect("/users/login")
+})

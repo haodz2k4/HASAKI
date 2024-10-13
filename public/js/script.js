@@ -52,3 +52,16 @@ function resetAutoSlide() {
 
 
 autoSlide();
+
+
+const btnLogout = document.querySelector("[btn-logout]");
+if(btnLogout){
+  btnLogout.addEventListener("click",() => {
+    const isConfirm = confirm("Bạn có chắc muốn đăng xuất không")
+    if(isConfirm){
+      const formLogout = document.querySelector("[form-logout]")
+      formLogout.submit();
+    }
+    
+  })
+}
