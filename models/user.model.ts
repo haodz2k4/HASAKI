@@ -21,7 +21,7 @@ export interface IUserMethods {
 
 export interface IUserDocument extends IUser, IUserMethods, Document {}
 
-// Định nghĩa Schema với các phương thức
+
 const userSchema = new Schema<IUserDocument, Model<IUserDocument>, IUserMethods>({
     fullName: { type: String, required: true },
     email: {
@@ -60,12 +60,11 @@ const userSchema = new Schema<IUserDocument, Model<IUserDocument>, IUserMethods>
     },
     phone: {
         type: String,
-        required: true,
         minlength: 8,
         maxlength: 10,
         validate: {
             validator: function (val: string): boolean {
-                return isMobilePhone(val, 'vi-VN'); // Specify locale if needed
+                return isMobilePhone(val, 'vi-VN');
             },
             message: 'Invalid Mobile Form'
         }

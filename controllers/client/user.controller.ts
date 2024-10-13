@@ -34,3 +34,8 @@ export const loginPost = catchAsync(async (req: Request, res: Response) => {
     res.redirect("back");
 
 })
+
+//[GET] "/users/register"
+export const register = catchAsync(async (req: Request, res: Response) => {
+    res.render("clients/pages/auth/register.pug")
+})

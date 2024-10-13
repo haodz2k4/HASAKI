@@ -1,0 +1,31 @@
+extends ../../layouts/auth.pug 
+
+
+block main 
+    .wrapper
+      img(src='img.png', alt='')
+      h2.text-right Chào mừng 
+      .form-wrapper.register
+        form(action='')
+          h2 Đăng ký tài khoản 
+          .input-box
+            span.icon
+              ion-icon(name='person')
+            input(type='text', placeholder='Họ và tên của bạn',name='fullName' required='')
+          .input-box
+            span.icon
+              ion-icon(name='mail')
+            input(type='email', placeholder='Email của bạn',name='email', required='')
+          .input-box
+            span.icon
+              ion-icon(name='phone')
+            input(type='phone', placeholder='Số điện thoại của bạn',name='phone', required='')
+          .input-box
+            span.icon
+              ion-icon(name='lock-closed')
+            input(type='password', placeholder='Mật khẩu của bạn', name='password' required='')
+          button(type='submit') Đăng ký 
+          .sign-link
+            p
+              | Bạn đã có tài khoản 
+              a(href='/users/login',) Đăng nhập 

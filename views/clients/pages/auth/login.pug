@@ -27,24 +27,5 @@ block main
           .sign-link
             p
               | Bạn chưa có tài khoản 
-              a(href='#', onclick='registerActive()') Đăng ký 
-      .form-wrapper.register
-        form(action='')
-          h2 Registration
-          .input-box
-            span.icon
-              ion-icon(name='person')
-            input(type='text', placeholder='Full Name', required='')
-          .input-box
-            span.icon
-              ion-icon(name='mail')
-            input(type='email', placeholder='Email', required='')
-          .input-box
-            span.icon
-              ion-icon(name='lock-closed')
-            input(type='password', placeholder='Password', required='')
-          button(type='submit') Register
-          .sign-link
-            p
-              | Bạn đã có tài khoản 
-              a(href='#', onclick='loginActive()') Đăng ký 
+              a(href='/users/register') Đăng ký 
+      

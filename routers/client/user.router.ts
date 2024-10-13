@@ -5,4 +5,7 @@ router
     .route("/login")
     .get(controller.login)
     .post(controller.loginPost)
+router
+    .route('/register')
+    .get(controller.register)
 export default router
