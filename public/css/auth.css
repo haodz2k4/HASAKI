@@ -164,4 +164,7 @@ button {
 .message-error {
     background-color: red;
 }
+.d-none {
+    display: none;
+}
 /*END SHOW ALERT*/

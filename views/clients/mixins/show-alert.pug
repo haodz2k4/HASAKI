@@ -1,8 +1,8 @@
 mixin alertSuccess(messages)
     - if (messages.success)
-        .message.message-success
+        .message.message-success(timeout-alert)
             | #{messages.success} 
 mixin alertError(messages)
     -if (messages.error)
-        .message.message-error 
+        .message.message-error(timeout-alert)
             | #{messages.error}

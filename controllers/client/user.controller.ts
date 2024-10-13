@@ -64,7 +64,7 @@ export const forgotPasswordPost = catchAsync(async (req: Request, res: Response)
     const {email} = req.body;
     const user = await userModel.findOne({email, deleted: false});
     if(!user){
-        throw new ApiError(401,"Email không tồn tại");
+        throw new RenderError(401,"Email không tồn tại");
     }
     res.redirect("/users/verify-otp")
 })

@@ -19,12 +19,8 @@ let currentSlide = 0;
 let slideInterval;
 
 
-function showSlide(index) {
-  slides.forEach(slide => slide.classList.remove('active'));
-  slides[index].classList.add('active');
-}
-
-if(prevBtn){
+if(slides.length > 0) {
+  if(prevBtn){
     prevBtn.addEventListener('click', () => {
     currentSlide = (currentSlide === 0) ? slides.length - 1 : currentSlide - 1;
     showSlide(currentSlide);
@@ -41,21 +37,29 @@ if(nextBtn){
     });
 }
 
-
-function autoSlide() {
-  slideInterval = setInterval(() => {
-    currentSlide = (currentSlide === slides.length - 1) ? 0 : currentSlide + 1;
-    showSlide(currentSlide);
-  }, 3000);
-}
-
-function resetAutoSlide() {
-  clearInterval(slideInterval);
+  function showSlide(index) {
+    slides.forEach(slide => slide.classList.remove('active'));
+    slides[index].classList.add('active');
+  }
+  function autoSlide() {
+    slideInterval = setInterval(() => {
+      currentSlide = (currentSlide === slides.length - 1) ? 0 : currentSlide + 1;
+      showSlide(currentSlide);
+    }, 3000);
+  }
+  
+  function resetAutoSlide() {
+    clearInterval(slideInterval);
+    autoSlide();
+  }
+  
+  
   autoSlide();
 }
 
 
-autoSlide();
+
+
 
 //Logout feature
 const btnLogout = document.querySelector("[btn-logout]");
@@ -105,4 +109,13 @@ if (searchInput) {
       console.error('Error fetching suggestions:', error);
     }
   });
+}
+
+
+const timeOutAlert = document.querySelector("[timeout-alert]");
+console.log(timeOutAlert)
+if(timeOutAlert){
+  setTimeout(() => {
+    timeOutAlert.classList.add("d-none")
+  }, 3000)
 }

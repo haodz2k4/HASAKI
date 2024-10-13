@@ -724,3 +724,21 @@
 }
 /* Footer end */
 
+/*SHOW ALERT*/
+.message {
+    width: 100%;
+    border: solid 1px;
+    text-align: center;
+    color: black;
+    font-size: 20px;
+    border-radius: 10px;
+}
+.message-success {
+    background-color: greenyellow;
+    
+}
+
+.message-error {
+    background-color: red;
+}
+/*END SHOW ALERT*/
