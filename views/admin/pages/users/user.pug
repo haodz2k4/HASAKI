@@ -1,4 +1,55 @@
-extends ../../layouts/default.pug 
 
+extends ../../layouts/default.pug 
+include ../../mixins/pagination.pug 
 block main 
-    h1 Quản lý người dủng 
+    h1.text-center(style='margin-top: 30px;font-weight: 30px;')
+     i.fas.fa-users
+     |  Quản lý người dùng 
+    .my-tool
+      
+
+    .table-responsive(table-manage)
+      table.table.table-striped
+        thead.thead-dark
+          tr
+            th 
+              input(type="checkbox", name="")
+            th #
+            th Họ và tên 
+            th Ảnh đại diện  
+            th Email 
+            th Số điện thoại  
+            th Ngày sinh 
+            th giới tính 
+            th Trạng thái
+            th Ngày tạo  
+            th Người tạo 
+            th Thao tác 
+        tbody
+          each item, index in users  
+            tr
+              td 
+                input(type="checkbox",value=item.id, name="")
+              td #{pagination.skip + 1 + index}
+              td #{item.fullName}
+              td 
+                img(src=`${item.avatar ? item.avatar : 'https://via.placeholder.com/70x70'}`, alt="" style='width: 70px; height: 70px')
+              td #{item.email}
+              td #{item.phone}
+              td #{item.birthDate ? item.birthDate : "Không"}
+              td #{item.gender ? item.gender : "không"}
+              td 
+                span.badge(class=`${item.status === "active" ? "badge-success" : "badge-danger"}` btn-ch-status=item.id status=item.status endpoint='api/products' style='padding: 10px;') #{item.status}
+              td !{moment(item.createdAt).format(' dddd,DD/MM/YYYY </br> HH:mm:ss')}  
+              
+              td
+                strong Hồ Sơn Hào 
+              td
+                a(href=`/admin/products/update/${item.id}`).btn.btn-sm.btn-info
+                  i.fas.fa-edit
+                button.btn.btn-sm.btn-danger
+                  i.fas.fa-trash 
+                a(href=`/admin/products/detail/${item.id}`).btn.btn-sm.btn-warning 
+                  i.fa-solid.fa-magnifying-glass
+    +pagination(pagination)
+    
