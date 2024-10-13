@@ -3,11 +3,12 @@ import { catchAsync } from "../../utils/catchAsync";
 import { Request, Response } from "express";
 import { RenderError } from "../../utils/error";
 import { generateUserAccessToken, generateUserRefreshToken } from "../../helpers/token.helper";
+import { ApiError } from "../../api/utils/error";
 
 
 //[GET] "/users/login"
 export const login = catchAsync(async (req: Request, res: Response) => {
-    res.render("clients/pages/auth/login.pug")
+    res.render("clients/pages/users/login.pug")
 })
 
 //[POST] "/users/login"
@@ -35,7 +36,7 @@ export const loginPost = catchAsync(async (req: Request, res: Response) => {
 
 //[GET] "/users/register"
 export const register = catchAsync(async (req: Request, res: Response) => {
-    res.render("clients/pages/auth/register.pug")
+    res.render("clients/pages/users/register.pug")
 })  
 
 //[POST] "/users/register"
@@ -51,4 +52,19 @@ export const logout = catchAsync(async (req: Request, res: Response) => {
     res.clearCookie('accessToken');
     res.clearCookie('refreshToken');
     res.redirect("/users/login")
+})
+
+//[GET] "/users/forgot-password"
+export const forgotPassword = catchAsync(async (req: Request, res: Response) => {
+    res.render("clients/pages/users/forgot-password.pug")
+})
+
+//[POST] "/users/forgot-password"
+export const forgotPasswordPost = catchAsync(async (req: Request, res: Response) => {
+    const {email} = req.body;
+    const user = await userModel.findOne({email, deleted: false});
+    if(!user){
+        throw new ApiError(401,"Email không tồn tại");
+    }
+    res.redirect("/users/verify-otp")
 })
