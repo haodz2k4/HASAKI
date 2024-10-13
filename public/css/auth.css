@@ -152,7 +152,7 @@ button {
     width: 100%;
     border: solid 1px;
     text-align: center;
-    color: white;
+    color: black;
     font-size: 20px;
     border-radius: 10px;
 }
@@ -164,3 +164,4 @@ button {
 .message-error {
     background-color: red;
 }
+/*END SHOW ALERT*/

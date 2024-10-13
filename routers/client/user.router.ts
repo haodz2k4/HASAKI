@@ -8,4 +8,5 @@ router
 router
     .route('/register')
     .get(controller.register)
+    .post(controller.registerPost)
 export default router
