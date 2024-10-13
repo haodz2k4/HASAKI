@@ -6,6 +6,55 @@ block main
      i.fas.fa-users
      |  Quản lý người dùng 
     .my-tool
+      .tool-container
+        .row.tool-section
+          form(action="").col-md-4.mb-3
+            .input-group
+              input.form-control(type='text', placeholder='Tìm kiếm sản phẩm',name='keyword', value=keyword)
+              .input-group-append
+                button.btn.btn-dark(type='submit') Tìm 
+          .col-md-4.mb-3
+            .btn-group(role='group', aria-label='Basic example')
+              each item in filters
+                button.btn.btn-outline-success(type='button' btn-select-filter=item.value style='width: 90px' class=`${item.selected ? 'active' : ""}`) #{item.name}
+                
+          .col-md-4.mb-3
+            select.form-control(form-select-sorting)
+              option(value='') Sắp Xếp Theo 
+        .row.tool-section
+          form(method="post" action="" form-change-multi).col-md-4.mb-3
+            .input-group
+              select.form-control
+                option Thay đổi nhiều
+                option(value="status-active") Hoạt động 
+                option(value="status-inactive") Không hoạt động 
+                option(value="highlighted-1") Nổi bậc 
+                option(value="highlighted-0") Không nổi bậc 
+                option(value="delete-true")  Xóa 
+              input(type="text", name='result').d-none 
+              .input-group-append
+                button.btn.btn-dark(type='submit') Áp dụng 
+          
+          .col-md-4.mb-3
+            .action-buttons.d-flex.justify-content-md-end
+              a(href="/admin/products/create").btn.btn-success
+                i.fa-solid.fa-plus 
+                |  Thêm 
+              button.btn.btn-warning(type='button') 
+                i.fa-solid.fa-square-plus
+                |  Thêm sll
+              button.btn.btn-secondary(type='button' btn-export-excel) 
+                i.fa-solid.fa-file-excel 
+                |  Xuất Excel 
+          form().col-md-4.mb-3
+            .input-group
+              select.form-control(select-limit)
+                option(value="5" selected=(pagination.limit === 5)) Giới hạn 5
+                option(value="10" selected=(pagination.limit === 10)) Giới hạn 10 
+                option(value="20" selected=(pagination.limit === 20)) Giới hạn 20
+                option(value="50" selected=(pagination.limit === 50)) Giới hạn 50 
+                option(value="100" selected=(pagination.limit === 100)) Giới hạn 100
+         
       
 
     .table-responsive(table-manage)

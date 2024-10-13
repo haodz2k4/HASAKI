@@ -12,7 +12,6 @@ export const products = catchAsync(async (req: Request, res: Response) => {
     const keyword = req.query.keyword as string 
     const filter: Record<string, unknown> = {deleted: false}
     if(keyword){
-        console.log(keyword)
         filter.title = new RegExp(keyword,"i") 
     }
     const minPrice = req.query.minPrice as string;
@@ -48,7 +47,7 @@ export const products = catchAsync(async (req: Request, res: Response) => {
     ])
     
     const status = req.query.status as string 
-    if(status as string){
+    if(status){
         filter.status = status 
         const index = filters.findIndex((item) => item.name === status)
         filters[index].selected = true 
