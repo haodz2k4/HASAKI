@@ -18,6 +18,6 @@ router
 router
     .route("/verify-otp")
     .get(controller.verifyOtp)
-
+    .post(controller.verifyOtpPost)
 router.post("/logout",controller.logout)
 export default router

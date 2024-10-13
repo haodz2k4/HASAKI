@@ -18,6 +18,7 @@ export interface IUser {
 export interface IUserMethods {
     isPasswordMatch(password: string): Promise<boolean>;
 }
+export const COLLECTION_USER_NAME = 'User'
 
 export interface IUserDocument extends IUser, IUserMethods, Document {}
 
@@ -86,4 +87,4 @@ userSchema.pre<IUserDocument>('save', async function (next) {
     next();
 });
 
-export default model<IUserDocument>('User', userSchema);
+export default model<IUserDocument>(COLLECTION_USER_NAME, userSchema);

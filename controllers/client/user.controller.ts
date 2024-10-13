@@ -8,7 +8,7 @@ import { sendMail } from "../../helpers/mail.helper";
 import {  readFileSync } from 'fs';
 import path from "path"
 import { generateRandomString } from '../../helpers/generate';
-
+import forgotPasswordModel from "../../models/forgot-password.model";
 
 //[GET] "/users/login"
 export const login = catchAsync(async (req: Request, res: Response) => {
@@ -77,6 +77,12 @@ export const forgotPasswordPost = catchAsync(async (req: Request, res: Response)
         .replace('{{fullName}}', user.fullName)
         .replace('{{otp}}',otp)
     await sendMail(email,"VUI LÒNG LẤY LẠI MẬT KHẨU",{html: htmlContent})
+    //save info to forgot password
+    await forgotPasswordModel.create({
+        email: email,
+        otp: otp,
+        expireIn: Date.now() + 3*60*1000    
+    })
     res.redirect("/users/verify-otp?email="+email)
 })
 
@@ -88,4 +94,21 @@ export const verifyOtp = catchAsync(async (req: Request, res: Response) => {
     })
 })
 
-//[GET] "/users/ve"
+//[POST] "/users/verify-otp"
+export const verifyOtpPost = catchAsync(async (req: Request, res: Response) => {
+    const {email, otp} = req.body;
+    const forgotPassword = await forgotPasswordModel.findOne({
+        email,
+        isUsed: false
+    })
+    console.log(forgotPassword)
+    if(!forgotPassword || !forgotPassword.isMatchOtp(otp)){
+        throw new RenderError(401,"Invalid otp")
+    }
+    Object.assign(forgotPassword,{
+        isUsed: true 
+    })
+    await forgotPassword.save()
+    req.flash('success','Xác thực')
+    res.redirect("/users/reset-password")
+})
