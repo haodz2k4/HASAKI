@@ -1,10 +1,13 @@
+
 import userModel from "../../models/user.model";
 import { catchAsync } from "../../utils/catchAsync";
 import { Request, Response } from "express";
 import { RenderError } from "../../utils/error";
 import { generateUserAccessToken, generateUserRefreshToken } from "../../helpers/token.helper";
-import { ApiError } from "../../api/utils/error";
 import { sendMail } from "../../helpers/mail.helper";
+import {  readFileSync } from 'fs';
+import path from "path"
+import { generateRandomString } from '../../helpers/generate';
 
 
 //[GET] "/users/login"
@@ -68,6 +71,11 @@ export const forgotPasswordPost = catchAsync(async (req: Request, res: Response)
     if(!user){
         throw new RenderError(401,"Email không tồn tại");
     }
-    await sendMail(email,"VUI LÒNG LẤY LẠI MẬT KHẨU",{text: "Mã Otp của bạn là"})
+    const otp = generateRandomString(6)
+    const filePath = path.join(__dirname,"../../templates/otp-email.html");
+    const htmlContent = readFileSync(filePath,"utf8")
+        .replace('{{fullName}}', user.fullName)
+        .replace('{{otp}}',otp)
+    await sendMail(email,"VUI LÒNG LẤY LẠI MẬT KHẨU",{html: htmlContent})
     res.redirect("/users/verify-otp")
 })
