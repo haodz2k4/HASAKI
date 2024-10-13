@@ -36,7 +36,7 @@ export const loginPost = catchAsync(async (req: Request, res: Response) => {
 //[GET] "/users/register"
 export const register = catchAsync(async (req: Request, res: Response) => {
     res.render("clients/pages/auth/register.pug")
-})
+})  
 
 //[POST] "/users/register"
 export const registerPost = catchAsync(async (req: Request, res: Response) => {

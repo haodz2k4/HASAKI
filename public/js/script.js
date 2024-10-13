@@ -1,3 +1,17 @@
+
+function getDomain() {
+  const domain = window.location.hostname;
+  const port = window.location.port;
+  const protocol = window.location.protocol;
+  let url = `${protocol}//${domain}`
+  if(port){
+    url += `:${port}`
+  }
+  return url
+}
+
+console.log(getDomain())
+
 const slides = document.querySelectorAll('.banner-slide');
 const prevBtn = document.querySelector('.prev');
 const nextBtn = document.querySelector('.next');
@@ -26,17 +40,7 @@ if(nextBtn){
         resetAutoSlide();
     });
 }
-function showSuggestions() {
-  const searchInput = document.getElementById('searchInput').value;
-  const suggestionsBox = document.getElementById('suggestionsBox');
 
-  if (searchInput.length > 0) {
-      suggestionsBox.classList.remove('d-none');
-  } else {
-      suggestionsBox.classList.add('d-none');
-  }
-}
-showSuggestions()
 
 function autoSlide() {
   slideInterval = setInterval(() => {
@@ -53,7 +57,7 @@ function resetAutoSlide() {
 
 autoSlide();
 
-
+//Logout feature
 const btnLogout = document.querySelector("[btn-logout]");
 if(btnLogout){
   btnLogout.addEventListener("click",() => {
@@ -64,4 +68,41 @@ if(btnLogout){
     }
     
   })
+}
+
+const searchInput = document.getElementById('searchInput');
+if (searchInput) {
+  searchInput.addEventListener("input", async () => {
+    const suggestionsBox = document.getElementById('suggestionsBox');
+    const value = searchInput.value.trim();
+
+    if (value.length === 0) {
+      suggestionsBox.innerHTML = '';
+      return;
+    }
+    console.log(getDomain())
+    try {
+     
+      const endpoint = `${getDomain()}/api/products?keyword=${value}&only=title thumbnail&limit=5`;
+      console.log(endpoint)
+      const response = await fetch(endpoint);
+      const data = await response.json();
+      console.log(data)
+      
+      if (data && data.products && data.products.length > 0) {
+        suggestionsBox.innerHTML = `<ul>` +
+          data.products.map(product => `
+            <li>
+              <img src="${product.thumbnail.length > 0 ? product.thumbnail[0] : 'https://via.placeholder.com/30' }" alt="${product.title}" width="30" height="30"/>
+              ${product.title}
+            </li>
+          `).join('') +
+          `</ul>`;
+      } else {
+        suggestionsBox.innerHTML = `<p>Không có gợi ý nào</p>`;
+      }
+    } catch (error) {
+      console.error('Error fetching suggestions:', error);
+    }
+  });
 }

@@ -19,12 +19,15 @@ export const getProducts = catchAsync(async (req: Request, res: Response) => {
     //sorting 
     const sortKey = req.query.sortKey as keyof IProduct
     const sortValue = req.query.sortValue as sortType;
+
+    const only = req.query.only as string || ""
     const products = await productService.getProducts({
         filter, 
         page, 
         limit,
         sortKey,
-        sortValue
+        sortValue,
+        selectFields: only
     })
     res.json(products)
 })
