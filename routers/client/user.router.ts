@@ -14,5 +14,10 @@ router
     .route('/forgot-password')
     .get(controller.forgotPassword)
     .post(controller.forgotPasswordPost)
+
+router
+    .route("/verify-otp")
+    .get(controller.verifyOtp)
+
 router.post("/logout",controller.logout)
 export default router

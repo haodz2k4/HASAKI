@@ -168,3 +168,12 @@ button {
     display: none;
 }
 /*END SHOW ALERT*/
+
+/**/
+.lock {
+    text-align: center;
+    font-size: 40px;
+    color: white;
+    position: relative;
+    top: 40px;
+}

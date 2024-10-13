@@ -77,5 +77,15 @@ export const forgotPasswordPost = catchAsync(async (req: Request, res: Response)
         .replace('{{fullName}}', user.fullName)
         .replace('{{otp}}',otp)
     await sendMail(email,"VUI LÒNG LẤY LẠI MẬT KHẨU",{html: htmlContent})
-    res.redirect("/users/verify-otp")
+    res.redirect("/users/verify-otp?email="+email)
 })
+
+//[GET] "/users/verify-otp"
+export const verifyOtp = catchAsync(async (req: Request, res: Response) => {
+    const {email} = req.query 
+    res.render("clients/pages/users/verify-otp.pug",{
+        email
+    })
+})
+
+//[GET] "/users/ve"

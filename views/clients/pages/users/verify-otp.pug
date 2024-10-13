@@ -1,0 +1,22 @@
+extends ../../layouts/auth.pug 
+include ../../mixins/show-alert.pug 
+block main 
+    .form-wrapper.register
+        +alertSuccess(messages)
+        +alertError(messages)
+        form(action='' method='POST')
+          i.fa-solid.fa-lock.lock
+          h2 Xác thực Otp
+          .input-box
+            span.icon
+              ion-icon(name='person')
+            input(type='email',name='email' required='', value=email disabled)
+          .input-box
+            span.icon
+              ion-icon(name='person')
+            input(type='otp', placeholder='Vui lòng điền mã otp',name='otp' required='')
+          button(type='submit') xác nhận 
+          .sign-link
+            p
+              | Bạn đã có tài khoản 
+              a(href='/users/login',) Đăng nhập 
