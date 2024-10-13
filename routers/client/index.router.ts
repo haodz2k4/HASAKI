@@ -4,8 +4,11 @@ import productRouter from "./product.router"
 import userRouter from "./user.router";
 //MDW 
 import { requireAuth } from "../../middleware/clients/auth.middleware";
+import userMiddleware from "../../middleware/clients/user.middleware";
 export default (app: Express) => {
+    app.use(userMiddleware)
     app.use("/",homeRouter) 
     app.use("/products",productRouter) 
     app.use("/users",userRouter) 
+    
 }

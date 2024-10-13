@@ -8,10 +8,10 @@ import userModel from "../../models/user.model";
 
 export const requireAuth = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     
-    if(!req.headers.authorization){
-        throw new RenderError(401,"Bạn chưa đăng nhập");
+    const token = req.cookies.accessToken;
+    if(!token){
+        throw new RenderError(401,"Vui lòng đăng nhập")
     }
-    const token = req.headers.authorization.split(" ")[1];
     const payload = verify(token,config.jwt_user.jwt_access_secret as string);
     const {id} = payload as JwtPayload; 
     const user = await userModel.findOne({_id: id, deleted: false});
