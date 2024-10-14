@@ -10,10 +10,6 @@ interface IContentEmail {
 }
 export const sendMail = async  (to: string, subject: string, content: IContentEmail) => {
     try {
-        console.log(to)
-        console.log(subject)
-        console.log(content)
-        console.log(config.mail)
         const info = await transporter.sendMail({
             from: config.mail.from,
             to,

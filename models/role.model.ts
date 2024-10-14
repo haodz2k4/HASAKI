@@ -11,7 +11,7 @@ export interface IRole {
 const roleSchema = new Schema<IRole>({
     title: {type: String ,required: true},
     description: String,
-    permissions:[{type: String,unique: true, default: []}],
+    permissions:[{type: String, default: []}],
     deleted: {
         type: Boolean,
         default: false
