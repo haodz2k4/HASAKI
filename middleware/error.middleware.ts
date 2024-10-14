@@ -8,18 +8,25 @@ export default (err: ErrorRequestHandler, req: Request, res: Response, next: Nex
     if(err instanceof RenderError){
         switch(err.statusCode) {
             case 404: 
-            res.render("common/404.pug", {
-                message: err.message
-            })
-            break;
+                res.render("common/404.pug", {
+                    message: err.message
+                })
+                break;
             case 401: 
                 req.flash('error',err.message)
                 res.redirect('back');
-            case 500: 
-            res.render("common/500.pug");
-            break;
+                break;
+            case 400: 
+                req.flash('error',err.message)
+                res.redirect('back');
+                break;
+            case 403: 
+                res.render('common/403.pug',{
+                    err: err.message
+                })
+                break;
             default: 
-            res.render("common/500.pug")
+            res.render("common/500.pug",{})
             break;
         }
     }else if (err instanceof ApiError){

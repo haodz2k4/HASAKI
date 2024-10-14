@@ -404,7 +404,7 @@
 	 margin-bottom: 40px;
 	 text-shadow: 6px 6px 10px #32243e;
 }
- .wrapper .container .text article button {
+ .wrapper .container .text article button, a {
 	 height: 40px;
 	 padding: 0 30px;
 	 border-radius: 50px;

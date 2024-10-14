@@ -16,6 +16,9 @@ import errorMiddleware from './middleware/error.middleware';
 import methodOverride from "method-override";
 import path from "path";
 import api from "./api/routers/index.router"
+import notFoundMdw from "./middleware/404.middleware"
+
+
 const bootstrap = () => {
     const app: Express = express();
 
@@ -68,7 +71,7 @@ const bootstrap = () => {
     // Router Admin and client 
     adminRouter(app);
     clientRouter(app);
-
+    
     // Redis
     redis;
 
@@ -79,6 +82,9 @@ const bootstrap = () => {
     getConnection();
 
     /*END API*/
+
+    //404 page
+    app.use('*', notFoundMdw)
     // Start server
     const port = config.port;
     app.listen(port, () => {

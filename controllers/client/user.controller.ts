@@ -26,7 +26,7 @@ export const loginPost = catchAsync(async (req: Request, res: Response) => {
         throw new RenderError(401,"Invalid email or password");
     }
     if(user.status === 'inactive'){
-        throw new RenderError(401,"Account has been locked");
+        throw new RenderError(403,`Tài khoản đã bị khóa`);
     }
     //Access Token 
     const accessToken = await generateUserAccessToken(user.id);
