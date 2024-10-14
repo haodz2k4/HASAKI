@@ -9,4 +9,9 @@ router
     .route("/create")
     .get(controller.create)
     .post(controller.createPost)
+
+router
+    .route("/update/:id")
+    .get(controller.update)
+    .patch(controller.updatePatch)
 export default router

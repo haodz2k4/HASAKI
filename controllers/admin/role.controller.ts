@@ -3,6 +3,7 @@ import { catchAsync } from "../../utils/catchAsync";
 import roleModel from "../../models/role.model";
 import paginationHelper from "../../helpers/pagination.helper";
 import { rangeSize } from "../../helpers/range-count";
+import { RenderError } from "../../utils/error";
 
 //[GET] "/admin/roles"
 export const roles = catchAsync(async (req: Request, res: Response) => {
@@ -58,5 +59,31 @@ export const create = catchAsync(async (req: Request, res: Response) => {
 export const createPost = catchAsync(async (req: Request, res: Response) => {
     const body = req.body;
     await roleModel.create(body);
+    res.redirect("/admin/roles")
+})
+
+//[GET] "/admin/roles/update/:id"
+export const update = catchAsync(async (req: Request, res: Response) => {
+    const {id} = req.params;
+    const role = await roleModel.findOne({
+        _id: id,
+        deleted: false
+    })
+    if(!role){
+        throw new RenderError(404,"Role is not found")
+    }
+    res.render("admin/pages/roles/update.pug",{
+        role
+    })
+})
+
+//[PATCH] "/admin/roles/update/:id"
+export const updatePatch = catchAsync(async (req: Request, res: Response) => {
+    const {id} = req.params;
+    const body = req.body
+    const role = await roleModel.findOneAndUpdate({_id: id, deleted: false},body);
+    if(!role){
+        throw new RenderError(404,"Role is not found");
+    }
     res.redirect("/admin/roles")
 })
