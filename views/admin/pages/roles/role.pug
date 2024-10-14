@@ -4,6 +4,24 @@ block main
     h1.text-center(style='margin-top: 30px;font-weight: 30px;')
      i.fa-solid.fa-boxes-stacked
      |  Quản lý vai trò 
+    .my-tool
+      .tool-container
+        .row.tool-section
+          form(action="").col-md-4.mb-3
+            .input-group
+              input.form-control(type='text', placeholder='Tìm kiếm sản phẩm',name='keyword', value=keyword)
+              .input-group-append
+                button.btn.btn-dark(type='submit') Tìm                 
+          
+          form(action="" from-range).col-md-4.mb-3
+            .d-flex
+                input.form-control.mr-2(type='number',placeholder='Lượng quyền từ', name='minCountPermission' value=minCountPermission)
+                input.form-control.mr-2(type='number',placeholder='Lượng quyền đến' name='maxCountPermission', value=maxCountPermission)
+                button.btn.btn-dark(type='submit') Lọc 
+          .col-md-4.mb-3
+            select.form-control
+              option(value='') Lọc theo người tạo 
+              option(value='') 
     .table-responsive(table-manage)
       table.table.table-striped
         thead.thead-dark

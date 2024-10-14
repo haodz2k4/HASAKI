@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import paginationHelper from "../../helpers/pagination.helper";
-import rangePriceHelper from "../../helpers/range-price.helper";
+import rangeCount from "../../helpers/range-count";
 import productModel from "../../models/product.model";
 import { catchAsync } from "../../utils/catchAsync";
 import { RenderError } from "../../utils/error";
@@ -21,7 +21,7 @@ export const products = catchAsync(async (req: Request, res: Response) => {
     const minPrice = parseInt(req.query.minPrice as string)
     const maxPrice = parseInt(req.query.maxPrice as string);
     
-    filter.$and = rangePriceHelper(minPrice, maxPrice)
+    filter.$and = rangeCount('price',minPrice, maxPrice)
     //Search 
     const keyword = req.query.keyword as string;
     if(keyword){
@@ -46,7 +46,7 @@ export const products = catchAsync(async (req: Request, res: Response) => {
         sortString,
         minPrice,
         maxPrice,
-        keyword
+        keyword,
         
     })
 })

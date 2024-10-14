@@ -246,7 +246,7 @@ if(selectCategory){
         window.location.href = url.href
     })
 }
-
+//Export excel 
 const btnExportExcel = document.querySelector("[btn-export-excel]");
 if(btnExportExcel){
     btnExportExcel.addEventListener("click",() => {
@@ -261,3 +261,4 @@ if(btnExportExcel){
         formExportExcel.submit()
     })
 }
+
