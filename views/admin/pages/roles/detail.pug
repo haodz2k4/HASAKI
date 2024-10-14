@@ -1,0 +1,36 @@
+extends ../../layouts/default.pug 
+
+block main 
+    .container.my-5
+      // Card cho nội dung chi tiết
+      .card.detail-card.shadow-lg
+        .detail-card-header
+          h2.detail-card-title Th&ocirc;ng Tin Chi Ti&#x1EBF;t
+        .detail-card-body
+          // Tiêu đề
+          .detail-section.mb-4
+            h4.detail-section-title Ti&ecirc;u &dstrok;&#x1EC1;:
+            p.detail-section-content #{role.title}
+          // Mô tả
+          .detail-section.mb-4
+            h4.detail-section-title M&ocirc; t&#x1EA3;:
+            p.detail-section-content
+              | !{role.description}
+          // Quyền hạn
+          .detail-section.mb-4
+            h4.detail-section-title Quy&#x1EC1;n H&#x1EA1;n:
+            ul.list-group.detail-permission-list
+              each item in role.permissions 
+                li.list-group-item.detail-permission-item #{item}
+              
+          // Thông tin Meta
+          .row.detail-meta-info
+            .col-md-4.detail-meta-item
+              h5.detail-meta-title Ng&agrave;y T&#x1EA1;o:
+              p.detail-meta-content !{moment(role.createdAt).format(' dddd,DD/MM/YYYY </br> HH:mm:ss')}  
+            .col-md-4.detail-meta-item
+              h5.detail-meta-title Ng&agrave;y C&#x1EAD;p Nh&#x1EAD;t:
+              p.detail-meta-content !{moment(role.updatedAt).format(' dddd,DD/MM/YYYY </br> HH:mm:ss')}  
+            .col-md-4.detail-meta-item
+              h5.detail-meta-title Ng&#x1B0;&#x1EDD;i T&#x1EA1;o:
+              p.detail-meta-content Admin

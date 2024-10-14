@@ -317,3 +317,105 @@
   vertical-align: top;
 }
 /*END DETAIL PRODUCT*/
+
+/*DETAIL CARD FOR ROLE*/
+.detail-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+}
+
+/* Tiêu đề thẻ chi tiết */
+.detail-card-header {
+  background-color: black; /* Màu xanh dương Bootstrap */
+  color: #ffffff;
+  text-align: center;
+  padding: 20px;
+}
+
+.detail-card-title {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+/* Thân thẻ chi tiết */
+.detail-card-body {
+  padding: 30px;
+}
+
+/* Tiêu đề các phần chi tiết */
+.detail-section-title {
+  color: #17a2b8; /* Màu xanh ngọc */
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+/* Nội dung các phần chi tiết */
+.detail-section-content {
+  color: #343a40; /* Màu đen tối */
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+/* Danh sách quyền hạn */
+.detail-permission-list {
+  border: none;
+  padding-left: 0;
+}
+
+.detail-permission-item {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  margin-bottom: -1px; /* Để tạo hiệu ứng phân cách */
+  padding: 10px 15px;
+  font-size: 1rem;
+}
+
+.detail-permission-item:nth-child(odd) {
+  background-color: #e9ecef;
+}
+
+/* Thông tin Meta */
+.detail-meta-info {
+  margin-top: 20px;
+}
+
+.detail-meta-item {
+  margin-bottom: 15px;
+}
+
+.detail-meta-title {
+  color: #17a2b8;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.detail-meta-content {
+  color: #343a40;
+  font-size: 0.95rem;
+}
+
+/* Đảm bảo không ảnh hưởng đến các phần tử khác */
+body {
+  background-color: #f1f3f5;
+}
+
+.container {
+  max-width: 800px;
+}
+
+/* Tùy chỉnh thêm nếu cần */
+@media (max-width: 576px) {
+  .detail-card-body {
+    padding: 20px;
+  }
+
+  .detail-card-title {
+    font-size: 1.5rem;
+  }
+}
+/*END DETAIL CARD*/

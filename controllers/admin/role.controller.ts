@@ -87,3 +87,27 @@ export const updatePatch = catchAsync(async (req: Request, res: Response) => {
     }
     res.redirect("/admin/roles")
 })
+
+//[DELETE] "/admin/roles/remove/:id"
+export const remove = catchAsync(async (req: Request, res: Response) => {
+    const {id} = req.params;
+    const role = await roleModel.findOneAndUpdate({_id: id}, {deleted: true});
+    if(!role){
+        throw new RenderError(404,"Role is not found");
+    }
+    res.redirect("back")
+})
+
+//[GET] "/admin/roles/detail/:id"
+export const detail = catchAsync(async (req: Request, res: Response) => {
+    const {id} = req.params;
+    const role = await roleModel.findOne({_id: id, deleted: false})
+    if(!role){
+        throw new RenderError(404,"Role is not found");
+    }
+    res.render("admin/pages/roles/detail.pug",{
+        pageTitle: "Chi tiết nhóm quyền",
+        activePages: "roles",
+        role
+    })
+})

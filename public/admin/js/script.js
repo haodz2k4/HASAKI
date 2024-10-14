@@ -262,3 +262,17 @@ if(btnExportExcel){
     })
 }
 
+//Delete
+const btnDelete = document.querySelectorAll("[btn-delete]");
+if(btnDelete.length > 0){
+    btnDelete.forEach((item) => {
+        item.addEventListener("click",() => {
+            const id = item.getAttribute("btn-delete");
+            const formDelete = document.querySelector("[form-delete]");
+            const path = document.querySelector(".my-path").getAttribute("path")
+            
+            formDelete.action = `/admin/${path}/remove/${id}?_method=DELETE`;
+            formDelete.submit()
+        })
+    })
+}

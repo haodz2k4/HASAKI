@@ -62,8 +62,11 @@ block main
               td
                 a(href=`/admin/roles/update/${item.id}`).btn.btn-sm.btn-info
                   i.fas.fa-edit
-                button.btn.btn-sm.btn-danger
+                button.btn.btn-sm.btn-danger(btn-delete=item.id)
                   i.fas.fa-trash 
                 a(href=`/admin/roles/detail/${item.id}`).btn.btn-sm.btn-warning 
                   i.fa-solid.fa-magnifying-glass 
     +pagination(pagination)
+    div(path='roles').my-path 
+
+    form(method="POST" form-delete) 
