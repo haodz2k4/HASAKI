@@ -5,4 +5,8 @@ const router = Router()
 
 router.get("/",controller.roles)
 
+router
+    .route("/create")
+    .get(controller.create)
+    .post(controller.createPost)
 export default router

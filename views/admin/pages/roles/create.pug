@@ -1,0 +1,20 @@
+extends ../../layouts/default.pug 
+
+block main 
+
+    .container
+      .form-container
+        h2.mb-4.text-center Thêm vai trò mới 
+        form(method="post")
+          // Tiêu đề
+          .mb-3
+            label.form-label(for='title') Ti&ecirc;u &dstrok;&#x1EC1;
+            input#title.form-control(type='text', name='title', placeholder='Nhập tiêu đề', required='')
+          // Mô tả
+          .mb-3
+            label.form-label(for='description') M&ocirc; t&#x1EA3;
+            textarea.form-control( id='my-expressjs-tinymce-app' name='description', rows='5', placeholder='Nhập mô tả vai trò')
+         
+          // Nút Submit
+          .d-grid
+            button.btn.btn-primary(type='submit' style='width: 100%') Xác nhận thêm 

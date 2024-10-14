@@ -22,6 +22,18 @@ block main
             select.form-control
               option(value='') Lọc theo người tạo 
               option(value='') 
+        .row.tool-section
+          .col-md-4.mb-3
+            .action-buttons.d-flex.justify-content-md-end
+              a(href="/admin/roles/create").btn.btn-success
+                i.fa-solid.fa-plus 
+                |  Thêm 
+              button.btn.btn-warning(type='button') 
+                i.fa-solid.fa-square-plus
+                |  Thêm sll
+              button.btn.btn-secondary(type='button' btn-export-excel) 
+                i.fa-solid.fa-file-excel 
+                |  Xuất Excel 
     .table-responsive(table-manage)
       table.table.table-striped
         thead.thead-dark
@@ -42,7 +54,7 @@ block main
                 input(type="checkbox",value=item.id, name="")
               td #{pagination.skip + 1 + index}
               td #{item.title}
-              td #{item.description}
+              td !{item.description}
               td #{item.permissions.length}
               td !{moment(item.createdAt).format(' dddd,DD/MM/YYYY </br> HH:mm:ss')}  
               td

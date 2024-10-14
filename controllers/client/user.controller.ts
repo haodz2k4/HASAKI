@@ -132,7 +132,6 @@ export const resetPasswordPost = catchAsync(async (req: Request, res: Response) 
         res.redirect("back")
         return;
     }
-    console.log(token)
     const payload = verify(token,config.jwt.jwt_password_reset_secret as string);
     const {email} = payload as JwtPayload;
     const user = await userModel.findOne({email, status: "active",deleted: false});

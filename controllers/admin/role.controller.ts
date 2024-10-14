@@ -45,3 +45,18 @@ export const roles = catchAsync(async (req: Request, res: Response) => {
         
     })
 })
+
+//[GET] "/admin/roles/create"
+export const create = catchAsync(async (req: Request, res: Response) => {
+    res.render("admin/pages/roles/create.pug", {
+        pageTitle: "Thêm Nhóm quyền",
+        activePages: 'roles',
+    })
+})
+
+//[POST] "/admin/roles/create"
+export const createPost = catchAsync(async (req: Request, res: Response) => {
+    const body = req.body;
+    await roleModel.create(body);
+    res.redirect("/admin/roles")
+})
