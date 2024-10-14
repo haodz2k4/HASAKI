@@ -14,12 +14,16 @@ export default {
         api_key: process.env.CLOUDINARY_API_KEY,
         api_secret: process.env.CLOUDINARY_API_SECRET,
     },
-    jwt_user: {
-        jwt_access_secret: process.env.JWT_USER_ACCESS_SECRET,
-        jwt_access_expire: process.env.JWT_USER_ACCESS_EXPIRE,
+    jwt: {
+        user: {
+            jwt_access_secret: process.env.JWT_USER_ACCESS_SECRET,
+            jwt_access_expire: process.env.JWT_USER_ACCESS_EXPIRE,
 
-        jwt_refresh_secret: process.env.JWT_USER_REFRESH_SECRET,
-        jwt_refresh_expire: process.env.JWT_USER_REFRESH_EXPIRE
+            jwt_refresh_secret: process.env.JWT_USER_REFRESH_SECRET,
+            jwt_refresh_expire: process.env.JWT_USER_REFRESH_EXPIRE,
+        },
+        jwt_password_reset_secret: process.env.JWT_PASSWORD_RESET_SECRET,
+
     },
     mail: {
         from: process.env.SMTP_FROM,

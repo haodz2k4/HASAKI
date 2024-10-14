@@ -9,7 +9,7 @@ export default catchAsync(async (req: Request, res: Response, next: NextFunction
     const token = req.cookies.accessToken;
     if(token){
         try {
-            const payload = verify(token,config.jwt_user.jwt_access_secret as string);
+            const payload = verify(token,config.jwt.user.jwt_access_secret as string);
             const {_id} = payload as JwtPayload;
             const user = await userModel.findOne({_id, deleted: false});
             if(user && user.status === 'active'){

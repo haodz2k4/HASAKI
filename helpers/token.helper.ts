@@ -1,3 +1,4 @@
+
 import { sign } from "jsonwebtoken";
 import config from "../config/config";
 
@@ -5,8 +6,8 @@ export const generateUserAccessToken = async (id: string,) => {
 
     return await sign({
         _id: id,
-    }, config.jwt_user.jwt_access_secret as string,{
-        expiresIn: config.jwt_user.jwt_access_expire
+    }, config.jwt.user.jwt_access_secret as string,{
+        expiresIn: config.jwt.user.jwt_access_expire
     })
 }
 
@@ -14,7 +15,15 @@ export const generateUserRefreshToken = async (id: string) => {
 
     return await sign({
         _id: id,
-    }, config.jwt_user.jwt_refresh_secret as string,{
-        expiresIn: config.jwt_user.jwt_access_expire
+    }, config.jwt.user.jwt_refresh_secret as string,{
+        expiresIn: config.jwt.user.jwt_access_expire
+    })
+}
+
+export const generateResetPasswordToken = async (email: string, expiresIn: string | number) => {
+    return await sign({
+        email 
+    }, config.jwt.jwt_password_reset_secret as string,{
+        expiresIn
     })
 }

@@ -3,12 +3,14 @@ import userModel from "../../models/user.model";
 import { catchAsync } from "../../utils/catchAsync";
 import { Request, Response } from "express";
 import { RenderError } from "../../utils/error";
-import { generateUserAccessToken, generateUserRefreshToken } from "../../helpers/token.helper";
+import { generateResetPasswordToken, generateUserAccessToken, generateUserRefreshToken } from "../../helpers/token.helper";
 import { sendMail } from "../../helpers/mail.helper";
 import {  readFileSync } from 'fs';
 import path from "path"
 import { generateRandomString } from '../../helpers/generate';
 import forgotPasswordModel from "../../models/forgot-password.model";
+import { JwtPayload, verify } from "jsonwebtoken";
+import config from "../../config/config";
 
 //[GET] "/users/login"
 export const login = catchAsync(async (req: Request, res: Response) => {
@@ -109,6 +111,40 @@ export const verifyOtpPost = catchAsync(async (req: Request, res: Response) => {
         isUsed: true 
     })
     await forgotPassword.save()
-    req.flash('success','Xác thực')
+
+    //Generate Token 
+    const tokenReset = await generateResetPasswordToken(email,'5m');
+    res.cookie('tokenReset', tokenReset)
+    req.flash('success','Xác thực thành công')
     res.redirect("/users/reset-password")
+}) 
+
+//[GET] "/users/reset-password"
+export const resetPassword = catchAsync(async (req: Request, res: Response) => {
+    res.render("clients/pages/users/reset-password.pug")
+})
+
+//[POST] "/users/reset-password"
+export const resetPasswordPost = catchAsync(async (req: Request, res: Response) => {
+    const token = req.cookies.tokenReset;
+   
+    if(!token){
+        res.redirect("back")
+        return;
+    }
+    console.log(token)
+    const payload = verify(token,config.jwt.jwt_password_reset_secret as string);
+    const {email} = payload as JwtPayload;
+    const user = await userModel.findOne({email, status: "active",deleted: false});
+    if(!user){
+        throw new RenderError(401,"User is not found");
+    }
+    const {password,repeatPassword } = req.body;
+    console.log(req.body)
+    if(password !== repeatPassword){
+        throw new RenderError(400,"Mật khẩu nhập lại không đúng");
+    }
+
+    res.clearCookie('tokenReset')
+    res.redirect("/users/login")
 })
