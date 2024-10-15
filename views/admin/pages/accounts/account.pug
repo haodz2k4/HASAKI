@@ -1,4 +1,39 @@
 extends ../../layouts/default.pug 
-
+include ../../mixins/pagination.pug
 block main 
+    h1.text-center(style='margin-top: 30px;font-weight: 30px;')
+     i.fas.fa-user-cog
+     |  Quản lý tài khoản 
+    .table-responsive(table-manage)
+      table.table.table-striped
+        thead.thead-dark
+          tr
+            th 
+              input(type="checkbox", name="")
+            th #
+            th Tiêu đề 
+            th avatar 
+            th trạng thái 
+            th Ngày tạo
+            th Người tạo 
+            th Thao tác 
+        tbody
+          each item, index in accounts  
+            tr
+              td 
+                input(type="checkbox",value=item.id, name="")
+              td #{pagination.skip + 1 + index}
+              td 
+              td !{moment(item.createdAt).format(' dddd,DD/MM/YYYY </br> HH:mm:ss')}  
+              td
+                strong Hồ Sơn Hào 
+              td
+                a(href=`/admin/products/update/${item.id}`).btn.btn-sm.btn-info
+                  i.fas.fa-edit
+                button.btn.btn-sm.btn-danger
+                  i.fas.fa-trash 
+                a(href=`/admin/products/detail/${item.id}`).btn.btn-sm.btn-warning 
+                  i.fa-solid.fa-magnifying-glass
+    +pagination(pagination) 
     
+    div(path='account').my-path 

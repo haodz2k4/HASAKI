@@ -1,0 +1,56 @@
+extends ../../layouts/default.pug 
+
+block main 
+    .container
+      .form-container
+        h2.mb-4.text-center Thêm tài khoản mới 
+        form(method="post" enctype="multipart/form-data")
+          // Tiêu đề
+          .mb-3
+            label.form-label(for='title') Họ và tên 
+            input#title.form-control(type='text', name='fullName', placeholder='Nhập Họ và tên tài khoản', required='')
+          // Mô tả
+          .mb-3
+            label.form-label(for='description') Mô tả 
+            textarea.form-control( id='my-expressjs-tinymce-app' name='description', rows='2', placeholder='Nhập mô tả sản phẩm')
+          .mb-3
+            label.form-label Avatar 
+            .image-upload-wrapper
+              span Kéo hoặc thả hình ảnh vào đây 
+              input#image(type='file', name='avatar', accept='image/*')
+          // Danh mục
+          .row.mb-3
+            .col-md-6 
+              label.form-label(for='role') Vai trò 
+              select#role.form-control(name='roleId')
+                option(selected='', disabled='') Chọn vai trò 
+                each item in roles
+                    option(value=item.id) #{item.title} 
+            .col-md-6
+              label.form-label.d-block Tr&#x1EA1;ng th&aacute;i
+              .form-check.form-check-inline
+                input#active.form-check-input(type='radio', name='status', value='active', checked)
+                label.form-check-label(for='active') Hoạt động
+              .form-check.form-check-inline
+                input#inactive.form-check-input(type='radio', name='status', value='inactive')
+                label.form-check-label(for='inactive') Không hoạt động 
+          .row.mb-3
+            .col-md-6 
+              label.form-label(for='email') Email 
+              input#email.form-control(type='email', name='email', placeholder='Nhập email', required='')
+            .col-md-6
+                label.form-label(for='password') Mật khẩu 
+                input#password.form-control(type='password', name='password', placeholder='Nhập mật khẩu', required='')
+          
+          .row.mb-3
+            .col-md-6 
+              label.form-label(for='phone') Số điện thoại  
+              input#email.form-control(type='phone', name='phone', placeholder='Nhập số điện thoại', required='')
+            .col-md-6
+                label.form-label(for='birthDate') Nhập ngày sinh 
+                input#birthDate.form-control(type='date', name='birthDate', placeholder='Nhập ngày sinh')
+            
+        
+          // Nút Submit
+          .d-grid
+            button.btn.btn-primary(type='submit' style='width: 100%') Th&ecirc;m S&#x1EA3;n Ph&#x1EA9;m
