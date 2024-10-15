@@ -4,6 +4,41 @@ block main
     h1.text-center(style='margin-top: 30px;font-weight: 30px;')
      i.fas.fa-user-cog
      |  Quản lý tài khoản 
+    .my-tool
+      .tool-container
+        .row.tool-section
+          form(action="").col-md-4.mb-3
+            .input-group
+              input.form-control(type='text', placeholder='Tìm kiếm sản phẩm',name='keyword', value=keyword)
+              .input-group-append
+                button.btn.btn-dark(type='submit') Tìm                 
+          
+
+          .col-md-4.mb-3
+            select.form-control
+              option(value='') Lọc theo người tạo 
+              option(value='') 
+          .col-md-4.mb-3
+            select.form-control
+              option(value='') Lọc theo vai trò 
+              each item in roles 
+               option(value=item.id) #{item.title}
+        .row.tool-section
+          .col-md-4.mb-3
+            .btn-group(role='group', aria-label='Basic example')
+              each item in filters
+                button.btn.btn-outline-success(type='button' btn-select-filter=item.value style='width: 90px' class=`${item.selected ? 'active' : ""}`) #{item.name}
+          .col-md-4.mb-3
+            .action-buttons.d-flex.justify-content-md-end
+              a(href="/admin/accounts/create").btn.btn-success
+                i.fa-solid.fa-plus 
+                |  Thêm 
+              button.btn.btn-warning(type='button') 
+                i.fa-solid.fa-square-plus
+                |  Thêm sll
+              button.btn.btn-secondary(type='button' btn-export-excel) 
+                i.fa-solid.fa-file-excel 
+                |  Xuất Excel 
     .table-responsive(table-manage)
       table.table.table-striped
         thead.thead-dark
@@ -11,9 +46,10 @@ block main
             th 
               input(type="checkbox", name="")
             th #
-            th Tiêu đề 
+            th Họ và tên 
             th avatar 
             th trạng thái 
+            th Nhóm quyền 
             th Ngày tạo
             th Người tạo 
             th Thao tác 
@@ -23,16 +59,24 @@ block main
               td 
                 input(type="checkbox",value=item.id, name="")
               td #{pagination.skip + 1 + index}
+              td #{item.fullName}
               td 
+                img(src=item.avatar ? item.avatar : "https://via.placeholder.com/70x70",style='width: 70px; height: 70px; border-radius: 50px' alt="")
+              td 
+                span.badge(class=`${item.status === "active" ? "badge-success" : "badge-danger"}` btn-ch-status=item.id status=item.status endpoint='api/products' style='padding: 10px;') #{item.status}
+              td 
+                select
+                  each role in roles 
+                   option(value=role.id, selected=(item.roleId == role.id)) #{role.title}
               td !{moment(item.createdAt).format(' dddd,DD/MM/YYYY </br> HH:mm:ss')}  
               td
                 strong Hồ Sơn Hào 
               td
-                a(href=`/admin/products/update/${item.id}`).btn.btn-sm.btn-info
+                a(href=`/admin/accounts/update/${item.id}`).btn.btn-sm.btn-info
                   i.fas.fa-edit
                 button.btn.btn-sm.btn-danger
                   i.fas.fa-trash 
-                a(href=`/admin/products/detail/${item.id}`).btn.btn-sm.btn-warning 
+                a(href=`/admin/accounts/detail/${item.id}`).btn.btn-sm.btn-warning 
                   i.fa-solid.fa-magnifying-glass
     +pagination(pagination) 
     

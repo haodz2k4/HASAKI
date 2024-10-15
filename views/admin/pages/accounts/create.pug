@@ -7,8 +7,8 @@ block main
         form(method="post" enctype="multipart/form-data")
           // Tiêu đề
           .mb-3
-            label.form-label(for='title') Họ và tên 
-            input#title.form-control(type='text', name='fullName', placeholder='Nhập Họ và tên tài khoản', required='')
+            label.form-label(for='fullName') Họ và tên 
+            input#fullName.form-control(type='text', name='fullName', placeholder='Nhập Họ và tên tài khoản', required='')
           // Mô tả
           .mb-3
             label.form-label(for='description') Mô tả 
@@ -18,12 +18,13 @@ block main
             .image-upload-wrapper
               span Kéo hoặc thả hình ảnh vào đây 
               input#image(type='file', name='avatar', accept='image/*')
+            #imagePreview.image-preview
           // Danh mục
           .row.mb-3
             .col-md-6 
               label.form-label(for='role') Vai trò 
               select#role.form-control(name='roleId')
-                option(selected='', disabled='') Chọn vai trò 
+                option(selected='') Chọn vai trò 
                 each item in roles
                     option(value=item.id) #{item.title} 
             .col-md-6

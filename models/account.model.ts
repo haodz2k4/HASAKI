@@ -27,7 +27,10 @@ const accountSchema = new Schema<IAccount, {}, IAccountMethod>({
         type: String,
         validate: {
             validator:  function(val: string) {
-                return isURL(val)
+                if(val){
+                    return isURL(val)
+                }
+                return true 
             },
             message: "Invalid url avatar"
         }
@@ -47,7 +50,7 @@ const accountSchema = new Schema<IAccount, {}, IAccountMethod>({
         type: String, 
         required: true,
         minlength: 8,
-        private: true,
+        select: false,
         validate: {
             validator: function(value: string) {
                 if(!value.match(/\d/) || !value.match(/[a-zA-Z]/)){

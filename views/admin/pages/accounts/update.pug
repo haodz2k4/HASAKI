@@ -1,0 +1,55 @@
+extends ../../layouts/default.pug 
+
+block main 
+    .container
+      .form-container
+        h2.mb-4.text-center Cập nhật tài khoản 
+        form(method="post" action="?_method=PATCH" enctype="multipart/form-data")
+          // Tiêu đề
+          .mb-3
+            label.form-label(for='fullName') Họ và tên 
+            input#fullName.form-control(type='text', name='fullName', placeholder='Nhập Họ và tên tài khoản', required='', value=account.fullName)
+          // Mô tả
+          .mb-3
+            label.form-label(for='description') Mô tả 
+            textarea.form-control( id='my-expressjs-tinymce-app' name='description', rows='2', placeholder='Nhập mô tả sản phẩm') !{account.description}
+          .mb-3
+            label.form-label Avatar 
+            .image-upload-wrapper
+              span Kéo hoặc thả hình ảnh vào đây 
+              input#image(type='file', name='avatar', accept='image/*')
+            #imagePreview.image-preview
+            if account.avatar 
+              img(src=account.avatar,style='width: 100px; height: 100px' alt="")
+          // Danh mục
+          .row.mb-3
+            .col-md-6 
+              label.form-label(for='role') Vai trò 
+              select#role.form-control(name='roleId')
+                option(selected='') Chọn vai trò 
+                each item in roles
+                    option(value=item.id selected=(account.roleId == item.id)) #{item.title} 
+            .col-md-6
+              label.form-label.d-block Tr&#x1EA1;ng th&aacute;i
+              .form-check.form-check-inline
+                input#active.form-check-input(type='radio', name='status', value='active', checked=(account.status == 'active'))
+                label.form-check-label(for='active') Hoạt động
+              .form-check.form-check-inline
+                input#inactive.form-check-input(type='radio', name='status', value='inactive' checked=(account.status == 'inactive'))
+                label.form-check-label(for='inactive') Không hoạt động 
+          .mb-3
+              label.form-label(for='email') Email 
+              input#email.form-control(type='email', name='email', placeholder='Nhập email', required='', value=account.email)
+          
+          .row.mb-3
+            .col-md-6 
+              label.form-label(for='phone') Số điện thoại  
+              input#email.form-control(type='phone', name='phone', placeholder='Nhập số điện thoại', required='', value=account.phone)
+            .col-md-6
+                label.form-label(for='birthDate') Nhập ngày sinh 
+                input#birthDate.form-control(type='date', name='birthDate', placeholder='Nhập ngày sinh' value=account.birthDate)
+            
+        
+          // Nút Submit
+          .d-grid
+            button.btn.btn-primary(type='submit' style='width: 100%; background-color: #326e51') Cập nhật 
