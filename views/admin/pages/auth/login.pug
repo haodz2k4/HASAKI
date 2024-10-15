@@ -1,0 +1,31 @@
+extends ../../layouts/auth.pug 
+
+block main 
+    .wrapper
+      .container
+        .col-left
+          .login-text
+            h2 Xin Chào Bạn 
+            p
+              | Đây là trang login cho 
+              br
+              | Admin 
+            a.btn(href='https://www.facebook.com/sonhaoratladepzai') Liên hệ  
+        .col-right
+          .login-form
+            h2 Đăng nhập 
+            form(method="post")
+              p
+                label
+                  | Email của bạn 
+                  span *
+                input(type='text', placeholder='Email của bạn',name='email' required='')
+              p
+                label
+                  | Mật khẩu 
+                  span *
+                input(type='password', placeholder='Password', required='')
+              p
+                input(type='submit', value='Đăng nhập')
+              p
+                a(href='') Quên mật khẩu?

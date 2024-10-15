@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Tài Khoản - Admin</title>
+    <!-- Bootstrap 4 CSS -->
+    <link 
+        rel="stylesheet" 
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+        integrity="sha384-MDgYpKJHcVFmXa1JfT+u7RvJfwYoq9bYf1IucP2v1P1VkhCqaEJbKXEBPcCTW2H+" 
+        crossorigin="anonymous"
+    >
+    <!-- Font Awesome for Icons -->
+    <link 
+        rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" 
+        integrity="sha512-dphw9KttjXJzRCN1APNh1UGpQd1DAa6L0d3K4cSyxB1htksvGk+GsVFd6LM+bcJGBPrIYmC/1U5UkIXLaqXf3Q==" 
+        crossorigin="anonymous" 
+        referrerpolicy="no-referrer" 
+    />
+    <!-- Tệp CSS Tùy chỉnh -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Admin Panel</a>
+        <button 
+            class="navbar-toggler" 
+            type="button" 
+            data-toggle="collapse" 
+            data-target="#navbarNav" 
+            aria-controls="navbarNav" 
+            aria-expanded="false" 
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#"><i class="fas fa-user"></i> Tài Khoản <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-cogs"></i> Cài Đặt</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i> Đăng Xuất</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <i class="fas fa-tachometer-alt"></i>
+                                Bảng Điều Khiển
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-users"></i>
+                                Quản Lý Người Dùng
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-file-alt"></i>
+                                Báo Cáo
+                            </a>
+                        </li>
+                        <!-- Thêm các mục khác tại đây -->
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Nội dung Chi Tiết -->
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h2>Chi Tiết Tài Khoản</h2>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        Thông Tin Cơ Bản
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Hình Ảnh Avatar -->
+                            <div class="col-md-3 text-center">
+                                <img 
+                                    src="assets/avatar-placeholder.png" 
+                                    alt="Avatar" 
+                                    class="img-fluid rounded-circle mb-3 avatar-img"
+                                >
+                                <h4>Nguyễn Văn A</h4>
+                                <p class="text-muted"><i class="fas fa-user-circle"></i> Quản trị viên</p>
+                            </div>
+                            <!-- Thông Tin Chi Tiết -->
+                            <div class="col-md-9">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row" style="width: 30%;"><i class="fas fa-envelope"></i> Email</th>
+                                            <td>nguyenvana@example.com</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row"><i class="fas fa-phone"></i> Số Điện Thoại</th>
+                                            <td>+84 912 345 678</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row"><i class="fas fa-birthday-cake"></i> Ngày Sinh</th>
+                                            <td>01/01/1990</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row"><i class="fas fa-user-check"></i> Trạng Thái</th>
+                                            <td>
+                                                <span class="badge badge-success"><i class="fas fa-check-circle"></i> Hoạt động</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row"><i class="fas fa-info-circle"></i> Mô Tả</th>
+                                            <td>
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                                                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row"><i class="fas fa-calendar-alt"></i> Ngày Tạo</th>
+                                            <td>15/10/2023</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row"><i class="fas fa-sync-alt"></i> Ngày Cập Nhật</th>
+                                            <td>10/10/2024</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nút Hành Động -->
+                <div class="mb-4">
+                    <button type="button" class="btn btn-primary mr-2">
+                        <i class="fas fa-edit"></i> Chỉnh Sửa
+                    </button>
+                    <button type="button" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i> Xóa
+                    </button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer (Tùy chọn) -->
+    <footer class="footer mt-auto py-3 bg-dark text-white text-center">
+        <div class="container">
+            <span>&copy; 2024 Công Ty Bạn. Bảo lưu mọi quyền.</span>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 4 JS và Dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" 
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" 
+        crossorigin="anonymous">
+    </script>
+    <script 
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" 
+        integrity="sha384-9/reFTGAW83EW2RDu5e6Rmcc/jwXjY5Ys3p3YEB1h75HhG6OQYFvbvMZcFZhktk" 
+        crossorigin="anonymous">
+    </script>
+    <script 
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" 
+        integrity="sha384-B4gt1jrGC7Jh4AgQOUjg1B1h2Km6PvVv9Lg+FmvwwEu5KjqCv/V+7A/tF9zW2L9" 
+        crossorigin="anonymous">
+    </script>
+    <!-- Font Awesome JS (Optional) -->
+    <script 
+        src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js" 
+        integrity="sha512-d6p0MX0eAaLM6+2+QqQYkSNV0eFjuGqTW2j+Z5uHh9+MgMfa6c2Nq1VwEbz1UY3PZUXGQZosGcTttR5Kk+XWdg==" 
+        crossorigin="anonymous" 
+        referrerpolicy="no-referrer">
+    </script>
+    <!-- Tệp JS Tùy chỉnh (Nếu cần) -->
+    <script src="js/scripts.js"></script>
+</body>
+</html>
