@@ -2,7 +2,11 @@
     display: flex;
     min-height: 100vh; /* Ensures the sidebar and content fill the entire viewport height */
   }
-  
+  #my-avatar-account {
+    width: 70px;
+    height: 70px; 
+    border-radius: 50%
+  }
   /* Sidebar styles */
   .sidebar {
     width: 250px; /* Fixed sidebar width */
@@ -334,6 +338,7 @@
   padding: 20px;
 }
 
+
 .detail-card-title {
   margin: 0;
   font-size: 1.8rem;
@@ -418,4 +423,5 @@ body {
     font-size: 1.5rem;
   }
 }
-/*END DETAIL CARD*/
+/*END DETAIL CARD*/ 
+

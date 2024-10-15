@@ -14,11 +14,11 @@ export default (err: ErrorRequestHandler, req: Request, res: Response, next: Nex
                 break;
             case 401: 
                 req.flash('error',err.message)
-                res.redirect('back');
+                res.redirect(err.redirect ? err.redirect : "back");
                 break;
             case 400: 
                 req.flash('error',err.message)
-                res.redirect('back');
+                res.redirect(err.redirect ? err.redirect : "back");
                 break;
             case 403: 
                 res.render('common/403.pug',{

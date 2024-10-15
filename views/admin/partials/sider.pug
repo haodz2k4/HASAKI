@@ -1,5 +1,6 @@
 .sidebar
-      h2 Trang quảng trị 
+      img(src=(account ? account.avatar : "https://placehold.co/70"), alt="")#my-avatar-account
+      h2 #{account ? account.fullName : "Trang quảng trị"}
       ul.nav.flex-column
         li.nav-item
           a.nav-link(href='/admin/dashboard' class=`${activePages === 'dashboard' ? 'show' : ''}`)
