@@ -155,6 +155,7 @@ export const updateProductPatch = catchAsync(async (req: Request, res: Response)
     if(!product){
         throw new RenderError(404,"Product is not found")
     }
+    req.flash('success','Cập nhật sản phẩm thành công')
     Object.assign(product,body);
     await product.save();
     res.redirect("/admin/products");

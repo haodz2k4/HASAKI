@@ -1,7 +1,7 @@
 
 import { sign } from "jsonwebtoken";
 import config from "../config/config";
-
+/***USER***/
 export const generateUserAccessToken = async (id: string,) => {
 
     return await sign({
@@ -17,6 +17,15 @@ export const generateUserRefreshToken = async (id: string) => {
         _id: id,
     }, config.jwt.user.jwt_refresh_secret as string,{
         expiresIn: config.jwt.user.jwt_access_expire
+    })
+}
+
+/***ADMIN***/
+export const generateAdminAccessToken = async (id: string) => {
+    return await sign({
+        _id: id 
+    }, config.jwt.admin.jwt_access_secret as string,{
+        expiresIn: config.jwt.admin.jwt_access_expire
     })
 }
 

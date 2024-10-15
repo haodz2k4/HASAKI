@@ -9,11 +9,18 @@ html(lang="en")
         link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css')
         title #{pageTitle}
     body 
-
     .container-flex
       include ../partials/sider.pug 
       .main-content
         include ../partials/header.pug 
+        - if (messages.success)
+          .message.success
+              .alert.alert-success(role='alert' time-out-alert)
+                  | #{messages.success} 
+        -if (messages.error)
+          .message.error
+              .alert.alert-danger(role='alert' time-out-alert) 
+                  | #{messages.error}
         block main 
 
     script(src="/admin/js/script.js") 

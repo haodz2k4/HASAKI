@@ -276,3 +276,11 @@ if(btnDelete.length > 0){
         })
     })
 }
+
+//Time out alert 
+const timeOutAlert = document.querySelector("[time-out-alert]");
+if(timeOutAlert){
+    setTimeout(() => {
+        timeOutAlert.classList.add("d-none")
+    }, 3000)
+}
