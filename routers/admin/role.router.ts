@@ -16,4 +16,8 @@ router
     .get(controller.update)
     .patch(controller.updatePatch)
 router.delete("/remove/:id",controller.remove)
+
+router  
+    .route("/permissions")
+    .get(controller.permissions)
 export default router

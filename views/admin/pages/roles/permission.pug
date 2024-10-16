@@ -1,0 +1,45 @@
+extends ../../layouts/default.pug  
+
+block main 
+    .container 
+      .permission-table
+        div(data-roles=roles)
+        table.table.table-bordered(table-permission)
+          thead
+            tr
+              th Chức năng 
+              each item in roles 
+                th #{item.title} 
+          tbody
+            // Tiêu đề nhóm
+            tr(data-name='id').d-none
+              each item in roles 
+                td
+                  input.form-check-input(type='text', value=item.id )
+            tr.group-header
+              th(colspan=roles.length + 1) Quản lý sản phẩm 
+            tr(data-name='product_view')
+              td Xem 
+              each item in roles 
+                td
+                  input.form-check-input(type='checkbox', value=item.id)
+              
+            tr(data-name='product_create')
+              td Thêm 
+              each item in roles 
+                td
+                  input.form-check-input(type='checkbox', value=item.id )
+              
+            tr(data-name='product_update')
+              td Sửa 
+              each item in roles 
+                td
+                  input.form-check-input(type='checkbox', value=item.id)
+            tr(data-name='product_delete')
+              td Xóa 
+              each item in roles
+                td
+                  input.form-check-input(type='checkbox', value=item.id)
+        .text-end
+          button.btn.btn-primary.btn-save(type='button') L&#x1B0;u Ph&acirc;n Quy&#x1EC1;n 
+    form(action="" method="post") 

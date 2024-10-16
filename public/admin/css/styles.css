@@ -425,3 +425,33 @@ body {
 }
 /*END DETAIL CARD*/ 
 
+/*Permission table*/
+.permission-table {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.permission-table th, .permission-table td {
+  text-align: center;
+  vertical-align: middle;
+}
+.permission-table th {
+  background-color: #326e51;
+  color: #fff;
+}
+.permission-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.btn-save {
+  margin-top: 20px;
+}
+/* Thêm kiểu cho tiêu đề nhóm */
+.group-header {
+  background-color: #495057;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+}
+/*END PERMISSION*/
+

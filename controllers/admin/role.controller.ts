@@ -111,3 +111,12 @@ export const detail = catchAsync(async (req: Request, res: Response) => {
         role
     })
 })
+
+//[GET] "/admin/roles/permissions"
+export const permissions = catchAsync(async (req: Request, res: Response) => {
+    const roles = await roleModel.find({deleted: false});
+    res.render("admin/pages/roles/permission.pug",{
+        activePages: 'permissions',
+        roles
+    })
+})

@@ -284,3 +284,17 @@ if(timeOutAlert){
         timeOutAlert.classList.add("d-none")
     }, 3000)
 }
+
+/*PERMISSIONS*/ 
+const tablePermission = document.querySelector("[table-permission]");
+if(tablePermission){
+    const dataRoles = document.querySelector("[data-roles]");
+    const roles = JSON.parse(dataRoles.getAttribute("data-roles"));
+    roles.forEach((role, index) => {
+        role.permissions.forEach((permission) => {
+            const row = tablePermission.querySelector(`tr[data-name="${permission}"]`)
+            const inp = row.querySelectorAll("input")[index]
+            inp.checked = true 
+        })
+    })
+}
