@@ -111,7 +111,7 @@ block main
               td
                 a(href=`/admin/products/update/${item.id}`).btn.btn-sm.btn-info
                   i.fas.fa-edit
-                button.btn.btn-sm.btn-danger
+                button.btn.btn-sm.btn-danger(btn-delete=item.id)
                   i.fas.fa-trash 
                 a(href=`/admin/products/detail/${item.id}`).btn.btn-sm.btn-warning 
                   i.fa-solid.fa-magnifying-glass
@@ -120,3 +120,4 @@ block main
     div(path='products').my-path 
     form(action="/admin/products/export/excel" method="POST" form-export-excel).d-none 
       input(type="text" name='ids') 
+    form(action="" form-delete method="post") 

@@ -227,5 +227,17 @@ export const exportExcel = catchAsync(async (req: Request, res: Response) => {
         'attachment; filename="products.xlsx"'
     );
     await workBook.xlsx.write(res);
+    req.flash('success','Xuất Excel thành công')
     res.redirect("back");
+})
+
+//[DELETE] "/admin/products/remove/:id"
+export const remove = catchAsync(async (req: Request, res: Response) => {
+    const {id} = req.params;
+    const product = await productModel.findOneAndUpdate({_id: id},{deleted: true});
+    if(!product){
+        throw new RenderError(404,"User is not found")
+    }
+    req.flash('success','Xóa sản phẩm thành công')
+    res.redirect("back")
 })

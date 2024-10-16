@@ -14,6 +14,7 @@ router.patch("/change-multi",requirePermission('product_update'),controller.chan
 router.get("/create",requirePermission('product_create'),controller.create);
 router.post("/create",upload.array('thumbnail', 5),requirePermission('product_create'),uploadMulti,controller.createPost)
 
+router.delete("/remove/:id",controller.remove)
 router
     .route("/update/:id")
     .get(requirePermission('product_update'),controller.updateProduct)
