@@ -83,6 +83,7 @@ block main
             th Tiêu đề 
             th Ảnh
             th Giá tiền 
+            th Số lượng 
             th Nổi bậc 
             th trạng thái 
             th vị trí 
@@ -99,6 +100,7 @@ block main
               td 
                 img(src=`${item.thumbnail.length > 0 ? item.thumbnail[0] : 'https://via.placeholder.com/70x70'}`, alt="" style='width: 70px; height: 70px')
               td #{item.newPrice}
+              td #{item.quantity}
               td 
                 span.badge(class=`${item.highlighted === "1" ? "badge-warning" : "badge-info"}` btn-ch-highlighted=item.id style='padding: 10px;') #{item.highlighted === "1" ? "Có" : "Không"}
               td 
@@ -106,6 +108,7 @@ block main
               td 
                 input(type="number" value=item.position inp-position=item.id style='width: 70px') 
               td !{moment(item.createdAt).format(' dddd,DD/MM/YYYY </br> HH:mm:ss')}  
+              
               td
                 strong Hồ Sơn Hào 
               td

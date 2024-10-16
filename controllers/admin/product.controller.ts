@@ -6,6 +6,8 @@ import { catchAsync } from "../../utils/catchAsync";
 import categoryModel from "../../models/category.model";
 import { RenderError } from "../../utils/error";
 import excelJs from "exceljs"
+import inventoryModel from "../../models/inventory.model";
+import { totalQuantity } from "../../helpers/total.helper";
 //[GET] "/admin/products"
 export const products = catchAsync(async (req: Request, res: Response) => {
     
@@ -59,13 +61,7 @@ export const products = catchAsync(async (req: Request, res: Response) => {
         const index = filters.findIndex((item) => item.name === highlighted)
         filters[index].selected = true 
     }
-    
-    //Pagination 
-    const page = parseInt(req.query.page as string) || 1;
-    const limit = parseInt(req.query.limit as string) || 10;
-    const totalDocument = await productModel.countDocuments(filter)
-    const pagination = paginationHelper(page, limit, totalDocument)
-    const {skip} = pagination
+        
     //Sorting 
     const sortKey = req.query.sortKey as string;
     const sortValue = req.query.sortValue as "desc" | "asc";
@@ -78,11 +74,24 @@ export const products = catchAsync(async (req: Request, res: Response) => {
     //Sort string;
     
     const sortString = `${sortKey}-${sortValue}`
-    const products = await productModel
+
+    //Pagination 
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const skip = (page - 1) * limit;
+    const [products, total] = await Promise.all([productModel
         .find(filter)
         .limit(limit)
         .skip(skip)
-        .sort(sort)
+        .sort(sort),
+        productModel.countDocuments(filter)]);
+    //Add field quantity
+    const ids = products.map(item => item.id)
+    for(const product of products){
+        product.quantity = await totalQuantity(ids);
+    }
+
+    const pagination = paginationHelper(page, limit, total)
     const categories = await categoryModel.find({deleted: false});
     res.render("admin/pages/products/product.pug",{
         pageTitle: "Quản lý sản phẩm",
@@ -98,6 +107,7 @@ export const products = catchAsync(async (req: Request, res: Response) => {
         categoryId
     })
 })
+
 
 //[PATCH] "/admin/products/change-multi"
 export const changeMulti = catchAsync(async (req: Request, res: Response) => {

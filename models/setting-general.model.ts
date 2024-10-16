@@ -1,4 +1,6 @@
 import { Schema, model } from "mongoose";
+
+export const COLLECTION_SETTING_GENERAL_NAME = 'Setting'
 export interface ISettingGeneral {
     websiteName: string,
     logo: string,
@@ -18,4 +20,4 @@ const settingGeneralSchema = new Schema<ISettingGeneral>({
 
 })
 
-export default model('settings',settingGeneralSchema)
+export default model(COLLECTION_SETTING_GENERAL_NAME,settingGeneralSchema)
