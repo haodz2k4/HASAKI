@@ -294,7 +294,7 @@ if(tablePermission){
         role.permissions.forEach((permission) => {
             const row = tablePermission.querySelector(`tr[data-name="${permission}"]`)
             const inp = row.querySelectorAll("input")[index]
-            inp.checked = true 
+            inp.checked = true;
         })
     })
 }

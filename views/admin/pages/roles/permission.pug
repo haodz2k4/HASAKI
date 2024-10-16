@@ -11,11 +11,12 @@ block main
               each item in roles 
                 th #{item.title} 
           tbody
-            // Tiêu đề nhóm
+            
             tr(data-name='id').d-none
               each item in roles 
                 td
                   input.form-check-input(type='text', value=item.id )
+            // Sản phẩm 
             tr.group-header
               th(colspan=roles.length + 1) Quản lý sản phẩm 
             tr(data-name='product_view')
@@ -40,6 +41,196 @@ block main
               each item in roles
                 td
                   input.form-check-input(type='checkbox', value=item.id)
+            // Người dùng
+            tr.group-header
+              th(colspan=roles.length + 1) Quản lý người dùng
+            tr(data-name='user_view')
+              td Xem 
+              each item in roles 
+                td
+                  input.form-check-input(type='checkbox', value=item.id)
+              
+            tr(data-name='user_create')
+              td Thêm 
+              each item in roles 
+                td
+                  input.form-check-input(type='checkbox', value=item.id )
+              
+            tr(data-name='user_update')
+              td Sửa 
+              each item in roles 
+                td
+                  input.form-check-input(type='checkbox', value=item.id)
+            tr(data-name='user_delete')
+              td Xóa 
+              each item in roles
+                td
+                  input.form-check-input(type='checkbox', value=item.id) 
+            // Danh mục 
+            tr.group-header
+              th(colspan=roles.length + 1) Quản lý danh mục 
+            tr(data-name='category_view')
+              td Xem 
+              each item in roles 
+                td
+                  input.form-check-input(type='checkbox', value=item.id)
+              
+            tr(data-name='category_create')
+              td Thêm 
+              each item in roles 
+                td
+                  input.form-check-input(type='checkbox', value=item.id )
+              
+            tr(data-name='category_update')
+              td Sửa 
+              each item in roles 
+                td
+                  input.form-check-input(type='checkbox', value=item.id)
+            tr(data-name='category_delete')
+              td Xóa 
+              each item in roles
+                td
+                  input.form-check-input(type='checkbox', value=item.id) 
+            // Dịch vụ 
+            tr.group-header
+              th(colspan=roles.length + 1) Quản lý dịch vụ 
+            tr(data-name='service_view')
+              td Xem 
+              each item in roles 
+                td
+                  input.form-check-input(type='checkbox', value=item.id)
+              
+            tr(data-name='service_create')
+              td Thêm 
+              each item in roles 
+                td
+                  input.form-check-input(type='checkbox', value=item.id )
+              
+            tr(data-name='service_update')
+              td Sửa 
+              each item in roles 
+                td
+                  input.form-check-input(type='checkbox', value=item.id)
+            tr(data-name='service_delete')
+              td Xóa 
+              each item in roles
+                td
+                  input.form-check-input(type='checkbox', value=item.id)
+            // Nhà cung cấp 
+            tr.group-header
+              th(colspan=roles.length + 1) Quản lý nhà cung cấp  
+            tr(data-name='supplier_view')
+              td Xem 
+              each item in roles 
+                td
+                  input.form-check-input(type='checkbox', value=item.id)
+              
+            tr(data-name='supplier_create')
+              td Thêm 
+              each item in roles 
+                td
+                  input.form-check-input(type='checkbox', value=item.id )
+              
+            tr(data-name='supplier_update')
+              td Sửa 
+              each item in roles 
+                td
+                  input.form-check-input(type='checkbox', value=item.id)
+            tr(data-name='supplier_delete')
+              td Xóa 
+              each item in roles
+                td
+                  input.form-check-input(type='checkbox', value=item.id) 
+            // Đơn hàng 
+            tr.group-header
+              th(colspan=roles.length + 1) Quản lý đơn hàng  
+            tr(data-name='order_view')
+              td Xem 
+              each item in roles 
+                td
+                  input.form-check-input(type='checkbox', value=item.id)
+              
+            tr(data-name='order_create')
+              td Thêm 
+              each item in roles 
+                td
+                  input.form-check-input(type='checkbox', value=item.id )
+              
+            tr(data-name='order_update')
+              td Sửa 
+              each item in roles 
+                td
+                  input.form-check-input(type='checkbox', value=item.id)
+            tr(data-name='order_delete')
+              td Xóa 
+              each item in roles
+                td
+                  input.form-check-input(type='checkbox', value=item.id)
+            // Nhóm quyền 
+            tr.group-header
+              th(colspan=roles.length + 1) Quản lý nhóm quyền
+            tr(data-name='role_view')
+              td Xem 
+              each item in roles 
+                td
+                  input.form-check-input(type='checkbox', value=item.id)
+              
+            tr(data-name='role_create')
+              td Thêm 
+              each item in roles 
+                td
+                  input.form-check-input(type='checkbox', value=item.id )
+              
+            tr(data-name='role_update')
+              td Sửa 
+              each item in roles 
+                td
+                  input.form-check-input(type='checkbox', value=item.id)
+            tr(data-name='role_delete')
+              td Xóa 
+              each item in roles
+                td
+                  input.form-check-input(type='checkbox', value=item.id) 
+            tr(data-name='role_permission')
+              td phân quyền 
+              each item in roles
+                td
+                  input.form-check-input(type='checkbox', value=item.id) 
+            // Sản phẩm 
+            tr.group-header
+              th(colspan=roles.length + 1) Quản lý tài khoản 
+            tr(data-name='account_view')
+              td Xem 
+              each item in roles 
+                td
+                  input.form-check-input(type='checkbox', value=item.id)
+              
+            tr(data-name='account_create')
+              td Thêm 
+              each item in roles 
+                td
+                  input.form-check-input(type='checkbox', value=item.id )
+              
+            tr(data-name='account_update')
+              td Sửa 
+              each item in roles 
+                td
+                  input.form-check-input(type='checkbox', value=item.id)
+            tr(data-name='account_delete')
+              td Xóa 
+              each item in roles
+                td
+                  input.form-check-input(type='checkbox', value=item.id) 
+            // Sản phẩm 
+            tr.group-header
+              th(colspan=roles.length + 1) Nhắn tin với khách hàng  
+            tr(data-name='chating')
+              td nhắn tin 
+              each item in roles 
+                td
+                  input.form-check-input(type='checkbox', value=item.id)
+              
+            
         .text-end
           button.btn.btn-primary.btn-save(type='button') L&#x1B0;u Ph&acirc;n Quy&#x1EC1;n 
     form(action="" method="post") 
