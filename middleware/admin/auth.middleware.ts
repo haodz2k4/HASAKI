@@ -14,13 +14,14 @@ export const requireAuth = catchAsync(async (req: Request, res: Response,next: N
     try {
         const payload = verify(adminAccessToken,config.jwt.admin.jwt_access_secret as string);
         const {_id} = payload as JwtPayload;
-        const account = await accountModel.findOne({_id, deleted: false});
+        const account = await accountModel.findOne({_id, deleted: false}).populate('roleId','title permissions');
         if(!account){
             throw new RenderError(401,"Không tìm thấy tài khoản","/admin/auth/login")
         }
         res.locals.account = account
         next()
-    } catch{
+    } catch (error){
+        console.log(error)
         throw new RenderError(401,"Token không hợp lệ","/admin/auth/login")
     }
 })

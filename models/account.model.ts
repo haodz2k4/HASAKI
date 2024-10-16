@@ -5,6 +5,7 @@ import {hash, compare} from "bcrypt"
 import { COLLECTION_ROLE_NAME } from './role.model';
 
 export const COLLECTION_ACCOUNT_NAME ='Account'
+
 export interface IAccount {
     fullName: string
     description: string
@@ -74,7 +75,7 @@ const accountSchema = new Schema<IAccount, {}, IAccountMethod>({
     roleId: {
         type: Schema.Types.ObjectId, 
         required: true, 
-        ref: 'role',
+        ref: COLLECTION_ROLE_NAME,
         validate: {
             validator: async function(val: string) {
                 const role = await model(COLLECTION_ROLE_NAME).findOne({_id: val},{deleted: false})

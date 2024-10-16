@@ -7,17 +7,19 @@ import multer from "multer"
 const upload = multer({ storage });
 import { uploadMulti } from "../../middleware/upload-cloud.middleware";
 
-router.get("/",controller.products)
-router.patch("/change-multi",controller.changeMulti)
-router.get("/create",controller.create);
-router.post("/create",upload.array('thumbnail', 5),uploadMulti,controller.createPost)
+import { requirePermission } from './../../middleware/admin/permission.middleware';
+
+router.get("/",requirePermission('product_view'),controller.products)
+router.patch("/change-multi",requirePermission('product_update'),controller.changeMulti)
+router.get("/create",requirePermission('product_create'),controller.create);
+router.post("/create",upload.array('thumbnail', 5),requirePermission('product_create'),uploadMulti,controller.createPost)
 
 router
     .route("/update/:id")
-    .get(controller.updateProduct)
-    .patch(upload.array('thumbnail', 5),uploadMulti,controller.updateProductPatch) 
+    .get(requirePermission('product_update'),controller.updateProduct)
+    .patch(requirePermission('product_update'),upload.array('thumbnail', 5),uploadMulti,controller.updateProductPatch) 
 
-router.get("/detail/:id",controller.detail)
-router.post("/export/excel",controller.exportExcel);
+router.get("/detail/:id",requirePermission('product_view'),controller.detail)
+router.post("/export/excel",requirePermission('product_view'),controller.exportExcel);
 
 export default router
