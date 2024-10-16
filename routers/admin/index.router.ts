@@ -5,6 +5,7 @@ import userRouter from "./user.router"
 import roleRouter from "./role.router"
 import accountRouter from "./account.router"
 import authRouter from "./auth.router"
+import categoryRouter from "./category.router"
 import { requireAuth } from "../../middleware/admin/auth.middleware";
 
 export default (app: Express) => {
@@ -15,5 +16,6 @@ export default (app: Express) => {
     app.use("/admin/users",requireAuth,userRouter)
     app.use("/admin/roles",requireAuth, roleRouter)
     app.use("/admin/accounts",requireAuth, accountRouter)
+    app.use("/admin/categories",requireAuth, categoryRouter)
     app.use("/admin/auth", authRouter)
 }

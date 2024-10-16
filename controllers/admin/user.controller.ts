@@ -4,6 +4,7 @@ import userModel from "../../models/user.model";
 
 import paginationHelper from "../../helpers/pagination.helper";
 import filterHelper from "../../helpers/filter.helper";
+import { RenderError } from "../../utils/error";
 
 //[GET] "/admin/users"
 export const users = catchAsync(async (req: Request, res: Response) => {
@@ -64,4 +65,14 @@ export const users = catchAsync(async (req: Request, res: Response) => {
         filters,
         keyword
     })
+})
+
+//[GET] "/admin/users/:id"
+export const update = catchAsync(async (req: Request, res: Response) => {
+    const {id} = req.params
+    const user = await userModel.findOne({_id: id, deleted: false})
+    if(!user){
+        throw new RenderError(404,"User is not found")
+    }
+    res.render("admin/pages/users/update.pug")
 })

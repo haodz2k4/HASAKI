@@ -1,0 +1,45 @@
+extends ../../layouts/default.pug 
+
+block main 
+    .table-responsive(table-manage)
+      table.table.table-striped
+        thead.thead-dark
+          tr
+            th 
+              input(type="checkbox", name="")
+            th #
+            th Tiêu đề 
+            th Ảnh
+            th Giá tiền 
+            th Nổi bậc 
+            th trạng thái 
+            th vị trí 
+            th Ngày tạo
+            th Người tạo 
+            th Thao tác 
+        tbody
+          each item, index in categories  
+            tr
+              td 
+                input(type="checkbox",value=item.id, name="")
+              // td #{pagination.skip + 1 + index}
+              td #{item.title}
+              td 
+                img(src=`${item.thumbnail ? item.thumbnail : 'https://via.placeholder.com/70x70'}`, alt="" style='width: 70px; height: 70px')
+              td #{item.newPrice}
+              td 
+                span.badge(class=`${item.highlighted === "1" ? "badge-warning" : "badge-info"}` btn-ch-highlighted=item.id style='padding: 10px;') #{item.highlighted === "1" ? "Có" : "Không"}
+              td 
+                span.badge(class=`${item.status === "active" ? "badge-success" : "badge-danger"}` btn-ch-status=item.id status=item.status endpoint='api/products' style='padding: 10px;') #{item.status}
+              td 
+                input(type="number" value=item.position inp-position=item.id style='width: 70px') 
+              td !{moment(item.createdAt).format(' dddd,DD/MM/YYYY </br> HH:mm:ss')}  
+              td
+                strong Hồ Sơn Hào 
+              td
+                a(href=`/admin/products/update/${item.id}`).btn.btn-sm.btn-info
+                  i.fas.fa-edit
+                button.btn.btn-sm.btn-danger(btn-delete=item.id)
+                  i.fas.fa-trash 
+                a(href=`/admin/products/detail/${item.id}`).btn.btn-sm.btn-warning 
+                  i.fa-solid.fa-magnifying-glass
