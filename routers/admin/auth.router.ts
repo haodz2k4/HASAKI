@@ -6,5 +6,5 @@ router
     .route("/login")
     .get(controller.login)
     .post(controller.loginPost)
-
+router.post("/logout",controller.logout)
 export default router;

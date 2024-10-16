@@ -338,3 +338,16 @@ if(btnSavePermission){
         
     })
 }
+
+
+const btnLogout = document.querySelector("[btn-logout]")
+if(btnLogout){
+    btnLogout.addEventListener("click",() => {
+        const isConfirm = confirm("Bạn có muốn đăng xuất ko ?");
+        if(isConfirm){
+            const formLogout = document.querySelector("[form-logout]");
+            formLogout.submit()
+        }
+        
+    })
+}
