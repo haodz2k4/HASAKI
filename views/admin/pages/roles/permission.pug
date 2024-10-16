@@ -1,7 +1,13 @@
 extends ../../layouts/default.pug  
 
 block main 
+    h1.text-center(style='margin-top: 30px;font-weight: 30px;')
+      i.fas.fa-key
+      |  Quản lý phân quyền 
     .container 
+      
+      .text-end
+          button.btn.btn-dark.btn-save(type='button' btn-save-permission) Lưu phân quyền 
       .permission-table
         div(data-roles=roles)
         table.table.table-bordered(table-permission)
@@ -204,7 +210,7 @@ block main
               each item in roles 
                 td
                   input.form-check-input(type='checkbox', value=item.id)
-              
+
             tr(data-name='account_create')
               td Thêm 
               each item in roles 
@@ -231,6 +237,6 @@ block main
                   input.form-check-input(type='checkbox', value=item.id)
               
             
-        .text-end
-          button.btn.btn-primary.btn-save(type='button') L&#x1B0;u Ph&acirc;n Quy&#x1EC1;n 
-    form(action="" method="post") 
+        
+    form(action="" method="post" form-update-permission).d-none 
+      input(type="text" name='roles')

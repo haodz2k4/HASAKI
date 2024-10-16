@@ -120,3 +120,30 @@ export const permissions = catchAsync(async (req: Request, res: Response) => {
         roles
     })
 })
+
+//[PATCH] "/admin/roles/permissions"
+export const permissionPatch = catchAsync(async (req: Request, res: Response) => {
+    /*
+        roles: [
+            {
+              id: 1,
+              permissions: []
+            },
+            {
+              id: 2,
+              permissions: []
+            }
+        ]
+    */
+   
+   const roles = JSON.parse(req.body.roles);
+   await Promise.all(
+    roles.map((item: { id: string; permissions: unknown[] }) => 
+        roleModel.updateOne(
+            { _id: item.id, deleted: false }, 
+            { permissions: item.permissions }   
+        )
+    )
+);
+    res.redirect("back");
+})

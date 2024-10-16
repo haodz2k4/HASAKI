@@ -298,3 +298,43 @@ if(tablePermission){
         })
     })
 }
+const btnSavePermission = document.querySelector("[btn-save-permission]");
+if(btnSavePermission){
+    const roles = []
+    btnSavePermission.addEventListener("click",() => {
+       
+        const tablePermission = document.querySelector("[table-permission]"); 
+        const row = tablePermission.querySelectorAll("tbody tr[data-name]");
+        for(const item of row) {
+            const dataName = item.getAttribute("data-name");
+            const inputs = item.querySelectorAll("input");
+            if(dataName === "id"){
+                
+                inputs.forEach((item) => {
+                    const id = item.value;
+                    roles.push({
+                        id, 
+                        permissions: []
+                    })
+                })
+            }else {
+                inputs.forEach((item, index) => {
+                    const inpChecked = item.checked;
+                    if(inpChecked){
+                        roles[index].permissions.push(dataName)
+                    }
+                })
+            }
+            
+        }
+        if(roles.length > 0) {
+            const formUpdatePermission = document.querySelector("[form-update-permission]");
+            formUpdatePermission.action = "?_method=PATCH"
+            const inp = formUpdatePermission.querySelector("input")
+            inp.value = JSON.stringify(roles)
+            formUpdatePermission.submit()
+        }
+        
+        
+    })
+}
