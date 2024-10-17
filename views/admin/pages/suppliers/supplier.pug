@@ -2,22 +2,18 @@ extends ../../layouts/default.pug
 include ../../mixins/pagination.pug 
 block main 
     h1.text-center(style='margin-top: 30px;font-weight: 30px;')
-     i.fa-solid.fa-boxes-stacked
+     i.fa-solid.fa-truck-field-un
      |  Quản lý nhà cung cấp 
     .my-tool
       .tool-container
         .row.tool-section
           form(action="").col-md-4.mb-3
             .input-group
-              input.form-control(type='text', placeholder='Tìm kiếm sản phẩm',name='keyword', value=keyword)
+              input.form-control(type='text', placeholder='Tìm kiếm Nhà cung cấp',name='keyword', value=keyword)
               .input-group-append
                 button.btn.btn-dark(type='submit') Tìm                 
           
-          form(action="" from-range).col-md-4.mb-3
-            .d-flex
-                input.form-control.mr-2(type='number',placeholder='Lượng quyền từ', name='minCountPermission' value=minCountPermission)
-                input.form-control.mr-2(type='number',placeholder='Lượng quyền đến' name='maxCountPermission', value=maxCountPermission)
-                button.btn.btn-dark(type='submit') Lọc 
+          
           .col-md-4.mb-3
             select.form-control
               option(value='') Lọc theo người tạo 
@@ -41,9 +37,11 @@ block main
             th 
               input(type="checkbox", name="")
             th #
-            th Tiêu đề 
-            th Mô tả ngắn 
-            th Số lượng quyền 
+            th Tên 
+            th Email 
+            th Số điện thoại 
+            th Địa chỉ 
+            th Trạng thái 
             th Tạo vào ngày 
             th người tạo 
             th Thao tác 
@@ -53,8 +51,12 @@ block main
               td 
                 input(type="checkbox",value=item.id, name="")
               td #{pagination.skip + 1 + index}
-              td #{item.title}
-              td !{item.description}
+              td #{item.name}
+              td #{item.contactInfo.email}
+              td #{item.contactInfo.phone} 
+              td #{item.contactInfo.address}
+              td 
+                span.badge(class=`${item.status === "active" ? "badge-success" : "badge-danger"}` btn-ch-status=item.id status=item.status endpoint='api/products' style='padding: 10px;') #{item.status}
               td !{moment(item.createdAt).format(' dddd,DD/MM/YYYY </br> HH:mm:ss')}  
               td
                 strong Hồ Sơn Hào 
