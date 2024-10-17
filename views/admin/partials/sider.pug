@@ -17,58 +17,47 @@
         li.nav-item
           a.nav-link(href='/admin/categories' class=`${activePages === 'categories' ? 'show' : ''}`)
             i.fas.fa-list
-            |  Danh m&#x1EE5;c
+            |  Danh mục 
         li.nav-item
           a.nav-link(href='/admin/services' class=`${activePages === 'services' ? 'show' : ''}`)
             i.fa-brands.fa-servicestack
-            |  D&#x1ECB;ch v&#x1EE5;
+            |  Dịch vụ 
         li.nav-item
         a.nav-link(href='/admin/suppliers' class=`${activePages === 'suppliers' ? 'show' : ''}`)
           i.fa-solid.fa-truck-field-un
-          |  Nh&agrave; cung c&#x1EA5;p
+          |  Nhà cung cấp 
         li.nav-item
-          a.nav-link(href='#orderSubmenu', data-toggle='collapse', aria-expanded='false')
+          a.nav-link(href='/admin/orders' class=`${activePages === 'orders' ? 'show' : ''}`)
             i.fa-solid.fa-cart-shopping
-            |  &Dstrok;&#x1A1;n H&agrave;ng
-          ul#orderSubmenu.collapse.list-unstyled
-            li.nav-item
-              a.nav-link(href='#')
-                | - 
-                i.fas.fa-user
-                |  Khách hàng 
-            li.nav-item
-              a.nav-link(href='#')
-                | - 
-                i.fas.fa-truck
-                |  Nhà cung cấp
+            |  Đơn hàng 
+        li.nav-item
+          a.nav-link(href='/admin/inventories' class=`${activePages === 'inventories' ? 'show' : ''}`)
+            i.fa-solid.fa-warehouse
+            |  Kho hàng 
         li.nav-item
           a.nav-link(href='/admin/roles' class=`${activePages === 'roles' ? 'show' : ''}`)
             i.fas.fa-user-shield
-            |  Nh&oacute;m Quy&#x1EC1;n
+            |  Nhóm quyền 
         li.nav-item
           a.nav-link(href='/admin/roles/permissions' class=`${activePages === 'permissions' ? 'show' : ''}`)
             i.fas.fa-key
-            |  Ph&acirc;n Quy&#x1EC1;n
+            |  Phân quyền 
         li.nav-item
           a.nav-link(href='/admin/accounts' class=`${activePages === 'accounts' ? 'show' : ''}`)
             i.fas.fa-user-cog
-            |  T&agrave;i Kho&#x1EA3;n
+            |  Tài khoản 
         li.nav-item
           a.nav-link(href='/admin/chat' class=`${activePages === 'chat' ? 'show' : ''}`)
             i.fa-solid.fa-message
-            |  Nh&#x1EAF;n tin
+            |  Nhắn tin 
       .separator
-      h5.text-light C&agrave;i &dstrok;&#x1EB7;t Chung
+      h5.text-light Cài đặt chung 
       ul.nav.flex-column
         li.nav-item
           a.nav-link(href='#')
-            i.fa-solid.fa-user-lock
-            |  Tài khoản của tôi 
-        li.nav-item
-          a.nav-link(href='#')
             i.fas.fa-cogs
-            |  C&agrave;i &dstrok;&#x1EB7;t
+            |  Cài đặt 
         li.nav-item
           a.nav-link(href='#')
             i.fas.fa-info-circle
-            |  Th&ocirc;ng tin
+            |  Thông tin 
