@@ -1,2 +1,75 @@
 extends ../../layouts/default.pug 
+include ../../mixins/pagination.pug 
 block main 
+    h1.text-center(style='margin-top: 30px;font-weight: 30px;')
+     i.fa-solid.fa-truck-field-un
+     |  Quản lý nhà cung cấp 
+    .my-tool
+      .tool-container
+        .row.tool-section
+          form(action="").col-md-4.mb-3
+            .input-group
+              input.form-control(type='text', placeholder='Tìm kiếm Nhà cung cấp',name='keyword', value=keyword)
+              select(style='width: 90px' select-search-by)
+                  option(value='') tìm theo 
+                  option(value="address") Địa chỉ 
+                  option(value="name") Tên  
+              .input-group-append
+                button.btn.btn-dark(type='submit') Tìm     
+                          
+          
+          
+          .col-md-4.mb-3
+            select.form-control
+              option(value='') Lọc theo người tạo 
+              option(value='') 
+        .row.tool-section
+          .col-md-4.mb-3
+            .action-buttons.d-flex.justify-content-md-end
+              a(href="/admin/roles/create").btn.btn-success
+                i.fa-solid.fa-plus 
+                |  Thêm 
+              button.btn.btn-warning(type='button') 
+                i.fa-solid.fa-square-plus
+                |  Thêm sll
+              button.btn.btn-secondary(type='button' btn-export-excel) 
+                i.fa-solid.fa-file-excel 
+                |  Xuất Excel 
+    .table-responsive(table-manage)
+      table.table.table-striped
+        thead.thead-dark
+          tr
+            th 
+              input(type="checkbox", name="")
+            th #
+            th Sản phẩm 
+            th Nhà cung cấp 
+            th Số lượng 
+            th wareHouse 
+            th Tạo vào ngày 
+            th người tạo 
+            th Thao tác 
+        tbody
+          each item, index in inventories    
+            tr
+              td 
+                input(type="checkbox",value=item.id, name="")
+              td #{pagination.skip + 1 + index}
+              td #{item.productId ? item.productId.title : 0} 
+              td #{item.supplierId ? item.supplierId : "Không có"}
+              td #{item.quantity} 
+              td #{item.wareHouse}
+              td !{moment(item.createdAt).format(' dddd,DD/MM/YYYY </br> HH:mm:ss')}  
+              td
+                strong Hồ Sơn Hào 
+              td
+                a(href=`/admin/suppliers/update/${item.id}`).btn.btn-sm.btn-info
+                  i.fas.fa-edit
+                button.btn.btn-sm.btn-danger(btn-delete=item.id)
+                  i.fas.fa-trash 
+                a(href=`/admin/suppliers/detail/${item.id}`).btn.btn-sm.btn-warning 
+                  i.fa-solid.fa-magnifying-glass 
+    +pagination(pagination)
+    div(path='suppliers').my-path 
+
+    form(method="POST" form-delete) 
