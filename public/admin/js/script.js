@@ -351,3 +351,16 @@ if(btnLogout){
         
     })
 }
+
+const selectSearchBy = document.querySelector("[select-search-by]");
+if(selectSearchBy){
+    selectSearchBy.addEventListener("change",() => {
+        const value = selectSearchBy.value;
+        if(value){
+            url.searchParams.set("searchBy", value)
+        }else {
+            url.searchParams.delete("searchBy")
+        }
+        window.location.href = url.href
+    })
+}

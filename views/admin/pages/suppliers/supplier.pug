@@ -10,8 +10,13 @@ block main
           form(action="").col-md-4.mb-3
             .input-group
               input.form-control(type='text', placeholder='Tìm kiếm Nhà cung cấp',name='keyword', value=keyword)
+              select(style='width: 90px' select-search-by)
+                  option(value='') tìm theo 
+                  option(value="address") Địa chỉ 
+                  option(value="name") Tên  
               .input-group-append
-                button.btn.btn-dark(type='submit') Tìm                 
+                button.btn.btn-dark(type='submit') Tìm     
+                          
           
           
           .col-md-4.mb-3
