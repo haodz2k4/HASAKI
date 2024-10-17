@@ -3,9 +3,9 @@ import { catchAsync } from "../../utils/catchAsync";
 import categoryModel from "../../models/category.model";
 import paginationHelper from "../../helpers/pagination.helper";
 import filterHelper from "../../helpers/filter.helper";
-import pick from "../../utils/pick";
+import sortHelper from "../../helpers/sort.helper";
 
-//[GET] "/admin/category"
+//[GET] "/admin/categories"
 export const category = catchAsync(async (req: Request, res: Response) => {
     //Pagination 
     const page = parseInt(req.query.page as string) || 1;
@@ -21,12 +21,22 @@ export const category = catchAsync(async (req: Request, res: Response) => {
         const index = filters.findIndex(item => item.name === status);
         filters[index].selected = true 
     }
+    const keyword = req.query.keyword as string;
+    if(keyword){
+        filter.title = new RegExp(keyword,"i");
+    }
+    //sorting 
+    const sortKey = req.query.sortKey as string;
+    const sortValue = req.query.sortValue as "asc" | "desc";
+    const sort = sortHelper(sortKey, sortValue);
+    const sortString = `${sortKey}-${sortValue}`
     //Query 
     const [categories,total] = await Promise.all([
         categoryModel
             .find(filter)
             .skip(skip)
-            .limit(limit),
+            .limit(limit)
+            .sort(sort),
         categoryModel.countDocuments(filter)
     ])
     const pagination = paginationHelper(page, limit, total)
@@ -35,8 +45,16 @@ export const category = catchAsync(async (req: Request, res: Response) => {
         categories,
         activePages: 'categories',
         pagination,
-        filters
+        filters,
+        sortString,
+        keyword
     })
 })
 
-
+//[GET] "/admin/categories"
+export const create = catchAsync(async (req: Request, res: Response) => {
+    const categories = await categoryModel.find({deleted: false});
+    res.render("admin/pages/categories/create.pug",{
+        categories
+    });
+}) 

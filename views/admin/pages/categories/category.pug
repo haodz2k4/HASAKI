@@ -9,7 +9,7 @@ block main
         .row.tool-section
           form(action="").col-md-4.mb-3
             .input-group
-              input.form-control(type='text', placeholder='Tìm kiếm sản phẩm',name='keyword', value=keyword)
+              input.form-control(type='text', placeholder='Tìm kiếm danh mục',name='keyword', value=keyword)
               .input-group-append
                 button.btn.btn-dark(type='submit') Tìm 
           .col-md-4.mb-3
@@ -22,8 +22,9 @@ block main
               option(value='') Sắp Xếp Theo 
               option(value='title-asc' selected=(sortString === "title-asc")) Tiêu đề từ A - Z
               option(value='title-desc' selected=(sortString === "title-desc")) Tiêu đề từ Z - A 
-              option(value='price-asc' selected=(sortString === "price-asc")) Giá tiền A - Z 
-              option(value="price-desc" selected=(sortString === "price-desc")) Giá tiền Z - A
+              option(value='createdAt-asc' selected=(sortString === "createdAt-asc")) Ngày tạo mới nhất 
+              option(value="createdAt-desc" selected=(sortString === "createdAt-desc")) Ngày tạo cũ nhất 
+              
         .row.tool-section
           form(method="post" action="/admin/products/change-multi?_method=PATCH" form-change-multi).col-md-4.mb-3
             .input-group
@@ -36,7 +37,18 @@ block main
                 option(value="delete-true")  Xóa 
               input(type="text", name='result').d-none 
               .input-group-append
-                button.btn.btn-dark(type='submit') Áp dụng 
+                button.btn.btn-dark(type='submit') Áp dụng  
+          .col-md-4.mb-3
+            .action-buttons.d-flex.justify-content-md-end
+              a(href="/admin/categories/create").btn.btn-success
+                i.fa-solid.fa-plus 
+                |  Thêm 
+              button.btn.btn-warning(type='button') 
+                i.fa-solid.fa-square-plus
+                |  Thêm sll
+              button.btn.btn-secondary(type='button' btn-export-excel) 
+                i.fa-solid.fa-file-excel 
+                |  Xuất Excel 
     .table-responsive(table-manage)
       table.table.table-striped
         thead.thead-dark
