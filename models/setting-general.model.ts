@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-export const COLLECTION_SETTING_GENERAL_NAME = 'Setting'
+export const COLLECTION_SETTING_GENERAL_NAME = 'Setting-general'
 export interface ISettingGeneral {
     websiteName: string,
     logo: string,

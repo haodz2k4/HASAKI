@@ -51,12 +51,12 @@
             i.fa-solid.fa-message
             |  Nhắn tin 
       .separator
-      h5.text-light Cài đặt chung 
+      h5.text-light Cài đặt
       ul.nav.flex-column
         li.nav-item
-          a.nav-link(href='#')
+          a.nav-link(href='/admin/settings/general' class=`${activePages === 'setting-general' ? 'show' : ''}`)
             i.fas.fa-cogs
-            |  Cài đặt 
+            |  Cài đặt chung 
         li.nav-item
           a.nav-link(href='#')
             i.fas.fa-info-circle
