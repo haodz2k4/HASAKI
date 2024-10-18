@@ -9,10 +9,14 @@ footer.footer.spad
               ul
                 li Hotline: 1800 6324
                 li (mi&#x1EC5;n ph&iacute; , 08-22h k&#x1EC3; c&#x1EA3; T7, CN)
-                li Email: HASAKI@Gmail.com
+                li Email: #{settingGeneral ? settingGeneral.email : "không"} 
+                li logo: 
+                  img(src=(settingGeneral ? settingGeneral.logo : "https://placehold.co/50"), alt="", style='width: 50px; height: 50px')
+                li Sđt: #{settingGeneral ? settingGeneral.phone : "không"} 
+                li địa chỉ: #{settingGeneral ? settingGeneral.address : "không"} 
           .col-lg-4.col-md-6.col-sm-6.offset-lg-1
             .footer__widget
-              h6 V&#x1EC1; HASAKI.VN
+              h6 Về #{settingGeneral ? settingGeneral.websiteName : ""} 
               ul
                 li
                   a(href='#') Gi&#x1EDB;i thi&#x1EC7;u Hasaki.vn
@@ -62,9 +66,9 @@ footer.footer.spad
                   | Copyright &copy;
                   script.
                     document.write(new Date().getFullYear());
-                  |  T&#x1EA5;t c&#x1EA3; c&aacute;c quy&#x1EC1;n &dstrok;&#x1B0;&#x1EE3;c b&#x1EA3;o l&#x1B0;u | M&#x1EAB;u n&agrave;y &dstrok;&#x1B0;&#x1EE3;c t&#x1EA1;o ra 
+                  |  #{settingGeneral ? settingGeneral.copyRight : "không"} 
                   i.fa.fa-heart(aria-hidden='true')
                   |  b&#x1EDF;i 
-                  a(href='https://colorlib.com', target='_blank') HASAKI
+                  a(href='https://colorlib.com', target='_blank') #{settingGeneral ? settingGeneral.websiteName : ""} 
                 .footer__copyright__payment
                   img(src='img/payment-item.png', alt='')

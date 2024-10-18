@@ -2,9 +2,9 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-green.py-2
       .container
         // Brand Logo and Name
         a.navbar-brand.d-flex.align-items-center(href='#')
-          img.rounded-circle.me-2(src='https://via.placeholder.com/40', alt='Logo')
+          img.rounded-circle.me-2(src=(settingGeneral ? settingGeneral.logo : ""), style='width: 50px; height: 50px' , alt='Logo')
           .brand-text
-            span.fw-bold HASAKI.vn
+            span.fw-bold #{settingGeneral ? settingGeneral.websiteName : ""} 
             br
             small Ch&#x1EA5;t l&#x1B0;&#x1EE3;ng th&#x1EAD;t - Gi&aacute; tr&#x1ECB; th&#x1EAD;t!
         // Toggle button for mobile
