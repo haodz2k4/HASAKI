@@ -25,8 +25,6 @@ export const requireAuth = catchAsync(async (req: Request, res: Response, next: 
 export const requirePermission = (permission: string) => {
     return (req: Request, res: Response, next: NextFunction) => {
         const account = res.locals.account;
-        console.log(account)
-        console.log(permission)
         //if role is admin check the permission and if role is user not check 
         if(account){
             if(!account.roleId.permissions.includes(permission)){

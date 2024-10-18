@@ -2,8 +2,8 @@ extends ../../layouts/default.pug
 include ../../mixins/pagination.pug 
 block main 
     h1.text-center(style='margin-top: 30px;font-weight: 30px;')
-     i.fa-solid.fa-truck-field-un
-     |  Quản lý nhà cung cấp 
+     i.fa-solid.fa-warehouse
+     |  Quản lý kho hàng 
     .my-tool
       .tool-container
         .row.tool-section
@@ -13,7 +13,8 @@ block main
               select(style='width: 90px' select-search-by)
                   option(value='') tìm theo 
                   option(value="address") Địa chỉ 
-                  option(value="name") Tên  
+                  option(value="title") Tên sản phẩm 
+                  option(value="name") Tên nhà cung cấp 
               .input-group-append
                 button.btn.btn-dark(type='submit') Tìm     
                           
@@ -23,7 +24,6 @@ block main
             select.form-control
               option(value='') Lọc theo người tạo 
               option(value='') 
-        .row.tool-section
           .col-md-4.mb-3
             .action-buttons.d-flex.justify-content-md-end
               a(href="/admin/roles/create").btn.btn-success
