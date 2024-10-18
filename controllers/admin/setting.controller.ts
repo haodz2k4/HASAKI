@@ -12,3 +12,18 @@ export const general = catchAsync(async (req: Request, res: Response) => {
         pageTitle: 'Cài đặt chung'
     })
 })
+
+//[PATCH] "/admin/settings/general"
+export const generalPatch = catchAsync(async (req: Request, res: Response) => {
+    const body = req.body;
+    console.log(body)
+    const settingGeneral = await settingGeneralModel.findOne();
+    if(!settingGeneral){
+        await settingGeneralModel.create(body)
+    }else{
+        Object.assign(settingGeneral, body)
+        await settingGeneral.save()
+    }
+    req.flash('success','Cập nhật thành công');
+    res.redirect("back");
+})

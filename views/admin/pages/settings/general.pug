@@ -1,3 +1,40 @@
 extends ../../layouts/default.pug 
 
 block main 
+    .container
+      .form-container
+        h2.mb-4.text-center Cập nhật cài đặt chung 
+        form(method="post" action="?_method=PATCH" enctype="multipart/form-data")
+          // Tiêu đề
+          .mb-3
+            label.form-label(for='websiteName') Tên website 
+            input#websiteName.form-control(type='text', name='websiteName', placeholder='Nhập tên website', required='', value=(settingGeneral ? settingGeneral.websiteName : ""))
+          
+          // Hình ảnh
+          .mb-3
+            label.form-label Logo 
+            .image-upload-wrapper
+              span kéo thả hoặc chọn hình ảnh ở đây 
+              input#image(type='file', name='logo', accept='image/*')
+            #imagePreview.image-preview 
+
+            .my-img 
+              img(src=(settingGeneral ? settingGeneral.logo : "https://placehold.co/70"), alt="", style='width: 70px; height: 70px')
+          // Mô tả
+          .mb-3
+            label.form-label(for='copyRight') Bản quyền bởi 
+            textarea.form-control( id='my-expressjs-tinymce-app' name='copyRight', rows='5', placeholder='Nhập nội dung') !{settingGeneral ? settingGeneral.copyRight : ""}
+          .mb-3
+            label.form-label(for='address') Địa chỉ  
+            input#address.form-control(type='text', name='address', placeholder='Nhập địa chỉ của website', required='' value=(settingGeneral ? settingGeneral.address : "")) 
+          .row.mb-3
+            .col-md-6
+              label.form-label(for='phone') Số điện thoại của bạn 
+              input#phone.form-control(type='phone', name='phone', placeholder='Nhập số điện thoại của website', value=(settingGeneral ? settingGeneral.phone : ""))
+            .col-md-6
+              label.form-label(for='email') Email của bạn 
+              input#email.form-control(type='email', name='email', placeholder='Nhập email của web site', value=(settingGeneral ? settingGeneral.email : ""))
+          
+          // Nút Submit
+          .d-grid
+            button.btn.btn-primary(type='submit' style='width: 100%') Cập nhật cài đặt chung 
