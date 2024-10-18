@@ -6,19 +6,20 @@ import { storage } from "../../storage/cloud";
 import multer from "multer";
 const upload = multer({ storage });
 
+import { requireAuth } from "../middlewares/auth.middleware";
 router  
     .route("/")
     .get(controller.getProducts)
-    .post(controller.createProduct)
+    .post(requireAuth,controller.createProduct)
 
 router
     .route("/:id")
     .get(controller.getProductById)
-    .patch(controller.updateProduct)
-    .delete(controller.deleteProduct)
+    .patch(requireAuth,controller.updateProduct)
+    .delete(requireAuth,controller.deleteProduct)
 router.get("/slug/:slug",controller.getProductBySlug)
 router
     .route("/:id/upload")
-    .post(upload.single('avatar'),controller.uploadFile)
+    .post(requireAuth,upload.single('avatar'),controller.uploadFile)
 
 export default router
