@@ -56,7 +56,7 @@ block main
                 input(type="checkbox",value=item.id, name="")
               td #{pagination.skip + 1 + index}
               td #{item.productId ? item.productId.title : 0} 
-              td #{item.supplierId ? item.supplierId : "Không có"}
+              td #{item.supplierId ? item.supplierId.name : "Không có"}
               td #{item.quantity} 
               td #{item.wareHouse}
               td !{moment(item.createdAt).format(' dddd,DD/MM/YYYY </br> HH:mm:ss')}  

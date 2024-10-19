@@ -16,12 +16,13 @@ export const inventory = catchAsync(async (req: Request, res: Response) => {
     }  
     //Pagination 
     const page = parseInt(req.query.page as string) || 1;
-    const limit = parseInt(req.query.limit as string) || 5;
+    const limit = parseInt(req.query.limit as string) || 10;
     const skip = (page - 1) * limit;
     const [inventories, total] = await Promise.all([
         inventoryModel
         .find(filter)
         .skip(skip)
+        .limit(limit)
         .populate('productId','title')
         .populate('supplierId','name'),
         inventoryModel.countDocuments({deleted: false})
