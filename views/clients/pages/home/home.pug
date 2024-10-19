@@ -37,7 +37,7 @@ block main
           .carousel-item
             .d-flex.justify-content-center
              each item in categories 
-              .col-6.col-md-4.col-lg-2
+              a(href=`/products/${item.slug}` style='text-decoration: none').col-6.col-md-4.col-lg-2
                 .card.product-sold-card
                   img(src='https://via.placeholder.com/100', alt=item.title)
                   .product-sold-title #{item.title}
@@ -128,7 +128,7 @@ block main
             .col
               .recommended-product-card
                 img.img-fluid(src='https://via.placeholder.com/300x200', alt=item.title)
-                .recommended-product-title(title='Sản phẩm 1') #{item.title}
+                a(href=`/products/${item.slug}` style='text-decoration: none').recommended-product-title(title='Sản phẩm 1') #{item.title}
                 .recommended-product-prices
                   span.recommended-new-price #{item.oldPrice}
                 .recommended-purchase-info
@@ -145,5 +145,5 @@ block main
                   | C&ograve;n h&agrave;ng: 25
                 a.recommended-add-to-cart(href='#')
                   i.fas.fa-shopping-cart
-                  span Th&ecirc;m v&agrave;o gi&#x1ECF;
+                  span Thêm vào giỏ 
             

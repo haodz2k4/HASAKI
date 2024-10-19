@@ -1,0 +1,222 @@
+
+
+.container3 {
+  display: flex;
+  padding: 20px;
+  background-color: white;
+  width: 80%;
+  height: 80%;
+}
+
+.image-gallery {
+  width: 30%;
+  margin-right: 20px;
+}
+
+.main-image {
+  width: 100%;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+
+.thumbnail-images {
+  display: flex;
+  justify-content: space-between;
+}
+
+.thumbnail-images img {
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+}
+
+.product-details {
+  width: 70%;
+}
+
+.product-title {
+  font-size: 17px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.product-code {
+  height: 2vh;
+  font-size: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e5fbf1;
+  color: #306e51;
+  border-radius: 5px;
+}
+.product-price {
+  margin-bottom: 10px;
+}
+.product-status {
+  font-size: 10px;
+}
+.stars {
+  color: #d9531e;
+  font-size: 16px;
+}
+
+.product-price span {
+  font-size: 20px;
+  color: red;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.product-color {
+  margin-bottom: 10px;
+}
+
+.color-option {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.product-quantity {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.delivery-info {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+}
+
+
+/* button:hover {
+          background-color: #d9531e;
+        } */
+
+/* Style for image overlay */
+.image-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.countdown {
+  color: white;
+  background-color: #d9531e;
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+.flash-icon {
+  color: white;
+}
+.flash-deal {
+  font-weight: bold;
+  font-size: 20px;
+}
+.current-price {
+  font-size: 25px !important;
+}
+.old-price {
+  font-size: 18px !important;
+}
+
+.countdown-timer {
+  color: white;
+  font-weight: bold;
+  font-size: 18px; /* Kích thước đồng hồ đếm ngược */
+}
+
+.overlay-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Căn giữa nội dung */
+  justify-content: center; /* Căn giữa nội dung */
+  position: relative;
+}
+/* .overlayImage{
+         
+        } */
+
+.overlay-content img {
+  max-width: 80%;
+  height: 73vh;
+}
+
+.overlay-thumbnails {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.quantity {
+  width: 35px;
+}
+
+.overlay-thumbnails img {
+  width: 64px;
+  height: 64px;
+  margin: 0 5px;
+  cursor: pointer;
+  border: 2px solid white;
+}
+.delivery-info {
+  margin-bottom: 20px; /* Khoảng cách dưới */
+  padding: 15px; /* Khoảng cách bên trong */
+  background-color: #f9f9f9; /* Màu nền */
+  border: 1px solid #ddd; /* Viền */
+}
+.nav-detail  {
+  background-color: #f8f8f8; /* Màu nền của thanh điều hướng */
+  padding: 10px;
+  text-align: center;
+}
+
+.nav-detail  ul {
+  list-style: none; /* Loại bỏ dấu đầu dòng của danh sách */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center; /* Căn giữa các mục trong thanh điều hướng */
+  align-items: center;
+}
+
+.nav-detail  ul li {
+  margin: 0 15px; /* Khoảng cách giữa các mục */
+}
+
+.nav-detail ul li:not(:last-child)::after {
+  content: '|'; /* Thêm ký tự | giữa các mục */
+  margin-left: 15px;
+  color: #888; /* Màu sắc của dấu phân cách */
+}
+
+.nav-detail  a {
+  text-decoration: none; /* Loại bỏ gạch chân */
+  color: #333; /* Màu chữ của liên kết */
+  font-weight: bold;
+}
+
+.nav-detail  a:hover {
+  color: #007bff; /* Màu chữ khi hover */
+}
+
+#cach-dung,
+#thanh-phan,
+#thong-so,
+#thongtin {
+  margin-top: 10px;
+  background-color: white;
+  width: 117%;
+  padding: 14px;
+}

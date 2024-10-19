@@ -7,7 +7,7 @@ export const home = async (req: Request, res: Response) => {
     const soldProducts = await productModel.find({
         deleted: false,
         status: "active"
-    }).limit(20)
+    }).limit(10)
     
     const products = await productModel.find({
         deleted: false, status: "active", highlighted: "1"

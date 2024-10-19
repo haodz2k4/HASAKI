@@ -55,6 +55,7 @@ export const detail = catchAsync(async (req: Request, res: Response) => {
     const {slug} = req.params;
     
     const product = await productModel.findOne({slug, deleted: false})
+    console.log(product)
     if(!product){
         throw new RenderError(404,"Product is not found ")
     }

@@ -1,4 +1,80 @@
 extends ../../layouts/default.pug 
 
+block styles 
+  link(rel='stylesheet' href='/css/product-detail.css')
+
+
 block main 
-  h2 Siuu
+    .container3
+      // Phần Hình Ảnh
+      .image-gallery
+        img#mainImage.main-image(src=(product.thumbnail.length > 0 ? product.thumbnail[0] : "https://placehold.co/300"), alt='Main Image', onclick='showOverlay(this.src)')
+        .thumbnail-images 
+          if product.thumbnail.length > 0 
+            each item in product.thumbnail 
+              img(src=item, alt='Thumbnail 1', onclick='changeImage(this)')
+          
+      // Phần Chi Tiết Sản Phẩm
+      .product-details
+        .product-title(style='font-size: 30px') #{product.title}
+        button.product-code
+          | S&#x1ED1; c&ocirc;ng b&#x1ED1; v&#x1EDB;i B&#x1ED9; Y T&#x1EBF;: 355/23/CBMP-BD
+        .countdown
+          span.flash-deal
+            span.flash-icon &#x26A1;
+            |  Flash Deal! K&#x1EBF;t th&uacute;c trong:
+          span#countdown-timer.countdown-timer 0 : 00 : 00 : 00
+        .product-price
+          span.current-price #{product.newPrice}
+          |  (&Dstrok;&atilde; bao g&#x1ED3;m VAT)
+          br
+          |        Giá cũ: 
+          span.old-price #{product.oldPrice}
+          |  - Ti&#x1EBF;t ki&#x1EC7;m:
+          |         
+          span.discount (-#{product.discountPercentage}%)
+        
+        .product-quantity
+          label(for='quantity') Số lượng: 
+          input#quantity.form-control(type='number', name='quantity', value='1', min='1', style='width: 65px;')
+        .delivery-info
+          strong Giao Nhanh Mi&#x1EC5;n Ph&iacute; 2H t&#x1EA1;i 220 Chi Nh&aacute;nh:
+          p
+            | B&#x1EA1;n mu&#x1ED1;n nh&#x1EAD;n h&agrave;ng tr&#x1B0;&#x1EDB;c 12h h&ocirc;m nay (Mi&#x1EC5;n ph&iacute;). &Dstrok;&#x1EB7;t h&agrave;ng trong 38
+            | ph&uacute;t t&#x1EDB;i v&agrave; ch&#x1ECD;n giao h&agrave;ng 2H &#x1EDF; b&#x1B0;&#x1EDB;c thanh to&aacute;n.
+            a(href='#') Xem chi ti&#x1EBF;t
+        .button-container
+          button.btn.btn-success
+            i.fas.fa-shopping-cart
+            |  Th&ecirc;m V&agrave;o Gi&#x1ECF; H&agrave;ng
+          button.btn.btn-warning Mua Ngay
+    // Overlay for larger image
+    #imageOverlay.image-overlay(onclick='hideOverlay()')
+      .overlay-content
+        img#overlayImage(src='', alt='Overlay Image')
+        .overlay-thumbnails
+          img(src='https://media.hcdn.vn/rating/171006510389710.jpg', alt='Thumbnail 1', onclick='changeOverlayImage(this); event.stopPropagation();')
+          img(src='https://media.hcdn.vn/rating/158963681811690.jpg', alt='Thumbnail 2', onclick='changeOverlayImage(this); event.stopPropagation();')
+          img(src='https://media.hcdn.vn/rating/161828416317171.jpg', alt='Thumbnail 3', onclick='changeOverlayImage(this); event.stopPropagation();')
+          img(src='https://media.hcdn.vn/rating/161828416317170.jpg', alt='Thumbnail 4', onclick='changeOverlayImage(this); event.stopPropagation();')
+          img(src='https://media.hcdn.vn/rating/161828416317173.jpg', alt='Thumbnail 5', onclick='changeOverlayImage(this); event.stopPropagation();')
+    nav.nav-detail(style='width: 82%; margin-top: 10px; margin-bottom: 10px')
+      ul
+        li
+          a(href='#thong-tin') Thông tin 
+        li
+          a(href='#thong-so') Thông số 
+        li
+          a(href='#thanh-phan') Thành phần 
+        li
+          a(href='#cach-dung') Cách dùng 
+    .container2
+      // Phần Hình Ảnh
+      // Thumbnails omitted for brevity
+      // Phần Chi Tiết Sản Phẩm
+      .product-details
+        // Countdown omitted for brevity
+        // Phần nội dung sản phẩm
+        section#thongtin
+          .container(style='margin-left: 20px')
+            |  !{product.description}
