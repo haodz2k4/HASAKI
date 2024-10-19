@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { catchAsync } from "../../utils/catchAsync";
 import inventoryModel from "../../models/inventory.model";
 import paginationHelper from "../../helpers/pagination.helper";
+import productModel from "../../models/product.model";
 
 //[GET] "/admin/inventories"
 export const inventory = catchAsync(async (req: Request, res: Response) => {
@@ -37,3 +38,14 @@ export const inventory = catchAsync(async (req: Request, res: Response) => {
         keyword
     })
 })
+
+//[GET] "/admin/inventories"
+export const create = catchAsync(async (req: Request, res: Response) => {
+    const products = await productModel.find({deleted: false, status: "active"});
+    const suppliers = await productModel.find({deleted: false, status: "active"});
+    res.render("admin/pages/inventories/create.pug", {
+        products,
+        suppliers,
+        activePages: 'inventories'
+    });
+}) 

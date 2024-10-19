@@ -1,0 +1,55 @@
+extends ../../layouts/default.pug 
+
+block main 
+    .container
+      .form-container
+        h2.mb-4.text-center Thêm đơn hàng mới 
+        form(method="post")
+          
+          .mb-3
+            .form-group
+              label(for='searchProduct') Tìm kiếm sản phẩm 
+              input#searchProduct.form-control(type='text', placeholder='Nhập tên sản phẩm' inp-product)
+            // Product list
+            .product-list-modal.d-none 
+              .product-item
+                img(src='https://via.placeholder.com/50', alt='Product 1')
+                .product-name Product 1
+              .product-item
+                img(src='https://via.placeholder.com/50', alt='Product 2')
+                .product-name Product 2
+              .product-item
+                img(src='https://via.placeholder.com/50', alt='Product 3')
+                .product-name Product 3
+              .product-item
+                img(src='https://via.placeholder.com/50', alt='Product 4')
+                .product-name Product 4
+              .product-item
+                img(src='https://via.placeholder.com/50', alt='Product 5')
+                .product-name Product 5 
+            .form-group
+              label(for='searchProduct') Tìm kiếm nhà cung cấp 
+              input#searchProduct.form-control(type='text', placeholder='Nhập tên nhà cung cấp' inp-product)
+            // Product list
+            .product-list-modal
+              .product-item
+                .product-name Product 2
+              .product-item
+                .product-name Product 3
+              .product-item
+                .product-name Product 4
+              .product-item
+                .product-name Product 5
+          
+          // Vị trí và Trạng thái
+          .row.mb-3
+            .col-md-6
+              label.form-label(for='quantity') Nhập số lượng 
+              input#quantity.form-control(type='number', name='quantity', placeholder='Nhập số lượng')
+            .col-md-6
+              label.form-label(for='wareHouse') Nhập địa chỉ nhà kho  
+              input#wareHouse.form-control(type='text', name='wareHouse', placeholder='Nhập địa chỉ nhà kho')
+                
+          // Nút Submit
+          .d-grid
+            button.btn.btn-primary(type='submit' style='width: 100%') Thêm đơn hàng 

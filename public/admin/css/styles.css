@@ -456,3 +456,32 @@ body {
 }
 /*END PERMISSION*/
 
+/*PRODUCT LIST MODAL*/
+.product-list-modal {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #e0e0e0;
+  margin-top: 10px;
+  padding: 10px;
+}
+.product-item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid #e0e0e0;
+  cursor: pointer;
+}
+.product-item:hover {
+  background-color: #007bff;
+  color: white;
+}
+.product-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 15px;
+}
+.product-name {
+  flex-grow: 1;
+}
+/*PRODUCT*/
