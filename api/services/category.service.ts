@@ -9,8 +9,8 @@ interface IFilterCategory {
     keyword?: string;
     searchBy?: string
 }
-interface IQueryCategory extends IPagination {
-    filter: IFilterCategory;
+interface IQueryCategory extends Partial<IPagination> {
+    filter?: IFilterCategory;
     sortKey?: string;
     sortValue?: sortType;
     selectFields?: string; 
@@ -24,11 +24,11 @@ export const getCategoryById = async (id: string) => {
     return await categoryModel.findOne({_id: id, deleted: false})
 }
 
-export const getCategories = async (queryCategory: IQueryCategory) => {
+export const getCategories = async (queryCategory: IQueryCategory = {}) => {
     const {
         page = 1,
         limit = 10,
-        filter,
+        filter = {},
         sortKey = "createdAt",
         sortValue = "desc",
         selectFields = ""
@@ -57,7 +57,7 @@ export const getCategories = async (queryCategory: IQueryCategory) => {
 
     }
     return {
-        categories,
+        items: categories,
         pagination
     }
 }
