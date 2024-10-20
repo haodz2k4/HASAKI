@@ -1,17 +1,18 @@
 import { Router } from "express";
 import * as controller from "../controllers/category.controller"
+import { requireAuth, requirePermission } from "../middlewares/auth.middleware";
 const router: Router = Router()
 
 router
     .route("/")
-    .get(controller.getCategories) 
-    .post(controller.createCategory)
+    .get(requirePermission('category_view'),controller.getCategories) 
+    .post(requireAuth,requirePermission('category_create'),controller.createCategory)
 
 router 
     .route("/:id")
-    .get(controller.getCategoryById)
-    .patch(controller.updateCategory)
-    .delete(controller.deleteCategory)
+    .get(requirePermission('category_view'),controller.getCategoryById)
+    .patch(requireAuth,requirePermission('category_update'),controller.updateCategory)
+    .delete(requireAuth,requirePermission('category_delete'),controller.deleteCategory)
 
-router.get("/slug/:slug",controller.getCategoryBySlug)
+router.get("/slug/:slug",requirePermission('category_view'),controller.getCategoryBySlug)
 export default router
