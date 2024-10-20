@@ -3,6 +3,7 @@ import { catchAsync } from "../utils/catchAsync";
 import * as categoryService from "../services/category.service"
 import pick from "../utils/pick";
 import { sortType } from "../utils/types/sort";
+import { ApiError } from "../utils/error";
 
 //[GET] "/api/categories"
 export const getCategories = catchAsync(async (req: Request, res: Response) => {
@@ -17,5 +18,48 @@ export const getCategories = catchAsync(async (req: Request, res: Response) => {
     };
     const record = await categoryService.getCategories(query)
     res.json(record)
+
+}) 
+
+//[POST] "/api/categories"
+export const createCategory = catchAsync(async (req: Request, res: Response) => {
+    const body = req.body
+    const category = await categoryService.createCategory(body);
+    res.json(category)
+})
+
+//[GET] "/api/categories/:id"
+export const getCategoryById = catchAsync(async (req: Request, res: Response) => {
+    const {id} = req.params
+    const category = await categoryService.getCategoryById(id)
+    if(!category){
+        throw new ApiError(404,"Category is not found")
+    }
+    res.json(category)
+}) 
+
+//[PATCH] "/api/categories/:id"
+export const updateCategory = catchAsync(async (req: Request, res: Response) => {
+    const {id} = req.params
+    const body = req.body
+    const category = await categoryService.updateCategory(id,body);
+    res.json(category)
+})
+
+//[DELETE] "/api/categories/:id"
+export const deleteCategory = catchAsync(async (req: Request, res: Response) => {
+    const {id} = req.params;
+    await categoryService.deleteCategory(id);
+    res.status(204)
+}) 
+
+//[GET] "/api/categories/slug/:slug"
+export const getCategoryBySlug = catchAsync(async (req: Request, res: Response) => {
+    const {slug} = req.params;
+    const category = await categoryService.getCategoryBySlug(slug);
+    if(!category){
+        throw new ApiError(404,"Category is not found")
+    }
+    res.json(category)
 
 })
