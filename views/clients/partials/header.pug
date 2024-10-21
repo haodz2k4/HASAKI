@@ -15,7 +15,7 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-green.py-2
           ul.navbar-nav.ms-auto.mb-2.mb-lg-0.align-items-center
             // Search bar with icon inside input
             li.nav-item.mx-2.search-bar.position-relative
-              form.position-relative
+              form.position-relative(form-search)
                 input#searchInput.form-control.rounded-pill(type='search',name='keyword' placeholder='Tìm kiếm sản phẩm...', aria-label='Search', value=keyword)
                 i.bi.bi-search.position-absolute.search-icon
                 // Suggestions Box

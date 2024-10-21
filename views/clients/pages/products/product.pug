@@ -17,12 +17,13 @@ block main
             button.btn.btn-success.w-100(style='margin-top: 10px' type='submit') Lọc 
           // Lọc theo nhãn hàng
           .mb-3
-            label.form-label(for='brandSelect') Nh&atilde;n h&agrave;ng
-            select#brandSelect.form-select
-              option(value='0') T&#x1EA5;t c&#x1EA3;
-              option(value='1') Nh&atilde;n h&agrave;ng A
-              option(value='2') Nh&atilde;n h&agrave;ng B
-              option(value='3') Nh&atilde;n h&agrave;ng C
+            label.form-label(for='sortSelect') Sắp xếp theo 
+            select#sortSelect.form-select
+              option(value='price-asc') Giá tiền A - Z 
+              option(value='price-desc') Giá tiền Z - A
+              option(value='sold-desc') Mua nhiều nhất 
+              option(value='sold-asc') Mua ít nhất 
+              option(value="rating-asc") Đánh giá cao nhất  
           // Nút lọc
           button.btn.btn-primary.w-100 L&#x1ECD;c
       // Product Listing

@@ -90,7 +90,7 @@ if (searchInput) {
     console.log(getDomain())
     try {
      
-      const endpoint = `${getDomain()}/api/products?keyword=${value}&only=title thumbnail&limit=5`;
+      const endpoint = `${getDomain()}/api/products?keyword=${value}&only=title thumbnail slug&limit=5`;
       console.log(endpoint)
       const response = await fetch(endpoint);
       const data = await response.json();
@@ -101,7 +101,7 @@ if (searchInput) {
           data.products.map(product => `
             <li>
               <img src="${product.thumbnail.length > 0 ? product.thumbnail[0] : 'https://via.placeholder.com/30' }" alt="${product.title}" width="30" height="30"/>
-              ${product.title}
+              <a href="/products/${product.slug}" style='text-decoration: none; color: black'> ${product.title} </a>
             </li>
           `).join('') +
           `</ul>`;
@@ -184,14 +184,38 @@ if(btnPagination.length > 0){
   btnPagination.forEach((item) => {
     item.addEventListener("click",() => {
       const page = item.getAttribute("btn-pagination");
+      
       if(page){
         url.searchParams.set("page", page)
-      }else{
+      }
+      if(page === '1'){
         url.searchParams.delete("page")
       }
       window.location.href = url.href
     })
   })
+}
+
+const formSearch = document.querySelector("[form-search]");
+if(formSearch){
+  formSearch.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const input = formSearch.querySelector("input");
+    if (!input) return;  
+
+    const keyword = input.value.trim();
+    const currentUrl = window.location.origin + "/products"; 
+    
+    const url = new URL(currentUrl);
+
+    if(keyword){
+      url.searchParams.set('keyword', keyword); 
+    } else {
+      url.searchParams.delete('keyword'); 
+    }
+    window.location.href = url.href;  
+  });
 }
 
 
