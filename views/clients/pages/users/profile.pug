@@ -12,16 +12,16 @@ block main
           img#avatar-profile.Krounded-circle(src='https://via.placeholder.com/80' alt='Icon')
         .Ktttk-info
           .Kinfo-form
-            label.Klabel(for='username') T&ecirc;n t&agrave;i kho&#x1EA3;n:
-            input#username.Kinput-text(type='text' value='Kha Tran')
+            label.Klabel(for='username') Tên tài khoản 
+            input#username.Kinput-text(type='text' value=user.fullName)
             label.Klabel Gi&#x1EDB;i t&iacute;nh:
             .Klabel-gender(style='display: flex; color:black;align-items: center;')
-              input#male(type='radio' name='gender' value='male' checked='')
+              input#male(type='radio' name='gender' value='male' checked=(user.gender === 'nam'))
               label.Klabel(for='male') Nam
-              input#female(type='radio' name='gender' value='female')
-              label.Klabel(for='female') N&#x1EEF;
+              input#female(type='radio' name='gender' value='female' checked=(user.gender === 'nữ'))
+              label.Klabel(for='female') Nữ 
             label.Klabel(for='dob') Ng&agrave;y sinh:
-            input#dob.Kinput-date(type='date')
+            input#dob.Kinput-date(type='date' value=user.birthDate)
             div(style='margin-top: 15px; display: flex; align-items: center;')
               input#promotions.Kinput-checkbox(type='checkbox' style='margin-right: 10px;')
               label.Klabel(for='promotions' style='font-size: 18px; margin-bottom: 15px;') Nh&#x1EAD;n th&ocirc;ng tin khuy&#x1EBF;n m&atilde;i
@@ -29,23 +29,20 @@ block main
               | C&#x1EAD;p nh&#x1EAD;t
     .Ktttk-right
       h3 S&#x1ED1; &dstrok;i&#x1EC7;n tho&#x1EA1;i v&agrave; Email
-      .Kphone-section
-        div
+      .Kemail-section
           label.Klabel(for='phone')
             i.fas.fa-phone(style='font-size: 20px; margin-right: 5px')
-            |                   S&#x1ED1; &dstrok;i&#x1EC7;n tho&#x1EA1;i:
-          p(style='font-size: 12px; color: #777') C&#x1EAD;p nh&#x1EAD;t s&#x1ED1; &dstrok;i&#x1EC7;n tho&#x1EA1;i
-        button.Kbtn-update(type='button' onclick="window.location.href='your-new-page.html'")
-          | C&#x1EAD;p nh&#x1EAD;t
+            | Số điện thoại 
+          p  #{user.phone}
       .Kemail-section
         label.Klabel
           i.fas.fa-envelope(style='font-size: 20px; margin-right: 5px')
           |                 Email:
-        p trankha1882k4@gmail.com
+        p  #{user.email}
       .Ksecurity-section
         label.Klabel
-          i.fas.fa-lock(style='font-size: 20px; margin-right: 5px')
-          |                 &Dstrok;&#x1ED5;i m&#x1EAD;t kh&#x1EA9;u
+          i.fas.fa-lock(style='font-size: 20px; margin-right: 5px;')
+          | Đổi mật khẩu 
         button.Kbtn-update(type='button' style='width: 40%') &Dstrok;&#x1ED5;i m&#x1EAD;t kh&#x1EA9;u
       h4(style='margin-top: 60px') Li&ecirc;n k&#x1EBF;t m&#x1EA1;ng x&atilde; h&#x1ED9;i
       .Ksocial-section

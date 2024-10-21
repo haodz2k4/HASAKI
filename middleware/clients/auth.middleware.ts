@@ -14,10 +14,11 @@ export const requireAuth = catchAsync(async (req: Request, res: Response, next: 
         throw new RenderError(401,"Vui lòng đăng nhập","/users/login")
     }
     const payload = verify(token,config.jwt.user.jwt_access_secret as string);
-    const {id} = payload as JwtPayload; 
-    const user = await userModel.findOne({_id: id, deleted: false});
+    const {_id} = payload as JwtPayload; 
+    console.log(_id)
+    const user = await userModel.findOne({_id, deleted: false});
     if(!user){
-        throw new RenderError(401,"Token không hợp lệ","/users/login");
+        throw new RenderError(401,"Token không hợp lệ hoặc người dùng không được tìm thấy","/users/login");
     }
     if(user.status === 'inactive'){
         throw new RenderError(403,"Tài khoản của bạn đã bị khóa");

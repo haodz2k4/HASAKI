@@ -154,4 +154,4 @@ export const getProfiles = catchAsync(async (req: Request, res: Response) => {
     res.render("clients/pages/users/profile.pug",{
         user
     })
-})
+}) 
