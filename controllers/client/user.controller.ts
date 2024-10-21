@@ -147,3 +147,11 @@ export const resetPasswordPost = catchAsync(async (req: Request, res: Response) 
     res.clearCookie('tokenReset')
     res.redirect("/users/login")
 })
+
+//[GET] "/users/profiles"
+export const getProfiles = catchAsync(async (req: Request, res: Response) => {
+    const user = res.locals.user;
+    res.render("clients/pages/users/profile.pug",{
+        user
+    })
+})

@@ -202,7 +202,6 @@ if(formSearch){
     e.preventDefault();
 
     const input = formSearch.querySelector("input");
-    if (!input) return;  
 
     const keyword = input.value.trim();
     const currentUrl = window.location.origin + "/products"; 

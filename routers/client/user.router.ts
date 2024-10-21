@@ -1,6 +1,7 @@
 import { Router } from "express";
 const router: Router = Router()
 import * as controller from "../../controllers/client/user.controller"
+import { requireAuth } from "../../middleware/clients/auth.middleware";
 router
     .route("/login")
     .get(controller.login)
@@ -23,6 +24,9 @@ router
 router
     .route("/reset-password")
     .get(controller.resetPassword)
-    .post(controller.resetPasswordPost)
-router.post("/logout",controller.logout)
+    .post(controller.resetPasswordPost) 
+router.post("/logout",controller.logout) 
+
+
+router.get("/profiles",requireAuth,controller.getProfiles)
 export default router

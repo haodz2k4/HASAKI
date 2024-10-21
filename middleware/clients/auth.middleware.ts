@@ -1,3 +1,4 @@
+
 import { Request, Response, NextFunction } from "express";
 import { catchAsync } from "../../utils/catchAsync";
 import { RenderError } from "../../utils/error";
@@ -10,13 +11,13 @@ export const requireAuth = catchAsync(async (req: Request, res: Response, next: 
     
     const token = req.cookies.accessToken;
     if(!token){
-        throw new RenderError(401,"Vui lòng đăng nhập")
+        throw new RenderError(401,"Vui lòng đăng nhập","/users/login")
     }
-    const payload = verify(token,config.jwt_user.jwt_access_secret as string);
+    const payload = verify(token,config.jwt.user.jwt_access_secret as string);
     const {id} = payload as JwtPayload; 
     const user = await userModel.findOne({_id: id, deleted: false});
     if(!user){
-        throw new RenderError(401,"Token không hợp lệ");
+        throw new RenderError(401,"Token không hợp lệ","/users/login");
     }
     if(user.status === 'inactive'){
         throw new RenderError(403,"Tài khoản của bạn đã bị khóa");

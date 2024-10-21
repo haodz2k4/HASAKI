@@ -1,0 +1,61 @@
+extends ../../layouts/default.pug 
+
+block styles 
+    link(rel="stylesheet", href="/css/profiles.css")
+block main 
+ .Kright
+  .Kthongtintaikhoan
+    .Kthongtintaikhoan-a
+      h1.Ktttk-header Th&ocirc;ng tin t&agrave;i kho&#x1EA3;n
+      .Ktttk-content
+        .Ktttk-icon
+          img#avatar-profile.Krounded-circle(src='https://via.placeholder.com/80' alt='Icon')
+        .Ktttk-info
+          .Kinfo-form
+            label.Klabel(for='username') T&ecirc;n t&agrave;i kho&#x1EA3;n:
+            input#username.Kinput-text(type='text' value='Kha Tran')
+            label.Klabel Gi&#x1EDB;i t&iacute;nh:
+            .Klabel-gender(style='display: flex; color:black;align-items: center;')
+              input#male(type='radio' name='gender' value='male' checked='')
+              label.Klabel(for='male') Nam
+              input#female(type='radio' name='gender' value='female')
+              label.Klabel(for='female') N&#x1EEF;
+            label.Klabel(for='dob') Ng&agrave;y sinh:
+            input#dob.Kinput-date(type='date')
+            div(style='margin-top: 15px; display: flex; align-items: center;')
+              input#promotions.Kinput-checkbox(type='checkbox' style='margin-right: 10px;')
+              label.Klabel(for='promotions' style='font-size: 18px; margin-bottom: 15px;') Nh&#x1EAD;n th&ocirc;ng tin khuy&#x1EBF;n m&atilde;i
+            button.Kbtn-update(type='button' style='width: 100%; background-color: #078734; color: white; margin-top: 20px; border-radius: 20px;')
+              | C&#x1EAD;p nh&#x1EAD;t
+    .Ktttk-right
+      h3 S&#x1ED1; &dstrok;i&#x1EC7;n tho&#x1EA1;i v&agrave; Email
+      .Kphone-section
+        div
+          label.Klabel(for='phone')
+            i.fas.fa-phone(style='font-size: 20px; margin-right: 5px')
+            |                   S&#x1ED1; &dstrok;i&#x1EC7;n tho&#x1EA1;i:
+          p(style='font-size: 12px; color: #777') C&#x1EAD;p nh&#x1EAD;t s&#x1ED1; &dstrok;i&#x1EC7;n tho&#x1EA1;i
+        button.Kbtn-update(type='button' onclick="window.location.href='your-new-page.html'")
+          | C&#x1EAD;p nh&#x1EAD;t
+      .Kemail-section
+        label.Klabel
+          i.fas.fa-envelope(style='font-size: 20px; margin-right: 5px')
+          |                 Email:
+        p trankha1882k4@gmail.com
+      .Ksecurity-section
+        label.Klabel
+          i.fas.fa-lock(style='font-size: 20px; margin-right: 5px')
+          |                 &Dstrok;&#x1ED5;i m&#x1EAD;t kh&#x1EA9;u
+        button.Kbtn-update(type='button' style='width: 40%') &Dstrok;&#x1ED5;i m&#x1EAD;t kh&#x1EA9;u
+      h4(style='margin-top: 60px') Li&ecirc;n k&#x1EBF;t m&#x1EA1;ng x&atilde; h&#x1ED9;i
+      .Ksocial-section
+        .Ksocial-item
+          span
+            i.fab.fa-facebook(style='font-size: 20px; margin-right: 5px')
+            |                   Facebook
+          button.Kbtn-link(type='button') Li&ecirc;n k&#x1EBF;t
+        .Ksocial-item
+          span
+            i.fab.fa-google(style='font-size: 20px; margin-right: 5px; color: #db4437')
+            |                   Google
+          button.Kbtn-link(type='button') Li&ecirc;n k&#x1EBF;t
