@@ -1,7 +1,7 @@
 nav.navbar.navbar-expand-lg.navbar-dark.bg-green.py-2
       .container
         // Brand Logo and Name
-        a.navbar-brand.d-flex.align-items-center(href='#')
+        a.navbar-brand.d-flex.align-items-center(href='/')
           img.rounded-circle.me-2(src=(settingGeneral ? settingGeneral.logo : ""), style='width: 50px; height: 50px' , alt='Logo')
           .brand-text
             span.fw-bold #{settingGeneral ? settingGeneral.websiteName : ""} 
@@ -46,14 +46,14 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-green.py-2
                    a.dropdown-item(href='/users/login') Đăng nhập 
             // Store Locator
             li.nav-item.mx-2
-              a.nav-link.text-white(href='#')
+              a.nav-link.text-white(href='/products')
                 i.bi.bi-shop
-                |  H&#x1EC7; th&#x1ED1;ng c&#x1EED;a h&agrave;ng
+                |  Danh sách sản phẩm 
             // Customer Support
             li.nav-item.mx-2
               a.nav-link.text-white(href='#')
                 i.bi.bi-telephone
-                |  H&#x1ED7; tr&#x1EE3; kh&aacute;ch h&agrave;ng
+                |  Hỗ trợ khách hàng 
             // Cart with notification
             li.nav-item.mx-2
               a.nav-link.position-relative.text-white.cart-icon(href='#')

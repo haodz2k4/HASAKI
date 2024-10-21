@@ -24,8 +24,8 @@ block main
           // Carousel Item 1 (active)
           .carousel-item.active
             .d-flex.justify-content-center
-             each item in soldProducts
-              .col-6.col-md-4.col-lg-2
+             each item in firstProductsCarousel
+               a(href=`/products/${item.slug}` style='text-decoration: none; color: black').col-6.col-md-4.col-lg-2
                 .card.product-sold-card
                   img(src='https://via.placeholder.com/120', alt=item.title)
                   .product-sold-title #{item.title}
@@ -36,8 +36,8 @@ block main
           // Carousel Item 2
           .carousel-item
             .d-flex.justify-content-center
-             each item in categories 
-              a(href=`/products/${item.slug}` style='text-decoration: none').col-6.col-md-4.col-lg-2
+             each item in secondProductsCarousel  
+              a(href=`/products/${item.slug}` style='text-decoration: none; color: black').col-6.col-md-4.col-lg-2
                 .card.product-sold-card
                   img(src='https://via.placeholder.com/100', alt=item.title)
                   .product-sold-title #{item.title}
@@ -55,61 +55,23 @@ block main
     // CATEGORY
     // Category Carousel
     .container.my-4.category-carousel
-      h5.category-title Danh m&#x1EE5;c
+      h5.category-title Danh mục 
       #categoryCarousel.carousel.slide(data-bs-ride='carousel', data-bs-interval='3000')
         .carousel-inner
           .carousel-item.active
             .d-flex.justify-content-between
+             each item in firstCategoriesCarousel 
               .category-item
-                img(src='https://via.placeholder.com/80', alt='Trang Điểm Môi')
-                h6 Trang &Dstrok;i&#x1EC3;m M&ocirc;i
-              .category-item
-                img(src='https://via.placeholder.com/80', alt='Mặt Nạ')
-                h6 M&#x1EB7;t N&#x1EA1;
-              .category-item
-                img(src='https://via.placeholder.com/80', alt='Trang Điểm Mặt')
-                h6 Trang &Dstrok;i&#x1EC3;m M&#x1EB7;t
-              .category-item
-                img(src='https://via.placeholder.com/80', alt='Sữa Rửa Mặt')
-                h6 S&#x1EEF;a R&#x1EED;a M&#x1EB7;t
-              .category-item
-                img(src='https://via.placeholder.com/80', alt='Dầu Gội & Dầu Xả')
-                h6 D&#x1EA7;u G&#x1ED9;i &amp; D&#x1EA7;u X&#x1EA3;
-              .category-item
-                img(src='https://via.placeholder.com/80', alt='Chống Nắng')
-                h6 Ch&#x1ED1;ng N&#x1EAF;ng
-              .category-item
-                img(src='https://via.placeholder.com/80', alt='Sữa Tắm')
-                h6 S&#x1EEF;a T&#x1EAF;m
-              .category-item
-                img(src='https://via.placeholder.com/80', alt='Dưỡng Thể')
-                h6 D&#x1B0;&#x1EE1;ng Th&#x1EC3;
+                img(src='https://via.placeholder.com/80', alt=(item.title))
+                h6 #{item.title}
+              
           .carousel-item
             .d-flex.justify-content-between
+             each item in secondCategoriesCarousel 
               .category-item
-                img(src='https://via.placeholder.com/80', alt='Tẩy Trang')
-                h6 T&#x1EA9;y Trang
-              .category-item
-                img(src='https://via.placeholder.com/80', alt='Sản Phẩm Khác')
-                h6 S&#x1EA3;n Ph&#x1EA9;m Kh&aacute;c
-              .category-item
-                img(src='https://via.placeholder.com/80', alt='Sản Phẩm A')
-                h6 S&#x1EA3;n Ph&#x1EA9;m A
-              .category-item
-                img(src='https://via.placeholder.com/80', alt='Sản Phẩm B')
-                h6 S&#x1EA3;n Ph&#x1EA9;m B
-              .category-item
-                img(src='https://via.placeholder.com/80', alt='Sản Phẩm C')
-                h6 S&#x1EA3;n Ph&#x1EA9;m C
-              .category-item
-                img(src='https://via.placeholder.com/80', alt='Sản Phẩm D')
-                h6 S&#x1EA3;n Ph&#x1EA9;m D
-              .category-item
-                img(src='https://via.placeholder.com/80', alt='Sản Phẩm E')
-                h6 S&#x1EA3;n Ph&#x1EA9;m E
-              .category-item
-                img(src='https://via.placeholder.com/80', alt='Sản Phẩm F')
-                h6 S&#x1EA3;n Ph&#x1EA9;m F
+                img(src='https://via.placeholder.com/80', alt=(item.title))
+                h6 #{item.title}
+              
         // Carousel controls
         button.carousel-control-prev(type='button', data-bs-target='#categoryCarousel', data-bs-slide='prev')
           span.carousel-control-prev-icon(aria-hidden='true')
@@ -128,7 +90,7 @@ block main
             .col
               .recommended-product-card
                 img.img-fluid(src='https://via.placeholder.com/300x200', alt=item.title)
-                a(href=`/products/${item.slug}` style='text-decoration: none').recommended-product-title(title='Sản phẩm 1') #{item.title}
+                a(href=`/products/${item.slug}` style='text-decoration: none; color: black').recommended-product-title(title='Sản phẩm 1') #{item.title}
                 .recommended-product-prices
                   span.recommended-new-price #{item.oldPrice}
                 .recommended-purchase-info
