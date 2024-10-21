@@ -25,11 +25,11 @@ block main
             |  Flash Deal! K&#x1EBF;t th&uacute;c trong:
           span#countdown-timer.countdown-timer 0 : 00 : 00 : 00
         .product-price
-          span.current-price #{product.newPrice}
+          span.current-price #{formatPrice(product.newPrice)}
           |  (&Dstrok;&atilde; bao g&#x1ED3;m VAT)
           br
           |        Giá cũ: 
-          span.old-price #{product.oldPrice}
+          span.old-price #{formatPrice(product.price)}
           |  - Ti&#x1EBF;t ki&#x1EC7;m:
           |         
           span.discount (-#{product.discountPercentage}%)

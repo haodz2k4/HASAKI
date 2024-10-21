@@ -60,6 +60,7 @@ export const productSchema = new Schema<IProduct>({
 },{
     timestamps: true,
 })
+
 productSchema.virtual('newPrice').get(function(): number {
     return this.price * (100 - this.discountPercentage) / 100
 }) 

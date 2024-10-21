@@ -99,7 +99,7 @@ block main
               td #{item.title}
               td 
                 img(src=`${item.thumbnail.length > 0 ? item.thumbnail[0] : 'https://via.placeholder.com/70x70'}`, alt="" style='width: 70px; height: 70px')
-              td #{item.newPrice}
+              td #{formatPrice(item.newPrice)}
               td #{item.quantity}
               td 
                 span.badge(class=`${item.highlighted === "1" ? "badge-warning" : "badge-info"}` btn-ch-highlighted=item.id style='padding: 10px;') #{item.highlighted === "1" ? "Có" : "Không"}

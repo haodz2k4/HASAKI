@@ -50,8 +50,8 @@ block main
               img.img-fluid(src=(item.thumbnail.length > 0 ? item.thumbnail[0] : 'https://via.placeholder.com/200') alt='Product 1')
               a(href=`/products/${item.slug}` style='text-decoration: none').product-list-title #{item.title}
               .product-prices
-                .product-old-price #{item.oldPrice}
-                .product-new-price #{item.newPrice}
+                .product-old-price #{formatPrice(item.price)}
+                .product-new-price #{formatPrice(item.newPrice)}
               .product-sale-percent -#{item.discountPercentage}%
               .product-icons
                 .product-sold

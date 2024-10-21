@@ -1,6 +1,13 @@
 const url = new URL(window.location.href)
 const domain = `http://localhost:3000`
 const route = document.querySelector(".my-path")
+
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
 //Pagination
 const btnPagination = document.querySelectorAll("[btn-pagination]");
 if(btnPagination.length > 0){
@@ -44,6 +51,7 @@ if (btnChangeStatus.length > 0) {
                 method: "PATCH", 
                 headers: {
                     "Content-Type": "application/json", 
+                    'Authorization': `Bearer ${getCookie('adminAccessToken')}`
                 },
                 body: JSON.stringify({ status: updateStatus }),
             })
@@ -92,7 +100,8 @@ if (inpPosition.length > 0) {
             fetch(path, {
                 method: "PATCH",
                 headers: {
-                    "Content-Type": "application/json" 
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${getCookie('adminAccessToken')}`
                 },
                 body: JSON.stringify({ position: value }) 
             })
