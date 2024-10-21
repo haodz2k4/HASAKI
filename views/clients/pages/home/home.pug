@@ -30,7 +30,7 @@ block main
                   img(src='https://via.placeholder.com/120', alt=item.title)
                   .product-sold-title #{item.title}
                   .product-sold-count 1.223M Đã bán 
-                  .product-sold-price #{item.newPrice}
+                  .product-sold-price #{formatPrice(item.newPrice)}
                   // Giá tiền
               
           // Carousel Item 2
@@ -92,7 +92,7 @@ block main
                 img.img-fluid(src='https://via.placeholder.com/300x200', alt=item.title)
                 a(href=`/products/${item.slug}` style='text-decoration: none; color: black').recommended-product-title(title='Sản phẩm 1') #{item.title}
                 .recommended-product-prices
-                  span.recommended-new-price #{item.oldPrice}
+                  span.recommended-new-price #{formatPrice(item.price)}
                 .recommended-purchase-info
                   i.fas.fa-shopping-cart
                   span 150 mua
@@ -104,7 +104,7 @@ block main
                   i.fas.fa-star-half-alt
                   |  (120 &dstrok;&aacute;nh gi&aacute;)
                 .recommended-stock
-                  | C&ograve;n h&agrave;ng: 25
+                  | C&ograve;n h&agrave;ng: #{item.quantity}
                 a.recommended-add-to-cart(href='#')
                   i.fas.fa-shopping-cart
                   span Thêm vào giỏ 

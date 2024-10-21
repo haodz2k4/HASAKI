@@ -2,8 +2,8 @@
 import { ObjectId, Schema, model} from "mongoose"
 import { isURL } from "validator"
 import categoryModel, { COLLECTION_CATEGORY_NAME } from "./category.model"
-import { formatPrice } from "../utils/format.utils"
 import { createUniqueSlug } from "../helpers/slug"
+import { totalQuantity } from "../helpers/total.helper"
 export const COLLECTION_PRODUCT_NAME = 'Product'
 export interface IProduct {
     _id: string 
@@ -60,13 +60,17 @@ export const productSchema = new Schema<IProduct>({
 },{
     timestamps: true,
 })
-productSchema.virtual('oldPrice').get(function(): string {
-    return formatPrice(this.price)
-})
-productSchema.virtual('newPrice').get(function(): string {
-    return formatPrice(this.price * (100 - this.discountPercentage) / 100)
+productSchema.virtual('newPrice').get(function(): number {
+    return this.price * (100 - this.discountPercentage) / 100
 }) 
-
+productSchema.post('find', async function (docs: IProduct[]) {
+    for(const item of docs){
+        item.quantity = await totalQuantity(item._id)
+    }
+});
+productSchema.post('findOne', async function (doc: IProduct) {
+    doc.quantity = await totalQuantity(doc._id)
+})
 
 productSchema.pre('save',async function(next) {
     //create unique slug 

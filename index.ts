@@ -17,6 +17,7 @@ import methodOverride from "method-override";
 import path from "path";
 import api from "./api/routers/index.router"
 import notFoundMdw from "./middleware/404.middleware"
+import { formatPrice } from "./utils/format.utils";
 
 
 const bootstrap = () => {
@@ -60,6 +61,8 @@ const bootstrap = () => {
     // Logger Middleware
     app.use(loggerMiddleware);
 
+    //Format price 
+    app.locals.formatPrice = formatPrice
     // Moment.js
     moment.locale('vi');
     app.locals.moment = moment;

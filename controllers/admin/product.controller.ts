@@ -85,11 +85,8 @@ export const products = catchAsync(async (req: Request, res: Response) => {
         .skip(skip)
         .sort(sort),
         productModel.countDocuments(filter)]);
-    //Add field quantity
-    const ids = products.map(item => item.id)
-    for(const product of products){
-        product.quantity = await totalQuantity(ids);
-    }
+   
+    
 
     const pagination = paginationHelper(page, limit, total)
     const categories = await categoryModel.find({deleted: false});
