@@ -25,7 +25,7 @@ export const products = catchAsync(async (req: Request, res: Response) => {
     //Search 
     const keyword = req.query.keyword as string;
     if(keyword){
-        filter.keyword = keyword
+        filter.title = new RegExp(keyword,"i")
     }
     //Pagination 
     const page = parseInt(req.query.page as string) || 1;
@@ -35,7 +35,8 @@ export const products = catchAsync(async (req: Request, res: Response) => {
         productModel
             .find(filter)
             .skip(skip)
-            .limit(limit),
+            .limit(limit)
+            .sort({position: 'desc'}),
         productModel.countDocuments(filter)
     ])
     const pagination = paginationHelper(page, limit,totalDocument)

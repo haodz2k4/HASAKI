@@ -193,3 +193,13 @@ if(btnPagination.length > 0){
     })
   })
 }
+
+
+const selectLimit = document.querySelector("[select-limit]");
+if(selectLimit){
+  selectLimit.addEventListener("change",() => {
+    const limit = selectLimit.value;
+    url.searchParams.set("limit",limit);
+    window.location.href = url.href
+  })
+}

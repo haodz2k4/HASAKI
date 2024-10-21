@@ -32,18 +32,22 @@ block main
             if keyword 
               p#show-keyword-result
                 | Kết quả tìm kiếm cho
-                strong #{keyword}
+                strong  #{keyword}
           .col-6.d-flex.justify-content-end
-            select#product-limit.form-control.select-control.small-select(name='limit' style='width: 120px; float: right;')
-              option(value='5') 5
-              option(value='10') 10
-              option(value='20') 20
+            select#product-limit.form-control.select-control.small-select(name='limit' style='width: 120px; float: right;' select-limit)
+              option(value='4' selected=(pagination.limit === 4)) 4
+              option(value='16' selected=(pagination.limit === 16)) 16
+              option(value='40' selected=(pagination.limit === 40)) 40 
+              option(value='80' selected=(pagination.limit === 80)) 80 
+              - if (![4,16,40,80].includes(pagination.limit) )
+                 option(value=pagination.limit selected='') #{pagination.limit}
+
         .row
          each item in products 
           .col-6.col-md-4.col-lg-3
             .product-list-card
               img.img-fluid(src=(item.thumbnail.length > 0 ? item.thumbnail[0] : 'https://via.placeholder.com/200') alt='Product 1')
-              .product-list-title #{item.title}
+              a(href=`/products/${item.slug}` style='text-decoration: none').product-list-title #{item.title}
               .product-prices
                 .product-old-price #{item.oldPrice}
                 .product-new-price #{item.newPrice}

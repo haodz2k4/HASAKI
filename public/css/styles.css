@@ -746,10 +746,11 @@
 /*PRODUCT LIST*/
 .product-list-title {
     font-size: 16px;
-    text-align: start;
     margin-left: 17px;
     margin-top: 10px;
     font-weight: bold;
+    color: black;
+    text-align: start;
 }
 #show-keyword-result {
     font-size: 25px;
