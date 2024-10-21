@@ -1,4 +1,7 @@
 
+
+const url = new URL(window.location.href)
+
 function getDomain() {
   const domain = window.location.hostname;
   const port = window.location.port;
@@ -176,4 +179,17 @@ const timer = setInterval(function () {
 
 function changeColor(color) {
   document.getElementById('selectedColor').innerText = color;
+}
+
+const btnPagination = document.querySelectorAll("[btn-pagination]");
+if(btnPagination.length > 0){
+  btnPagination.forEach((item) => {
+    item.addEventListener("click",() => {
+      const page = item.getAttribute("btn-pagination");
+      if(page){
+        url.searchParams.set("page", page)
+      }
+      window.location.href = url.href
+    })
+  })
 }

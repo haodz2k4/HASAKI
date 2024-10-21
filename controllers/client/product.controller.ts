@@ -29,7 +29,7 @@ export const products = catchAsync(async (req: Request, res: Response) => {
     }
     //Pagination 
     const page = parseInt(req.query.page as string) || 1;
-    const limit = parseInt(req.query.limit as string) || 18 
+    const limit = parseInt(req.query.limit as string) || 16
     const skip = (page - 1) * limit;
     const [products, totalDocument] =await Promise.all([
         productModel
@@ -55,7 +55,6 @@ export const detail = catchAsync(async (req: Request, res: Response) => {
     const {slug} = req.params;
     
     const product = await productModel.findOne({slug, deleted: false})
-    console.log(product)
     if(!product){
         throw new RenderError(404,"Product is not found ")
     }

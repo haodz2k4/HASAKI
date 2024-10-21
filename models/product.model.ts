@@ -64,7 +64,7 @@ productSchema.virtual('oldPrice').get(function(): string {
     return formatPrice(this.price)
 })
 productSchema.virtual('newPrice').get(function(): string {
-    return formatPrice(this.price - (100 - this.discountPercentage) / 100)
+    return formatPrice(this.price * (100 - this.discountPercentage) / 100)
 }) 
 
 

@@ -7,14 +7,14 @@ block main
       .col-md-3
         .filter-sidebar
           // Lọc theo giá
-          .mb-3
-            h5 Kho&#x1EA3;ng gi&aacute; 
+          form.mb-3
+            h5 Khoảng giá 
             .row
               .col
-                input#minPrice.form-control(type='number' placeholder='Giá thấp nhất')
+                input#minPrice.form-control(type='number' name='minPrice' value=minPrice placeholder='Giá thấp nhất')
               .col
-                input#maxPrice.form-control(type='number' placeholder='Giá cao nhất')
-          button.btn.btn-success.w-100 L&#x1ECD;c
+                input#maxPrice.form-control(type='number' name='maxPrice' value=maxPrice placeholder='Giá cao nhất')
+            button.btn.btn-success.w-100(style='margin-top: 10px' type='submit') Lọc 
           // Lọc theo nhãn hàng
           .mb-3
             label.form-label(for='brandSelect') Nh&atilde;n h&agrave;ng
@@ -29,24 +29,25 @@ block main
       .col-md-9
         .row.mb-3
           .col-6
-            p#show-keyword-result
-              | K&#x1EBF;t qu&#x1EA3; t&igrave;m ki&#x1EBF;m cho 
-              strong BAC
+            if keyword 
+              p#show-keyword-result
+                | Kết quả tìm kiếm cho
+                strong #{keyword}
           .col-6.d-flex.justify-content-end
             select#product-limit.form-control.select-control.small-select(name='limit' style='width: 120px; float: right;')
               option(value='5') 5
               option(value='10') 10
               option(value='20') 20
         .row
-          // Product Item
+         each item in products 
           .col-6.col-md-4.col-lg-3
-            .product-recommend-card
-              img.img-fluid(src='https://via.placeholder.com/150' alt='Product 1')
-              .product-list-title S&#x1EA3;n ph&#x1EA9;m 1
+            .product-list-card
+              img.img-fluid(src=(item.thumbnail.length > 0 ? item.thumbnail[0] : 'https://via.placeholder.com/200') alt='Product 1')
+              .product-list-title #{item.title}
               .product-prices
-                .product-old-price 500.000&dstrok;
-                .product-new-price 300.000&dstrok;
-              .product-sale-percent -40%
+                .product-old-price #{item.oldPrice}
+                .product-new-price #{item.newPrice}
+              .product-sale-percent -#{item.discountPercentage}%
               .product-icons
                 .product-sold
                   i.bi.bi-cart-fill
@@ -54,66 +55,15 @@ block main
                 .product-rating
                   i.bi.bi-star-fill
                   |  4.5
-          // Product 2
-          .col-6.col-md-4.col-lg-3
-            .product-recommend-card
-              img.img-fluid(src='https://via.placeholder.com/150' alt='Product 2')
-              .product-title S&#x1EA3;n ph&#x1EA9;m 2
-              .product-prices
-                .product-old-price 800.000&dstrok;
-                .product-new-price 600.000&dstrok;
-              .product-sale-percent -25%
-              .product-icons
-                .product-sold
-                  i.bi.bi-cart-fill
-                  |  2K &dstrok;&atilde; b&aacute;n
-                .product-rating
-                  i.bi.bi-star-fill
-                  |  4.8
-          // Product 3
-          .col-6.col-md-4.col-lg-3
-            .product-recommend-card
-              img.img-fluid(src='https://via.placeholder.com/150' alt='Product 3')
-              .product-title S&#x1EA3;n ph&#x1EA9;m 3
-              .product-prices
-                .product-old-price 1.000.000&dstrok;
-                .product-new-price 750.000&dstrok;
-              .product-sale-percent -30%
-              .product-icons
-                .product-sold
-                  i.bi.bi-cart-fill
-                  |  500 &dstrok;&atilde; b&aacute;n
-                .product-rating
-                  i.bi.bi-star-fill
-                  |  4.3
-          // Product 4
-          .col-6.col-md-4.col-lg-3
-            .product-recommend-card
-              img.img-fluid(src='https://via.placeholder.com/150' alt='Product 4')
-              .product-title S&#x1EA3;n ph&#x1EA9;m 4
-              .product-prices
-                .product-old-price 2.000.000&dstrok;
-                .product-new-price 1.500.000&dstrok;
-              .product-sale-percent -25%
-              .product-icons
-                .product-sold
-                  i.bi.bi-cart-fill
-                  |  1.2K &dstrok;&atilde; b&aacute;n
-                .product-rating
-                  i.bi.bi-star-fill
-                  |  4.7
-          // Add more products as needed
+          
     // After the product listing, add this pagination section
     .col-md-12
       nav(aria-label='Page navigation')
         ul.pagination.justify-content-center
           li.page-item.disabled
             a.page-link(href='#' tabindex='-1' aria-disabled='true') Tr&#x1B0;&#x1EDB;c
-          li.page-item.active
-            a.page-link(href='#') 1
-          li.page-item
-            a.page-link(href='#') 2
-          li.page-item
-            a.page-link(href='#') 3
+          - for(let i = 1; i <= pagination.countPage; i++) 
+            li.page-item
+              button.page-link(btn-pagination=i) #{i}
           li.page-item
             a.page-link(href='#') Sau
