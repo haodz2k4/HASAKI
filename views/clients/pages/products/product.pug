@@ -7,13 +7,13 @@ block main
       .col-md-3
         .filter-sidebar
           // Lọc theo giá
-          form.mb-3
+          form.mb-3(form-range-price)
             h5 Khoảng giá 
             .row
               .col
-                input#minPrice.form-control(type='number' name='minPrice' value=minPrice placeholder='Giá thấp nhất')
+                input#minPrice.form-control(type='number' name='minPrice' value=minPrice placeholder='Giá thấp nhất', min=0)
               .col
-                input#maxPrice.form-control(type='number' name='maxPrice' value=maxPrice placeholder='Giá cao nhất')
+                input#maxPrice.form-control(type='number' name='maxPrice' value=maxPrice placeholder='Giá cao nhất', min=0)
             button.btn.btn-success.w-100(style='margin-top: 10px' type='submit') Lọc 
           // Lọc theo nhãn hàng
           .mb-3
@@ -60,10 +60,10 @@ block main
     .col-md-12
       nav(aria-label='Page navigation')
         ul.pagination.justify-content-center
-          li.page-item.disabled
-            a.page-link(href='#' tabindex='-1' aria-disabled='true') Tr&#x1B0;&#x1EDB;c
+          li.page-item(class=(pagination.page === 1 ? 'disabled' : ''))
+            button.page-link( btn-pagination=(pagination.page - 1)) Trước sao 
           - for(let i = 1; i <= pagination.countPage; i++) 
-            li.page-item
+            li.page-item(class=((i === pagination.page ? 'active' : '')))
               button.page-link(btn-pagination=i) #{i}
-          li.page-item
-            a.page-link(href='#') Sau
+          li.page-item(class=(pagination.page === pagination.countPage ? 'disabled' : ''))
+            button.page-link(btn-pagination=(pagination.page + 1)) Sau
