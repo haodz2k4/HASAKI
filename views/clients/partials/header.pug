@@ -56,6 +56,7 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-green.py-2
                 |  Hỗ trợ khách hàng 
             // Cart with notification
             li.nav-item.mx-2
-              a.nav-link.position-relative.text-white.cart-icon(href='#')
+              a.nav-link.position-relative.text-white.cart-icon(href='/cart')
                 i.fa-solid.fa-cart-shopping
-                span.position-absolute.top-0.start-100.translate-middle.badge.rounded-pill.bg-danger 2
+                if cart 
+                  span.position-absolute.top-0.start-100.translate-middle.badge.rounded-pill.bg-danger(btn-cart) #{cart.products.length}

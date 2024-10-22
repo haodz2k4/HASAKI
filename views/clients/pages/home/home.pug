@@ -90,7 +90,7 @@ block main
             .col
               .recommended-product-card
                 img.img-fluid(src='https://via.placeholder.com/300x200', alt=item.title)
-                a(href=`/products/${item.slug}` style='text-decoration: none; color: black').recommended-product-title(title='Sản phẩm 1') #{item.title}
+                a(href=`/products/${item.slug}` style='text-decoration: none; color: black').recommended-product-title #{item.title}
                 .recommended-product-prices
                   span.recommended-new-price #{formatPrice(item.price)}
                 .recommended-purchase-info

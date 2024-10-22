@@ -23,7 +23,8 @@ const cartSchema = new Schema<ICart>({
                 message: 'Product is not exists'
             },
         },
-        quantity: { type: Number, default: 1 }
+        quantity: { type: Number, default: 1 },
+        default: []
     }]
 })
 
