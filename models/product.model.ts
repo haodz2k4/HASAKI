@@ -6,7 +6,7 @@ import { createUniqueSlug } from "../helpers/slug"
 import { totalQuantity } from "../helpers/total.helper"
 export const COLLECTION_PRODUCT_NAME = 'Product'
 export interface IProduct {
-    _id: string 
+    _id?: string 
     title: string
     categoryId: ObjectId
     description?: string
@@ -66,13 +66,19 @@ export const productSchema = new Schema<IProduct>({
 productSchema.virtual('newPrice').get(function(): number {
     return this.price * (100 - this.discountPercentage) / 100
 }) 
-productSchema.post('find', async function (docs: IProduct[]) {
-    for(const item of docs){
-        item.quantity = await totalQuantity(item._id)
+productSchema.post('find', async function (docs) {
+
+    if(docs.length > 0) {
+        for(const item of docs){
+            item.quantity = await totalQuantity(item.id)
+        }
     }
+    
 });
-productSchema.post('findOne', async function (doc: IProduct) {
-    doc.quantity = await totalQuantity(doc._id)
+productSchema.post('findOne', async function (doc) {
+    if(doc){
+        doc.quantity = await totalQuantity(doc.id)
+    }
 })
 
 productSchema.pre('save',async function(next) {

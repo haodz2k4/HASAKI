@@ -220,8 +220,6 @@ export const uploadFile = catchAsync(async (req: Request, res: Response) => {
         const urls: string[] = files.map(item => item.path);
         const product = await productService.updateProductById(id,{thumbnail: urls});
 
-        const cacheRedis = res.locals.CacheRedis;
-        cacheRedis.deleteCache()
         res.status(200).json({message: "upload File successfully", product})
     }else {
         throw new ApiError(400,"Files is must provided")
@@ -268,8 +266,6 @@ export const updateProduct = catchAsync(async (req: Request, res: Response) => {
     const body = req.body;
     const product = await productService.updateProductById(id, body);
 
-    const cacheRedis = res.locals.CacheRedis;
-    cacheRedis.deleteCache()
     res.status(200).json({message: "Update product successfully",product})
 })
 
@@ -295,7 +291,5 @@ export const deleteProduct = catchAsync(async (req: Request, res: Response) => {
     const {id} = req.params;
     await productService.deleteProduct(id);
     
-    const cacheRedis = res.locals.CacheRedis;
-    cacheRedis.deleteCache()
     res.status(204)
 })

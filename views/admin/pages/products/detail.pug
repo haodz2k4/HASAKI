@@ -25,7 +25,7 @@ block main
               | !{product.description}
             .mt-4
               h5 S&#x1ED1; L&#x1B0;&#x1EE3;ng:
-              p 50
+              p #{product.quantity}
             .mt-4
               h5 Trạng thái 
               p.status-active #{product.status} 
@@ -45,9 +45,9 @@ block main
                 td #{product.position}
               tr
                 th Giá gốc 
-                td #{product.oldPrice} 
+                td #{product.price} 
               tr
-                th Gi&aacute; Sau Khi Gi&#x1EA3;m
+                th Giá; Sau Khi Gi&#x1EA3;m
                 td #{product.newPrice} 
               tr
                 th T&#x1EF7; L&#x1EC7; Gi&#x1EA3;m Gi&aacute; (%)

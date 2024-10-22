@@ -100,16 +100,18 @@ export const verifyOtp = catchAsync(async (req: Request, res: Response) => {
 export const verifyOtpPost = catchAsync(async (req: Request, res: Response) => {
     const {email, otp} = req.body;
     const forgotPassword = await forgotPasswordModel.findOne({
-        email,
-        isUsed: false
+        email
     })
-    console.log(forgotPassword)
-    if(!forgotPassword || !forgotPassword.isMatchOtp(otp)){
+    if(!forgotPassword){
+        throw new RenderError(400,"Không tìm thấy email")
+    }
+    if(forgotPassword.isUsed) {
+        throw new RenderError(401,"Otp đã được sử dụng")
+    }
+    if(!forgotPassword.isMatchOtp(otp)){
         throw new RenderError(401,"Invalid otp")
     }
-    Object.assign(forgotPassword,{
-        isUsed: true 
-    })
+    forgotPassword.isUsed = true;
     await forgotPassword.save()
 
     //Generate Token 
@@ -138,12 +140,13 @@ export const resetPasswordPost = catchAsync(async (req: Request, res: Response) 
     if(!user){
         throw new RenderError(401,"User is not found");
     }
-    const {password,repeatPassword } = req.body;
     console.log(req.body)
+    const {password,repeatPassword } = req.body;
     if(password !== repeatPassword){
-        throw new RenderError(400,"Mật khẩu nhập lại không đúng");
+        throw new RenderError(400,"Invalid repeat password")
     }
-
+    Object.assign(user, {password});
+    await user.save()
     res.clearCookie('tokenReset')
     res.redirect("/users/login")
 })

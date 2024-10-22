@@ -28,6 +28,8 @@ forgotPasswordSchema.pre('save',async function(next) {
     next()
 })
 forgotPasswordSchema.methods.isMatchOtp = async function(otp): Promise<boolean> {
+    console.log(otp)
+    console.log(this.otp)
     return await compare(otp, this.otp)
 }
 export default model<IForgotPassword, ForgotPasswordModel>(COLLECTION_FORGOT_PASSWORD_NAME, forgotPasswordSchema)

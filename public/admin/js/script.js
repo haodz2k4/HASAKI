@@ -107,7 +107,7 @@ if (inpPosition.length > 0) {
             })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Có lỗi xảy ra khi cập nhật vị trí.');
+                    alert('Có lỗi xảy ra khi cập nhật vị trí.');
                 }
                 return response.json();
             })
