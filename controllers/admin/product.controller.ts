@@ -216,7 +216,7 @@ export const exportExcel = catchAsync(async (req: Request, res: Response) => {
             description: product.description,
             highlighted: product.highlighted === "1" ? "có" : "0",
             position: product.position,
-            thumbnail: product.thumbnail.join(", "), 
+            thumbnail: product.thumbnail, 
             price: product.price,
             discountPercentage: product.discountPercentage,
             deleted: product.deleted ? "Yes" : "No",

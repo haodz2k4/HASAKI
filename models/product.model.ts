@@ -9,15 +9,15 @@ export interface IProduct {
     _id: string 
     title: string
     categoryId: ObjectId
-    description: string
-    highlighted: string
+    description?: string
+    highlighted?: string
     position?: number 
-    thumbnail: string[] 
+    thumbnail?: string[] 
     price: number
     discountPercentage: number 
-    deleted: boolean
-    slug: string
-    status: string
+    deleted?: boolean
+    slug?: string
+    status?: string
     newPrice?: number
     quantity?: number
 
@@ -36,7 +36,8 @@ export const productSchema = new Schema<IProduct>({
         validate: async function(val: string): Promise<boolean> {
             const category = await categoryModel.findOne({_id: val, deleted: false})
             return !!category
-        }
+        },
+        required: true 
     },  
     position: {type: Number, min: 1},
     description: String,
@@ -74,7 +75,7 @@ productSchema.post('findOne', async function (doc: IProduct) {
     doc.quantity = await totalQuantity(doc._id)
 })
 
-productSchema.pre(['save'],async function(next) {
+productSchema.pre('save',async function(next) {
     //create unique slug 
     if(this.isModified('title')){
         this.slug = await createUniqueSlug(this.title, COLLECTION_PRODUCT_NAME);
