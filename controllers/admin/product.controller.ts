@@ -6,8 +6,6 @@ import { catchAsync } from "../../utils/catchAsync";
 import categoryModel from "../../models/category.model";
 import { RenderError } from "../../utils/error";
 import excelJs from "exceljs"
-import inventoryModel from "../../models/inventory.model";
-import { totalQuantity } from "../../helpers/total.helper";
 //[GET] "/admin/products"
 export const products = catchAsync(async (req: Request, res: Response) => {
     
@@ -111,10 +109,8 @@ export const changeMulti = catchAsync(async (req: Request, res: Response) => {
     
     const {ids, data} = JSON.parse(req.body.result)
     const [key, value] = data.split("-");
-    const infoUpdate = await productModel.updateMany({_id: {$in: ids}},{[key]: value});
-    if(infoUpdate.modifiedCount > 0){
-        req.flash("error","Không thể cập nhật hết sản phẩm")
-    }
+    await productModel.updateMany({_id: {$in: ids}},{[key]: value});
+    req.flash('success','Cập nhật nhiều sản phẩm thành công')
     res.redirect("back")
 })
 
