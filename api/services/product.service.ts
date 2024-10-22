@@ -3,9 +3,10 @@ import { sortType } from './../utils/types/sort';
 import productModel, {IProduct} from "../../models/product.model"
 import { IPagination, IPaginationResult } from "../utils/types/pagination";
 import { buildRegrex } from '../utils/regrex';
-import { ApiError } from '../utils/error';
 import pick from '../utils/pick';
 import rangePriceHelper from '../helpers/range-price.helper';
+import { NullableType } from '../utils/types/nullable';
+import { ApiError } from '../utils/error';
 interface IFilterProduct {
     status?: string;
     highlighted?: string;
@@ -21,8 +22,8 @@ interface IQueryProduct extends Partial<IPagination> {
     selectFields?: string;
 }
 
-export const getProductBySlug = async (slug: string) => {
-    return await productModel.findOne({slug, deleted: false})
+export const getProductBySlug = async (slug: string): Promise<NullableType<IProduct>> => {
+    return await productModel.findOne({slug, deleted: false}).lean()
 }
 
 export const getProducts = async (queryProduct: IQueryProduct) => {
@@ -51,7 +52,8 @@ export const getProducts = async (queryProduct: IQueryProduct) => {
         .skip(skip)
         .limit(limit)
         .sort({[sortKey]: sortValue})
-        .select(selectFields),
+        .select(selectFields)
+        .lean(),
         await getTotalDocument(filter)
     ])
     const pageSize = Math.ceil(total / limit);
@@ -67,7 +69,7 @@ export const getProducts = async (queryProduct: IQueryProduct) => {
     }
 }
 
-export const getTotalDocument = async (filter?: IFilterProduct) => {
+export const getTotalDocument = async (filter?: IFilterProduct): Promise<number> => {
     return await productModel.countDocuments(filter);
 }
 
@@ -75,21 +77,21 @@ export const createProduct = async (product: IProduct) => {
     return await productModel.create(product);
 }
 
-export const findProductById = async (id: string) => {
-    return await productModel.findOne({_id: id, deleted: false});
+export const findProductById = async (id: string): Promise<NullableType<IProduct>> => {
+    return await productModel.findOne({_id: id, deleted: false}).lean();
 }
 
-export const updateProductById = async (id: string, updateProduct: Partial<IProduct>) => {
-    const product = await findProductById(id);
+export const updateProductById = async (id: string, updateProduct: Partial<IProduct>): Promise<IProduct> => {
+    const product = await productModel.findOne({_id: id, deleted: false});
     if(!product){
-        throw new ApiError(404,"Product is not found");
+        throw new ApiError(404,"Product is not found")
     }
     Object.assign(product, updateProduct);
     await product.save()
     return product
 }
-export const deleteProduct = async (id: string) => {
-    return await updateProductById(id,{
+export const deleteProduct = async (id: string): Promise<void> => {
+    await updateProductById(id,{
         deleted: true
     })
 }

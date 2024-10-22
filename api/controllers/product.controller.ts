@@ -8,9 +8,10 @@ import { ApiError } from '../utils/error';
 
 /** 
  * @swagger
- * /api/products  
+ * /api/products:
+ *  get: 
+ *   summary: Get all products
 */
-//[GET] "/api/products"
 export const getProducts = catchAsync(async (req: Request, res: Response) => {
     const filter = pick(req.query,["status", "highlighted","categoryId","keyword","minPrice","maxPrice"]);
     //Pagination 

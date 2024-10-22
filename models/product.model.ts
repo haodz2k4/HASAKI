@@ -18,6 +18,7 @@ export interface IProduct {
     deleted: boolean
     slug: string
     status: string
+    newPrice?: number
     quantity?: number
 
 }
@@ -58,7 +59,7 @@ export const productSchema = new Schema<IProduct>({
 
 
 },{
-    timestamps: true,
+    timestamps: true
 })
 
 productSchema.virtual('newPrice').get(function(): number {
@@ -73,7 +74,7 @@ productSchema.post('findOne', async function (doc: IProduct) {
     doc.quantity = await totalQuantity(doc._id)
 })
 
-productSchema.pre('save',async function(next) {
+productSchema.pre(['save'],async function(next) {
     //create unique slug 
     if(this.isModified('title')){
         this.slug = await createUniqueSlug(this.title, COLLECTION_PRODUCT_NAME);
