@@ -4,7 +4,7 @@ import cartModel from "../../models/cart.model";
 
 export default catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const user = res.locals.user;
-    if(!user){
+    if(user){
         let cart = await cartModel.findOne({userId: user.id});
         if(!cart){
            cart = await cartModel.create({userId: user.id});
