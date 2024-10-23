@@ -37,10 +37,10 @@ export const generateResetPasswordToken = async (email: string, expiresIn: strin
     })
 }
 
-export const generateVerifyEmailToken = async (email: string, expiresIn: string | number) => {
+export const generateVerifyEmailToken = async (email: string) => {
     return await sign({
         email
-    }, config.jwt.user.jwt_verify_email as string,{
-        expiresIn
+    }, config.jwt.user.jwt_verify_email_secret as string,{
+        expiresIn: config.jwt.user.jwt_verify_email_expire
     })
 }

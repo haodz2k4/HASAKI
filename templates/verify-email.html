@@ -1,11 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Xác Thực Email</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f7;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        p {
+            color: #666;
+            line-height: 1.5;
+        }
+        .button {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            color: #999;
+        }
+        .footer a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-    <h1>Vui lòng xác thực tài khoản</h1>
+    <div class="container">
+        <h1>Xác Thực Email</h1>
+        <p>Xin chào,</p>
+        <p>Cảm ơn bạn đã đăng ký dịch vụ của chúng tôi. Vui lòng nhấn vào nút bên dưới để xác nhận địa chỉ email của bạn. Việc này sẽ giúp bạn hoàn tất việc đăng ký và sử dụng đầy đủ các chức năng của chúng tôi.</p>
+        
+        <!-- Thay thế URL bằng đường dẫn xác thực của bạn -->
+        <a href="{{verification_link}}" class="button">Xác Thực Email</a>
+
+        <p>Nếu bạn không đăng ký tài khoản này, vui lòng bỏ qua email này.</p>
+        
+        <div class="footer">
+            <p>Cần hỗ trợ? <a href="mailto:support@example.com">Liên hệ bộ phận hỗ trợ</a></p>
+            <p>&copy; 2024 Công Ty Của Bạn. Mọi quyền được bảo lưu.</p>
+        </div>
+    </div>
 </body>
 </html>

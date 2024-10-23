@@ -3,7 +3,7 @@ import userModel from "../../models/user.model";
 import { catchAsync } from "../../utils/catchAsync";
 import { Request, Response } from "express";
 import { RenderError } from "../../utils/error";
-import { generateResetPasswordToken, generateUserAccessToken, generateUserRefreshToken } from "../../helpers/token.helper";
+import { generateResetPasswordToken, generateUserAccessToken, generateUserRefreshToken, generateVerifyEmailToken } from "../../helpers/token.helper";
 import { sendMail } from "../../helpers/mail.helper";
 import {  readFileSync } from 'fs';
 import path from "path"
@@ -12,6 +12,7 @@ import forgotPasswordModel from "../../models/forgot-password.model";
 import { JwtPayload, verify } from "jsonwebtoken";
 import config from "../../config/config";
 import ms from "ms";
+import { getDomain } from "../../helpers/domain.helper";
 
 //[GET] "/users/login"
 export const login = catchAsync(async (req: Request, res: Response) => {
@@ -53,6 +54,12 @@ export const registerPost = catchAsync(async (req: Request, res: Response) => {
     const body = req.body;
     const {email} = body;
     await userModel.create(body);
+    const domain = getDomain(req)
+    const token = generateVerifyEmailToken(email)
+
+
+    const verifyPath = `${domain}/users/verify-email?token=${token}`
+    
     const pathTemplate = path.join(__dirname,"../../templates/verify-email.html");
     const htmlContent = await readFileSync(pathTemplate,"utf8")
     sendMail(email,'VUI LÒNG XÁC THỰC TÀI KHOẢN',{html: htmlContent});
@@ -60,7 +67,7 @@ export const registerPost = catchAsync(async (req: Request, res: Response) => {
     res.redirect('back')
 })
 
-//[POST] "/users/verify-email"
+//[GET] "/users/verify-email"
 export const verifyEmail = catchAsync(async (req: Request, res: Response) => {
     const {token} = req.query;
 
