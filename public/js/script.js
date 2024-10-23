@@ -225,4 +225,20 @@ if(selectLimit){
     url.searchParams.set("limit",limit);
     window.location.href = url.href
   })
+} 
+
+
+const btnAddToCart = document.querySelectorAll("[btn-add-cart]");
+if(btnAddToCart.length > 0){
+  btnAddToCart.forEach((item) => {
+    item.addEventListener("click",() =>{
+      const id = item.getAttribute("btn-add-cart");
+      const formAddCart = document.querySelector("[form-add-cart]")
+      const input = formAddCart.querySelector("input");
+      const path = formAddCart.getAttribute("path");
+      formAddCart.action = `${path}${id}`;
+      input.value = id 
+      formAddCart.submit()
+    })
+  })
 }

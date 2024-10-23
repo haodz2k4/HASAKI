@@ -16,6 +16,6 @@ export default (app: Express) => {
     app.use("/",homeRouter) 
     app.use("/products",productRouter) 
     app.use("/users",userRouter) 
-    //app.use("/cart",requireAuth,cartRouter)
+    app.use("/cart",requireAuth,cartRouter)
     
 }

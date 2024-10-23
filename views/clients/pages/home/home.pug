@@ -105,7 +105,7 @@ block main
                   |  (120 &dstrok;&aacute;nh gi&aacute;)
                 .recommended-stock
                   | C&ograve;n h&agrave;ng: #{item.quantity}
-                a.recommended-add-to-cart(href='#')
+                button.recommended-add-to-cart(btn-add-cart=item.id)
                   i.fas.fa-shopping-cart
                   span Thêm vào giỏ 
-            
+    include ../../partials/add-to-cart.pug  

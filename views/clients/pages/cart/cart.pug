@@ -3,14 +3,16 @@ extends ../../layouts/default.pug
 block main 
 
     .container.my-5
-      h2 Giỏ hàng 
+      h2 Giỏ hàng của bạn 
       .row
         .col-12
           .card.p-3
             .row
               .col-md-1
+                input(type="checkbox")
+              .col-md-1
                 img.product-img(src='https://via.placeholder.com/80', alt='Product Image')
-              .col-md-5
+              .col-md-4
                 p.product-name &Aacute;o thun oversize nam n&#x1EEF; cao c&#x1EA5;p v&#x1EA3;i waffle h&agrave;ng hi&#x1EC7;u
                 p.product-options Ph&acirc;n Lo&#x1EA1;i H&agrave;ng: N&acirc;u, XL
               .col-md-2
