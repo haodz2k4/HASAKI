@@ -9,6 +9,9 @@ export default catchAsync(async (req: Request, res: Response, next: NextFunction
         if(!cart){
            cart = await cartModel.create({userId: user.id});
         }
+        cart.populate({
+            path: 'products.productId',
+        })
         res.locals.cart = cart
     } 
     next()
