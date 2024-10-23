@@ -52,13 +52,12 @@ export const register = catchAsync(async (req: Request, res: Response) => {
 //[POST] "/users/register"
 export const registerPost = catchAsync(async (req: Request, res: Response) => {
     const body = req.body;
-    const {email} = body;
+    const {email} =req.body
+    const user = await userModel.create(body)
     const domain = getDomain(req)
-    const token = generateVerifyEmailToken(email)
-
+    const token = await generateVerifyEmailToken(user.id)
 
     const verifyPath = `${domain}/users/verify-email?token=${token}`
-    console.log(verifyPath)
     const pathTemplate = path.join(__dirname,"../../templates/verify-email.html");
     const htmlContent = await readFileSync(pathTemplate,"utf8")
         .replace('{{verification_link}}', verifyPath)
@@ -70,8 +69,18 @@ export const registerPost = catchAsync(async (req: Request, res: Response) => {
 //[GET] "/users/verify-email"
 export const verifyEmail = catchAsync(async (req: Request, res: Response) => {
     const {token} = req.query;
+    const payload = verify(token as string, config.jwt.user.jwt_verify_email_secret as string);
+    const {_id} = payload as JwtPayload
+    const user = await userModel.findOne({_id, deleted: false});
+    if(!user){
+        throw new Error("Xác thực email thất bại")
+    }
+    user.isVerified = true;
+    await user.save()
     req.flash('success','Xác thực thành công vui lòng đăng nhập');
     res.redirect("/users/login");
+    
+    
 })
 
 //[POST] "/users/logout"

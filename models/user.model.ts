@@ -13,6 +13,7 @@ export interface IUser {
     gender: "nam" | "nữ";
     status: "active" | "inactive";
     deleted: boolean;
+    isVerified: boolean;
 }
 
 export interface IUserMethods {
@@ -73,6 +74,7 @@ const userSchema = new Schema<IUserDocument, Model<IUserDocument>, IUserMethods>
     birthDate: { type: Date },
     gender: { type: String, enum: ["nam", "nữ"] },
     status: { type: String, enum: ["active", "inactive"], default: "active" },
+    isVerified: {type: Boolean, default: false},
     deleted: { type: Boolean, default: false }
 }, { timestamps: true });
 
