@@ -32,7 +32,15 @@ export const generateAdminAccessToken = async (id: string) => {
 export const generateResetPasswordToken = async (email: string, expiresIn: string | number) => {
     return await sign({
         email 
-    }, config.jwt.jwt_password_reset_secret as string,{
+    }, config.jwt.user.jwt_password_reset_secret as string,{
+        expiresIn
+    })
+}
+
+export const generateVerifyEmailToken = async (email: string, expiresIn: string | number) => {
+    return await sign({
+        email
+    }, config.jwt.user.jwt_verify_email as string,{
         expiresIn
     })
 }

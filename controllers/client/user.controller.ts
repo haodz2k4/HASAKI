@@ -56,8 +56,16 @@ export const registerPost = catchAsync(async (req: Request, res: Response) => {
     const pathTemplate = path.join(__dirname,"../../templates/verify-email.html");
     const htmlContent = await readFileSync(pathTemplate,"utf8")
     sendMail(email,'VUI LÒNG XÁC THỰC TÀI KHOẢN',{html: htmlContent});
-    req.flash('success','Đăng ký thành công')
-    res.redirect("/users/login")
+    req.flash('success','Vui lòng kiểm tra email')
+    res.redirect('back')
+})
+
+//[POST] "/users/verify-email"
+export const verifyEmail = catchAsync(async (req: Request, res: Response) => {
+    const {token} = req.query;
+
+
+    res.redirect("/users/login");
 })
 
 //[POST] "/users/logout"
@@ -141,7 +149,7 @@ export const resetPasswordPost = catchAsync(async (req: Request, res: Response) 
         res.redirect("back")
         return;
     }
-    const payload = verify(token,config.jwt.jwt_password_reset_secret as string);
+    const payload = verify(token,config.jwt.user.jwt_password_reset_secret as string);
     const {email} = payload as JwtPayload;
     const user = await userModel.findOne({email, status: "active",deleted: false});
     if(!user){

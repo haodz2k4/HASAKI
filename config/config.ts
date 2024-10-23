@@ -21,12 +21,14 @@ export default {
 
             jwt_refresh_secret: process.env.JWT_USER_REFRESH_SECRET,
             jwt_refresh_expire: process.env.JWT_USER_REFRESH_EXPIRE,
+
+            jwt_verify_email: process.env.JWT_VERIFY_EMAIL,
+            jwt_password_reset_secret: process.env.JWT_PASSWORD_RESET_SECRET
         },
         admin: {
             jwt_access_secret: process.env.JWT_ADMIN_ACCESS_SECRET,
             jwt_access_expire: process.env.JWT_ADMIN_ACCESS_EXPIRE
         },
-        jwt_password_reset_secret: process.env.JWT_PASSWORD_RESET_SECRET,
 
     },
     mail: {
