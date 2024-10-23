@@ -3,12 +3,14 @@ import Product from "../models/product.model"
 import { COLLECTION_USER_NAME } from "./user.model";
 import { COLLECTION_PRODUCT_NAME } from "./product.model";
 export const COLLECTION_CART_NAME = 'Cart' 
+
+export interface IProductCart {
+    productId: Types.ObjectId,
+    quantity: number
+}
 export interface ICart {
     userId: Types.ObjectId,
-    products: {
-        productId: Types.ObjectId,
-        quantity: number
-    }[]
+    products: IProductCart[]
 }
 
 const cartSchema = new Schema<ICart>({

@@ -236,8 +236,11 @@ if(btnAddToCart.length > 0){
       const formAddCart = document.querySelector("[form-add-cart]")
       const input = formAddCart.querySelector("input");
       const path = formAddCart.getAttribute("path");
+      const quantity = document.querySelector(".product-quantity").querySelector("input");
       formAddCart.action = `${path}${id}`;
-      input.value = id 
+      if(quantity) {
+        input.value = quantity.value 
+      }
       formAddCart.submit()
     })
   })
