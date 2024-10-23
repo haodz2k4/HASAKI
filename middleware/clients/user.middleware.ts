@@ -16,7 +16,9 @@ export default catchAsync(async (req: Request, res: Response, next: NextFunction
                 res.locals.user = user 
             }
             //If jwt expire or jwt invalid => next 
-        } catch {}
+        } catch {
+            //Nothing to do
+        }
         
     }
     next()

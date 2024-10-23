@@ -73,7 +73,7 @@ export const verifyEmail = catchAsync(async (req: Request, res: Response) => {
     const {_id} = payload as JwtPayload
     const user = await userModel.findOne({_id, deleted: false});
     if(!user){
-        throw new Error("Xác thực email thất bại")
+        throw new RenderError(400,"Xác thực email thất bại","/users/register")
     }
     user.isVerified = true;
     await user.save()
