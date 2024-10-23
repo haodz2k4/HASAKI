@@ -11,6 +11,7 @@ import { generateRandomString } from '../../helpers/generate';
 import forgotPasswordModel from "../../models/forgot-password.model";
 import { JwtPayload, verify } from "jsonwebtoken";
 import config from "../../config/config";
+import ms from "ms";
 
 //[GET] "/users/login"
 export const login = catchAsync(async (req: Request, res: Response) => {
@@ -30,7 +31,9 @@ export const loginPost = catchAsync(async (req: Request, res: Response) => {
     }
     //Access Token 
     const accessToken = await generateUserAccessToken(user.id);
-    res.cookie('accessToken', accessToken)
+    res.cookie('accessToken', accessToken,{
+        maxAge: ms(config.jwt.user.jwt_access_expire as string)
+    })
     if(remember === 'on'){
         const refreshToken = await generateUserRefreshToken(user.id);
         res.cookie('refreshToken', refreshToken)
@@ -48,7 +51,11 @@ export const register = catchAsync(async (req: Request, res: Response) => {
 //[POST] "/users/register"
 export const registerPost = catchAsync(async (req: Request, res: Response) => {
     const body = req.body;
+    const {email} = body;
     await userModel.create(body);
+    const pathTemplate = path.join(__dirname,"../../templates/verify-email.html");
+    const htmlContent = await readFileSync(pathTemplate,"utf8")
+    sendMail(email,'VUI LÒNG XÁC THỰC TÀI KHOẢN',{html: htmlContent});
     req.flash('success','Đăng ký thành công')
     res.redirect("/users/login")
 })
@@ -140,7 +147,6 @@ export const resetPasswordPost = catchAsync(async (req: Request, res: Response) 
     if(!user){
         throw new RenderError(401,"User is not found");
     }
-    console.log(req.body)
     const {password,repeatPassword } = req.body;
     if(password !== repeatPassword){
         throw new RenderError(400,"Invalid repeat password")
