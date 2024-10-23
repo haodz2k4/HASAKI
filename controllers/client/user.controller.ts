@@ -53,15 +53,15 @@ export const register = catchAsync(async (req: Request, res: Response) => {
 export const registerPost = catchAsync(async (req: Request, res: Response) => {
     const body = req.body;
     const {email} = body;
-    await userModel.create(body);
     const domain = getDomain(req)
     const token = generateVerifyEmailToken(email)
 
 
     const verifyPath = `${domain}/users/verify-email?token=${token}`
-    
+    console.log(verifyPath)
     const pathTemplate = path.join(__dirname,"../../templates/verify-email.html");
     const htmlContent = await readFileSync(pathTemplate,"utf8")
+        .replace('{{verification_link}}', verifyPath)
     sendMail(email,'VUI LÒNG XÁC THỰC TÀI KHOẢN',{html: htmlContent});
     req.flash('success','Vui lòng kiểm tra email')
     res.redirect('back')
@@ -70,8 +70,7 @@ export const registerPost = catchAsync(async (req: Request, res: Response) => {
 //[GET] "/users/verify-email"
 export const verifyEmail = catchAsync(async (req: Request, res: Response) => {
     const {token} = req.query;
-
-
+    req.flash('success','Xác thực thành công vui lòng đăng nhập');
     res.redirect("/users/login");
 })
 

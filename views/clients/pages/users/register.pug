@@ -1,11 +1,13 @@
 extends ../../layouts/auth.pug 
-
+include ../../mixins/show-alert.pug 
 
 block main 
     .wrapper
       img(src='img.png', alt='')
       h2.text-right Chào mừng 
       .form-wrapper.register
+        +alertSuccess(messages)
+        +alertError(messages)
         form(action='' method='POST')
           h2 Đăng ký tài khoản 
           .input-box

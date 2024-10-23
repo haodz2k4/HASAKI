@@ -27,6 +27,7 @@ router
     .post(controller.resetPasswordPost) 
 router.post("/logout",controller.logout) 
 
+router.get("/verify-email",controller.verifyEmail)
 
 router.get("/profiles",requireAuth,controller.getProfiles)
 export default router
