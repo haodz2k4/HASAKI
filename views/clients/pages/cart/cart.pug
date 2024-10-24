@@ -10,7 +10,6 @@ block main
     // Header
     .cart-header.row
       .col-1.checkbox-col
-        input#select-all(type='checkbox')
       .col-5 Sản phẩm 
       .col-2 Đơn giá 
       .col-2 Số lượng 
@@ -19,7 +18,8 @@ block main
      each item in cart.products 
       .cart-item.row.align-items-center(class=(item.productId.quantity === 0 || item.productId.status === 'inactive') ? 'card-disabled' : '')
         .col-1.checkbox-col
-          input(type='checkbox')
+          if (item.productId.quantity !== 0 && item.productId.status !== 'inactive')
+            input(type='checkbox')
         .col-5.d-flex.align-items-center
           img.product-image.me-3(src='https://via.placeholder.com/100' alt='Product Image')
           div
@@ -41,7 +41,7 @@ block main
  .cart-footer
       .d-flex.align-items-center.justify-content-between
         div
-          input#footer-select-all.footer-checkbox(type='checkbox')
+          input#footer-select-all.footer-checkbox(type='checkbox' checked-all)
           span Ch&#x1ECD;n T&#x1EA5;t C&#x1EA3; (2)
           a.ms-3(href='#') X&oacute;a
           a.ms-3(href='#') B&#x1ECF; s&#x1EA3;n ph&#x1EA9;m kh&ocirc;ng ho&#x1EA1;t &dstrok;&#x1ED9;ng
@@ -50,3 +50,5 @@ block main
           span T&#x1ED5;ng thanh to&aacute;n (2 S&#x1EA3;n ph&#x1EA9;m):
           span.total-price.ms-2 &#x20AB;278.000
           button.btn.btn-buy.ms-3 Mua hàng 
+ block script  
+  script(src='/js/cart.js')
