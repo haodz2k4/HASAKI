@@ -236,12 +236,17 @@ if(btnAddToCart.length > 0){
       const formAddCart = document.querySelector("[form-add-cart]")
       const input = formAddCart.querySelector("input");
       const path = formAddCart.getAttribute("path");
-      const quantity = document.querySelector(".product-quantity").querySelector("input");
+      const productQuantity = document.querySelector(".product-quantity")
+      let quantity = 1;
+      if(productQuantity){
+        quantity = productQuantity.querySelector("input").value;
+      }
       formAddCart.action = `${path}${id}`;
       if(quantity) {
-        input.value = quantity.value 
+        input.value = quantity 
       }
       formAddCart.submit()
+      
     })
   })
 }

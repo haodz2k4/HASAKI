@@ -2,6 +2,7 @@ import { Types, Schema, model } from "mongoose";
 import Product from "../models/product.model"
 import { COLLECTION_USER_NAME } from "./user.model";
 import { COLLECTION_PRODUCT_NAME } from "./product.model";
+import { RenderError } from "../utils/error";
 export const COLLECTION_CART_NAME = 'Cart' 
 
 export interface IProductCart {
@@ -22,11 +23,20 @@ const cartSchema = new Schema<ICart>({
                 ref: COLLECTION_PRODUCT_NAME,
                 required: [true, 'Product ID is required'],
                 validate: {
-                    validator:async function(data):Promise<boolean> {
-                        const product = await Product.findById({_id: data})
-                        return !!product
+                    validator:async function(id):Promise<boolean> {
+                        const product = await Product.findById({_id: id});
+                        if(!product){
+                            throw new RenderError(400,"Sản phẩm không tìm thấy")
+                        }
+                        if(product.status === 'inactive'){
+                            throw new RenderError(400,"Sản phẩm không còn hoạt động")
+                        }
+                        if(product.quantity === 0){
+                            throw new RenderError(400,"Sản phẩm hết hàng")
+                        }
+                        return true;
                     },
-                    message: 'Product is not exists'
+                    message: 'Invalid product id'
                 },
             },
             quantity: { type: Number, default: 1 },

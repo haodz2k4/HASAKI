@@ -3,3 +3,5 @@ mixin disableProduct(quantity, status)
         | Hết hàng 
     else if status === 'inactive' 
         | Không còn hoạt động 
+    else 
+        | Còn #{quantity}

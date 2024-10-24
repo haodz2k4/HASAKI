@@ -1,4 +1,4 @@
-import { IProductCart } from './../../models/cart.model';
+
 import { Request, Response } from "express";
 import { catchAsync } from "../../utils/catchAsync";
 
@@ -10,6 +10,7 @@ export const cart = catchAsync(async (req: Request, res: Response) => {
     cart.products.forEach((item: Record<string, any>) => {
         item.totalPrice = (item.productId.price * (100 - item.productId.discountPercentage) / 100) * item.quantity
     })
+    
     res.render("clients/pages/cart/cart.pug",{
         cart
     });
@@ -19,8 +20,8 @@ export const cart = catchAsync(async (req: Request, res: Response) => {
 export const add = catchAsync(async (req: Request, res: Response) => {
     const {productId} = req.params;
     const quantity = parseInt(req.body.quantity)
-    const cart = res.locals.cart 
-    const index: number = cart.products.findIndex((item: IProductCart) => item.productId.id.toString() === productId);
+    const cart = res.locals.cart;
+    const index: number = cart.products.findIndex((item: Record<string, any>) => item.productId.id.toString() === productId);
     if(index === -1 ){
         cart.products.push({
             productId,

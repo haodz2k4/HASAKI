@@ -37,3 +37,6 @@ if(btnRemoveProductCarts.length > 0){
         })
     })
 }
+
+const cartLength = document.querySelector("[cart-length]");
+cartLength.innerHTML = `Chọn tất cả (${checkMulti.length})`

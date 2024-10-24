@@ -23,7 +23,8 @@ block main
         .col-5.d-flex.align-items-center
           img.product-image.me-3(src='https://via.placeholder.com/100' alt='Product Image')
           div
-            +disableProduct(item.productId.quantity,item.productId.status)
+            .deal-label
+              +disableProduct(item.productId.quantity,item.productId.status)
             .product-name #{item.productId.title}
             span.disabled-text Phân loại hàng 
             //.stock-label.mt-1 H&#x1EBE;T H&Agrave;NG
@@ -42,7 +43,7 @@ block main
       .d-flex.align-items-center.justify-content-between
         div
           input#footer-select-all.footer-checkbox(type='checkbox' checked-all)
-          span Ch&#x1ECD;n T&#x1EA5;t C&#x1EA3; (2)
+          span(cart-length) Ch&#x1ECD;n T&#x1EA5;t C&#x1EA3; 
           a.ms-3(href='#') X&oacute;a
           a.ms-3(href='#') B&#x1ECF; s&#x1EA3;n ph&#x1EA9;m kh&ocirc;ng ho&#x1EA1;t &dstrok;&#x1ED9;ng
           a.ms-3.text-danger(href='#') L&#x1B0;u v&agrave;o m&#x1EE5;c &Dstrok;&atilde; th&iacute;ch
