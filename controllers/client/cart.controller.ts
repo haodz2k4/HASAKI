@@ -15,15 +15,15 @@ export const cart = catchAsync(async (req: Request, res: Response) => {
     });
 }) 
 
-//[POST] "/cart/add/:id"
+//[POST] "/cart/add/:productId"
 export const add = catchAsync(async (req: Request, res: Response) => {
-    const {id} = req.params;
+    const {productId} = req.params;
     const quantity = parseInt(req.body.quantity)
     const cart = res.locals.cart 
-    const index: number = cart.products.findIndex((item: IProductCart) => item.productId.id.toString() === id);
+    const index: number = cart.products.findIndex((item: IProductCart) => item.productId.id.toString() === productId);
     if(index === -1 ){
         cart.products.push({
-            productId: id,
+            productId,
             quantity
         })
     }else{
@@ -34,4 +34,16 @@ export const add = catchAsync(async (req: Request, res: Response) => {
     req.flash('success','Thêm sản phẩm vào giỏ hàng thành công');
     res.redirect("back");
 
+}) 
+
+//[DELETE] "/cart/remove/:productId"
+export const removeProductFormcart = catchAsync(async (req: Request, res: Response) => {
+    const {productId} = req.params;
+    const cart = res.locals.cart 
+    const index = cart.products.findIndex((item: Record<string, any>) => item.productId.id.toString() === productId)
+    if(index !== -1) {
+        cart.products.splice(index, 1);
+        await cart.save()
+    }
+    res.redirect("back");
 })

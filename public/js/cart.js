@@ -24,3 +24,16 @@ checkMulti.forEach((item) => {
         }
     })
 })
+
+const btnRemoveProductCarts = document.querySelectorAll("[btn-remove-product-cart]");
+if(btnRemoveProductCarts.length > 0){
+    btnRemoveProductCarts.forEach((item) => {
+        item.addEventListener("click",() => {
+            const id = item.getAttribute("btn-remove-product-cart");
+            const formRemoveProductCart = document.querySelector("[form-remove-product-cart]");
+            console.log(formRemoveProductCart)
+            formRemoveProductCart.action = `/cart/remove/${id}?_method=DELETE`
+            formRemoveProductCart.submit()
+        })
+    })
+}

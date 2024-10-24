@@ -35,7 +35,7 @@ block main
           input.form-control.text-center(type='number' value=item.quantity)
         .col-1.price #{formatPrice(item.totalPrice)}
         .col-1.action-col
-          span.delete-btn X&oacute;a
+          span.delete-btn(btn-remove-product-cart=item.productId.id) X&oacute;a
       
       
  .cart-footer
@@ -50,5 +50,7 @@ block main
           span T&#x1ED5;ng thanh to&aacute;n (2 S&#x1EA3;n ph&#x1EA9;m):
           span.total-price.ms-2 &#x20AB;278.000
           button.btn.btn-buy.ms-3 Mua hàng 
+ form(action="" method='POST' form-remove-product-cart)
+   
  block script  
   script(src='/js/cart.js')
