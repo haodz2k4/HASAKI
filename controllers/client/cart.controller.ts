@@ -6,6 +6,10 @@ import { catchAsync } from "../../utils/catchAsync";
 export const cart = catchAsync(async (req: Request, res: Response) => {
 
     const cart = res.locals.cart
+
+    cart.products.forEach((item: Record<string, any>) => {
+        item.totalPrice = (item.productId.price * (100 - item.productId.discountPercentage) / 100) * item.quantity
+    })
     res.render("clients/pages/cart/cart.pug",{
         cart
     });
@@ -16,7 +20,7 @@ export const add = catchAsync(async (req: Request, res: Response) => {
     const {id} = req.params;
     const quantity = parseInt(req.body.quantity)
     const cart = res.locals.cart 
-    const index: number = cart.products.findIndex((item: IProductCart) => item.productId.toString() === id);
+    const index: number = cart.products.findIndex((item: IProductCart) => item.productId.id.toString() === id);
     if(index === -1 ){
         cart.products.push({
             productId: id,

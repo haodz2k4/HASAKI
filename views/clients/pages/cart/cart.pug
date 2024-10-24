@@ -1,55 +1,52 @@
 extends ../../layouts/default.pug 
+include ../../mixins/disable-product.pug 
+block styles 
+  link(rel="stylesheet", href="/css/cart.css")
 
 block main 
 
-    .container.my-5
-      h2 Giỏ hàng của bạn 
-      .row
-        .col-12
-          .card.p-3
-            .row
-              .col-md-1
-                input(type="checkbox")
-              .col-md-1
-                img.product-img(src='https://via.placeholder.com/80', alt='Product Image')
-              .col-md-4
-                p.product-name &Aacute;o thun oversize nam n&#x1EEF; cao c&#x1EA5;p v&#x1EA3;i waffle h&agrave;ng hi&#x1EC7;u
-                p.product-options Ph&acirc;n Lo&#x1EA1;i H&agrave;ng: N&acirc;u, XL
-              .col-md-2
-                span.price-original 230.000&dstrok;
-                span.price-sale 138.000&dstrok;
-              .col-md-2
-                .input-group
-                  button.btn.btn-outline-secondary -
-                  input.form-control.text-center(type='text', value='1', style='max-width: 50px;')
-                  button.btn.btn-outline-secondary +
-              .col-md-2.cart-action
-                a.remove-link(href='#') X&oacute;a
-            hr
-            .row
-              .col-md-1
-                img.product-img(src='https://via.placeholder.com/80', alt='Product Image')
-              .col-md-5
-                p.product-name &Aacute;o thun oversize nam n&#x1EEF; cao c&#x1EA5;p v&#x1EA3;i waffle h&agrave;ng hi&#x1EC7;u
-                p.product-options Ph&acirc;n Lo&#x1EA1;i H&agrave;ng: X&aacute;m, XL
-              .col-md-2
-                span.price-original 230.000&dstrok;
-                span.price-sale 138.000&dstrok;
-              .col-md-2
-                .input-group
-                  button.btn.btn-outline-secondary -
-                  input.form-control.text-center(type='text', value='1', style='max-width: 50px;')
-                  button.btn.btn-outline-secondary +
-              .col-md-2.cart-action
-                a.remove-link(href='#') X&oacute;a
-          .row.mt-4
-            .col-md-8
-              .voucher-input
-                input.form-control(type='text', placeholder='Nhập mã giảm giá')
-                button.btn.btn-warning Ch&#x1ECD;n ho&#x1EB7;c nh&#x1EAD;p m&atilde;
-            .col-md-4.total-section
-              | T&#x1ED5;ng ti&#x1EC1;n: 
-              span 276.000&dstrok;
-          .row.mt-4
-            .col-md-4.offset-md-8
-              button.btn.buy-btn Mua H&agrave;ng
+ .container
+  .cart-container
+    // Header
+    .cart-header.row
+      .col-1.checkbox-col
+        input#select-all(type='checkbox')
+      .col-5 Sản phẩm 
+      .col-2 Đơn giá 
+      .col-2 Số lượng 
+      .col-2 Tổng tiền 
+    .cart-items
+     each item in cart.products 
+      .cart-item.row.align-items-center(class=(item.productId.quantity === 0 || item.productId.status === 'inactive') ? 'card-disabled' : '')
+        .col-1.checkbox-col
+          input(type='checkbox')
+        .col-5.d-flex.align-items-center
+          img.product-image.me-3(src='https://via.placeholder.com/100' alt='Product Image')
+          div
+            +disableProduct(item.productId.quantity,item.productId.status)
+            .product-name #{item.productId.title}
+            span.disabled-text Phân loại hàng 
+            //.stock-label.mt-1 H&#x1EBE;T H&Agrave;NG
+        .col-2
+          del.text-muted #{formatPrice(item.productId.price)}
+          br
+          span.price #{formatPrice(item.productId.newPrice)}
+        .col-2
+          input.form-control.text-center(type='number' value=item.quantity)
+        .col-1.price #{formatPrice(item.totalPrice)}
+        .col-1.action-col
+          span.delete-btn X&oacute;a
+      
+      
+ .cart-footer
+      .d-flex.align-items-center.justify-content-between
+        div
+          input#footer-select-all.footer-checkbox(type='checkbox')
+          span Ch&#x1ECD;n T&#x1EA5;t C&#x1EA3; (2)
+          a.ms-3(href='#') X&oacute;a
+          a.ms-3(href='#') B&#x1ECF; s&#x1EA3;n ph&#x1EA9;m kh&ocirc;ng ho&#x1EA1;t &dstrok;&#x1ED9;ng
+          a.ms-3.text-danger(href='#') L&#x1B0;u v&agrave;o m&#x1EE5;c &Dstrok;&atilde; th&iacute;ch
+        .d-flex.align-items-center
+          span T&#x1ED5;ng thanh to&aacute;n (2 S&#x1EA3;n ph&#x1EA9;m):
+          span.total-price.ms-2 &#x20AB;278.000
+          button.btn.btn-buy.ms-3 Mua hàng 

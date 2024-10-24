@@ -772,3 +772,8 @@
     object-fit: cover;
     border-radius: 10px;
 }
+
+.card-disabled {
+    pointer-events: none; 
+    opacity: 0.5; 
+}
