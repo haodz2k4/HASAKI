@@ -6,12 +6,13 @@
 //RETURN: {status: "active", age: 20}
 export default <T extends Record<string, any>, K extends keyof T>(object: T, fields: K[]): Partial<T> => {
     return fields.reduce((result, item) => {
-        if(item in Object){
+        if (item in object) {
             result[item] = object[item];
         }
-        return result
-    }, {} as Partial<T>)
-}
+        return result;
+    }, {} as Partial<T>);
+};
+
 //INP: {status: "active"}
 //OUT: "status-active"
 export const stringObject = (obj: Record<string, any>): string => {

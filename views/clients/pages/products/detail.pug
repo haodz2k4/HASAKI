@@ -36,7 +36,7 @@ block main
         
         .product-quantity
           label(for='quantity') Số lượng: #{product.quantity}
-          input#quantity.form-control(type='number', name='quantity', value='1', min='1', style='width: 65px;')
+          input#quantity.form-control(type='number', name='quantity', value='1', min='1',max=product.quantity, style='width: 65px;')
         .delivery-info
           strong Giao Nhanh Mi&#x1EC5;n Ph&iacute; 2H t&#x1EA1;i 220 Chi Nh&aacute;nh:
           p
