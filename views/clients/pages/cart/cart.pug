@@ -19,7 +19,7 @@ block main
       .cart-item.row.align-items-center(class=(item.productId.quantity === 0 || item.productId.status === 'inactive') ? 'card-disabled' : '')
         .col-1.checkbox-col
           if (item.productId.quantity !== 0 && item.productId.status !== 'inactive')
-            input(type='checkbox')
+            input(type='checkbox' value=item.productId.id)
         .col-5.d-flex.align-items-center
           img.product-image.me-3(src='https://via.placeholder.com/100' alt='Product Image')
           div
@@ -39,12 +39,12 @@ block main
           span.delete-btn(btn-remove-product-cart=item.productId.id) X&oacute;a
       
       
- .cart-footer
+ .cart-footer(card-change-multi)
       .d-flex.align-items-center.justify-content-between
         div
           input#footer-select-all.footer-checkbox(type='checkbox' checked-all)
           span(cart-length) Ch&#x1ECD;n T&#x1EA5;t C&#x1EA3; 
-          a.ms-3(href='#') X&oacute;a
+          button.ms-3(btn-delete-multi) X&oacute;a
           a.ms-3(href='#') B&#x1ECF; s&#x1EA3;n ph&#x1EA9;m kh&ocirc;ng ho&#x1EA1;t &dstrok;&#x1ED9;ng
           a.ms-3.text-danger(href='#') L&#x1B0;u v&agrave;o m&#x1EE5;c &Dstrok;&atilde; th&iacute;ch
         .d-flex.align-items-center
@@ -52,6 +52,7 @@ block main
           span.total-price.ms-2 &#x20AB;278.000
           button.btn.btn-buy.ms-3 Mua hàng 
  form(action="" method='POST' form-remove-product-cart)
-   
+ form(action="" method='POST' form-change-multi-cart) 
+  input(type="text" name='ids')
  block script  
   script(src='/js/cart.js')

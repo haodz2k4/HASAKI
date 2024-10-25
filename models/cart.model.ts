@@ -28,12 +28,6 @@ const cartSchema = new Schema<ICart>({
                         if(!product){
                             throw new RenderError(400,"Sản phẩm không tìm thấy")
                         }
-                        if(product.status === 'inactive'){
-                            throw new RenderError(400,"Sản phẩm không còn hoạt động")
-                        }
-                        if(product.quantity === 0){
-                            throw new RenderError(400,"Sản phẩm hết hàng")
-                        }
                         return true;
                     },
                     message: 'Invalid product id'

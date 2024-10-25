@@ -1,4 +1,3 @@
-
 const cartContainer = document.querySelector(".cart-container")
 
 const checkAll = document.querySelector("[checked-all]")
@@ -15,7 +14,6 @@ checkAll.addEventListener("click",() => {
         })
     }
 })
-
 checkMulti.forEach((item) => {
     item.addEventListener("click", () => {
         const checkedLength = cartContainer.querySelectorAll(".cart-items input[type='checkbox']:checked").length;
@@ -25,6 +23,14 @@ checkMulti.forEach((item) => {
     })
 })
 
+const getIds = () => {
+    const ids = []
+    const checkMulti = cartContainer.querySelectorAll(".cart-items input[type='checkbox']:checked")
+    checkMulti.forEach((item) => {
+        ids.push(item.value)
+    })
+    return ids
+}
 const btnRemoveProductCarts = document.querySelectorAll("[btn-remove-product-cart]");
 if(btnRemoveProductCarts.length > 0){
     btnRemoveProductCarts.forEach((item) => {
@@ -40,3 +46,20 @@ if(btnRemoveProductCarts.length > 0){
 
 const cartLength = document.querySelector("[cart-length]");
 cartLength.innerHTML = `Chọn tất cả (${checkMulti.length})`
+
+
+const cardChangeMulti = document.querySelector("[card-change-multi]");
+const btnDeleteMulti = cardChangeMulti.querySelector("[btn-delete-multi]");
+btnDeleteMulti.addEventListener("click",() => {
+    const formChangeMultiCart = document.querySelector("[form-change-multi-cart]") 
+    const inpIds = formChangeMultiCart.querySelector("input");
+    const checkedLength = cartContainer.querySelectorAll(".cart-items input[type='checkbox']:checked").length;
+    if(checkedLength === 0){
+        alert("Vui lòng chọn ít nhất 1 bản ghi")
+    }
+    const ids = getIds()
+    inpIds.value = JSON.stringify(ids)
+    formChangeMultiCart.action = `/cart/update/multi/remove?_method=PATCH`;
+    formChangeMultiCart.submit()
+
+})
