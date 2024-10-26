@@ -1,213 +1,55 @@
-
-
-.Kright {
-  width: 100%;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding:50px 0 50px 0;
-}
-
-.Kthongtintaikhoan {
-  width: 85%;
-  height: 80vh;
-  display: flex;
-  border-radius: 8px;
+.profile-card {
   overflow: hidden;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  background-color: #edecec;
+  border: none;
 }
 
-.Kthongtintaikhoan-a {
-  width: 50%;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.Ktttk-header {
+.profile-sidebar {
+  background-color: #336e5b;
+  color: white;
   text-align: center;
-  margin-bottom: 20px;
 }
 
-.Ktttk-content {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+.text-custom {
+  color: #336e5b;
+  font-weight: 600;
+}
+
+.btn-custom {
+  background-color: #336e5b;
+  color: white;
+  border-radius: 25px;
+}
+.btn-custom:hover {
+  background-color: #28564c;
+}
+
+/* Product Card */
+.product-card {
+  width: 150px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  text-align: center;
+}
+.product-card img {
   width: 100%;
+  border-radius: 8px;
 }
-
-.Ktttk-icon {
-  width: 20%;
-  margin-top: 20px;
-  padding-right: 0px;
-}
-
-.Krounded-circle {
-  width: 100%;
-}
-
-.Ktttk-info {
-  width: 80%;
-  height: 60vh;
-  padding: 20px;
-  box-sizing: border-box;
-  overflow: auto;
-  padding-top: 0px;
-  font-size: 18px;
-}
-
-.Kinfo-form {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.Klabel {
+.product-info h6 {
   margin: 10px 0 5px;
-  width: 100%;
-  margin-top: 15px;
+  font-size: 16px;
+  color: #333;
+}
+.product-info p {
+  color: #888;
 }
 
-.Kinput-text,
-.Kinput-email,
-.Kinput-date {
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.Kinput-checkbox {
-  margin-right: 5px;
-}
-
-.Kbtn-update {
-  margin-top: 5px;
-  padding: 12px;
-  background-color: #cccccc;
-  color: black;
+/* Heart Button */
+.btn-favorite {
+  position: absolute;
+  top: 5px;
+  left: 5px;
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 30%;
-  transition: background-color 0.3s ease;
-}
-
-.Kbtn-update:hover {
-  background-color: #0056b3;
-  color: white;
-}
-
-.Ktttk-right {
-  width: 50%;
-  padding: 15px;
-  font-size: 20px;
-}
-
-.Kphone-section,
-.Kemail-section,
-.Ksecurity-section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.Kbtn-link {
-  width: 30%;
-  margin-top: 5px;
-  padding: 8px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.Kbtn-link:hover {
-  background-color: #218838;
-}
-
-.Ksocial-section {
-  margin-top: 20px;
-}
-
-.Ksocial-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.Kbtn-link:hover {
-  background-color: #0056b3;
-}
-
-.Ksocial-item span {
-  display: block;
-}
-
-.Ksocial-item i {
-  color: #0056b3;
-}
-
-.Kemail-section i,
-.Kphone-section i,
-.Ksecurity-section i {
-  color: black;
-}
-
-.Ksocial-item:hover i {
-  color: #218838;
-}
-.Klabel-gender label {
-  flex: 1; /* Allow label to grow and shrink as necessary */
-  margin-right: 10px; /* Add some space between label and checkbox */
-  margin-bottom: 15px;
-}
-
-.Klabel-gender input[type='checkbox'] {
-  flex: 0; /* Prevent checkbox from growing or shrinking */
-  margin-right: 5px; /* Add space between checkbox and label */
-}
-
-@media (max-width: 768px) {
-  .Kthongtintaikhoan {
-    flex-direction: column;
-    width: 95%;
-    height: auto;
-  }
-
-  .Ktttk-right,
-  .Kthongtintaikhoan-a {
-    width: 100%;
-  }
-
-  .Ktttk-content {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .Ktttk-icon {
-    width: 100%;
-    text-align: center;
-  }
-
-  .Ktttk-info {
-    width: 100%;
-  }
-
-  .Kbtn-update {
-    width: 100%;
-  }
-
-  .Kbtn-link {
-    width: 100%;
-  }
-}
-
-#avatar-profile {
-  border-radius: 50%;
+  background: none;
+  font-size: 1.2rem;
 }

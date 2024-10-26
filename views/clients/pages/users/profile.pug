@@ -3,56 +3,117 @@ extends ../../layouts/default.pug
 block styles 
     link(rel="stylesheet", href="/css/profiles.css")
 block main 
- .Kright
-  .Kthongtintaikhoan
-    .Kthongtintaikhoan-a
-      h1.Ktttk-header Th&ocirc;ng tin t&agrave;i kho&#x1EA3;n
-      .Ktttk-content
-        .Ktttk-icon
-          img#avatar-profile.Krounded-circle(src='https://via.placeholder.com/80' alt='Icon')
-        .Ktttk-info
-          .Kinfo-form
-            label.Klabel(for='username') Tên tài khoản 
-            input#username.Kinput-text(type='text' value=user.fullName)
-            label.Klabel Gi&#x1EDB;i t&iacute;nh:
-            .Klabel-gender(style='display: flex; color:black;align-items: center;')
-              input#male(type='radio' name='gender' value='male' checked=(user.gender === 'nam'))
-              label.Klabel(for='male') Nam
-              input#female(type='radio' name='gender' value='female' checked=(user.gender === 'nữ'))
-              label.Klabel(for='female') Nữ 
-            label.Klabel(for='dob') Ng&agrave;y sinh:
-            input#dob.Kinput-date(type='date' value=user.birthDate)
-            div(style='margin-top: 15px; display: flex; align-items: center;')
-              input#promotions.Kinput-checkbox(type='checkbox' style='margin-right: 10px;')
-              label.Klabel(for='promotions' style='font-size: 18px; margin-bottom: 15px;') Nh&#x1EAD;n th&ocirc;ng tin khuy&#x1EBF;n m&atilde;i
-            button.Kbtn-update(type='button' style='width: 100%; background-color: #078734; color: white; margin-top: 20px; border-radius: 20px;')
-              | C&#x1EAD;p nh&#x1EAD;t
-    .Ktttk-right
-      h3 S&#x1ED1; &dstrok;i&#x1EC7;n tho&#x1EA1;i v&agrave; Email
-      .Kemail-section
-          label.Klabel(for='phone')
-            i.fas.fa-phone(style='font-size: 20px; margin-right: 5px')
-            | Số điện thoại 
-          p  #{user.phone}
-      .Kemail-section
-        label.Klabel
-          i.fas.fa-envelope(style='font-size: 20px; margin-right: 5px')
-          |                 Email:
-        p  #{user.email}
-      .Ksecurity-section
-        label.Klabel
-          i.fas.fa-lock(style='font-size: 20px; margin-right: 5px;')
-          | Đổi mật khẩu 
-        button.Kbtn-update(type='button' style='width: 40%') &Dstrok;&#x1ED5;i m&#x1EAD;t kh&#x1EA9;u
-      h4(style='margin-top: 60px') Li&ecirc;n k&#x1EBF;t m&#x1EA1;ng x&atilde; h&#x1ED9;i
-      .Ksocial-section
-        .Ksocial-item
-          span
-            i.fab.fa-facebook(style='font-size: 20px; margin-right: 5px')
-            |                   Facebook
-          button.Kbtn-link(type='button') Li&ecirc;n k&#x1EBF;t
-        .Ksocial-item
-          span
-            i.fab.fa-google(style='font-size: 20px; margin-right: 5px; color: #db4437')
-            |                   Google
-          button.Kbtn-link(type='button') Li&ecirc;n k&#x1EBF;t
+ .container.my-5
+  .card.profile-card.mx-auto.shadow-lg.rounded-4
+    .row.g-0
+      // Profile Sidebar
+      .col-md-4.profile-sidebar
+        .text-center.p-4
+          img.rounded-circle.mb-3.shadow(src='https://via.placeholder.com/150' alt='User Avatar' style='width: 120px; height: 120px;')
+          h4.text-white #{}
+          p.text-white-50 user@example.com
+          hr.text-white
+          p.text-white-50
+            i.fas.fa-phone.me-2
+            | 0123456789
+          p.text-white-50
+            i.fas.fa-birthday-cake.me-2
+            | 01/01/1990
+          p.text-white-50
+            i.fas.fa-venus-mars.me-2
+            | Nam
+      // Profile Details and Actions
+      .col-md-8
+        .card-body.p-4
+          h5.card-title.mb-4.text-custom Th&ocirc;ng tin c&aacute; nh&acirc;n
+          .list-group
+            .list-group-item.border-0
+              strong Tr&#x1EA1;ng th&aacute;i:
+              span.badge.bg-success &Dstrok;ang ho&#x1EA1;t &dstrok;&#x1ED9;ng
+            .list-group-item.border-0
+              strong X&aacute;c th&#x1EF1;c t&agrave;i kho&#x1EA3;n:
+              |  &Dstrok;&atilde; x&aacute;c th&#x1EF1;c
+          // Profile Actions
+          .mt-5
+            button.btn.btn-custom.shadow.me-2(onclick="showSection('editProfile')")
+              i.fas.fa-user-edit
+              |  S&#x1EED;a Th&ocirc;ng Tin
+            button.btn.btn-custom.shadow.me-2(onclick="showSection('orders')")
+              i.fas.fa-box
+              |  &Dstrok;&#x1A1;n H&agrave;ng
+            button.btn.btn-custom.shadow.me-2(onclick="showSection('wishlist')")
+              i.fas.fa-heart
+              |  S&#x1EA3;n Ph&#x1EA9;m Y&ecirc;u Th&iacute;ch
+            button.btn.btn-custom.shadow(onclick="showSection('addresses')")
+              i.fas.fa-map-marker-alt
+              |  &Dstrok;&#x1ECB;a Ch&#x1EC9;
+  // Sections
+  #editProfile.mt-5.section.shadow.p-4.rounded-4.bg-white
+    h3.text-custom
+      i.fas.fa-user-edit.me-2
+      | S&#x1EED;a Th&ocirc;ng Tin C&aacute; Nh&acirc;n
+    form
+      .mb-3
+        label.form-label(for='fullName') H&#x1ECD; v&agrave; T&ecirc;n
+        input#fullName.form-control(type='text' value='Nguyễn Văn A')
+      .mb-3
+        label.form-label(for='email') Email
+        input#email.form-control(type='email' value='user@example.com')
+      .mb-3
+        label.form-label(for='phone') S&#x1ED1; &dstrok;i&#x1EC7;n tho&#x1EA1;i
+        input#phone.form-control(type='text' value='0123456789')
+      button.btn.btn-custom.shadow(type='submit') L&#x1B0;u Thay &Dstrok;&#x1ED5;i
+  #orders.mt-5.section.shadow.p-4.rounded-4.bg-white
+    h3.text-custom
+      i.fas.fa-box.me-2
+      | &Dstrok;&#x1A1;n H&agrave;ng &Dstrok;&atilde; Mua
+    .order-group
+      .order-item.mb-4
+        h5 &Dstrok;&#x1A1;n h&agrave;ng #12345 - Ng&agrave;y mua: 12/01/2024 - Tr&#x1EA1;ng th&aacute;i: &Dstrok;&atilde; giao
+        .product-list.d-flex.flex-wrap
+          .product-card.shadow-sm.m-2
+            img(src='https://via.placeholder.com/100' alt='Product Image')
+            .product-info
+              h6 S&#x1EA3;n ph&#x1EA9;m A
+              p Gi&aacute;: 100,000&dstrok;
+          .product-card.shadow-sm.m-2
+            img(src='https://via.placeholder.com/100' alt='Product Image')
+            .product-info
+              h6 S&#x1EA3;n ph&#x1EA9;m B
+              p Gi&aacute;: 200,000&dstrok;
+      .order-item.mb-4
+        h5 &Dstrok;&#x1A1;n h&agrave;ng #67890 - Ng&agrave;y mua: 20/02/2024 - Tr&#x1EA1;ng th&aacute;i: &Dstrok;ang x&#x1EED; l&yacute;
+        .product-list.d-flex.flex-wrap
+          .product-card.shadow-sm.m-2
+            img(src='https://via.placeholder.com/100' alt='Product Image')
+            .product-info
+              h6 S&#x1EA3;n ph&#x1EA9;m C
+              p Gi&aacute;: 150,000&dstrok;
+  #wishlist.mt-5.section.shadow.p-4.rounded-4.bg-white
+    h3.text-custom
+      i.fas.fa-heart.me-2
+      | S&#x1EA3;n Ph&#x1EA9;m Y&ecirc;u Th&iacute;ch
+    .product-list.d-flex.flex-wrap
+      .product-card.shadow-sm.m-2.position-relative
+        button.btn-favorite
+          i.fas.fa-heart.text-danger
+        img(src='https://via.placeholder.com/100' alt='Product Image')
+        .product-info
+          h6 S&#x1EA3;n ph&#x1EA9;m A
+          p Gi&aacute;: 100,000&dstrok;
+      .product-card.shadow-sm.m-2.position-relative
+        button.btn-favorite
+          i.fas.fa-heart.text-danger
+        img(src='https://via.placeholder.com/100' alt='Product Image')
+        .product-info
+          h6 S&#x1EA3;n ph&#x1EA9;m B
+          p Gi&aacute;: 200,000&dstrok;
+  #addresses.mt-5.section.shadow.p-4.rounded-4.bg-white
+    h3.text-custom
+      i.fas.fa-map-marker-alt.me-2
+      | &Dstrok;&#x1ECB;a Ch&#x1EC9; C&#x1EE7;a B&#x1EA1;n
+    ul.list-group.list-group-flush
+      li.list-group-item &Dstrok;&#x1ECB;a ch&#x1EC9; 1: 123 &Dstrok;&#x1B0;&#x1EDD;ng ABC, Ph&#x1B0;&#x1EDD;ng DEF, Qu&#x1EAD;n XYZ
+      li.list-group-item &Dstrok;&#x1ECB;a ch&#x1EC9; 2: 456 &Dstrok;&#x1B0;&#x1EDD;ng GHI, Ph&#x1B0;&#x1EDD;ng JKL, Qu&#x1EAD;n UVW 
+  block script 
+    script(src="/js/profile.js") 
