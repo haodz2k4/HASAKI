@@ -53,10 +53,18 @@ export const removeProductFormcart = catchAsync(async (req: Request, res: Respon
 //[PATCH] "/cart/update/multi/:type"
 export const updateMulti = catchAsync(async (req: Request, res: Response) => {
     const ids = JSON.parse(req.body.ids)
+    console.log(ids)
     const {type} = req.params
     const cart = res.locals.cart;
     switch(type) {
         case 'remove': 
+            cart.products.forEach((item: Record<string, any>, index: number) => {
+                if(ids.includes(item.productId.id.toString())){
+                    cart.products.splice(index,1)
+                }
+            })
+            break;
+        case 'inactive': 
             cart.products.forEach((item: Record<string, any>, index: number) => {
                 if(ids.includes(item.productId.id.toString())){
                     cart.products.splice(index,1)

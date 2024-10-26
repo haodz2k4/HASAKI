@@ -16,7 +16,7 @@ block main
       .col-2 Tổng tiền 
     .cart-items
      each item in cart.products 
-      .cart-item.row.align-items-center(class=(item.productId.quantity === 0 || item.productId.status === 'inactive') ? 'card-disabled' : '')
+      .cart-item.row.align-items-center(class=(item.productId.quantity === 0 || item.productId.status == 'inactive') ? 'card-disabled' : '' info-status=item.productId.status id=item.productId.id)
         .col-1.checkbox-col
           if (item.productId.quantity !== 0 && item.productId.status !== 'inactive')
             input(type='checkbox' value=item.productId.id)
@@ -44,15 +44,16 @@ block main
         div
           input#footer-select-all.footer-checkbox(type='checkbox' checked-all)
           span(cart-length) Ch&#x1ECD;n T&#x1EA5;t C&#x1EA3; 
-          button.ms-3(btn-delete-multi) X&oacute;a
-          a.ms-3(href='#') B&#x1ECF; s&#x1EA3;n ph&#x1EA9;m kh&ocirc;ng ho&#x1EA1;t &dstrok;&#x1ED9;ng
-          a.ms-3.text-danger(href='#') L&#x1B0;u v&agrave;o m&#x1EE5;c &Dstrok;&atilde; th&iacute;ch
+          button.ms-3.btn.btn-success(btn-delete-multi) X&oacute;a
+          button.btn.btn-primary.ms-3(btn-remove-product-inactive) Bỏ sản phẩm không hoạt động 
+          button.btn.btn-info.ms-3() Bỏ sản phẩm hết hàng 
+          button.ms-3.btn.btn-danger(styles='color: white') L&#x1B0;u v&agrave;o m&#x1EE5;c &Dstrok;&atilde; th&iacute;ch
         .d-flex.align-items-center
           span T&#x1ED5;ng thanh to&aacute;n (2 S&#x1EA3;n ph&#x1EA9;m):
           span.total-price.ms-2 &#x20AB;278.000
           button.btn.btn-buy.ms-3 Mua hàng 
  form(action="" method='POST' form-remove-product-cart)
- form(action="" method='POST' form-change-multi-cart) 
+ form(action="" method='POST' form-change-multi-cart).d-none 
   input(type="text" name='ids')
  block script  
   script(src='/js/cart.js')

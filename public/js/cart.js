@@ -51,15 +51,44 @@ cartLength.innerHTML = `Chọn tất cả (${checkMulti.length})`
 const cardChangeMulti = document.querySelector("[card-change-multi]");
 const btnDeleteMulti = cardChangeMulti.querySelector("[btn-delete-multi]");
 btnDeleteMulti.addEventListener("click",() => {
+   
     const formChangeMultiCart = document.querySelector("[form-change-multi-cart]") 
     const inpIds = formChangeMultiCart.querySelector("input");
     const checkedLength = cartContainer.querySelectorAll(".cart-items input[type='checkbox']:checked").length;
     if(checkedLength === 0){
         alert("Vui lòng chọn ít nhất 1 bản ghi")
+    }else{
+        const isConfirm = confirm("Bạn có chắc muốn xóa không")
+        if(!isConfirm){
+            return
+        }
+        const ids = getIds()
+        inpIds.value = JSON.stringify(ids)
+        formChangeMultiCart.action = `/cart/update/multi/remove?_method=PATCH`;
+        formChangeMultiCart.submit()
     }
-    const ids = getIds()
-    inpIds.value = JSON.stringify(ids)
-    formChangeMultiCart.action = `/cart/update/multi/remove?_method=PATCH`;
-    formChangeMultiCart.submit()
 
+}) 
+
+const btnRemoveProductInactive = document.querySelector("[btn-remove-product-inactive]")
+btnRemoveProductInactive.addEventListener("click",() => {
+    const isConfirm = confirm("Bạn có chắc muốn xóa tất cả sản phẩm không hoạt động không");
+    if(!isConfirm){
+        return;
+    }
+    const infoStatus = document.querySelectorAll("[info-status=inactive]");
+    const ids = []
+    infoStatus.forEach((item) => {
+        const value = item.getAttribute("id");
+        ids.push(value)
+        
+    })
+    const formChangeMultiCart = document.querySelector("[form-change-multi-cart]") 
+    const inpIds = formChangeMultiCart.querySelector("input");
+    inpIds.value = JSON.stringify(ids);
+    const path = `/cart/update/multi/inactive?_method=PATCH`
+    formChangeMultiCart.action = path;
+    formChangeMultiCart.submit()
+    
 })
+

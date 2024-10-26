@@ -1,5 +1,7 @@
 mixin disableProduct(quantity, status) 
-    if quantity === 0 
+    if quantity === 0 && status === 'inactive'
+        | Hết hàng và không còn hoạt động  
+    else if quantity === 0 
         | Hết hàng 
     else if status === 'inactive' 
         | Không còn hoạt động 
