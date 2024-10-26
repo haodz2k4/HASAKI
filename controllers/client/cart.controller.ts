@@ -61,6 +61,7 @@ export const updateMulti = catchAsync(async (req: Request, res: Response) => {
                     cart.products.splice(index,1)
                 }
             })
+            await cart.save()
             break;
         case 'inactive': 
             cart.products.forEach((item: Record<string, any>, index: number) => {
@@ -68,6 +69,7 @@ export const updateMulti = catchAsync(async (req: Request, res: Response) => {
                     cart.products.splice(index,1)
                 }
             })
+            await cart.save()
             break;
         case 'oufof-stock': 
             cart.products.forEach((item: Record<string, any>, index: number) => {
@@ -75,8 +77,15 @@ export const updateMulti = catchAsync(async (req: Request, res: Response) => {
                     cart.products.splice(index,1)
                 }
             })
+            await cart.save()
+            break;
+        case 'favorite-list': 
+            const favoriteList = await res.locals.favoriteList;
+            const newIds = ids.filter((id: string) => !favoriteList.productIds.includes(id));
+            favoriteList.productIds = [...favoriteList.productIds, ...newIds]
+            await favoriteList.save()
+            req.flash('success','Thêm vào danh sách yêu thích thành công')
             break;
     }
-    await cart.save()
     res.redirect("back")
 })

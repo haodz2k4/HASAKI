@@ -114,3 +114,24 @@ if(btnOutOfStock){
         formChangeMultiCart.submit()
     })
 }
+
+const btnFavoriteList = document.querySelector("[btn-favorite-list]");
+if(btnFavoriteList){
+    btnFavoriteList.addEventListener("click",() => {
+        const formChangeMultiCart = document.querySelector("[form-change-multi-cart]") 
+        const inpIds = formChangeMultiCart.querySelector("input");
+        const checkedLength = cartContainer.querySelectorAll(".cart-items input[type='checkbox']:checked").length;
+        if(checkedLength === 0){
+            alert("Vui lòng chọn ít nhất 1 bản ghi")
+        }else{
+            const isConfirm = confirm("Bạn có chắc muốn thêm vào danh sách yêu thích không")
+            if(!isConfirm){
+                return
+            }
+            const ids = getIds()
+            inpIds.value = JSON.stringify(ids)
+            formChangeMultiCart.action = `/cart/update/multi/favorite-list?_method=PATCH`;
+            formChangeMultiCart.submit()
+        }
+    })
+}
