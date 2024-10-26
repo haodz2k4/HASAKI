@@ -1,8 +1,6 @@
 
 import { Request, Response } from "express";
 import { catchAsync } from "../../utils/catchAsync";
-import productModel from "../../models/product.model";
-import { RenderError } from "../../utils/error";
 
 //[GET] "/cart"
 export const cart = catchAsync(async (req: Request, res: Response) => {
@@ -65,6 +63,13 @@ export const updateMulti = catchAsync(async (req: Request, res: Response) => {
             })
             break;
         case 'inactive': 
+            cart.products.forEach((item: Record<string, any>, index: number) => {
+                if(ids.includes(item.productId.id.toString())){
+                    cart.products.splice(index,1)
+                }
+            })
+            break;
+        case 'oufof-stock': 
             cart.products.forEach((item: Record<string, any>, index: number) => {
                 if(ids.includes(item.productId.id.toString())){
                     cart.products.splice(index,1)
