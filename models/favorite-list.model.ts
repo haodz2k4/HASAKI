@@ -1,6 +1,6 @@
 import { Schema, model, Types } from 'mongoose';
-import User from "../models/user.model";
-import { COLLECTION_USER_NAME } from '../models/user.model';
+import User from "./user.model";
+import { COLLECTION_USER_NAME } from './user.model';
 
 const COLLECTION_FAVORITE_LIST_NAME = 'Favorite-list'
 interface IFavoriteList {
@@ -20,7 +20,10 @@ const favoriteListSChema = new Schema<IFavoriteList>({
             message: 'User is not found'
         }
     },
-    productIds: [{type: Schema.Types.ObjectId, ref: COLLECTION_FAVORITE_LIST_NAME}] 
+    productIds: {
+        type: [{type: Schema.Types.ObjectId, ref: COLLECTION_FAVORITE_LIST_NAME}],
+        default: [] 
+    }
 })
 
 
