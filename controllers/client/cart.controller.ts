@@ -81,7 +81,7 @@ export const updateMulti = catchAsync(async (req: Request, res: Response) => {
             break;
         case 'favorite-list': 
             const favoriteList = await res.locals.favoriteList;
-            const newIds = ids.filter((id: string) => !favoriteList.productIds.includes(id));
+            const newIds = ids.filter((item: Record<string, any>) => !favoriteList.productIds.includes(item.id));
             favoriteList.productIds = [...favoriteList.productIds, ...newIds]
             await favoriteList.save()
             req.flash('success','Thêm vào danh sách yêu thích thành công')

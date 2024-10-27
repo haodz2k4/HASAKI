@@ -5,7 +5,7 @@ import favoriteListModel from "../../models/favorite-list.model";
 export default catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const user = res.locals.user;
     if(user){
-        let favoriteList = await favoriteListModel.findOne({userId: user.id})
+        let favoriteList = await favoriteListModel.findOne({userId: user.id}).populate('productIds')
         if(!favoriteList){
             favoriteList = await favoriteListModel.create({userId: user.id})
         }

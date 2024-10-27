@@ -1,6 +1,7 @@
 import { Schema, model, Types } from 'mongoose';
 import User from "./user.model";
 import { COLLECTION_USER_NAME } from './user.model';
+import { COLLECTION_PRODUCT_NAME } from './product.model';
 
 const COLLECTION_FAVORITE_LIST_NAME = 'Favorite-list'
 interface IFavoriteList {
@@ -21,7 +22,7 @@ const favoriteListSChema = new Schema<IFavoriteList>({
         }
     },
     productIds: {
-        type: [{type: Schema.Types.ObjectId, ref: COLLECTION_FAVORITE_LIST_NAME}],
+        type: [{type: Schema.Types.ObjectId, ref: COLLECTION_PRODUCT_NAME}],
         default: [] 
     }
 })

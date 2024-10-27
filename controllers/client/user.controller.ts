@@ -182,8 +182,6 @@ export const resetPasswordPost = catchAsync(async (req: Request, res: Response) 
 
 //[GET] "/users/profiles"
 export const getProfiles = catchAsync(async (req: Request, res: Response) => {
-    const user = res.locals.user;
-    res.render("clients/pages/users/profile.pug",{
-        user
-    })
+    const favoriteList = res.locals.favoriteList;
+    res.render("clients/pages/users/profile.pug")
 }) 

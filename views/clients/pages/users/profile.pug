@@ -10,18 +10,21 @@ block main
       .col-md-4.profile-sidebar
         .text-center.p-4
           img.rounded-circle.mb-3.shadow(src='https://via.placeholder.com/150' alt='User Avatar' style='width: 120px; height: 120px;')
-          h4.text-white #{}
-          p.text-white-50 user@example.com
+          h4.text-white #{user.fullName}
+          p.text-white-50 #{user.email}
           hr.text-white
           p.text-white-50
             i.fas.fa-phone.me-2
-            | 0123456789
+            | #{user.phone}
           p.text-white-50
             i.fas.fa-birthday-cake.me-2
-            | 01/01/1990
+            | #{user.birthDate ? user.birthDate : 'Chưa có'}
           p.text-white-50
             i.fas.fa-venus-mars.me-2
-            | Nam
+            | #{user.gender ? user.gender : 'Chưa có'}
+          p.text-white-50
+            i.fa-solid.fa-calendar-days
+            |  #{moment(user.createdAt).format('Do/MM/YYYY')}
       // Profile Details and Actions
       .col-md-8
         .card-body.p-4
@@ -29,15 +32,15 @@ block main
           .list-group
             .list-group-item.border-0
               strong Tr&#x1EA1;ng th&aacute;i:
-              span.badge.bg-success &Dstrok;ang ho&#x1EA1;t &dstrok;&#x1ED9;ng
+              span.badge.bg-success #{user.status}
             .list-group-item.border-0
               strong X&aacute;c th&#x1EF1;c t&agrave;i kho&#x1EA3;n:
-              |  &Dstrok;&atilde; x&aacute;c th&#x1EF1;c
+              |  #{user.isVerified ? 'Đã xác thực' : 'Chưa xác thực'}
           // Profile Actions
           .mt-5
             button.btn.btn-custom.shadow.me-2(onclick="showSection('editProfile')")
               i.fas.fa-user-edit
-              |  S&#x1EED;a Th&ocirc;ng Tin
+              |  Sửa thông tin
             button.btn.btn-custom.shadow.me-2(onclick="showSection('orders')")
               i.fas.fa-box
               |  &Dstrok;&#x1A1;n H&agrave;ng
@@ -53,15 +56,30 @@ block main
       i.fas.fa-user-edit.me-2
       | S&#x1EED;a Th&ocirc;ng Tin C&aacute; Nh&acirc;n
     form
-      .mb-3
-        label.form-label(for='fullName') H&#x1ECD; v&agrave; T&ecirc;n
-        input#fullName.form-control(type='text' value='Nguyễn Văn A')
-      .mb-3
-        label.form-label(for='email') Email
-        input#email.form-control(type='email' value='user@example.com')
-      .mb-3
-        label.form-label(for='phone') S&#x1ED1; &dstrok;i&#x1EC7;n tho&#x1EA1;i
-        input#phone.form-control(type='text' value='0123456789')
+      .row.mb-3
+        .col-md-6
+          label.form-label(for='fullName') H&#x1ECD; v&agrave; T&ecirc;n
+          input#fullName.form-control(type='text' value='Nguyễn Văn A')
+        .col-md-6
+          label.form-label(for='email') Email
+          input#email.form-control(type='email' value='user@example.com')
+      .row.mb-3
+        .col-md-6
+          label.form-label(for='phone') S&#x1ED1; &dstrok;i&#x1EC7;n tho&#x1EA1;i
+          input#phone.form-control(type='text' value='0123456789')
+        .col-md-6
+          label.form-label(for='birthDate') Ng&agrave;y sinh
+          input#birthDate.form-control(type='date' value=user.birthDate placeholder='Nhập ngày sinh của bạn')
+      .row.mb-3
+        .col-md-6
+          label.form-label.d-block Gi&#x1EDB;i t&iacute;nh
+          .form-check.form-check-inline
+            input#male.form-check-input(type='radio' name='gender' value='nam'  checked=(user.gender === 'nam'))
+            label.form-check-label(for='male') Nam
+          .form-check.form-check-inline
+            input#female.form-check-input(type='radio' name='gender' value='nữ' checked=(user.gender === 'nữ'))
+            label.form-check-label(for='female') N&#x1EEF;
+
       button.btn.btn-custom.shadow(type='submit') L&#x1B0;u Thay &Dstrok;&#x1ED5;i
   #orders.mt-5.section.shadow.p-4.rounded-4.bg-white
     h3.text-custom
@@ -94,20 +112,14 @@ block main
       i.fas.fa-heart.me-2
       | S&#x1EA3;n Ph&#x1EA9;m Y&ecirc;u Th&iacute;ch
     .product-list.d-flex.flex-wrap
-      .product-card.shadow-sm.m-2.position-relative
-        button.btn-favorite
-          i.fas.fa-heart.text-danger
-        img(src='https://via.placeholder.com/100' alt='Product Image')
-        .product-info
-          h6 S&#x1EA3;n ph&#x1EA9;m A
-          p Gi&aacute;: 100,000&dstrok;
-      .product-card.shadow-sm.m-2.position-relative
-        button.btn-favorite
-          i.fas.fa-heart.text-danger
-        img(src='https://via.placeholder.com/100' alt='Product Image')
-        .product-info
-          h6 S&#x1EA3;n ph&#x1EA9;m B
-          p Gi&aacute;: 200,000&dstrok;
+      each item in favoriteList.productIds
+        .product-card.shadow-sm.m-2.position-relative
+          button.btn-favorite
+            i.fas.fa-heart.text-danger
+          img(src=(item.thumbnail.length > 0 ? item.thumbnail[0] : 'https://via.placeholder.com/100') alt='Product Image')
+          .product-info
+            h6 #{item.title}
+            p #{formatPrice(item.newPrice)}
   #addresses.mt-5.section.shadow.p-4.rounded-4.bg-white
     h3.text-custom
       i.fas.fa-map-marker-alt.me-2
