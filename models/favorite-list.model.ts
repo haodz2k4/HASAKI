@@ -1,4 +1,5 @@
-import { Schema, model, Types } from 'mongoose';
+
+import { Schema, model, Types, Model } from 'mongoose';
 import User from "./user.model";
 import { COLLECTION_USER_NAME } from './user.model';
 import { COLLECTION_PRODUCT_NAME } from './product.model';
@@ -8,8 +9,12 @@ interface IFavoriteList {
     userId: Types.ObjectId,
     productIds: Types.ObjectId[] 
 }
-
-const favoriteListSChema = new Schema<IFavoriteList>({
+interface IFavoriteListMethod {
+    addToFavorite(productId: string): void 
+    addMultiFavorite(productIds: string[]): void 
+}
+type FavoriteListModel = Model<IFavoriteList, {}, IFavoriteListMethod>
+const favoriteListSChema = new Schema<IFavoriteList, FavoriteListModel, IFavoriteListMethod>({
     userId: {
         type: Schema.Types.ObjectId,
         ref: COLLECTION_USER_NAME,
@@ -27,5 +32,23 @@ const favoriteListSChema = new Schema<IFavoriteList>({
     }
 })
 
+favoriteListSChema.methods.addToFavorite = async function(productId: string) {
+    const isExistsProductIds = await this.productIds.some(item => item.equals(productId));
+    if(!isExistsProductIds){
+        this.productIds.push(new Types.ObjectId(productId))
+        await this.save()
+    }
+}
+favoriteListSChema.methods.addMultiFavorite = async function(productIds: string[]) {
+    const newProductIds = productIds
+        .map(id => new Types.ObjectId(id)) 
+        .filter(id => !this.productIds.some(existingId => existingId.equals(id)));
 
-export default model(COLLECTION_FAVORITE_LIST_NAME,favoriteListSChema)
+        if (newProductIds.length > 0) {
+            this.productIds.push(...newProductIds);
+            await this.save(); 
+        }
+}
+
+
+export default model<IFavoriteList, FavoriteListModel>(COLLECTION_FAVORITE_LIST_NAME,favoriteListSChema)

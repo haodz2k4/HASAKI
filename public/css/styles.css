@@ -777,3 +777,8 @@
     pointer-events: none; 
     opacity: 0.5; 
 }
+
+.my-margin {
+    margin-left: 5px;
+    margin-right: 5px;
+}

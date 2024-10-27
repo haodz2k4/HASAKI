@@ -44,10 +44,15 @@ block main
             | ph&uacute;t t&#x1EDB;i v&agrave; ch&#x1ECD;n giao h&agrave;ng 2H &#x1EDF; b&#x1B0;&#x1EDB;c thanh to&aacute;n.
             a(href='#') Xem chi ti&#x1EBF;t
         .button-container
-          button.btn.btn-success(btn-add-cart=product.id)
-            i.fas.fa-shopping-cart
-            |  Th&ecirc;m V&agrave;o Gi&#x1ECF; H&agrave;ng
-          button.btn.btn-warning Mua Ngay
+          button.btn.btn-success.my-margin(btn-add-cart=product.id)
+            i.fa-solid.fa-cart-plus
+          button.btn.btn-outline-danger.my-margin 
+            if favoriteList 
+              i.fa-heart(class=(favoriteList.productIds.includes(product.id) ? 'fa-solid' : 'fa-regular'))
+            else 
+              i.fa-regular.fa-heart  
+          button.btn.btn-warning.my-margin Mua Ngay
+
     // Overlay for larger image
     #imageOverlay.image-overlay(onclick='hideOverlay()')
       .overlay-content
