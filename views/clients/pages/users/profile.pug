@@ -128,9 +128,29 @@ block main
   #addresses.mt-5.section.shadow.p-4.rounded-4.bg-white
     h3.text-custom
       i.fas.fa-map-marker-alt.me-2
-      | &Dstrok;&#x1ECB;a Ch&#x1EC9; C&#x1EE7;a B&#x1EA1;n
+      | Địa chỉ của bạn 
+    form(action="/users/add-address" method="POST")
+      .row.mb-3
+        .col-md-4
+          label.form-label(for='street') T&ecirc;n &dstrok;&#x1B0;&#x1EDD;ng
+          input#street.form-control(type='text' name='street')
+        .col-md-4
+          label.form-label(for='city') T&ecirc;n th&agrave;nh ph&#x1ED1;
+          input#city.form-control(type='text' name='city')
+        .col-md-4
+          label.form-label(for='country') Qu&#x1ED1;c gia
+          select#country.form-control(name='country')
+            option(value='vietnam') Vi&#x1EC7;t Nam
+            option(value='usa') Hoa K&#x1EF3;
+            option(value='japan') Nh&#x1EAD;t B&#x1EA3;n
+            option(value='korea') H&agrave;n Qu&#x1ED1;c
+            option(value='france') Ph&aacute;p
+            // Thêm các quốc gia khác nếu cần
+      button(btn-add-address).btn.btn-success 
+        | Thêm địa chỉ 
+        i.fa-solid.fa-plus
     ul.list-group.list-group-flush
-      li.list-group-item &Dstrok;&#x1ECB;a ch&#x1EC9; 1: 123 &Dstrok;&#x1B0;&#x1EDD;ng ABC, Ph&#x1B0;&#x1EDD;ng DEF, Qu&#x1EAD;n XYZ
-      li.list-group-item &Dstrok;&#x1ECB;a ch&#x1EC9; 2: 456 &Dstrok;&#x1B0;&#x1EDD;ng GHI, Ph&#x1B0;&#x1EDD;ng JKL, Qu&#x1EAD;n UVW 
+     each item, index in user.addresses
+      li.list-group-item Địa chỉ #{index + 1}: Tên đường: #{item.street}, Tên thành phố: #{item.city}, Quốc gia: #{item.country}
   block script 
     script(src="/js/profile.js") 

@@ -32,5 +32,7 @@ router.get("/verify-email",controller.verifyEmail)
 router
     .route("/profiles")
     .get(requireAuth,controller.getProfiles)
-    .patch(requireAuth,controller.updateProfiles)
+    .patch(requireAuth,controller.updateProfiles) 
+
+router.post("/add-address",controller.addAddress)
 export default router

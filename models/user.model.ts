@@ -3,6 +3,11 @@ import { Schema, model, Document, Model } from "mongoose";
 import { isURL, isMobilePhone, isEmail } from "validator";
 import { compare, hash } from "bcrypt";
 
+interface IUserAddress {
+    street: string;
+    city: string;
+    country: string 
+}
 export interface IUser {
     fullName: string;
     avatar: string;
@@ -12,6 +17,7 @@ export interface IUser {
     birthDate: Date;
     gender: "nam" | "nữ";
     status: "active" | "inactive";
+    addresses: IUserAddress[];
     deleted: boolean;
     isVerified: boolean;
 }
@@ -70,6 +76,16 @@ const userSchema = new Schema<IUserDocument, Model<IUserDocument>, IUserMethods>
             },
             message: 'Invalid Mobile Form'
         }
+    },
+    addresses: {
+        type: [
+            {
+                city: String, 
+                street: String, 
+                country: String
+            }
+        ],
+        default: []
     },
     birthDate: { type: Date },
     gender: { type: String, enum: ["nam", "nữ"] },

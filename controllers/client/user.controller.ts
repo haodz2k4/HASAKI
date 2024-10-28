@@ -191,9 +191,16 @@ export const getProfiles = catchAsync(async (req: Request, res: Response) => {
 export const updateProfiles = catchAsync(async (req: Request, res: Response) => {
     const body = req.body;
     const user = res.locals.user; 
-    console.log(user)
-    console.log(body)
     Object.assign(user, body);
     await user.save()
     res.redirect("back");
+}) 
+
+//[POST] "/users/add-address"
+export const addAddress = catchAsync(async (req: Request, res: Response) => {
+    const {street, city, country} = req.body;
+    const user = await res.locals.user; 
+    user.addresses.push({street, city, country});
+    await user.save()
+    res.redirect("back")
 })
