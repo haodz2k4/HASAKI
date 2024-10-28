@@ -249,4 +249,14 @@ if(btnAddToCart.length > 0){
       
     })
   })
+} 
+
+const btnFavoriteList = document.querySelector("[btn-favorite-list]");
+if(btnFavoriteList){
+  btnFavoriteList.addEventListener("click",() => {
+    const id = btnFavoriteList.getAttribute("btn-favorite-list")
+    const formFavoriteList = document.querySelector("[form-favorite-list]");
+    formFavoriteList.action = `/products/favorite-list/toggle/${id}?_method=PATCH`
+    formFavoriteList.submit()
+  })
 }

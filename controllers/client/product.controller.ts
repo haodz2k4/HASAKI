@@ -59,5 +59,21 @@ export const detail = catchAsync(async (req: Request, res: Response) => {
     if(!product){
         throw new RenderError(404,"Product is not found ")
     }
-    res.render("clients/pages/products/detail.pug", {product})
+    const favoriteList = res.locals.favoriteList 
+    const isFaforiteList = favoriteList.productIds.some((item: Record<string, any>) => item.id === product.id)
+    
+    res.render("clients/pages/products/detail.pug", {
+        product,
+        isFaforiteList
+    })
 })
+
+
+//[PATCH] "/products/favorite-list/toggle/:id"
+export const toggleFavoriteList = catchAsync(async (req: Request, res: Response) => {
+    const {id} = req.params;
+    const favoriteList = res.locals.favoriteList;
+    await favoriteList.toggleFavoriteList(id);
+    await favoriteList.save()
+    res.redirect("back");
+}) 

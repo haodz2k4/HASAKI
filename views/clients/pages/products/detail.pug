@@ -46,9 +46,9 @@ block main
         .button-container
           button.btn.btn-success.my-margin(btn-add-cart=product.id)
             i.fa-solid.fa-cart-plus
-          button.btn.btn-outline-danger.my-margin 
+          button.btn.btn-outline-danger.my-margin(btn-favorite-list=product.id isFaforiteList=isFaforiteList)
             if favoriteList 
-              i.fa-heart(class=(favoriteList.productIds.includes(product.id) ? 'fa-solid' : 'fa-regular'))
+              i.fa-heart(class=(isFaforiteList ? 'fa-solid' : 'fa-regular'))
             else 
               i.fa-regular.fa-heart  
           button.btn.btn-warning.my-margin Mua Ngay
@@ -84,3 +84,4 @@ block main
           .container(style='margin-left: 20px')
             |  !{product.description}
     include ../../partials/add-to-cart.pug 
+    form(action="" form-favorite-list method="POST") 

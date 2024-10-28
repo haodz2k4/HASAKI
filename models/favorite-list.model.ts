@@ -10,7 +10,7 @@ interface IFavoriteList {
     productIds: Types.ObjectId[] 
 }
 interface IFavoriteListMethod {
-    addToFavorite(productId: string): void 
+    toggleFavoriteList(productId: string): void 
     addMultiFavorite(productIds: string[]): void 
 }
 type FavoriteListModel = Model<IFavoriteList, {}, IFavoriteListMethod>
@@ -32,12 +32,16 @@ const favoriteListSChema = new Schema<IFavoriteList, FavoriteListModel, IFavorit
     }
 })
 
-favoriteListSChema.methods.addToFavorite = async function(productId: string) {
-    const isExistsProductIds = await this.productIds.some(item => item.equals(productId));
-    if(!isExistsProductIds){
+favoriteListSChema.methods.toggleFavoriteList = async function(productId: string) {
+    
+    const isExists = this.productIds.some((item: Record<string, any>) => item.id === productId);
+    if(isExists){
+        const index = this.productIds.findIndex((item: Record<string, any>) => item.id === productId);
+        this.productIds.splice(index, 1)
+    }else {
         this.productIds.push(new Types.ObjectId(productId))
-        await this.save()
     }
+    await this.save()
 }
 favoriteListSChema.methods.addMultiFavorite = async function(productIds: string[]) {
     const newProductIds = productIds
