@@ -18,6 +18,7 @@ export interface IUser {
     gender: "nam" | "nữ";
     status: "active" | "inactive";
     addresses: IUserAddress[];
+    defaultAddressIndex: number;
     deleted: boolean;
     isVerified: boolean;
 }
@@ -87,6 +88,7 @@ const userSchema = new Schema<IUserDocument, Model<IUserDocument>, IUserMethods>
         ],
         default: []
     },
+    defaultAddressIndex: {type: Number, default: 0},
     birthDate: { type: Date },
     gender: { type: String, enum: ["nam", "nữ"] },
     status: { type: String, enum: ["active", "inactive"], default: "active" },

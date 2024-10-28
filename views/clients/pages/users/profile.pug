@@ -149,8 +149,33 @@ block main
       button(btn-add-address).btn.btn-success 
         | Thêm địa chỉ 
         i.fa-solid.fa-plus
-    ul.list-group.list-group-flush
-     each item, index in user.addresses
-      li.list-group-item Địa chỉ #{index + 1}: Tên đường: #{item.street}, Tên thành phố: #{item.city}, Quốc gia: #{item.country}
+    table.table
+      thead
+        tr
+          th(scope='col') #
+          th(scope='col') Tên đường   
+          th(scope='col') Thành phố  
+          th(scope='col') Quốc gia  
+          th(scope='col') Mặc định 
+          th(scope='col') Thao tác 
+      tbody
+       each item, index in user.addresses 
+        tr
+          th(scope='row') #{index + 1}
+          td #{item.street}
+          td #{item.city}
+          td #{item.country} 
+          td 
+           .form-check
+            input#exampleRadios1.form-check-input(type='radio' name='defaultAddressIndex' checked=(user.defaultAddressIndex === index ? true : false ) value=item.id ) 
+          td 
+            .btn-group(role='group')
+              button.btn.btn-danger(type='button') 
+                i.fa-solid.fa-pen-to-square
+              button.btn.btn-warning(type='button')
+                i.fa-solid.fa-trash
+
+
+      
   block script 
     script(src="/js/profile.js") 
