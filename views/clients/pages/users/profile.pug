@@ -172,10 +172,10 @@ block main
             .btn-group(role='group')
               button.btn.btn-danger(type='button') 
                 i.fa-solid.fa-pen-to-square
-              button.btn.btn-warning(type='button')
+              button.btn.btn-warning(type='button' btn-remove-address=index)
                 i.fa-solid.fa-trash
 
   div(my-user-id=user.id)
-      
+  form(action="" form-remove-address method="post")  
   block script 
     script(src="/js/profile.js") 

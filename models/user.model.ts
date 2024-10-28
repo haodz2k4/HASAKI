@@ -107,4 +107,6 @@ userSchema.pre<IUserDocument>('save', async function (next) {
     next();
 });
 
+
+
 export default model<IUserDocument>(COLLECTION_USER_NAME, userSchema);

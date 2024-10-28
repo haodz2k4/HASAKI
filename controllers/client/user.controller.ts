@@ -205,3 +205,16 @@ export const addAddress = catchAsync(async (req: Request, res: Response) => {
     res.redirect("back")
 })
 
+//[DELETE] "/users/remove-address/:index"
+export const removeAddres = catchAsync(async (req: Request, res: Response) => {
+    const index = parseInt(req.params.index);
+    
+    const user = await res.locals.user; 
+    if(index === user.defaultAddressIndex){
+        user.defaultAddressIndex = 0
+    }
+    user.addresses.splice(index, 1)
+    await user.save()
+    res.redirect("back")
+})
+

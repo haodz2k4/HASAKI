@@ -35,4 +35,5 @@ router
     .patch(requireAuth,controller.updateProfiles) 
 
 router.post("/add-address",controller.addAddress)
+router.delete("/remove-address/:index",controller.removeAddres)
 export default router

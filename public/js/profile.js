@@ -47,4 +47,14 @@ inpDefaultAddress.forEach((item) => {
       console.error("Error:", error);
     });
   });
-});
+}); 
+
+const btnRemoveAddress = document.querySelectorAll("[btn-remove-address]");
+btnRemoveAddress.forEach((item) => {
+  item.addEventListener("click", () => {
+    const index = item.getAttribute("btn-remove-address");
+    const formRemoveAddress = document.querySelector("[form-remove-address]");
+    formRemoveAddress.action = `/users/remove-address/${index}?_method=DELETE`;
+    formRemoveAddress.submit()
+  })
+})
