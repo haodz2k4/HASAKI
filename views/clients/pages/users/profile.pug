@@ -167,7 +167,7 @@ block main
           td #{item.country} 
           td 
            .form-check
-            input#exampleRadios1.form-check-input(type='radio' name='defaultAddressIndex' checked=(user.defaultAddressIndex === index ? true : false ) value=item.id ) 
+            input#exampleRadios1.form-check-input(type='radio' inp-default-address=index name='defaultAddressIndex' checked=(user.defaultAddressIndex === index ? true : false ) value=item.id ) 
           td 
             .btn-group(role='group')
               button.btn.btn-danger(type='button') 
@@ -175,7 +175,7 @@ block main
               button.btn.btn-warning(type='button')
                 i.fa-solid.fa-trash
 
-
+  div(my-user-id=user.id)
       
   block script 
     script(src="/js/profile.js") 
