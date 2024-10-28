@@ -18,7 +18,7 @@ block main
             | #{user.phone}
           p.text-white-50
             i.fas.fa-birthday-cake.me-2
-            | #{user.birthDate ? user.birthDate : 'Chưa có'}
+            | #{user.birthDate ? moment(user.birthDate).calendar() : 'Chưa có'}
           p.text-white-50
             i.fas.fa-venus-mars.me-2
             | #{user.gender ? user.gender : 'Chưa có'}
@@ -32,10 +32,15 @@ block main
           .list-group
             .list-group-item.border-0
               strong Tr&#x1EA1;ng th&aacute;i:
-              span.badge.bg-success #{user.status}
+              span.badge.bg-success  
+                | #{user.status === 'active' ? 'Còn hoạt động' : 'Dừng hoạt động'}
             .list-group-item.border-0
               strong X&aacute;c th&#x1EF1;c t&agrave;i kho&#x1EA3;n:
               |  #{user.isVerified ? 'Đã xác thực' : 'Chưa xác thực'}
+            .list-group-item.border-0 
+              Button.btn.btn-danger Thay đổi mk 
+                i.fa-solid.fa-lock
+
           // Profile Actions
           .mt-5
             button.btn.btn-custom.shadow.me-2(onclick="showSection('editProfile')")
@@ -55,21 +60,21 @@ block main
     h3.text-custom
       i.fas.fa-user-edit.me-2
       | S&#x1EED;a Th&ocirc;ng Tin C&aacute; Nh&acirc;n
-    form
+    form(action="?_method=PATCH" method="POST")
       .row.mb-3
         .col-md-6
           label.form-label(for='fullName') H&#x1ECD; v&agrave; T&ecirc;n
-          input#fullName.form-control(type='text' value='Nguyễn Văn A')
+          input#fullName.form-control(type='text' value=user.fullName name='fullName')
         .col-md-6
           label.form-label(for='email') Email
-          input#email.form-control(type='email' value='user@example.com')
+          input#email.form-control(type='email' value=user.email name='email')
       .row.mb-3
         .col-md-6
           label.form-label(for='phone') S&#x1ED1; &dstrok;i&#x1EC7;n tho&#x1EA1;i
-          input#phone.form-control(type='text' value='0123456789')
+          input#phone.form-control(type='text' value=user.phone name='phone')
         .col-md-6
           label.form-label(for='birthDate') Ng&agrave;y sinh
-          input#birthDate.form-control(type='date' value=user.birthDate placeholder='Nhập ngày sinh của bạn')
+          input#birthDate.form-control(type='date' value=`${moment(user.birthDate , 'DD/MM/YYYY').format('YYYY-MM-DD')}` name='birthDate' placeholder='Nhập ngày sinh của bạn')
       .row.mb-3
         .col-md-6
           label.form-label.d-block Gi&#x1EDB;i t&iacute;nh
@@ -113,7 +118,7 @@ block main
       | S&#x1EA3;n Ph&#x1EA9;m Y&ecirc;u Th&iacute;ch
     .product-list.d-flex.flex-wrap
       each item in favoriteList.productIds
-        .product-card.shadow-sm.m-2.position-relative
+        a(href="/products/"+item.slug).text-decoration-none.product-card.shadow-sm.m-2.position-relative
           button.btn-favorite
             i.fas.fa-heart.text-danger
           img(src=(item.thumbnail.length > 0 ? item.thumbnail[0] : 'https://via.placeholder.com/100') alt='Product Image')

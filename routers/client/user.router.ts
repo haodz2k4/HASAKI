@@ -29,5 +29,8 @@ router.post("/logout",controller.logout)
 
 router.get("/verify-email",controller.verifyEmail)
 
-router.get("/profiles",requireAuth,controller.getProfiles)
+router
+    .route("/profiles")
+    .get(requireAuth,controller.getProfiles)
+    .patch(requireAuth,controller.updateProfiles)
 export default router

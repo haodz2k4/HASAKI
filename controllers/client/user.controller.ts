@@ -185,3 +185,15 @@ export const getProfiles = catchAsync(async (req: Request, res: Response) => {
     const favoriteList = res.locals.favoriteList;
     res.render("clients/pages/users/profile.pug")
 }) 
+
+
+//[PATCH] "/users/profiles"
+export const updateProfiles = catchAsync(async (req: Request, res: Response) => {
+    const body = req.body;
+    const user = res.locals.user; 
+    console.log(user)
+    console.log(body)
+    Object.assign(user, body);
+    await user.save()
+    res.redirect("back");
+})
