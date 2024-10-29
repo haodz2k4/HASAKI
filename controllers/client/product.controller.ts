@@ -75,5 +75,6 @@ export const toggleFavoriteList = catchAsync(async (req: Request, res: Response)
     const favoriteList = res.locals.favoriteList;
     await favoriteList.toggleFavoriteList(id);
     await favoriteList.save()
+    req.flash('success','Thay đổi danh sách yêu thích thành công')
     res.redirect("back");
 }) 

@@ -15,9 +15,9 @@ html(lang="en")
     body 
 
     include ../partials/header.pug 
+    include ../partials/alert.pug 
     block main 
     include ../partials/footer.pug 
-
     //Form logout 
     form(action="/users/logout" method='post' form-logout) 
     script(src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js')

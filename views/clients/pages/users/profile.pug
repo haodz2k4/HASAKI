@@ -127,7 +127,7 @@ block main
   #wishlist.mt-5.section.shadow.p-4.rounded-4.bg-white
     h3.text-custom
       i.fas.fa-heart.me-2
-      | S&#x1EA3;n Ph&#x1EA9;m Y&ecirc;u Th&iacute;ch
+      | Sản phẩm yêu thích (#{favoriteList.productIds.length})
     .product-list.d-flex.flex-wrap
       each item in favoriteList.productIds
         a(href="/products/"+item.slug).text-decoration-none.product-card.shadow-sm.m-2.position-relative

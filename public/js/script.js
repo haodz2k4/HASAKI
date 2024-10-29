@@ -120,7 +120,7 @@ const timeOutAlert = document.querySelector("[timeout-alert]");
 if(timeOutAlert){
   setTimeout(() => {
     timeOutAlert.classList.add("d-none")
-  }, 3000)
+  }, 5000)
 }
 
 function changeImage(thumbnail) {
