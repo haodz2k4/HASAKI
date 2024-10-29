@@ -2,9 +2,9 @@
         #successAlert.show.alert.alert-success.alert-dismissible.alert-custom.d-flex.align-items-center(role='alert' timeout-alert)
             i.fas.fa-check-circle.me-2
             span #{messages.success}
-            button.btn-close.ms-auto(type='button', aria-label='Close', onclick="hideAlert('successAlert')") 
+            button.btn-close.ms-auto(type='button', aria-label='Close' btn-close-alert) 
 -if (messages.error)
       #errorAlert.show.alert.alert-danger.alert-dismissible.alert-custom.d-flex.align-items-center(role='alert' timeout-alert)
         i.fas.fa-exclamation-circle.me-2
         span Error! #{messages.error}
-        button.btn-close.ms-auto(type='button', aria-label='Close', onclick="hideAlert('errorAlert')")
+        button.btn-close.ms-auto(type='button', aria-label='Close' btn-close-alert)

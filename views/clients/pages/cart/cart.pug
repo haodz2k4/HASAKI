@@ -47,12 +47,13 @@ block main
           button.ms-3.btn.btn-success(btn-delete-multi) X&oacute;a
           button.btn.btn-primary.ms-3(btn-remove-product-inactive) Bỏ sản phẩm không hoạt động 
           button.btn.btn-info.ms-3(btn-remove-out-of-stock) Bỏ sản phẩm hết hàng 
-          button.ms-3.btn.btn-danger(styles='color: white' btn-favorite-list) Lưu vào mục đã thích 
+          button.ms-3.btn.btn-danger(styles='color: white' btn-multi-favorite-list) Lưu vào mục đã thích 
         .d-flex.align-items-center
           span T&#x1ED5;ng thanh to&aacute;n (2 S&#x1EA3;n ph&#x1EA9;m):
           span.total-price.ms-2(total-price) đ0
           button.btn.btn-success.ms-3 Mua hàng 
- form(action="" method='POST' form-remove-product-cart)
+ form(action="" method='POST' form-remove-product-cart) 
+ form(action="" method='POST' form-change-quantity)
  form(action="" method='POST' form-change-multi-cart).d-none 
   input(type="text" name='ids')
  block script  

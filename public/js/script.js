@@ -113,10 +113,15 @@ if (searchInput) {
     }
   });
 }
-
-
+console.log("SIUUU")
+const btnCloseAlert = document.querySelector("[btn-close-alert]");
+if(btnCloseAlert){
+  btnCloseAlert.addEventListener("click",() => {
+    const alert = btnCloseAlert.closest(".alert")
+    alert.classList.add("d-none")
+  })
+}
 const timeOutAlert = document.querySelector("[timeout-alert]");
-
 if(timeOutAlert){
   setTimeout(() => {
     timeOutAlert.classList.add("d-none")

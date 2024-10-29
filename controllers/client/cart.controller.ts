@@ -88,10 +88,10 @@ export const updateMulti = catchAsync(async (req: Request, res: Response) => {
     res.redirect("back")
 })
 
-//[PATCH] "/cart/update-quantity"
+//[PATCH] "/cart/change/quantity/:productId"
 export const updateCartItemQuantity = catchAsync(async (req: Request, res: Response) => {
     const {productId} = req.params;
-    const quantity = parseInt(req.body.quantity)
+    const quantity = parseInt(req.params.quantity)
     const cart = res.locals.cart;
     cart.products.forEach((item: Record<string, any>) => {
         if(item.productId.id === productId){
@@ -99,5 +99,6 @@ export const updateCartItemQuantity = catchAsync(async (req: Request, res: Respo
         }
     })
     await cart.save()
-    res.status(200).json({message: "Cập nhật giỏ hàng thành công"})
+    req.flash('success','Cập nhật số lượng thành công')
+    res.redirect("back")
 })

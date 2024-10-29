@@ -13,23 +13,30 @@ function getDomain() {
     }
     return url
 }
-
+let total = 0
+const totalPrice = document.querySelector("[total-price]");
+            
 checkAll.addEventListener("click",() => {
     if(checkAll.checked){
         checkMulti.forEach((item) => {
-            item.checked = true 
+            item.checked = true
+            const totalItems = parseInt(item.closest(".cart-item").querySelector("[total]").getAttribute("total"));
+            total += totalItems
+            totalPrice.innerHTML = formattedAmount(total) 
         })
     }else{
         checkMulti.forEach((item) => {
             item.checked = false
+            const totalItems = parseInt(item.closest(".cart-item").querySelector("[total]").getAttribute("total"));
+            total -= totalItems 
+            totalPrice.innerHTML = formattedAmount(total) 
         })
     }
 })
 
-let total = 0
+
 checkMulti.forEach((item) => {
     item.addEventListener("click", () => {
-        const totalPrice = document.querySelector("[total-price]");
         const totalItems = parseInt(item.closest(".cart-item").querySelector("[total]").getAttribute("total"));
         if(item.checked){
             total += totalItems
@@ -41,6 +48,8 @@ checkMulti.forEach((item) => {
         const checkedLength = cartContainer.querySelectorAll(".cart-items input[type='checkbox']:checked").length;
         if(checkedLength === checkMulti.length){
             checkAll.checked = true;
+        }else{
+            checkAll.checked = false 
         }
     })
 })
@@ -136,9 +145,9 @@ if(btnOutOfStock){
     })
 }
 
-const btnFavoriteList = document.querySelector("[btn-favorite-list]");
-if(btnFavoriteList){
-    btnFavoriteList.addEventListener("click",() => {
+const btnMultiFavoriteList = document.querySelector("[btn-multi-favorite-list]");
+if(btnMultiFavoriteList){
+    btnMultiFavoriteList.addEventListener("click",() => {
         const formChangeMultiCart = document.querySelector("[form-change-multi-cart]") 
         const inpIds = formChangeMultiCart.querySelector("input");
         const checkedLength = cartContainer.querySelectorAll(".cart-items input[type='checkbox']:checked").length;
@@ -162,28 +171,11 @@ const inpQuantity = document.querySelectorAll("[inp-quantity]");
 if (inpQuantity.length > 0) {
     inpQuantity.forEach((item) => {
         item.addEventListener("change", () => {
-            const quantity = item.value;
-            const id = item.getAttribute("inp-quantity");
-            const url = `${getDomain()}/cart/update-quantity/${id}`;
-            fetch(url, {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ quantity }) 
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Thất bại khi cập nhật số lượng");
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log("Cập nhật số lượng thành công", data);
-            })
-            .catch(error => {
-                console.error("Lỗi khi cập nhật số lượng");
-            });
+           const id = item.getAttribute("inp-quantity")
+           const quantity = item.value;
+           const formChangeQuantity = document.querySelector("[form-change-quantity]");
+           formChangeQuantity.action = `/cart/change/quantity/${id}/${quantity}?_method=PATCH`
+           formChangeQuantity.submit()
         });
     });
 }
