@@ -218,3 +218,18 @@ export const removeAddres = catchAsync(async (req: Request, res: Response) => {
     res.redirect("back")
 })
 
+//[PATCH] "/users/update-password"
+export const updatePassword = catchAsync(async (req: Request, res: Response) => {
+    const {oldPassword, newPassword, repeatPassword} =req.body;
+    const user = res.locals.user;
+    if(!user.isPasswordMatch(oldPassword)){
+        throw new RenderError(401,"Mật khẩu không đúng yêu cầu nhập lại");
+    }
+    if(newPassword !== repeatPassword){
+        throw new RenderError(401,"Mật khẩu nhập lại không đúng")
+    }
+    user.password = newPassword;
+    await user.save();
+    req.flash('success','Cập nhật mật khẩu thành công')
+    res.redirect("back")
+})
