@@ -24,11 +24,14 @@ export const loginPost = catchAsync(async (req: Request, res: Response) => {
     const {email, password, remember} = req.body;
     
     const user = await userModel.findOne({email, deleted: false}).select("+password");
-    if(!user || !user.isPasswordMatch(password)){
+    if(!user || ! await user.isPasswordMatch(password)){
         throw new RenderError(401,"Invalid email or password");
     }
     if(user.status === 'inactive'){
         throw new RenderError(403,`Tài khoản đã bị khóa`);
+    }
+    if(!user.isVerified){
+        throw new RenderError(401,"Tài khoản chưa được xác thực")
     }
     //Access Token 
     const accessToken = await generateUserAccessToken(user.id);
@@ -138,7 +141,7 @@ export const verifyOtpPost = catchAsync(async (req: Request, res: Response) => {
     if(forgotPassword.isUsed) {
         throw new RenderError(401,"Otp đã được sử dụng")
     }
-    if(!forgotPassword.isMatchOtp(otp)){
+    if(! await forgotPassword.isMatchOtp(otp)){
         throw new RenderError(401,"Invalid otp")
     }
     forgotPassword.isUsed = true;
@@ -220,10 +223,10 @@ export const removeAddres = catchAsync(async (req: Request, res: Response) => {
 
 //[PATCH] "/users/update-password"
 export const updatePassword = catchAsync(async (req: Request, res: Response) => {
-    const {oldPassword, newPassword, repeatPassword} =req.body;
+    const {currentPassword, newPassword, repeatPassword} =req.body;
     const user = res.locals.user;
-    if(!user.isPasswordMatch(oldPassword)){
-        throw new RenderError(401,"Mật khẩu không đúng yêu cầu nhập lại");
+    if(!await user.isPasswordMatch(currentPassword)){
+        throw new RenderError(401,"Mật khẩu hiện tại không đúng yêu cầu nhập lại");
     }
     if(newPassword !== repeatPassword){
         throw new RenderError(401,"Mật khẩu nhập lại không đúng")

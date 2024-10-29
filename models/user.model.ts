@@ -64,8 +64,7 @@ const userSchema = new Schema<IUserDocument, Model<IUserDocument>, IUserMethods>
                 return /\d/.test(value) && /[a-zA-Z]/.test(value);
             },
             message: 'Password must contain at least one letter and one number'
-        },
-        select: false
+        }
     },
     phone: {
         type: String,

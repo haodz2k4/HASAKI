@@ -29,6 +29,8 @@ router.post("/logout",controller.logout)
 
 router.get("/verify-email",controller.verifyEmail)
 
+router.patch("/update-password",controller.updatePassword)
+
 router
     .route("/profiles")
     .get(requireAuth,controller.getProfiles)

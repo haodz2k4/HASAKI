@@ -38,9 +38,21 @@ block main
               strong X&aacute;c th&#x1EF1;c t&agrave;i kho&#x1EA3;n:
               |  #{user.isVerified ? 'Đã xác thực' : 'Chưa xác thực'}
             .list-group-item.border-0 
-              Button.btn.btn-danger Thay đổi mk 
-                i.fa-solid.fa-lock
-
+              Button.btn.btn-danger(btn-update-password) Thay đổi mk 
+                i.fa-solid.fa-lock 
+              form(form-update-password action="/users/update-password?_method=PATCH" method="POST").d-none 
+                .row.mb-3
+                  .col-md-4
+                    label.form-label(for='currentPassword') Mật khẩu hiện tại 
+                    input#currentPassword.form-control(type='password' name='currentPassword')
+                  .col-md-4
+                    label.form-label(for='city') Mật khẩu mới 
+                    input#city.form-control(type='password' name='newPassword')
+                  .col-md-4 
+                    label.form-label(for='city') Nhập lại mật khẩu mới 
+                    input#city.form-control(type='password' name='repeatPassword') 
+                button.btn.btn-dark.shadow(type='submit') Đổi Mk 
+                  i.fa-solid.fa-lock 
           // Profile Actions
           .mt-5
             button.btn.btn-custom.shadow.me-2(onclick="showSection('editProfile')")

@@ -58,3 +58,10 @@ btnRemoveAddress.forEach((item) => {
     formRemoveAddress.submit()
   })
 })
+
+
+const btnUpdatePassword = document.querySelector("[btn-update-password]");
+btnUpdatePassword.addEventListener("click", () => {
+  const formUpdatePassword = document.querySelector("[form-update-password]");
+  formUpdatePassword.classList.toggle("d-none")
+})
