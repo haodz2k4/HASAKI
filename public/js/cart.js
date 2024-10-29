@@ -3,6 +3,17 @@ const cartContainer = document.querySelector(".cart-container")
 const checkAll = document.querySelector("[checked-all]")
 const checkMulti = cartContainer.querySelectorAll(".cart-items input[type='checkbox']")
 
+function getDomain() {
+    const domain = window.location.hostname;
+    const port = window.location.port;
+    const protocol = window.location.protocol;
+    let url = `${protocol}//${domain}`
+    if(port){
+      url += `:${port}`
+    }
+    return url
+}
+
 checkAll.addEventListener("click",() => {
     if(checkAll.checked){
         checkMulti.forEach((item) => {
@@ -134,4 +145,35 @@ if(btnFavoriteList){
             formChangeMultiCart.submit()
         }
     })
+}
+
+
+const inpQuantity = document.querySelectorAll("[inp-quantity]");
+if (inpQuantity.length > 0) {
+    inpQuantity.forEach((item) => {
+        item.addEventListener("change", () => {
+            const quantity = item.value;
+            const id = item.getAttribute("inp-quantity");
+            const url = `${getDomain()}/cart/update-quantity/${id}`;
+            fetch(url, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ quantity }) 
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Thất bại khi cập nhật số lượng");
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Cập nhật số lượng thành công", data);
+            })
+            .catch(error => {
+                console.error("Lỗi khi cập nhật số lượng");
+            });
+        });
+    });
 }

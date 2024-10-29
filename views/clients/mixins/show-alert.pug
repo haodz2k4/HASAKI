@@ -2,11 +2,11 @@ mixin alertSuccess()
     - if (messages.success)
         #successAlert.show.alert.alert-success.alert-dismissible.alert-custom.d-flex.align-items-center(role='alert')
             i.fas.fa-check-circle.me-2
-            span Success! #{message}
+            span Success! #{messages.success}
             button.btn-close.ms-auto(type='button', aria-label='Close', onclick="hideAlert('successAlert')")
 mixin alertError(messages)
     -if (messages.error)
       #errorAlert.show.alert.alert-danger.alert-dismissible.alert-custom.d-flex.align-items-center(role='alert')
         i.fas.fa-exclamation-circle.me-2
-        span Error! #{messages}
+        span Error! #{messages.error}
         button.btn-close.ms-auto(type='button', aria-label='Close', onclick="hideAlert('errorAlert')")

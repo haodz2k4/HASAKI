@@ -8,4 +8,5 @@ router.get("/",controller.cart)
 router.post("/add/:productId",validation.add, controller.add)
 router.delete("/remove/:productId",controller.removeProductFormcart)
 router.patch("/update/multi/:type",controller.updateMulti)
+router.patch("/update-quantity/:productId",controller.updateCartItemQuantity)
 export default router;

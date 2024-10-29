@@ -33,7 +33,7 @@ block main
           br
           span.price #{formatPrice(item.productId.newPrice)}
         .col-2
-          input.form-control.text-center(type='number' value=item.quantity)
+          input.form-control.text-center(type='number' inp-quantity=item.productId.id value=item.quantity)
         .col-1.price #{formatPrice(item.totalPrice)}
         .col-1.action-col
           span.delete-btn(btn-remove-product-cart=item.productId.id) X&oacute;a

@@ -16,7 +16,6 @@ export const requireAuth = catchAsync(async (req: Request, res: Response, next: 
     try {
         const payload = verify(token,config.jwt.user.jwt_access_secret as string);
         const {_id} = payload as JwtPayload; 
-        console.log(_id)
         const user = await userModel.findOne({_id, deleted: false});
         if(!user){
             throw new RenderError(401,"Token không hợp lệ hoặc người dùng không được tìm thấy","/users/login");
