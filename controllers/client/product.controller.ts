@@ -60,7 +60,8 @@ export const detail = catchAsync(async (req: Request, res: Response) => {
         throw new RenderError(404,"Product is not found ")
     }
     const favoriteList = res.locals.favoriteList 
-    const isFaforiteList = favoriteList.productIds.some((item: Record<string, any>) => item.id === product.id)
+
+    const isFaforiteList = favoriteList ? favoriteList.productIds.some((item: Record<string, any>) => item.id === product.id) : false
     
     res.render("clients/pages/products/detail.pug", {
         product,
