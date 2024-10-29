@@ -29,13 +29,13 @@ router.post("/logout",controller.logout)
 
 router.get("/verify-email",controller.verifyEmail)
 
-router.patch("/update-password",controller.updatePassword)
+router.patch("/update-password",requireAuth,controller.updatePassword)
 
 router
     .route("/profiles")
     .get(requireAuth,controller.getProfiles)
     .patch(requireAuth,controller.updateProfiles) 
 
-router.post("/add-address",controller.addAddress)
-router.delete("/remove-address/:index",controller.removeAddres)
+router.post("/add-address",requireAuth,controller.addAddress)
+router.delete("/remove-address/:index",requireAuth,controller.removeAddres)
 export default router
