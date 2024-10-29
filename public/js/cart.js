@@ -1,5 +1,5 @@
 const cartContainer = document.querySelector(".cart-container")
-
+const formattedAmount = (amount) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
 const checkAll = document.querySelector("[checked-all]")
 const checkMulti = cartContainer.querySelectorAll(".cart-items input[type='checkbox']")
 
@@ -25,8 +25,19 @@ checkAll.addEventListener("click",() => {
         })
     }
 })
+
+let total = 0
 checkMulti.forEach((item) => {
     item.addEventListener("click", () => {
+        const totalPrice = document.querySelector("[total-price]");
+        const totalItems = parseInt(item.closest(".cart-item").querySelector("[total]").getAttribute("total"));
+        if(item.checked){
+            total += totalItems
+        }else{
+            total -= totalItems
+        }
+        totalPrice.innerHTML = formattedAmount(total)
+        
         const checkedLength = cartContainer.querySelectorAll(".cart-items input[type='checkbox']:checked").length;
         if(checkedLength === checkMulti.length){
             checkAll.checked = true;
@@ -48,7 +59,6 @@ if(btnRemoveProductCarts.length > 0){
         item.addEventListener("click",() => {
             const id = item.getAttribute("btn-remove-product-cart");
             const formRemoveProductCart = document.querySelector("[form-remove-product-cart]");
-            console.log(formRemoveProductCart)
             formRemoveProductCart.action = `/cart/remove/${id}?_method=DELETE`
             formRemoveProductCart.submit()
         })
@@ -177,3 +187,4 @@ if (inpQuantity.length > 0) {
         });
     });
 }
+

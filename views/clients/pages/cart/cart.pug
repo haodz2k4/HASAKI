@@ -19,7 +19,7 @@ block main
       .cart-item.row.align-items-center(class=(item.productId.quantity === 0 || item.productId.status == 'inactive') ? 'card-disabled' : '' info-status=item.productId.status info-quantity=item.productId.quantity id=item.productId.id)
         .col-1.checkbox-col
           if (item.productId.quantity !== 0 && item.productId.status !== 'inactive')
-            input(type='checkbox' value=item.productId.id)
+            input(type='checkbox' value=item.productId.id )
         .col-5.d-flex.align-items-center
           img.product-image.me-3(src='https://via.placeholder.com/100' alt='Product Image')
           div
@@ -34,7 +34,7 @@ block main
           span.price #{formatPrice(item.productId.newPrice)}
         .col-2
           input.form-control.text-center(type='number' inp-quantity=item.productId.id value=item.quantity)
-        .col-1.price #{formatPrice(item.totalPrice)}
+        .col-1.price(total=item.totalPrice) #{formatPrice(item.totalPrice)}
         .col-1.action-col
           span.delete-btn(btn-remove-product-cart=item.productId.id) X&oacute;a
       
@@ -50,8 +50,8 @@ block main
           button.ms-3.btn.btn-danger(styles='color: white' btn-favorite-list) Lưu vào mục đã thích 
         .d-flex.align-items-center
           span T&#x1ED5;ng thanh to&aacute;n (2 S&#x1EA3;n ph&#x1EA9;m):
-          span.total-price.ms-2 &#x20AB;278.000
-          button.btn.btn-buy.ms-3 Mua hàng 
+          span.total-price.ms-2(total-price) đ0
+          button.btn.btn-success.ms-3 Mua hàng 
  form(action="" method='POST' form-remove-product-cart)
  form(action="" method='POST' form-change-multi-cart).d-none 
   input(type="text" name='ids')
