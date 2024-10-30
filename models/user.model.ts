@@ -3,7 +3,7 @@ import { Schema, model, Document, Model } from "mongoose";
 import { isURL, isMobilePhone, isEmail } from "validator";
 import { compare, hash } from "bcrypt";
 
-interface IUserAddress {
+export interface IUserAddress {
     street: string;
     city: string;
     country: string 
@@ -80,9 +80,9 @@ const userSchema = new Schema<IUserDocument, Model<IUserDocument>, IUserMethods>
     addresses: {
         type: [
             {
-                city: String, 
-                street: String, 
-                country: String
+                city: {type: String, required: true}, 
+                street: {type: String, required: true}, 
+                country: {type: String, required: true}
             }
         ],
         default: []
