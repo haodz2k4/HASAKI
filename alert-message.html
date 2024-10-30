@@ -1,67 +1,219 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alert Message</title>
-  <!-- Link Bootstrap 5 và Font Awesome -->
+  <title>Trang Thanh Toán</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    /* Định dạng cho alert ở góc phải */
-    .alert-custom {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1050;
-      display: none;
-      min-width: 300px;
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+      color: #333;
     }
-    .alert-custom.show {
-      display: block;
-      opacity: 1;
+    .checkout-box {
+      max-width: 800px;
+      margin: auto;
+      padding: 30px;
+      background-color: #ffffff;
+      border-radius: 12px;
+      border: 2px solid #336e5f;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .checkout-header-title {
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.5em;
+      color: #336e5f;
+    }
+    .section-header {
+      font-size: 1.2em;
+      color: #336e5f;
+      font-weight: bold;
+      border-bottom: 2px solid #336e5f;
+      padding-bottom: 5px;
+      margin-bottom: 15px;
+    }
+    .user-info-box, .order-summary-box {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #336e5f;
+      margin-bottom: 20px;
+    }
+    .order-summary-box th, .order-summary-box td {
+      vertical-align: middle;
+    }
+    .custom-button {
+      background-color: #336e5f;
+      color: #ffffff;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+    .custom-button:hover {
+      background-color: #285c4d;
+    }
+    .product-img {
+      width: 80px;
+      border-radius: 8px;
+    }
+    .summary-total {
+      font-size: 1.1em;
+      font-weight: bold;
+    }
+    .payment-option {
+      padding: 10px;
+      border: 1px solid #336e5f;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      transition: background-color 0.3s;
+    }
+    .payment-option:hover {
+      background-color: #f0f5f3;
+    }
+    .payment-icon {
+      font-size: 1.5em;
+      margin-right: 10px;
+      color: #336e5f;
+    }
+    .form-check-input:checked + .form-check-label .payment-option {
+      background-color: #e0f0e8;
+      border-color: #336e5f;
     }
   </style>
 </head>
 <body>
 
-<!-- Alert cho Success -->
-<div id="successAlert" class=" show alert alert-success alert-dismissible alert-custom d-flex align-items-center " role="alert">
-  <i class="fas fa-check-circle me-2"></i>
-  <span>Success! Your action was successful.</span>
-  <button type="button" class="btn-close ms-auto" aria-label="Close" onclick="hideAlert('successAlert')"></button>
-</div>
+  <div class="container checkout-box my-5">
+    <div class="checkout-header-title mb-4">Thanh Toán</div>
 
-<!-- Alert cho Error -->
-<div id="errorAlert" class="show alert alert-danger alert-dismissible alert-custom d-flex align-items-center" role="alert">
-  <i class="fas fa-exclamation-circle me-2"></i>
-  <span>Error! Something went wrong.</span>
-  <button type="button" class="btn-close ms-auto" aria-label="Close" onclick="hideAlert('errorAlert')"></button>
-</div>
+    <!-- User Information -->
+    <div class="user-info-box mb-4">
+      <div class="section-header"><i class="fas fa-user"></i> Thông Tin Khách Hàng</div>
+      <div><strong>Họ và Tên:</strong> Nguyễn Văn A</div>
+      <div><strong><i class="fas fa-phone"></i> Số Điện Thoại:</strong> 0123456789</div>
+      <div class="d-flex justify-content-between align-items-center">
+        <div><strong><i class="fas fa-map-marker-alt"></i> Địa Chỉ:</strong> 123 Đường ABC, Quận 1, TP. HCM</div>
+        <button class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i> Thay Đổi</button>
+      </div>
+      <div><strong><i class="fas fa-envelope"></i> Email:</strong> nguyenvana@gmail.com</div>
+    </div>
 
+    <!-- Ordered Products List -->
+    <div class="mb-4">
+      <div class="section-header"><i class="fas fa-shopping-cart"></i> Sản Phẩm Đã Đặt Hàng</div>
+      <table class="table order-summary-box">
+        <thead>
+          <tr>
+            <th>Sản Phẩm</th>
+            <th>Số Lượng</th>
+            <th>Giá</th>
+            <th>Tổng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="d-flex align-items-center">
+                <img src="product1.jpg" class="product-img me-3" alt="Product 1">
+                <span>Tên Sản Phẩm 1</span>
+              </div>
+            </td>
+            <td>2</td>
+            <td>₫100,000</td>
+            <td>₫200,000</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="d-flex align-items-center">
+                <img src="product2.jpg" class="product-img me-3" alt="Product 2">
+                <span>Tên Sản Phẩm 2</span>
+              </div>
+            </td>
+            <td>1</td>
+            <td>₫150,000</td>
+            <td>₫150,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-<!-- JavaScript để điều khiển hiện/ẩn alert -->
-<script>
-  function showAlert(alertId) { 
-    const alertElement = document.getElementById(alertId);
-    alertElement.classList.add('show');
+    <!-- Payment Method -->
+    <div class="mb-4">
+      <div class="section-header"><i class="fas fa-money-check-alt"></i> Phương Thức Thanh Toán</div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="paymentMethod" id="cod" checked>
+        <label class="form-check-label" for="cod">
+          <div class="payment-option">
+            <i class="fas fa-truck payment-icon"></i>
+            <span>Thanh toán khi nhận hàng</span>
+          </div>
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="paymentMethod" id="online" onclick="showPaymentModal()">
+        <label class="form-check-label" for="online">
+          <div class="payment-option">
+            <i class="fas fa-credit-card payment-icon"></i>
+            <span>Thanh toán trực tuyến</span>
+          </div>
+        </label>
+      </div>
+    </div>
 
-    // Tự động ẩn alert sau 3 giây
-    setTimeout(() => {
-      hideAlert(alertId);
-    }, 3000);
-  }
+    <!-- Order Summary -->
+    <div class="order-summary-box mb-4">
+      <div class="section-header"><i class="fas fa-receipt"></i> Tóm Tắt Đơn Hàng</div>
+      <div class="d-flex justify-content-between">
+        <span>Tổng Tiền Sản Phẩm:</span>
+        <span>₫350,000</span>
+      </div>
+      <div class="d-flex justify-content-between">
+        <span>Phí Vận Chuyển:</span>
+        <span>₫20,000</span>
+      </div>
+      <div class="d-flex justify-content-between summary-total mt-3">
+        <span>Tổng Cộng:</span>
+        <span>₫370,000</span>
+      </div>
+      <div class="text-muted mt-1">Thời Gian Dự Kiến Giao Hàng: 2 - 4 ngày làm việc</div>
+    </div>
 
-  function hideAlert(alertId) {
-    const alertElement = document.getElementById(alertId);
-    alertElement.classList.remove('show');
-  }
-</script>
+    <!-- Place Order Button -->
+    <div class="text-center">
+      <button class="btn custom-button btn-lg"><i class="fas fa-check-circle"></i> Đặt Hàng</button>
+    </div>
+  </div>
 
-<!-- Bootstrap 5 JavaScript Bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Payment Modal -->
+  <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="paymentModalLabel">Chọn Phương Thức Thanh Toán Trực Tuyến</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex justify-content-around">
+            <button class="btn btn-outline-primary"><i class="fab fa-vuejs"></i> VNPay</button>
+            <button class="btn btn-outline-primary"><i class="fas fa-mobile-alt"></i> MoMo</button>
+            <button class="btn btn-outline-primary"><i class="fas fa-wallet"></i> ZaloPay</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function showPaymentModal() {
+      var paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
+      paymentModal.show();
+    }
+  </script>
 </body>
 </html>

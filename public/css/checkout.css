@@ -1,0 +1,72 @@
+.checkout-box {
+    max-width: 800px;
+    margin: auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 2px solid #336e5f;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  .checkout-header-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #336e5f;
+  }
+  .section-header {
+    font-size: 1.2em;
+    color: #336e5f;
+    font-weight: bold;
+    border-bottom: 2px solid #336e5f;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+  }
+  .user-info-box, .order-summary-box {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #336e5f;
+    margin-bottom: 20px;
+  }
+  .order-summary-box th, .order-summary-box td {
+    vertical-align: middle;
+  }
+  .custom-button {
+    background-color: #336e5f;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+  }
+  .custom-button:hover {
+    background-color: #285c4d;
+  }
+  .product-img {
+    width: 80px;
+    border-radius: 8px;
+  }
+  .summary-total {
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+  .payment-option {
+    padding: 10px;
+    border: 1px solid #336e5f;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+  }
+  .payment-option:hover {
+    background-color: #f0f5f3;
+  }
+  .payment-icon {
+    font-size: 1.5em;
+    margin-right: 10px;
+    color: #336e5f;
+  }
+  .form-check-input:checked + .form-check-label .payment-option {
+    background-color: #e0f0e8;
+    border-color: #336e5f;
+  }
