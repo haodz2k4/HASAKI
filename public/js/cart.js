@@ -179,4 +179,24 @@ if (inpQuantity.length > 0) {
         });
     });
 }
+const getProductItems = () => {
+    const items = []
+    const checkMulti = cartContainer.querySelectorAll(".cart-items input[type='checkbox']:checked")
+    checkMulti.forEach((item) => {
+        const quantity = parseInt(item.closest(".cart-item").querySelector("input[type='number']").value);
+        items.push({
+            id: item.value,
+            quantity
+        })
+    })
+    return items
+}
 
+const btnPurchase = document.querySelector("[btn-purchase]");
+btnPurchase.addEventListener("click", () => {
+    const items = getProductItems()
+    const formCheckOut = document.querySelector("[form-check-out]");
+    const inp = formCheckOut.querySelector("input")
+    inp.value = JSON.stringify(items) 
+    formCheckOut.submit()
+})

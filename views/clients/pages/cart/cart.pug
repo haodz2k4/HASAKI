@@ -51,9 +51,11 @@ block main
         .d-flex.align-items-center
           span T&#x1ED5;ng thanh to&aacute;n (2 S&#x1EA3;n ph&#x1EA9;m):
           span.total-price.ms-2(total-price) đ0
-          button.btn.btn-success.ms-3 Mua hàng 
+          button.btn.btn-success.ms-3(btn-purchase) Mua hàng 
  form(action="" method='POST' form-remove-product-cart) 
  form(action="" method='POST' form-change-quantity)
+ form(action="/checkout" method="POST" form-check-out)
+  input(type="text", name='items') 
  form(action="" method='POST' form-change-multi-cart).d-none 
   input(type="text" name='ids')
  block script  

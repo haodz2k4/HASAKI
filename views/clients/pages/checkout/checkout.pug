@@ -53,22 +53,15 @@ block main
           th Gi&aacute;
           th T&#x1ED5;ng
       tbody
+       each item in products
         tr
           td
             .d-flex.align-items-center
-              img.product-img.me-3(src='product1.jpg' alt='Product 1')
-              span T&ecirc;n S&#x1EA3;n Ph&#x1EA9;m 1
-          td 2
-          td &#x20AB;100,000
-          td &#x20AB;200,000
-        tr
-          td
-            .d-flex.align-items-center
-              img.product-img.me-3(src='product2.jpg' alt='Product 2')
-              span T&ecirc;n S&#x1EA3;n Ph&#x1EA9;m 2
-          td 1
-          td &#x20AB;150,000
-          td &#x20AB;150,000
+              img.product-img.me-3(src=(item.thumbnail.length > 0 ? item.thumbnail[0] : 'https://placehold.co/70') alt='Product 1')
+              span #{item.title}
+          td #{item.quantity}
+          td #{formatPrice(item.newPrice)}
+          td #{formatPrice(item.totalPrice)}
   // Payment Method
   .mb-4
     .section-header
@@ -93,13 +86,13 @@ block main
       |  T&oacute;m T&#x1EAF;t &Dstrok;&#x1A1;n H&agrave;ng
     .d-flex.justify-content-between
       span T&#x1ED5;ng Ti&#x1EC1;n S&#x1EA3;n Ph&#x1EA9;m:
-      span &#x20AB;350,000
+      span #{formatPrice(total)}
     .d-flex.justify-content-between
       span Ph&iacute; V&#x1EAD;n Chuy&#x1EC3;n:
       span &#x20AB;20,000
     .d-flex.justify-content-between.summary-total.mt-3
       span T&#x1ED5;ng C&#x1ED9;ng:
-      span &#x20AB;370,000
+      span #{formatPrice(total + 20000)}
     .text-muted.mt-1 Th&#x1EDD;i Gian D&#x1EF1; Ki&#x1EBF;n Giao H&agrave;ng: 2 - 4 ng&agrave;y l&agrave;m vi&#x1EC7;c
   // Place Order Button
   .text-center

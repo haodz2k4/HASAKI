@@ -3,28 +3,31 @@ import { COLLECTION_USER_NAME, IUserAddress } from "./user.model";
 import { COLLECTION_PRODUCT_NAME } from "./product.model";
 
 const COLLECTION_ORDER_NAME = 'Orders';
-interface IOrderProduct {
+export interface IOrderProduct {
     productId: Schema.Types.ObjectId,
     quantity: number,
     price: number,
     discountPercentage: number
 }
-interface IOrder {
+export interface IOrder {
     userId: Schema.Types.ObjectId;
     status: string;
-    products: IOrderProduct;
-    address: IUserAddress
+    paymentMethod: string;
+    products: IOrderProduct[];
+    address: IUserAddress;
+    shippingCost: number;
 }
 const orderSchema = new Schema<IOrder>({
     userId: {type: Schema.Types.ObjectId, ref: COLLECTION_USER_NAME},
-    status: {type: String, enum: ['pending','confirmed','processing','shipped','delivered','cancelled','issue']},
+    status: {type: String, enum: ['pending','confirmed','processing','shipped','delivered','cancelled','issue'], default: 'pending'},
+    paymentMethod: {type: String, enum: ['cash_on_delivery','card_payment'], required: true},
     products: {
-        type: {
+        type: [{
             productId: {type: Schema.Types.ObjectId, ref: COLLECTION_PRODUCT_NAME},
             price: {type: Number, min: 0},
             discountPercentage: {type: Number, min: 0, max: 100},
             quantity: {type: Number, min: 1}
-        },
+        }],
         required: true
     },
     address: {
@@ -34,6 +37,12 @@ const orderSchema = new Schema<IOrder>({
                 country: {type: String, required: true}
             },
         required: true 
+    },
+    shippingCost: {
+        type: Number,
+        default: 20000,
+        min: 0,
+        max: 100000
     }
 })
 
