@@ -2,31 +2,33 @@ extends ../../layouts/default.pug
 block styles 
     link(rel="stylesheet", href="/css/checkout.css")
 block main 
- .container.checkout-box.my-5
-  .checkout-header-title.mb-4 Thanh To&aacute;n
-  // User Information
-  .user-info-box.mb-4
-    .section-header
-      i.fas.fa-user
-      |  Th&ocirc;ng Tin Kh&aacute;ch H&agrave;ng
-    div
-      strong H&#x1ECD; v&agrave; T&ecirc;n:
-      |  #{user.fullName}
-    div
-      strong
-        i.fas.fa-phone
-        |  S&#x1ED1; &Dstrok;i&#x1EC7;n Tho&#x1EA1;i:
-      |  #{user.phone}
-    .d-flex.justify-content-between.align-items-center
-      div
-        strong
-          i.fas.fa-map-marker-alt
-          |  &Dstrok;&#x1ECB;a Ch&#x1EC9;:
-        |  #{user.addresses[user.defaultAddressIndex].city}; #{ user.addresses[user.defaultAddressIndex].street}; #{user.addresses[user.defaultAddressIndex].country}
-      button.btn.btn-outline-primary.btn-sm
-        i.fas.fa-edit
-        |  Thay &Dstrok;&#x1ED5;i 
-    table.table
+ form(action="/checkout/order" method="post") 
+  .container.checkout-box.my-5
+   .checkout-header-title.mb-4 Thanh To&aacute;n
+   // User Information
+   .user-info-box.mb-4
+     .section-header
+       i.fas.fa-user
+       |  Th&ocirc;ng Tin Kh&aacute;ch H&agrave;ng
+     div
+       strong H&#x1ECD; v&agrave; T&ecirc;n:
+       |  #{user.fullName}
+     div
+       strong
+         i.fas.fa-phone
+         |  S&#x1ED1; &Dstrok;i&#x1EC7;n Tho&#x1EA1;i:
+       |  #{user.phone}
+     .d-flex.justify-content-between.align-items-center(address)
+       div
+         strong
+           i.fas.fa-map-marker-alt
+           |  &Dstrok;&#x1ECB;a Ch&#x1EC9;:
+         |  #{user.addresses[user.defaultAddressIndex].city}; #{ user.addresses[user.defaultAddressIndex].street}; #{user.addresses[user.defaultAddressIndex].country}
+       button.btn.btn-outline-primary.btn-sm(btn-show-address)
+         i.fas.fa-edit
+         |  Thay &Dstrok;&#x1ED5;i 
+     input(value=products name='products')
+     table.table.d-none(table-address)
       thead
         tr
           th(scope='col') #
@@ -35,13 +37,21 @@ block main
           th(scope='col') Quốc gia  
           th(scope='col') Chọn 
       tbody
-    div
+        each item, index  in user.addresses 
+          tr 
+            td #{index + 1} 
+            td #{item.street}
+            td #{item.city} 
+            td #{item.country} 
+            td 
+              input(type="radio", name="defaultAddressIndex" value=index checked=(user.defaultAddressIndex === index)) 
+     div
       strong
         i.fas.fa-envelope
         |  Email:
       |  #{user.email}
-  // Ordered Products List
-  .mb-4
+   // Ordered Products List
+   .mb-4
     .section-header
       i.fas.fa-shopping-cart
       |  S&#x1EA3;n Ph&#x1EA9;m &Dstrok;&atilde; &Dstrok;&#x1EB7;t H&agrave;ng
@@ -62,25 +72,25 @@ block main
           td #{item.quantity}
           td #{formatPrice(item.newPrice)}
           td #{formatPrice(item.totalPrice)}
-  // Payment Method
-  .mb-4
+   // Payment Method
+   .mb-4
     .section-header
       i.fas.fa-money-check-alt
       |  Ph&#x1B0;&#x1A1;ng Th&#x1EE9;c Thanh To&aacute;n
     .form-check
-      input#cod.form-check-input(type='radio' name='paymentMethod' checked='')
+      input#cod.form-check-input(type='radio' name='paymentMethod' value='cash_on_delivery' checked='')
       label.form-check-label(for='cod')
         .payment-option
           i.fas.fa-truck.payment-icon
           span Thanh to&aacute;n khi nh&#x1EAD;n h&agrave;ng
     .form-check
-      input#online.form-check-input(type='radio' name='paymentMethod' onclick='showPaymentModal()')
+      input#online.form-check-input(type='radio' name='paymentMethod' value='card_payment' onclick='showPaymentModal()')
       label.form-check-label(for='online')
         .payment-option
           i.fas.fa-credit-card.payment-icon
           span Thanh to&aacute;n tr&#x1EF1;c tuy&#x1EBF;n
-  // Order Summary
-  .order-summary-box.mb-4
+   // Order Summary
+   .order-summary-box.mb-4
     .section-header
       i.fas.fa-receipt
       |  T&oacute;m T&#x1EAF;t &Dstrok;&#x1A1;n H&agrave;ng
@@ -94,12 +104,12 @@ block main
       span T&#x1ED5;ng C&#x1ED9;ng:
       span #{formatPrice(total + 20000)}
     .text-muted.mt-1 Th&#x1EDD;i Gian D&#x1EF1; Ki&#x1EBF;n Giao H&agrave;ng: 2 - 4 ng&agrave;y l&agrave;m vi&#x1EC7;c
-  // Place Order Button
-  .text-center
-    button.btn.custom-button.btn-lg
+   // Place Order Button
+   .text-center
+    button.btn.custom-button.btn-lg(type='submit')
       i.fas.fa-check-circle
-      |  &Dstrok;&#x1EB7;t H&agrave;ng
-  #paymentModal.modal.fade(tabindex='-1' aria-labelledby='paymentModalLabel' aria-hidden='true')
+      |  &Dstrok;&#x1EB7;t H&agrave;ng 
+   #paymentModal.modal.fade(tabindex='-1' aria-labelledby='paymentModalLabel' aria-hidden='true')
     .modal-dialog
       .modal-content
         .modal-header
@@ -115,6 +125,6 @@ block main
                 |  MoMo
             button.btn.btn-outline-primary
                 i.fas.fa-wallet
-                |  ZaloPay
+                |  ZaloPay 
     block script 
         script(src="/js/checkout.js") 

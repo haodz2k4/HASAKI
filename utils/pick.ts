@@ -4,14 +4,15 @@
 //req.query = {status: "active", age: 20, deleted: true}
 //EXAMPLE: const filter = pick(req.query,["status","age"])
 //RETURN: {status: "active", age: 20}
-export default <T extends Record<string, any>, K extends keyof T>(object: T, fields: K[]): Partial<T> => {
-    return fields.reduce((result, item) => {
-        if (item in object) {
-            result[item] = object[item];
+export default <T extends object, K extends keyof T>(object: T, keys: K[]): Partial<T> => { 
+    return keys.reduce((result, key) => {
+        if (key in object) {
+            result[key] = object[key];
         }
         return result;
     }, {} as Partial<T>);
-};
+}
+
 
 //INP: {status: "active"}
 //OUT: "status-active"

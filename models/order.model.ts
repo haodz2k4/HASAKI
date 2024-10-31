@@ -16,6 +16,7 @@ export interface IOrder {
     products: IOrderProduct[];
     address: IUserAddress;
     shippingCost: number;
+    deleted: boolean;
 }
 const orderSchema = new Schema<IOrder>({
     userId: {type: Schema.Types.ObjectId, ref: COLLECTION_USER_NAME},
@@ -43,6 +44,10 @@ const orderSchema = new Schema<IOrder>({
         default: 20000,
         min: 0,
         max: 100000
+    },
+    deleted: {
+        type: Boolean, 
+        default: false
     }
 })
 

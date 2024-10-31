@@ -20,7 +20,6 @@ export interface IProduct {
     status?: string
     newPrice?: number
     quantity?: number
-    totalPrice: number
 
 }
 

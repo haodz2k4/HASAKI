@@ -4,5 +4,8 @@ import * as controller from "../../controllers/client/checkout.controller"
 
 router
     .route("/")
-    .post(controller.checkoutPost)
+    .post(controller.checkoutPost) 
+router
+    .route("/order")
+    .post(controller.orderPost)
 export default router
