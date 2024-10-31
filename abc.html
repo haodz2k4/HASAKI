@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Tracking</title>
+    <title>Order Tracking - Canceled</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         /* Custom Styles */
@@ -22,7 +22,7 @@
             box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
         }
         .tracking-header {
-            color: #336e5b;
+            color: #c0392b; /* Red color for canceled order */
             font-weight: bold;
             font-size: 1.5rem;
             text-align: center;
@@ -42,9 +42,12 @@
             flex: 1;
             color: #555;
         }
-        .status-step.active .status-circle {
-            background-color: #336e5b;
+        .status-step.canceled .status-circle {
+            background-color: #c0392b; /* Red for canceled status */
             color: white;
+        }
+        .status-step.canceled::after {
+            background-color: #c0392b; /* Red for canceled status */
         }
         .status-step .status-circle {
             width: 30px;
@@ -66,9 +69,6 @@
             z-index: -1;
             transform: translateX(-50%) translateY(-50%);
         }
-        .status-step.active + .status-step::after {
-            background-color: #336e5b;
-        }
         .status-step:last-child::after {
             content: none;
         }
@@ -77,9 +77,9 @@
             font-size: 0.9rem;
             color: #555;
         }
-        .status-label.active {
+        .status-label.canceled {
             font-weight: bold;
-            color: #336e5b;
+            color: #c0392b; /* Red for canceled status */
         }
 
         /* Product List */
@@ -134,30 +134,49 @@
             color: #336e5b;
             margin-bottom: 10px;
         }
+        /* Cancellation Message */
+        .cancellation-message {
+            background-color: #f8d7da; /* Light red background for cancellation message */
+            border: 1px solid #f5c6cb;
+            padding: 10px;
+            border-radius: 5px;
+            color: #721c24; /* Dark red text */
+            margin-bottom: 20px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="tracking-container">
-        <div class="tracking-header">Order Tracking</div>
+        <div class="tracking-header">Order Canceled</div>
+
+        <!-- Cancellation Message -->
+        <div class="cancellation-message">
+            We're sorry to inform you that your order has been canceled. If you have any questions, please contact our support team.
+        </div>
 
         <!-- Status Tracking Steps -->
         <div class="status-container">
-            <div class="status-step active">
-                <div class="status-circle">✓</div>
+            <div class="status-step canceled">
+                <div class="status-circle">✖</div>
+                <div class="status-label canceled">Canceled</div>
+            </div>
+            <div class="status-step">
+                <div class="status-circle">✖</div>
                 <div class="status-label">Ordered</div>
             </div>
-            <div class="status-step active">
-                <div class="status-circle">✓</div>
+            <div class="status-step">
+                <div class="status-circle">✖</div>
                 <div class="status-label">In Transit</div>
             </div>
-            <div class="status-step active">
-                <div class="status-circle">✓</div>
+            <div class="status-step">
+                <div class="status-circle">✖</div>
                 <div class="status-label">Out for Delivery</div>
             </div>
             <div class="status-step">
-                <div class="status-circle">✓</div>
+                <div class="status-circle">✖</div>
                 <div class="status-label">Delivered</div>
             </div>
         </div>

@@ -61,9 +61,10 @@ export const orderPost = catchAsync(async (req: Request, res: Response) => {
     res.redirect(`/checkout/order/${order.id}/tracking`)
 }) 
 
-// //[GET] "/checkout/order/:id/tracking"
-// export const orderTracking = catchAsync(async (req: Request, res: Response) => {
-//     const {id} = req.params;
-//     const order = await orderModel.findOne({_id: id, deleted: false})
+//[GET] "/checkout/order/:id/tracking"
+export const orderTracking = catchAsync(async (req: Request, res: Response) => {
+    const {id} = req.params;
+    const order = await orderModel.findOne({_id: id, deleted: false})
+    res.render("clients/pages/checkout/tracking.pug")
 
-// })
+})

@@ -70,3 +70,125 @@
     background-color: #e0f0e8;
     border-color: #336e5f;
   }
+  /*PRACTICAL PAGE*/
+
+.tracking-container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+.tracking-header {
+    color: #336e5b;
+    font-weight: bold;
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+/* Status Tracking Steps */
+.status-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding: 0 10px;
+    position: relative;
+}
+.status-step {
+    text-align: center;
+    position: relative;
+    flex: 1;
+    color: #555;
+}
+.status-step.active .status-circle {
+    background-color: #336e5b;
+    color: white;
+}
+.status-step .status-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #d3d3d3;
+    margin: 0 auto;
+    line-height: 30px;
+    font-size: 1.1rem;
+}
+.status-step::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 3px;
+    background-color: #d3d3d3;
+    z-index: -1;
+    transform: translateX(-50%) translateY(-50%);
+}
+.status-step.active + .status-step::after {
+    background-color: #336e5b;
+}
+.status-step:last-child::after {
+    content: none;
+}
+.status-label {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: #555;
+}
+.status-label.active {
+    font-weight: bold;
+    color: #336e5b;
+}
+
+/* Product List */
+.order-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+}
+.order-item:last-child {
+    border-bottom: none;
+}
+.product-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-right: 15px;
+}
+.product-details {
+    flex-grow: 1;
+}
+.product-title {
+    font-weight: bold;
+    color: #336e5b;
+    margin: 0;
+}
+.product-info {
+    font-size: 0.9rem;
+    color: #555;
+}
+.price {
+    color: #336e5b;
+    font-weight: bold;
+    font-size: 1rem;
+}
+.discount {
+    color: #ff6347;
+    font-size: 0.9rem;
+    text-decoration: line-through;
+    margin-left: 10px;
+}
+/* Additional Info Styles */
+.additional-info {
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+.info-title {
+    font-weight: bold;
+    color: #336e5b;
+    margin-bottom: 10px;
+}
+/*END PRACTICAL PAGE*/

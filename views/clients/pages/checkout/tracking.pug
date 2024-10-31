@@ -1,0 +1,62 @@
+extends ../../layouts/default.pug 
+block styles 
+    link(rel="stylesheet", href="/css/checkout.css")
+block main  
+ .container
+  .tracking-container
+    .tracking-header Theo dõi đơn hàng 
+     i.fa-solid.fa-box-open
+    // Status Tracking Steps
+    .status-container
+      .status-step.active
+        .status-circle &check;
+        .status-label Đang chờ 
+      .status-step.active
+        .status-circle &check;
+        .status-label Đã xác nhận 
+      .status-step.active
+        .status-circle &check;
+        .status-label Trong quá trình 
+      .status-step.active
+        .status-circle &check;
+        .status-label Đang vận chuyển 
+      .status-step
+        .status-circle &check;
+        .status-label Đã giao 
+    // Product List
+    .order-item
+      img.product-image(src='https://via.placeholder.com/100' alt='Product Image')
+      .product-details
+        h5.product-title Product Name 1
+        p.product-info Quantity: 2
+        p.product-info
+          | Original Price: 
+          span.discount $120
+          span.price $100
+    .order-item
+      img.product-image(src='https://via.placeholder.com/100' alt='Product Image')
+      .product-details
+        h5.product-title Product Name 2
+        p.product-info Quantity: 1
+        p.product-info
+          | Original Price: 
+          span.discount $80
+          span.price $70
+    // Additional Info
+    .additional-info
+      h5.info-title Thông tin vận chuyển 
+      p
+        i.fa-solid.fa-location-dot 
+        strong  Địa chỉ giao hàng: 
+        |  123 Main St, Springfield, IL 62701
+      p
+        i.fa-solid.fa-calendar-days
+        strong  Ngày đặt hàng: 
+        |  November 3, 2024
+      p
+        i.fa-solid.fa-clock
+        strong  Ngày giao hàng dự tính: 
+        |  November 3, 2024
+      p
+        strong Tổng tiền:
+        span.price $170

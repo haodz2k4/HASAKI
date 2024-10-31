@@ -7,5 +7,6 @@ router
     .post(controller.checkoutPost) 
 router
     .route("/order")
-    .post(controller.orderPost)
+    .post(controller.orderPost) 
+router.get("/order/:id/tracking",controller.orderTracking)
 export default router
