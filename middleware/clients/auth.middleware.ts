@@ -10,8 +10,9 @@ import userModel from "../../models/user.model";
 export const requireAuth = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     
     const token = req.cookies.accessToken;
+    const redirect = `/users/login?redirect=${req.originalUrl}`
     if(!token){
-        throw new RenderError(401,"Vui lòng đăng nhập","/users/login")
+        throw new RenderError(401,"Vui lòng đăng nhập",redirect)
     }
     try {
         const payload = verify(token,config.jwt.user.jwt_access_secret as string);
@@ -27,7 +28,7 @@ export const requireAuth = catchAsync(async (req: Request, res: Response, next: 
         next()
     } catch (error) {
         if(error instanceof TokenExpiredError || error instanceof JsonWebTokenError){
-            throw new RenderError(401,"Vui lòng đăng nhập lại","/users/login");
+            throw new RenderError(401,"Vui lòng đăng nhập lại",redirect);
         }
 
     }

@@ -42,8 +42,8 @@ export const loginPost = catchAsync(async (req: Request, res: Response) => {
         const refreshToken = await generateUserRefreshToken(user.id);
         res.cookie('refreshToken', refreshToken)
     }
-
-    res.redirect("/");
+    const redirect = req.query.redirect as string || "/"
+    res.redirect(redirect);
 
 })
 
