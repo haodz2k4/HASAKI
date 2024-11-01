@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { COLLECTION_USER_NAME, IUserAddress } from "./user.model";
+import { IUserAddress } from "./user.model";
 import { COLLECTION_PRODUCT_NAME } from "./product.model";
 
 const COLLECTION_ORDER_NAME = 'Orders';
@@ -9,17 +9,29 @@ export interface IOrderProduct {
     price: number,
     discountPercentage: number
 }
+
+export interface IOrderUser {
+    userId: Schema.Types.ObjectId,
+    email: string;
+    phone: string;
+    address: IUserAddress;
+}
 export interface IOrder {
-    userId: Schema.Types.ObjectId;
+    user: IOrderUser;
     status: string;
     paymentMethod: string;
     products: IOrderProduct[];
-    address: IUserAddress;
     shippingCost: number;
     deleted: boolean;
 }
 const orderSchema = new Schema<IOrder>({
-    userId: {type: Schema.Types.ObjectId, ref: COLLECTION_USER_NAME},
+    user: {
+        type: {
+            userId: {type: Schema.Types.ObjectId, required: true},
+            email: {type: String, required: true},
+            phone: {type: String, required: true}
+        }
+    },
     status: {type: String, enum: ['pending','confirmed','processing','shipped','delivered','cancelled','issue'], default: 'pending'},
     paymentMethod: {type: String, enum: ['cash_on_delivery','card_payment'], required: true},
     products: {
@@ -30,14 +42,6 @@ const orderSchema = new Schema<IOrder>({
             quantity: {type: Number, min: 1}
         }],
         required: true
-    },
-    address: {
-        type: {
-                city: {type: String, required: true}, 
-                street: {type: String, required: true}, 
-                country: {type: String, required: true}
-            },
-        required: true 
     },
     shippingCost: {
         type: Number,

@@ -1,4 +1,96 @@
 extends ../../layouts/default.pug 
 
 block main 
-    h1 Siuu 
+    h1.text-center(style='margin-top: 30px;font-weight: 30px;')
+     i.fa-solid.fa-cart-shopping
+     |  Quản lý đơn hàng 
+    .my-tool
+      .tool-container
+        .row.tool-section
+          form(action="").col-md-4.mb-3
+            .input-group
+              input.form-control(type='text', placeholder='Tìm kiếm đơn hàng',name='keyword', value=keyword)
+              .input-group-append
+                button.btn.btn-dark(type='submit') Tìm kiếm 
+          
+                
+          .col-md-4.mb-3
+            select.form-control(form-select-sorting)
+              option(value='') Sắp Xếp Theo 
+              option(value='title-asc' selected=(sortString === "title-asc")) Tiêu đề từ A - Z
+              option(value='title-desc' selected=(sortString === "title-desc")) Tiêu đề từ Z - A 
+              option(value='price-asc' selected=(sortString === "price-asc")) Giá tiền A - Z 
+              option(value="price-desc" selected=(sortString === "price-desc")) Giá tiền Z - A
+        .row.tool-section
+          form(method="post" action="/admin/orders/change-multi?_method=PATCH" form-change-multi).col-md-4.mb-3
+            .input-group
+              select.form-control
+                option Thay đổi nhiều
+                option(value="status-active") Hoạt động 
+                option(value="status-inactive") Không hoạt động 
+                option(value="highlighted-1") Nổi bậc 
+                option(value="highlighted-0") Không nổi bậc 
+                option(value="delete-true")  Xóa 
+              input(type="text", name='result').d-none 
+              .input-group-append
+                button.btn.btn-dark(type='submit') Áp dụng 
+          .col-md-4.mb-3
+            .action-buttons.d-flex.justify-content-md-end
+              a(href="/admin/products/create").btn.btn-success
+                i.fa-solid.fa-plus 
+                |  Thêm 
+              button.btn.btn-warning(type='button') 
+                i.fa-solid.fa-square-plus
+                |  Thêm sll
+              button.btn.btn-secondary(type='button' btn-export-excel) 
+                i.fa-solid.fa-file-excel 
+                |  Xuất Excel 
+        //- .row.tool-section
+        //-   form().col-md-4.mb-3
+        //-     .input-group
+        //-       select.form-control(select-limit)
+        //-         option(value="5" selected=(pagination.limit === 5)) Giới hạn 5
+        //-         option(value="10" selected=(pagination.limit === 10)) Giới hạn 10 
+        //-         option(value="20" selected=(pagination.limit === 20)) Giới hạn 20
+        //-         option(value="50" selected=(pagination.limit === 50)) Giới hạn 50 
+        //-         option(value="100" selected=(pagination.limit === 100)) Giới hạn 100 
+    .table-responsive(table-manage)
+      table.table.table-striped
+        thead.thead-dark
+          tr
+            th 
+              input(type="checkbox", name="")
+            th #
+            th Tên người đặt 
+            th Tổng số lượng sản phẩm 
+            th Trạng thái 
+            th Phương thức thanh toán 
+            th Giá tiền ship 
+            th Tổng giá tiền 
+            th Ngày mua 
+            th Thao tác 
+        tbody
+          each item, index in orders 
+            tr
+              td 
+                input(type="checkbox",value=item.id, name="")
+              //td #{pagination.skip + 1 + index}
+              td #{item.userId.fullName}
+              
+              td #{formatPrice(item.newPrice)}
+              td #{item.quantity}
+              
+              td 
+                input(type="number" value=item.position inp-position=item.id style='width: 70px') 
+              td !{moment(item.createdAt).format(' dddd,DD/MM/YYYY </br> HH:mm:ss')}  
+              
+              td
+                strong Hồ Sơn Hào 
+              td
+                a(href=`/admin/products/update/${item.id}`).btn.btn-sm.btn-info
+                  i.fas.fa-edit
+                button.btn.btn-sm.btn-danger(btn-delete=item.id)
+                  i.fas.fa-trash 
+                a(href=`/admin/products/detail/${item.id}`).btn.btn-sm.btn-warning 
+                  i.fa-solid.fa-magnifying-glass    
+          
