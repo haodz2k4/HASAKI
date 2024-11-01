@@ -9,6 +9,7 @@ import categoryRouter from "./category.router"
 import supplierRouter from "./supplier.router"
 import inventoryRouter from "./inventory.router"
 import settingRouter from "./setting.router"
+import orderRouter from "./order.router";
 
 import { requireAuth } from "../../middleware/admin/auth.middleware";
 
@@ -24,5 +25,6 @@ export default (app: Express) => {
     app.use("/admin/categories",requireAuth, categoryRouter)
     app.use("/admin/inventories",requireAuth, inventoryRouter)
     app.use("/admin/settings",requireAuth, settingRouter)
+    app.use("/admin/orders",requireAuth, orderRouter)
     app.use("/admin/auth", authRouter)
 }
