@@ -42,6 +42,7 @@ export const loginPost = catchAsync(async (req: Request, res: Response) => {
         const refreshToken = await generateUserRefreshToken(user.id);
         res.cookie('refreshToken', refreshToken)
     }
+    req.flash('success','Đăng nhập thành công')
     const redirect = req.query.redirect as string || "/"
     res.redirect(redirect);
 
@@ -90,6 +91,7 @@ export const verifyEmail = catchAsync(async (req: Request, res: Response) => {
 export const logout = catchAsync(async (req: Request, res: Response) => {
     res.clearCookie('accessToken');
     res.clearCookie('refreshToken');
+    req.flash('success','Đăng xuất thành công')
     res.redirect("/users/login")
 })
 
@@ -150,7 +152,7 @@ export const verifyOtpPost = catchAsync(async (req: Request, res: Response) => {
     //Generate Token 
     const tokenReset = await generateResetPasswordToken(email,'5m');
     res.cookie('tokenReset', tokenReset)
-    req.flash('success','Xác thực thành công')
+    req.flash('success','Xác thực otp thành công')
     res.redirect("/users/reset-password")
 }) 
 
@@ -180,6 +182,7 @@ export const resetPasswordPost = catchAsync(async (req: Request, res: Response) 
     Object.assign(user, {password});
     await user.save()
     res.clearCookie('tokenReset')
+    req.flash('success','Thay đổi mật khẩu thành công. vui lòng đăng nhập lại')
     res.redirect("/users/login")
 })
 
@@ -196,6 +199,7 @@ export const updateProfiles = catchAsync(async (req: Request, res: Response) => 
     const user = res.locals.user; 
     Object.assign(user, body);
     await user.save()
+    req.flash('success','Cập nhật profiles thành công')
     res.redirect("back");
 }) 
 
@@ -205,6 +209,7 @@ export const addAddress = catchAsync(async (req: Request, res: Response) => {
     const user = await res.locals.user; 
     user.addresses.push({street, city, country});
     await user.save()
+    req.flash('success','Thêm địa chỉ thành công')
     res.redirect("back")
 })
 

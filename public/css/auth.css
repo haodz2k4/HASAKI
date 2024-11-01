@@ -177,3 +177,63 @@ button {
     position: relative;
     top: 40px;
 }
+/*ALERT MESSAGE*/
+/*ALERT MESSAGE*/
+.alert-custom {
+    position: fixed !important;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+    display: none;
+    min-width: 200px;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.alert-custom.show {
+    display: flex;
+    opacity: 1;
+}
+
+/* Alert Success Style */
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+/* Alert Error Style */
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Icon Styles */
+.alert-custom i {
+    font-size: 20px;
+    margin-right: 8px;
+}
+
+/* Close Button */
+.alert-custom .btn-close {
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: inherit;
+    opacity: 0.7;
+    cursor: pointer;
+    margin-left: auto;
+    padding: 0;
+}
+
+.alert-custom .btn-close:hover {
+    opacity: 1;
+}
+
+/*END SHOW ALERT*/

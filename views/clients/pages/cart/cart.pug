@@ -54,7 +54,7 @@ block main
           button.btn.btn-success.ms-3(btn-purchase) Mua hàng 
  form(action="" method='POST' form-remove-product-cart) 
  form(action="" method='POST' form-change-quantity)
- form(action="/checkout" method="POST" form-check-out)
+ form(action="/checkout" method="POST" form-check-out).d-none 
   input(type="text", name='items') 
  form(action="" method='POST' form-change-multi-cart).d-none 
   input(type="text" name='ids')
