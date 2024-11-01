@@ -13,6 +13,7 @@ import { JwtPayload, verify } from "jsonwebtoken";
 import config from "../../config/config";
 import ms from "ms";
 import { getDomain } from "../../helpers/domain.helper";
+import orderModel from "../../models/order.model";
 
 //[GET] "/users/login"
 export const login = catchAsync(async (req: Request, res: Response) => {
@@ -188,8 +189,12 @@ export const resetPasswordPost = catchAsync(async (req: Request, res: Response) 
 
 //[GET] "/users/profiles"
 export const getProfiles = catchAsync(async (req: Request, res: Response) => {
-    const favoriteList = res.locals.favoriteList;
-    res.render("clients/pages/users/profile.pug")
+    const userId = res.locals.user.id;
+    const orders = await orderModel.find({userId, deleted: false}).populate('products.productId','title slug thumbnail');
+    
+    res.render("clients/pages/users/profile.pug",{
+        orders
+    })
 }) 
 
 

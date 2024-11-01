@@ -103,27 +103,19 @@ block main
       i.fas.fa-box.me-2
       | &Dstrok;&#x1A1;n H&agrave;ng &Dstrok;&atilde; Mua
     .order-group
-      .order-item.mb-4
-        h5 &Dstrok;&#x1A1;n h&agrave;ng #12345 - Ng&agrave;y mua: 12/01/2024 - Tr&#x1EA1;ng th&aacute;i: &Dstrok;&atilde; giao
-        .product-list.d-flex.flex-wrap
-          .product-card.shadow-sm.m-2
+     each order, index in orders 
+      .order-item.mb-4 
+        a(href=`/orders/${order.id}` style='text-decoration: none; color: black') 
+         h5 &Dstrok;&#x1A1;n h&agrave;ng ##{index + 1}- Ng&agrave;y mua: #{moment(order.createdAt).calendar()} - Tr&#x1EA1;ng th&aacute;i: #{order.status}
+        .product-list.d-flex.flex-wrap 
+         each product in order.products 
+          a(href=`/products/${product.productId.slug}` style='text-decoration: none; color: black').product-card.shadow-sm.m-2
             img(src='https://via.placeholder.com/100' alt='Product Image')
             .product-info
-              h6 S&#x1EA3;n ph&#x1EA9;m A
-              p Gi&aacute;: 100,000&dstrok;
-          .product-card.shadow-sm.m-2
-            img(src='https://via.placeholder.com/100' alt='Product Image')
-            .product-info
-              h6 S&#x1EA3;n ph&#x1EA9;m B
-              p Gi&aacute;: 200,000&dstrok;
-      .order-item.mb-4
-        h5 &Dstrok;&#x1A1;n h&agrave;ng #67890 - Ng&agrave;y mua: 20/02/2024 - Tr&#x1EA1;ng th&aacute;i: &Dstrok;ang x&#x1EED; l&yacute;
-        .product-list.d-flex.flex-wrap
-          .product-card.shadow-sm.m-2
-            img(src='https://via.placeholder.com/100' alt='Product Image')
-            .product-info
-              h6 S&#x1EA3;n ph&#x1EA9;m C
-              p Gi&aacute;: 150,000&dstrok;
+              h6 #{product.productId.title}
+              p #{formatPrice(product.price * (100 - product.discountPercentage) / 100)}
+
+      
   #wishlist.mt-5.section.shadow.p-4.rounded-4.bg-white
     h3.text-custom
       i.fas.fa-heart.me-2

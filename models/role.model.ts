@@ -15,7 +15,7 @@ const roleSchema = new Schema<IRole>({
     deleted: {
         type: Boolean,
         default: false
-    }
+    }   
 },{timestamps: true}) 
 
 export default model<IRole>(COLLECTION_ROLE_NAME,roleSchema)

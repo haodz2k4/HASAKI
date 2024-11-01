@@ -4,6 +4,7 @@ import productRouter from "./product.router"
 import userRouter from "./user.router";
 import cartRouter from "../../routers/client/cart.router";
 import checkOutRouter from "./checkout.router"
+import orderRouter from "./order.router"
 //MDW 
 import { requireAuth } from "../../middleware/clients/auth.middleware";
 import userMiddleware from "../../middleware/clients/user.middleware";
@@ -21,5 +22,6 @@ export default (app: Express) => {
     app.use("/users",userRouter) 
     app.use("/cart",requireAuth,cartRouter)
     app.use("/checkout",requireAuth,checkOutRouter)
+    app.use("/orders",requireAuth,orderRouter)
     
 }

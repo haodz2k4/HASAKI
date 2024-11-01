@@ -58,14 +58,18 @@ export const orderPost = catchAsync(async (req: Request, res: Response) => {
         products
     })
     req.flash('success','Đặt hàng thành công')
-    res.redirect(`/checkout/success`)
+    res.redirect(`/checkout/order/${order.id}/success`)
 }) 
 
 //[GET] "/checkout/order/:id/success"
-export const orderTracking = catchAsync(async (req: Request, res: Response) => {
+export const orderSuccess = catchAsync(async (req: Request, res: Response) => {
     const {id} = req.params;
+    const userId = res.locals.user.id 
+    const order = await orderModel.findOne({_id: id,userId, deleted: false});
+    if(!order){
+        throw new RenderError(401,"Order is not found");
+    }
     res.render("clients/pages/checkout/success.pug",{
-        
+        order
     })
-
 })

@@ -11,20 +11,20 @@ block main
   // Thông tin chi tiết đơn hàng
   .order-details
     p
-      strong &Dstrok;&#x1ECB;a ch&#x1EC9;:
-      |  123 &Dstrok;&#x1B0;&#x1EDD;ng ABC, Th&agrave;nh ph&#x1ED1; XYZ
+      strong Địa chỉ 
+      |  #{order.address.street}, #{order.address.city}, #{order.address.country}
     p
       strong S&Dstrok;T Li&ecirc;n h&#x1EC7;:
-      |  0901234567
+      |  #{user.phone}
     p
       strong Ng&agrave;y &dstrok;&#x1EB7;t:
-      |  01/11/2024
+      |  #{moment(order.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
     p
       strong Gi&aacute; ti&#x1EC1;n:
-      |  500,000 VND
+      |  #{order.totalPrice}
   // Các nút điều hướng
   .button-container
     button.btn.btn-primary.me-2(onclick="window.location.href='/'") V&#x1EC1; trang ch&#x1EE7;
-    button.btn.btn-success(onclick="window.location.href='/order-status'") Xem tr&#x1EA1;ng th&aacute;i &dstrok;&#x1A1;n h&agrave;ng
+    a(href=`/orders/${order.id}`).btn.btn-succe Xem tr&#x1EA1;ng th&aacute;i &dstrok;&#x1A1;n h&agrave;ng
   // Pháo hoa toàn màn hình
   .fireworks-effect
