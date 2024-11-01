@@ -1,196 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Tracking</title>
+    <title>Đặt Hàng Thành Công</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Custom Styles */
-        body {
-            background-color: #f5f5f5;
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            max-width: 800px;
-            margin-top: 30px;
-        }
-        .tracking-container {
-            background-color: white;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        .tracking-header {
-            color: #336e5b;
-            font-weight: bold;
-            font-size: 1.5rem;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        /* Status Tracking Steps */
-        .status-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-            padding: 0 10px;
+        /* Chỉ CSS dành riêng cho thành phần này */
+        .success-page-container {
             position: relative;
-        }
-        .status-step {
             text-align: center;
-            position: relative;
-            flex: 1;
-            color: #555;
-        }
-        .status-step.active .status-circle {
-            background-color: #336e5b;
-            color: white;
-        }
-        .status-step .status-circle {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background-color: #d3d3d3;
-            margin: 0 auto;
-            line-height: 30px;
-            font-size: 1.1rem;
-        }
-        .status-step::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100%;
-            height: 3px;
-            background-color: #d3d3d3;
-            z-index: -1;
-            transform: translateX(-50%) translateY(-50%);
-        }
-        .status-step.active + .status-step::after {
-            background-color: #336e5b;
-        }
-        .status-step:last-child::after {
-            content: none;
-        }
-        .status-label {
-            margin-top: 8px;
-            font-size: 0.9rem;
-            color: #555;
-        }
-        .status-label.active {
-            font-weight: bold;
-            color: #336e5b;
+            color: #333;
+            margin-top: 5%;
         }
 
-        /* Product List */
-        .order-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #ddd;
+        .success-checkmark {
+            font-size: 5rem;
+            color: #4CAF50;
         }
-        .order-item:last-child {
-            border-bottom: none;
-        }
-        .product-image {
-            width: 100px;
-            height: 100px;
-            border-radius: 8px;
-            object-fit: cover;
-            margin-right: 15px;
-        }
-        .product-details {
-            flex-grow: 1;
-        }
-        .product-title {
+
+        .success-title {
+            color: #4CAF50;
+            font-size: 2rem;
             font-weight: bold;
-            color: #336e5b;
-            margin: 0;
         }
-        .product-info {
-            font-size: 0.9rem;
+
+        .order-details {
+            margin-top: 1rem;
+            font-size: 1.1rem;
             color: #555;
         }
-        .price {
-            color: #336e5b;
-            font-weight: bold;
-            font-size: 1rem;
+
+        .order-details p {
+            margin: 0.25rem 0;
         }
-        .discount {
-            color: #ff6347;
-            font-size: 0.9rem;
-            text-decoration: line-through;
-            margin-left: 10px;
+
+        .button-container {
+            margin-top: 1.5rem;
         }
-        /* Additional Info Styles */
-        .additional-info {
-            margin-top: 20px;
-            border-top: 1px solid #ddd;
-            padding-top: 20px;
+
+        .fireworks-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1; /* Đặt sau nội dung chính */
         }
-        .info-title {
-            font-weight: bold;
-            color: #336e5b;
-            margin-bottom: 10px;
+
+        .firework-particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: explode 1s ease-out infinite;
+            opacity: 0;
+        }
+
+        /* Tạo hiệu ứng nổ cho pháo hoa */
+        @keyframes explode {
+            0% { transform: scale(0.2); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="tracking-container">
-        <div class="tracking-header">Order Tracking</div>
+<div class="success-page-container">
+    <!-- Dấu tích và tiêu đề thành công -->
+    <div class="success-checkmark">✔</div>
+    <h1 class="success-title">Đặt Hàng Thành Công!</h1>
+    <p class="lead text-muted">Cảm ơn bạn đã mua hàng! Đơn hàng của bạn đã được xác nhận.</p>
 
-        <!-- Status Tracking Steps -->
-        <div class="status-container">
-            <div class="status-step active">
-                <div class="status-circle">✓</div>
-                <div class="status-label">Ordered</div>
-            </div>
-            <div class="status-step active">
-                <div class="status-circle">✓</div>
-                <div class="status-label">In Transit</div>
-            </div>
-            <div class="status-step active">
-                <div class="status-circle">✓</div>
-                <div class="status-label">Out for Delivery</div>
-            </div>
-            <div class="status-step">
-                <div class="status-circle">✓</div>
-                <div class="status-label">Delivered</div>
-            </div>
-        </div>
-
-        <!-- Product List -->
-        <div class="order-item">
-            <img src="https://via.placeholder.com/100" alt="Product Image" class="product-image">
-            <div class="product-details">
-                <h5 class="product-title">Product Name 1</h5>
-                <p class="product-info">Quantity: 2</p>
-                <p class="product-info">Original Price: <span class="discount">$120</span> <span class="price">$100</span></p>
-            </div>
-        </div>
-        
-        <div class="order-item">
-            <img src="https://via.placeholder.com/100" alt="Product Image" class="product-image">
-            <div class="product-details">
-                <h5 class="product-title">Product Name 2</h5>
-                <p class="product-info">Quantity: 1</p>
-                <p class="product-info">Original Price: <span class="discount">$80</span> <span class="price">$70</span></p>
-            </div>
-        </div>
-
-        <!-- Additional Info -->
-        <div class="additional-info">
-            <h5 class="info-title">Shipping Information</h5>
-            <p><strong>Shipping Address:</strong> 123 Main St, Springfield, IL 62701</p>
-            <p><strong>Estimated Delivery Date:</strong> November 3, 2024</p>
-            <p><strong>Total Amount:</strong> <span class="price">$170</span></p>
-        </div>
+    <!-- Thông tin chi tiết đơn hàng -->
+    <div class="order-details">
+        <p><strong>Địa chỉ:</strong> 123 Đường ABC, Thành phố XYZ</p>
+        <p><strong>SĐT Liên hệ:</strong> 0901234567</p>
+        <p><strong>Ngày đặt:</strong> 01/11/2024</p>
+        <p><strong>Giá tiền:</strong> 500,000 VND</p>
     </div>
+
+    <!-- Các nút điều hướng -->
+    <div class="button-container">
+        <button class="btn btn-primary me-2" onclick="window.location.href='/'">Về trang chủ</button>
+        <button class="btn btn-success" onclick="window.location.href='/order-status'">Xem trạng thái đơn hàng</button>
+    </div>
+    
+    <!-- Pháo hoa toàn màn hình -->
+    <div class="fireworks-effect"></div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function createFireworkParticle() {
+        const particle = document.createElement('div');
+        particle.classList.add('firework-particle');
+        
+        const size = Math.random() * 20 + 10;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        particle.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        
+        document.querySelector('.fireworks-effect').appendChild(particle);
+
+        setTimeout(() => particle.remove(), 1000);
+    }
+    setInterval(createFireworkParticle, 200);
+</script>
+
 </body>
 </html>

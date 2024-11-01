@@ -1,0 +1,30 @@
+extends ../../layouts/default.pug 
+
+block styles 
+    link(rel="stylesheet", href="/css/checkout.css")
+block main 
+ .success-page-container
+  // Dấu tích và tiêu đề thành công
+  .success-checkmark &#x2714;
+  h1.success-title &Dstrok;&#x1EB7;t H&agrave;ng Th&agrave;nh C&ocirc;ng!
+  p.lead.text-muted C&#x1EA3;m &#x1A1;n b&#x1EA1;n &dstrok;&atilde; mua h&agrave;ng! &Dstrok;&#x1A1;n h&agrave;ng c&#x1EE7;a b&#x1EA1;n &dstrok;&atilde; &dstrok;&#x1B0;&#x1EE3;c x&aacute;c nh&#x1EAD;n.
+  // Thông tin chi tiết đơn hàng
+  .order-details
+    p
+      strong &Dstrok;&#x1ECB;a ch&#x1EC9;:
+      |  123 &Dstrok;&#x1B0;&#x1EDD;ng ABC, Th&agrave;nh ph&#x1ED1; XYZ
+    p
+      strong S&Dstrok;T Li&ecirc;n h&#x1EC7;:
+      |  0901234567
+    p
+      strong Ng&agrave;y &dstrok;&#x1EB7;t:
+      |  01/11/2024
+    p
+      strong Gi&aacute; ti&#x1EC1;n:
+      |  500,000 VND
+  // Các nút điều hướng
+  .button-container
+    button.btn.btn-primary.me-2(onclick="window.location.href='/'") V&#x1EC1; trang ch&#x1EE7;
+    button.btn.btn-success(onclick="window.location.href='/order-status'") Xem tr&#x1EA1;ng th&aacute;i &dstrok;&#x1A1;n h&agrave;ng
+  // Pháo hoa toàn màn hình
+  .fireworks-effect

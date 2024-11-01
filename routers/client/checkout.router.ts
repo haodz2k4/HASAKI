@@ -8,5 +8,5 @@ router
 router
     .route("/order")
     .post(controller.orderPost) 
-router.get("/order/:id/tracking",controller.orderTracking)
+router.get("/order/:id/success",controller.orderTracking)
 export default router

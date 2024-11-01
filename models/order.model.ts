@@ -51,4 +51,12 @@ const orderSchema = new Schema<IOrder>({
     }
 })
 
+orderSchema.virtual('totalPrice').get(function() {
+    let total = 0
+    this.products.forEach((item) => {
+        total += (item.price * (100 - item.discountPercentage) / 100)
+    })
+    total += this.shippingCost
+    return total
+})
 export default model<IOrder>(COLLECTION_ORDER_NAME, orderSchema)

@@ -191,4 +191,62 @@
     color: #336e5b;
     margin-bottom: 10px;
 }
-/*END PRACTICAL PAGE*/
+/*END PRACTICAL PAGE*/ 
+/*CHECKOUT SUCCESS PAGE*/
+.success-page-container {
+  position: relative;
+  text-align: center;
+  color: #333;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.success-checkmark {
+  font-size: 5rem;
+  color: #4CAF50;
+}
+
+.success-title {
+  color: #4CAF50;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.order-details {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.order-details p {
+  margin: 0.25rem 0;
+}
+
+.button-container {
+  margin-top: 1.5rem;
+}
+
+.fireworks-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1; /* Đặt sau nội dung chính */
+}
+
+.firework-particle {
+  position: absolute;
+  border-radius: 50%;
+  animation: explode 1s ease-out infinite;
+  opacity: 0;
+}
+
+/* Tạo hiệu ứng nổ cho pháo hoa */
+@keyframes explode {
+  0% { transform: scale(0.2); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+/*END CHECKOUT SUCCESS PAGE*/
