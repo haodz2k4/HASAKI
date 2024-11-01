@@ -29,7 +29,15 @@ const orderSchema = new Schema<IOrder>({
         type: {
             userId: {type: Schema.Types.ObjectId, required: true},
             email: {type: String, required: true},
-            phone: {type: String, required: true}
+            phone: {type: String, required: true},
+            address: {
+                type: {
+                    street: {type: String, required: true},
+                    city: {type: String, required: true},
+                    country: {type: String, required: true}
+                }, 
+                required: true
+            }
         }
     },
     status: {type: String, enum: ['pending','confirmed','processing','shipped','delivered','cancelled','issue'], default: 'pending'},

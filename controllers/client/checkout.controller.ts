@@ -48,15 +48,21 @@ export const orderPost = catchAsync(async (req: Request, res: Response) => {
         price: item.price,
         discountPercentage: item.discountPercentage
     }))
-    const defaultAddressIndex = parseInt(req.body.defaultAddressIndex)
+    const defaultAddressIndex = parseInt(req.body.defaultAddressIndex) || 0
     const paymentMethod = req.body.paymentMethod
     const user = res.locals.user 
+    console.log(user.addresses[defaultAddressIndex])
     const order = await orderModel.create({
-        userId: user.id,
+        user: {
+            userId: user.id,
+            email: user.email,
+            phone: user.phone,
+            address: user.addresses[defaultAddressIndex],
+        },
         paymentMethod,
-        address: user.addresses[defaultAddressIndex],
         products
     })
+    console.log(order.user)
     req.flash('success','Đặt hàng thành công')
     res.redirect(`/checkout/order/${order.id}/success`)
 }) 
@@ -65,7 +71,7 @@ export const orderPost = catchAsync(async (req: Request, res: Response) => {
 export const orderSuccess = catchAsync(async (req: Request, res: Response) => {
     const {id} = req.params;
     const userId = res.locals.user.id 
-    const order = await orderModel.findOne({_id: id,userId, deleted: false});
+    const order = await orderModel.findOne({_id: id,'user.userId': userId, deleted: false});
     if(!order){
         throw new RenderError(401,"Order is not found");
     }
