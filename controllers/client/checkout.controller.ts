@@ -1,9 +1,11 @@
+import { products } from './product.controller';
 
 import { Request, Response } from "express";
 import { catchAsync } from "../../utils/catchAsync";
 import productModel, { IProduct } from "../../models/product.model";
 import { RenderError } from "../../utils/error";
 import orderModel, { IOrderProduct } from "../../models/order.model";
+import cartModel, { IProductCart } from "../../models/cart.model";
 
 //[POST] "/checkout"
 export const checkoutPost = catchAsync(async (req: Request, res: Response) => {
@@ -51,7 +53,6 @@ export const orderPost = catchAsync(async (req: Request, res: Response) => {
     const defaultAddressIndex = parseInt(req.body.defaultAddressIndex) || 0
     const paymentMethod = req.body.paymentMethod
     const user = res.locals.user 
-    console.log(user.addresses[defaultAddressIndex])
     const order = await orderModel.create({
         user: {
             userId: user.id,
@@ -62,7 +63,17 @@ export const orderPost = catchAsync(async (req: Request, res: Response) => {
         paymentMethod,
         products
     })
-    console.log(order.user)
+    //remove cart item after order
+    const productIds = new Set(productsJson.map((item: Record<string, any>) => item.productId));
+    console.log(productIds)
+    const cart = res.locals.cart;
+    console.log(cart.products.filter(
+        (product: Record<string, any>) => !productIds.has(product.productId.id)
+    ))
+    cart.products = cart.products.filter(
+        (product: Record<string, any>) => !productIds.has(product.productId.id)
+    )
+    await cart.save()
     req.flash('success','Đặt hàng thành công')
     res.redirect(`/checkout/order/${order.id}/success`)
 }) 
