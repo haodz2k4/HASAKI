@@ -29,6 +29,8 @@ block main
         .product-details
           h5.product-title #{item.productId.title}
           p.product-info 
+            | Số lượng: 
+            strong #{item.quantity}
           p.product-info
             | Giá tiền: 
             span.price #{formatPrice(item.price * (100 - item.discountPercentage)/100)}

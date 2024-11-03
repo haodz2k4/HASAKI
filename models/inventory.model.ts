@@ -1,5 +1,5 @@
 import productModel, { COLLECTION_PRODUCT_NAME } from './product.model';
-import { Schema, model} from "mongoose"
+import { Model, Schema, model} from "mongoose"
 import supplierModel, { COLLECTION_SUPPLIER_NAME } from "./supplier.model"
 export interface IIventory {
     productId: Schema.Types.ObjectId,
@@ -8,9 +8,11 @@ export interface IIventory {
     wareHouse: string,
     deleted: boolean
 }
-export const COLLECTION_INVENTORY_NAME = 'Inventory'
-
-const inventorySchema = new Schema<IIventory>({
+export const COLLECTION_INVENTORY_NAME = 'Inventory' 
+interface IInventoryModel extends Model<IIventory>{
+    substractInventory(productId: string, quantity: number): Promise<void>
+}
+const inventorySchema = new Schema<IIventory, IInventoryModel>({
     productId: {
         type: Schema.Types.ObjectId, 
         
@@ -43,7 +45,23 @@ const inventorySchema = new Schema<IIventory>({
         default: false
     }
 
-})
+}) 
+inventorySchema.statics.substractInventory = async function(productId: string, quantity: number) {
+    const inventories = await model<IIventory, IInventoryModel>(COLLECTION_INVENTORY_NAME).find({productId, deleted: false});
+    for(const item of inventories){
+        if(quantity == 0) {break};
+        if(quantity < item.quantity){
+            item.quantity -= quantity
+            await item.save()
+            quantity = 0;
+        }else{
+            quantity -= item.quantity
+            item.quantity = 0;
+            await item.save()
+        }
+    }
+}
 
 
-export default model<IIventory>(COLLECTION_INVENTORY_NAME,inventorySchema)
+
+export default model<IIventory, IInventoryModel>(COLLECTION_INVENTORY_NAME,inventorySchema)

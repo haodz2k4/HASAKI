@@ -1,6 +1,7 @@
 import { model, Schema } from "mongoose";
 import { COLLECTION_USER_NAME, IUserAddress } from "./user.model";
 import { COLLECTION_PRODUCT_NAME } from "./product.model";
+import inventoryModel from "./inventory.model";
 
 const COLLECTION_ORDER_NAME = 'Orders';
 export interface IOrderProduct {
@@ -62,7 +63,15 @@ const orderSchema = new Schema<IOrder>({
         default: false
     }
 })
-
+orderSchema.pre('save',async function(next) {
+    if(this.isNew){
+        for(const item of this.products){
+            await inventoryModel.substractInventory(item.productId.toString(), item.quantity)
+        }
+       
+    }
+    next()
+})
 orderSchema.virtual('totalPrice').get(function() {
     let total = 0
     this.products.forEach((item) => {
