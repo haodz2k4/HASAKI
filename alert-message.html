@@ -3,113 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đặt Hàng Thành Công</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        /* Chỉ CSS dành riêng cho thành phần này */
-        .success-page-container {
-            position: relative;
-            text-align: center;
-            color: #333;
-            margin-top: 5%;
-        }
-
-        .success-checkmark {
-            font-size: 5rem;
-            color: #4CAF50;
-        }
-
-        .success-title {
-            color: #4CAF50;
-            font-size: 2rem;
-            font-weight: bold;
-        }
-
-        .order-details {
-            margin-top: 1rem;
-            font-size: 1.1rem;
-            color: #555;
-        }
-
-        .order-details p {
-            margin: 0.25rem 0;
-        }
-
-        .button-container {
-            margin-top: 1.5rem;
-        }
-
-        .fireworks-effect {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: -1; /* Đặt sau nội dung chính */
-        }
-
-        .firework-particle {
-            position: absolute;
-            border-radius: 50%;
-            animation: explode 1s ease-out infinite;
-            opacity: 0;
-        }
-
-        /* Tạo hiệu ứng nổ cho pháo hoa */
-        @keyframes explode {
-            0% { transform: scale(0.2); opacity: 1; }
-            100% { transform: scale(1.5); opacity: 0; }
-        }
-    </style>
+    <title>Quản lý đơn hàng</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 
-<div class="success-page-container">
-    <!-- Dấu tích và tiêu đề thành công -->
-    <div class="success-checkmark">✔</div>
-    <h1 class="success-title">Đặt Hàng Thành Công!</h1>
-    <p class="lead text-muted">Cảm ơn bạn đã mua hàng! Đơn hàng của bạn đã được xác nhận.</p>
+<div class="container mt-5">
+    <div class="row tool-section">
+        <!-- Form Tìm Kiếm -->
+        <form action="" method="get" class="col-md-6 mb-3">
+            <div class="input-group">
+                <!-- Ô Nhập Tìm Kiếm -->
+                <input type="text" class="form-control" placeholder="Tìm kiếm đơn hàng" name="keyword" id="search-input" value="">
 
-    <!-- Thông tin chi tiết đơn hàng -->
-    <div class="order-details">
-        <p><strong>Địa chỉ:</strong> 123 Đường ABC, Thành phố XYZ</p>
-        <p><strong>SĐT Liên hệ:</strong> 0901234567</p>
-        <p><strong>Ngày đặt:</strong> 01/11/2024</p>
-        <p><strong>Giá tiền:</strong> 500,000 VND</p>
+                <!-- Nút Dropdown Tìm Theo -->
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-outline-secondary" id="dropdownButton">Tìm theo</button>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <button class="dropdown-item" type="button" data-option="username">Tên người dùng</button>
+                        <button class="dropdown-item" type="button" data-option="email">Email</button>
+                        <button class="dropdown-item" type="button" data-option="phone">Số điện thoại</button>
+                        <button class="dropdown-item" type="button" data-option="address">Địa chỉ</button>
+                    </div>
+                </div>
+
+                <!-- Ô Ẩn Lưu Tùy Chọn Tìm Kiếm -->
+                <input type="hidden" id="search_option" name="search_by" value="">
+
+                <!-- Nút Tìm Kiếm -->
+                <div class="input-group-append">
+                    <button class="btn btn-dark" type="submit">Tìm kiếm</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Lựa chọn Sắp Xếp -->
+        <div class="col-md-4 mb-3">
+            <select name="sort_by" class="form-control">
+                <option value="">Sắp Xếp Theo</option>
+                <option value="title-asc">Tiêu đề từ A - Z</option>
+                <option value="title-desc">Tiêu đề từ Z - A</option>
+                <option value="price-asc">Giá tiền A - Z</option>
+                <option value="price-desc">Giá tiền Z - A</option>
+            </select>
+        </div>
     </div>
 
-    <!-- Các nút điều hướng -->
-    <div class="button-container">
-        <button class="btn btn-primary me-2" onclick="window.location.href='/'">Về trang chủ</button>
-        <button class="btn btn-success" onclick="window.location.href='/order-status'">Xem trạng thái đơn hàng</button>
+    <div class="row tool-section">
+        <!-- Form Thay Đổi Nhiều -->
+        <form method="post" action="/admin/orders/change-multi?_method=PATCH" class="col-md-4 mb-3">
+            <div class="input-group">
+                <select name="bulk_action" class="form-control">
+                    <option value="">Thay đổi nhiều</option>
+                    <option value="status-active">Hoạt động</option>
+                    <option value="status-inactive">Không hoạt động</option>
+                    <option value="highlighted-1">Nổi bật</option>
+                    <option value="highlighted-0">Không nổi bật</option>
+                    <option value="delete-true">Xóa</option>
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-dark" type="submit">Áp dụng</button>
+                </div>
+            </div>
+        </form>
     </div>
-    
-    <!-- Pháo hoa toàn màn hình -->
-    <div class="fireworks-effect"></div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- JavaScript thuần để xử lý dropdown -->
 <script>
-    function createFireworkParticle() {
-        const particle = document.createElement('div');
-        particle.classList.add('firework-particle');
-        
-        const size = Math.random() * 20 + 10;
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        
-        particle.style.left = `${Math.random() * 100}%`;
-        particle.style.top = `${Math.random() * 100}%`;
-        particle.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-        
-        document.querySelector('.fireworks-effect').appendChild(particle);
+    // Biến tham chiếu tới dropdown
+    const dropdownButton = document.getElementById('dropdownButton');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const searchInput = document.getElementById('search-input');
+    const searchOptionInput = document.getElementById('search_option');
 
-        setTimeout(() => particle.remove(), 1000);
-    }
-    setInterval(createFireworkParticle, 200);
+    // Hiển thị hoặc ẩn dropdown khi nhấn nút
+    dropdownButton.addEventListener('click', function() {
+        dropdownMenu.classList.toggle('show');
+    });
+
+    // Hàm chọn tùy chọn tìm kiếm và đóng dropdown
+    dropdownMenu.querySelectorAll('.dropdown-item').forEach(item => {
+        item.addEventListener('click', function() {
+            const option = this.getAttribute('data-option');
+            searchOptionInput.value = option;
+
+            // Đổi placeholder dựa trên tùy chọn
+            switch (option) {
+                case 'username':
+                    searchInput.placeholder = 'Nhập tên người dùng';
+                    break;
+                case 'email':
+                    searchInput.placeholder = 'Nhập email';
+                    break;
+                case 'phone':
+                    searchInput.placeholder = 'Nhập số điện thoại';
+                    break;
+                case 'address':
+                    searchInput.placeholder = 'Nhập địa chỉ';
+                    break;
+                default:
+                    searchInput.placeholder = 'Tìm kiếm đơn hàng';
+            }
+
+            dropdownMenu.classList.remove('show');  // Đóng dropdown sau khi chọn
+        });
+    });
+
+    // Đóng dropdown khi nhấn ra ngoài
+    window.addEventListener('click', function(event) {
+        if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.classList.remove('show');
+        }
+    });
 </script>
+
+<style>
+    /* Tùy chỉnh dropdown với Bootstrap */
+    .dropdown-menu {
+        display: none; /* Ẩn mặc định */
+    }
+    .dropdown-menu.show {
+        display: block; /* Hiển thị khi có lớp .show */
+    }
+</style>
 
 </body>
 </html>

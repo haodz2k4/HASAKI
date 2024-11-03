@@ -11,7 +11,6 @@ export const order = catchAsync(async (req: Request, res: Response) => {
     if(!order){
         throw new RenderError(404,"Order is not found");
     }
-    console.log(order.user)
     res.render("clients/pages/orders/order.pug",{
         order
     })

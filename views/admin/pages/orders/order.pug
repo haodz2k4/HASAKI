@@ -10,10 +10,11 @@ block main
           form(action="").col-md-4.mb-3
             .input-group
               input.form-control(type='text', placeholder='Tìm kiếm đơn hàng',name='keyword', value=keyword)
+
               .input-group-append
                 button.btn.btn-dark(type='submit') Tìm kiếm 
           
-                
+          
           .col-md-4.mb-3
             select.form-control(form-select-sorting)
               option(value='') Sắp Xếp Theo 
@@ -74,18 +75,21 @@ block main
             tr
               td 
                 input(type="checkbox",value=item.id, name="")
-              //td #{pagination.skip + 1 + index}
-              td #{item.userId.fullName}
-              
-              td #{formatPrice(item.newPrice)}
-              td #{item.quantity}
-              
+              td #{1 + index}
+              td #{item.user.userId.fullName} 
               td 
-                input(type="number" value=item.position inp-position=item.id style='width: 70px') 
-              td !{moment(item.createdAt).format(' dddd,DD/MM/YYYY </br> HH:mm:ss')}  
+                strong 
+                | #{item.products.length} 
+              td 
+                select(name="") 
+                  option(value="" )  Đang Chờ  
+                  option(value="") Đã xác nhận 
+                  option(value="")
+              td #{item.paymentMethod} 
+              td #{formatPrice(item.shippingCost)} 
+              td #{formatPrice(item.totalPrice)} 
+              td #{moment(item.createdAt).calendar()}
               
-              td
-                strong Hồ Sơn Hào 
               td
                 a(href=`/admin/products/update/${item.id}`).btn.btn-sm.btn-info
                   i.fas.fa-edit

@@ -372,4 +372,6 @@ if(selectSearchBy){
         }
         window.location.href = url.href
     })
-}
+} 
+
+

@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { IUserAddress } from "./user.model";
+import { COLLECTION_USER_NAME, IUserAddress } from "./user.model";
 import { COLLECTION_PRODUCT_NAME } from "./product.model";
 
 const COLLECTION_ORDER_NAME = 'Orders';
@@ -27,7 +27,7 @@ export interface IOrder {
 const orderSchema = new Schema<IOrder>({
     user: {
         type: {
-            userId: {type: Schema.Types.ObjectId, required: true},
+            userId: {type: Schema.Types.ObjectId,ref: COLLECTION_USER_NAME, required: true},
             email: {type: String, required: true},
             phone: {type: String, required: true},
             address: {

@@ -200,3 +200,4 @@ btnPurchase.addEventListener("click", () => {
     inp.value = JSON.stringify(items) 
     formCheckOut.submit()
 })
+
