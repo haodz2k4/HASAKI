@@ -12,7 +12,11 @@ export const products = catchAsync(async (req: Request, res: Response) => {
     const keyword = req.query.keyword as string 
     const filter: Record<string, unknown> = {deleted: false}
     if(keyword){
-        filter.title = new RegExp(keyword,"i") 
+        filter["$or"] = [
+            {title: new RegExp(keyword,"i")},
+            {price: new RegExp(keyword,"i")},
+            {discountPercentage: new RegExp(keyword,"i")},
+        ]
     }
     const minPrice = req.query.minPrice as string;
     const maxPrice = req.query.maxPrice as string;
@@ -128,7 +132,6 @@ export const create = catchAsync(async (req: Request, res: Response) => {
 //[POST] "/admin/products/create"
 export const createPost = catchAsync(async (req: Request, res: Response) => {
     const body = req.body;
-    console.log(body)
     await productModel.create(body);
     req.flash('successs','Tạo sản phẩm mới thành công')
     res.redirect("/admin/products")
