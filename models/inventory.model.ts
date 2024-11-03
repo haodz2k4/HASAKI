@@ -10,7 +10,7 @@ export interface IIventory {
 }
 export const COLLECTION_INVENTORY_NAME = 'Inventory' 
 interface IInventoryModel extends Model<IIventory>{
-    substractInventory(productId: string, quantity: number): Promise<void>
+    substractInventory(productId: string, quantity: number): Promise<void>;
 }
 const inventorySchema = new Schema<IIventory, IInventoryModel>({
     productId: {
@@ -49,7 +49,7 @@ const inventorySchema = new Schema<IIventory, IInventoryModel>({
 inventorySchema.statics.substractInventory = async function(productId: string, quantity: number) {
     const inventories = await model<IIventory, IInventoryModel>(COLLECTION_INVENTORY_NAME).find({productId, deleted: false});
     for(const item of inventories){
-        if(quantity == 0) {break};
+        if(quantity === 0) {break};
         if(quantity < item.quantity){
             item.quantity -= quantity
             await item.save()

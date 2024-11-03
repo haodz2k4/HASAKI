@@ -9,12 +9,7 @@ block main
         .row.tool-section
           form(action="").col-md-4.mb-3
             .input-group
-              input.form-control(type='text', placeholder='Tìm kiếm Nhà cung cấp',name='keyword', value=keyword)
-              select(style='width: 90px' select-search-by)
-                  option(value='') tìm theo 
-                  option(value="address") Địa chỉ 
-                  option(value="title") Tên sản phẩm 
-                  option(value="name") Tên nhà cung cấp 
+              input.form-control(type='text', placeholder='Tìm kiếm Nhà cung cấp',name='keyword', value=keyword)  
               .input-group-append
                 button.btn.btn-dark(type='submit') Tìm     
                           
@@ -55,8 +50,8 @@ block main
               td 
                 input(type="checkbox",value=item.id, name="")
               td #{pagination.skip + 1 + index}
-              td #{item.productId ? item.productId.title : 0} 
-              td #{item.supplierId ? item.supplierId.name : "Không có"}
+              td #{item.product.title} 
+              td #{item.supplier.name}
               td #{item.quantity} 
               td #{item.wareHouse}
               td !{moment(item.createdAt).format(' dddd,DD/MM/YYYY </br> HH:mm:ss')}  

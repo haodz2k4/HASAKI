@@ -9,35 +9,65 @@ export const inventory = catchAsync(async (req: Request, res: Response) => {
     const filter: Record<string, unknown> = {
         deleted: false
     }
-    //search and search by 
+    
     const keyword = req.query.keyword as string;
-    const searchBy = (req.query.searchBy as string) || "title";
-    if(keyword){
-        filter[searchBy] = new RegExp(keyword,"i")
+    if (keyword) {
+        filter["$or"] = [
+            { "product.title": new RegExp(keyword, "i") },
+            { "supplier.name": new RegExp(keyword, "i") },
+            { wareHouse: new RegExp(keyword,"i")}
+        ]
     }  
-    //Pagination 
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
     const skip = (page - 1) * limit;
-    const [inventories, total] = await Promise.all([
-        inventoryModel
-        .find(filter)
-        .skip(skip)
-        .limit(limit)
-        .populate('productId','title')
-        .populate('supplierId','name'),
-        inventoryModel.countDocuments({deleted: false})
-    ])
-    const pagination = paginationHelper(page, limit, total)
-    res.render("admin/pages/inventories/inventory.pug",{
+    const aggregatePipeline = [
+        {
+            $lookup: {
+                from: 'products',
+                foreignField: '_id',
+                localField: 'productId',
+                as: 'product'
+            }
+        },
+        {
+            $lookup: {
+                from: 'suppliers',
+                foreignField: '_id',
+                localField: 'supplierId',
+                as: 'supplier'
+            }
+        },
+        { $unwind: '$product' },
+        { $unwind: '$supplier' },
+        { $match: filter },
+        {
+            $facet: {
+                totalCount: [{ $count: "count" }], 
+                data: [ 
+                    { $skip: skip },
+                    { $limit: limit }
+                ]
+            }
+        }
+    ];
+
+    const result = await inventoryModel.aggregate(aggregatePipeline);
+
+    const inventories = result[0].data;
+    const totalDocuments = result[0].totalCount.length > 0 ? result[0].totalCount[0].count : 0;
+
+    const pagination = paginationHelper(page, limit, totalDocuments);
+
+    res.render("admin/pages/inventories/inventory.pug", {
         inventories,
         activePages: 'inventories',
         pageTitle: 'Quản lý kho hàng',
         pagination,
-        searchBy,
         keyword
-    })
-})
+    });
+});
+
 
 //[GET] "/admin/inventories"
 export const create = catchAsync(async (req: Request, res: Response) => {

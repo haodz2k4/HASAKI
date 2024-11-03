@@ -66,6 +66,7 @@ const orderSchema = new Schema<IOrder>({
 orderSchema.pre('save',async function(next) {
     if(this.isNew){
         for(const item of this.products){
+            console.log(item.quantity)
             await inventoryModel.substractInventory(item.productId.toString(), item.quantity)
         }
        
