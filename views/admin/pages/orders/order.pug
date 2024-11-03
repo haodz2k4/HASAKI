@@ -63,6 +63,8 @@ block main
               input(type="checkbox", name="")
             th #
             th Tên người đặt 
+            th Số điện thoại 
+            th Email 
             th Tổng số lượng sản phẩm 
             th Trạng thái 
             th Phương thức thanh toán 
@@ -76,7 +78,9 @@ block main
               td 
                 input(type="checkbox",value=item.id, name="")
               td #{1 + index}
-              td #{item.user.userId.fullName} 
+              td #{item.user.fullName} 
+              td #{item.user.phone} 
+              td #{item.user.email}
               td 
                 strong 
                 | #{item.products.length} 

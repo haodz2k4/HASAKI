@@ -10,17 +10,17 @@ export const add = catchAsync(async (req: Request, res: Response, next: NextFunc
 
     const product = await productModel.findOne({_id: productId});
     if(!product){
-        throw new RenderError(400,"Product is not found")
+        throw new RenderError(400,"Sản phẩm không tìm thấy")
     }
     if(product.status === 'inactive'){
-        throw new RenderError(400,"Product is invalid")
+        throw new RenderError(400,"Sản phẩm đã dung hoạt động")
     }
     if(product.quantity === 0) {
-        throw new RenderError(400,"Product is out of stock")
+        throw new RenderError(400,"Đã hết số lượng")
     }
     const productQuantity: number = product.quantity as number
     if(quantity > productQuantity){
-        throw new RenderError(400,"Invalid quantity")
+        throw new RenderError(400,"Số lượng đặt ko hợp lệ")
     }
     next()
 })
