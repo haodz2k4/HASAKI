@@ -5,4 +5,5 @@ router.get("/",controller.inventory)
 router  
     .route("/create")
     .get(controller.create)
+    .post(controller.createPost)
 export default router;

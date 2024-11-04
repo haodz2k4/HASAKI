@@ -485,3 +485,65 @@ body {
   flex-grow: 1;
 }
 /*PRODUCT*/
+
+/*FORM CREATE INVENTORY*/
+.inventory-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.inventory-form-container .form-box {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+}
+.inventory-form-container h2 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+.inventory-form-container .form-group input, 
+.inventory-form-container .form-group select {
+  height: 50px;
+  font-size: 16px;
+}
+.inventory-form-container .btn-primary {
+  background: #333;
+  border: none;
+  height: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+}
+.inventory-form-container .btn-primary:hover {
+  background: #555;
+}
+/* Hide original dropdown options for custom search */
+.inventory-form-container .searchable-select .option {
+  display: none;
+}
+/* Show options when input is focused */
+.inventory-form-container .searchable-select.focused .option {
+  display: block;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.inventory-form-container .searchable-select .option:hover {
+  background-color: #f0f0f0;
+}
+.inventory-form-container .searchable-select .options {
+  max-height: 150px; /* Chiều cao tối đa của danh sách tùy chọn */
+  overflow-y: auto; /* Bật cuộn dọc */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  position: absolute;
+  z-index: 1000;
+}
+
+/*END FORM CREATE INVENTORY*/

@@ -3,6 +3,7 @@ import { catchAsync } from "../../utils/catchAsync";
 import inventoryModel from "../../models/inventory.model";
 import paginationHelper from "../../helpers/pagination.helper";
 import productModel from "../../models/product.model";
+import supplierModel from "../../models/supplier.model";
 
 //[GET] "/admin/inventories"
 export const inventory = catchAsync(async (req: Request, res: Response) => {
@@ -69,13 +70,20 @@ export const inventory = catchAsync(async (req: Request, res: Response) => {
 });
 
 
-//[GET] "/admin/inventories"
+//[GET] "/admin/inventories/create"
 export const create = catchAsync(async (req: Request, res: Response) => {
-    const products = await productModel.find({deleted: false, status: "active"});
-    const suppliers = await productModel.find({deleted: false, status: "active"});
+    const products = await productModel.find({deleted: false, status: "active"})
+    const suppliers = await supplierModel.find({deleted: false, status: "active"})
     res.render("admin/pages/inventories/create.pug", {
         products,
         suppliers,
         activePages: 'inventories'
     });
 }) 
+
+//[POST] "/admin/inventories"
+export const createPost = catchAsync(async (req: Request, res: Response) => {
+    
+    console.log(req.body)
+    res.redirect("back")
+})

@@ -1,55 +1,37 @@
 extends ../../layouts/default.pug 
 
 block main 
-    .container
-      .form-container
-        h2.mb-4.text-center Thêm đơn hàng mới 
-        form(method="post")
-          
-          .mb-3
-            .form-group
-              label(for='searchProduct') Tìm kiếm sản phẩm 
-              input#searchProduct.form-control(type='text', placeholder='Nhập tên sản phẩm' inp-product)
-            // Product list
-            .product-list-modal.d-none 
-              .product-item
-                img(src='https://via.placeholder.com/50', alt='Product 1')
-                .product-name Product 1
-              .product-item
-                img(src='https://via.placeholder.com/50', alt='Product 2')
-                .product-name Product 2
-              .product-item
-                img(src='https://via.placeholder.com/50', alt='Product 3')
-                .product-name Product 3
-              .product-item
-                img(src='https://via.placeholder.com/50', alt='Product 4')
-                .product-name Product 4
-              .product-item
-                img(src='https://via.placeholder.com/50', alt='Product 5')
-                .product-name Product 5 
-            .form-group
-              label(for='searchProduct') Tìm kiếm nhà cung cấp 
-              input#searchProduct.form-control(type='text', placeholder='Nhập tên nhà cung cấp' inp-product)
-            // Product list
-            .product-list-modal
-              .product-item
-                .product-name Product 2
-              .product-item
-                .product-name Product 3
-              .product-item
-                .product-name Product 4
-              .product-item
-                .product-name Product 5
-          
-          // Vị trí và Trạng thái
-          .row.mb-3
-            .col-md-6
-              label.form-label(for='quantity') Nhập số lượng 
-              input#quantity.form-control(type='number', name='quantity', placeholder='Nhập số lượng')
-            .col-md-6
-              label.form-label(for='wareHouse') Nhập địa chỉ nhà kho  
-              input#wareHouse.form-control(type='text', name='wareHouse', placeholder='Nhập địa chỉ nhà kho')
-                
-          // Nút Submit
-          .d-grid
-            button.btn.btn-primary(type='submit' style='width: 100%') Thêm đơn hàng 
+ .inventory-form-container
+      .form-box
+        h2 Create Inventory
+        form(action='/admin/inventories/create', method='POST')
+          // Product Selection with Search
+          .form-group
+            label(for='product') Product
+            #product-container.searchable-select
+              input#product-display.form-control(type='text', placeholder='Search for a product...', autocomplete='off', required='')
+              input#product-id(type='hidden', name='productId')
+              .options
+                .option(data-id='1') Product 1
+                .option(data-id='2') Product 2
+                .option(data-id='3') Product 3
+          // Supplier Selection with Search
+          .form-group
+            label(for='supplier') Supplier
+            #supplier-container.searchable-select
+              input#supplier-display.form-control(type='text', placeholder='Search for a supplier...', autocomplete='off', required='')
+              input#supplier-id(type='hidden', name='supplierId')
+              .options
+                .option(data-id='101') Supplier 1
+                .option(data-id='102') Supplier 2
+                .option(data-id='103') Supplier 3
+          // Warehouse Input
+          .form-group
+            label(for='warehouse') Warehouse
+            input#warehouse.form-control(type='text', name='warehouse', placeholder='Enter warehouse name', required='')
+          // Quantity Input
+          .form-group
+            label(for='quantity') Quantity
+            input#quantity.form-control(type='number', name='quantity', placeholder='Enter quantity', min='1', required='')
+          // Submit Button
+          button.btn.btn-primary(type='submit') Add Inventory

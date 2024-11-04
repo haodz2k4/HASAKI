@@ -375,3 +375,36 @@ if(selectSearchBy){
 } 
 
 
+const seachableSelect = document.querySelectorAll('.searchable-select')
+if(seachableSelect.length > 0){
+    forEach(container => {
+        const displayInput = container.querySelector('input[type="text"]');
+        const hiddenInput = container.querySelector('input[type="hidden"]');
+        const optionsContainer = container.querySelector('.options');
+
+        displayInput.addEventListener('focus', () => {
+            container.classList.add('focused');
+        });
+
+        displayInput.addEventListener('input', () => {
+            const filter = displayInput.value.toLowerCase();
+            optionsContainer.querySelectorAll('.option').forEach(option => {
+                const text = option.textContent.toLowerCase();
+                option.style.display = text.includes(filter) ? 'block' : 'none';
+            });
+        });
+
+        optionsContainer.addEventListener('click', e => {
+            if (e.target.classList.contains('option')) {
+                displayInput.value = e.target.textContent;
+                hiddenInput.value = e.target.getAttribute('data-id'); // Set ID to hidden input
+                container.classList.remove('focused');
+            }
+        });
+
+        displayInput.addEventListener('blur', () => {
+            setTimeout(() => container.classList.remove('focused'), 100);
+        });
+    });
+}
+

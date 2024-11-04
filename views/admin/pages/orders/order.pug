@@ -18,10 +18,22 @@ block main
           .col-md-4.mb-3
             select.form-control(form-select-sorting)
               option(value='') Sắp Xếp Theo 
-              option(value='title-asc' selected=(sortString === "title-asc")) Tiêu đề từ A - Z
-              option(value='title-desc' selected=(sortString === "title-desc")) Tiêu đề từ Z - A 
-              option(value='price-asc' selected=(sortString === "price-asc")) Giá tiền A - Z 
-              option(value="price-desc" selected=(sortString === "price-desc")) Giá tiền Z - A
+              option(value='createdAt-desc' selected=(sortString === "createdAt-desc")) Ngày mua mới nhất 
+              option(value='createdAt-asc' selected=(sortString === "createdAt-asc")) Ngày mua cũ nhất  
+              option(value='productCount-desc' selected=(sortString === "productCount-desc")) Nhiều sản phẩm nhất 
+              option(value="productCount-asc" selected=(sortString === "productCount-asc")) Ít sản phẩm nhất 
+               option(value='totalPrice-desc' selected=(sortString === "totalPrice-desc")) Tổng tiền cao nhất  
+              option(value="totalPrice-asc" selected=(sortString === "totalPrice-asc")) Tổng tiền ít nhất 
+          .col-md-4.mb-3
+            select.form-control(select-status)
+              option(value='') Lọc theo trạng thái  
+              option(value='pending' selected=(status === 'pending')) Đang chờ  
+              option(value='confirmed' selected=(status === 'confirmed')) Đã xác nhận 
+              option(value='processing' selected=(status === 'processing')) trong quá trình 
+              option(value="shipped" selected=(status === 'shipped')) Vận chuyển 
+              option(value="delivered" selected=(status === 'delivered')) Đã dao 
+              option(value="cancelled" selected=(status === 'cancelled')) Bị hủy 
+              option(value="issue" selected=(status === 'issue')) gặp vấn đề   
         .row.tool-section
           form(method="post" action="/admin/orders/change-multi?_method=PATCH" form-change-multi).col-md-4.mb-3
             .input-group
@@ -37,24 +49,21 @@ block main
                 button.btn.btn-dark(type='submit') Áp dụng 
           .col-md-4.mb-3
             .action-buttons.d-flex.justify-content-md-end
-              a(href="/admin/products/create").btn.btn-success
-                i.fa-solid.fa-plus 
-                |  Thêm 
-              button.btn.btn-warning(type='button') 
-                i.fa-solid.fa-square-plus
-                |  Thêm sll
               button.btn.btn-secondary(type='button' btn-export-excel) 
                 i.fa-solid.fa-file-excel 
                 |  Xuất Excel 
-        //- .row.tool-section
-        //-   form().col-md-4.mb-3
-        //-     .input-group
-        //-       select.form-control(select-limit)
-        //-         option(value="5" selected=(pagination.limit === 5)) Giới hạn 5
-        //-         option(value="10" selected=(pagination.limit === 10)) Giới hạn 10 
-        //-         option(value="20" selected=(pagination.limit === 20)) Giới hạn 20
-        //-         option(value="50" selected=(pagination.limit === 50)) Giới hạn 50 
-        //-         option(value="100" selected=(pagination.limit === 100)) Giới hạn 100 
+              button.btn.btn-danger(type='button' btn-export-excel) 
+                i.fa-solid.fa-trash
+                |  Thùng rác 
+        
+          form().col-md-4.mb-3
+            .input-group
+              select.form-control(select-limit)
+                option(value="5" selected=(pagination.limit === 5)) Giới hạn 5
+                option(value="10" selected=(pagination.limit === 10)) Giới hạn 10 
+                option(value="20" selected=(pagination.limit === 20)) Giới hạn 20
+                option(value="50" selected=(pagination.limit === 50)) Giới hạn 50 
+                option(value="100" selected=(pagination.limit === 100)) Giới hạn 100 
     .table-responsive(table-manage)
       table.table.table-striped
         thead.thead-dark
@@ -76,7 +85,7 @@ block main
           each item, index in orders 
             tr
               td 
-                input(type="checkbox",value=item.id, name="")
+                input(type="checkbox", name='id'  value=item._id.toString())
               td #{1 + index}
               td #{item.user.fullName} 
               td #{item.user.phone} 
@@ -85,10 +94,14 @@ block main
                 strong 
                 | #{item.products.length} 
               td 
-                select(name="") 
-                  option(value="" )  Đang Chờ  
-                  option(value="") Đã xác nhận 
-                  option(value="")
+                select(select-update-status)
+                  option(value='pending' selected=(item.status === 'pending')) Đang chờ  
+                  option(value='confirmed' selected=(item.status === 'confirmed')) Đã xác nhận 
+                  option(value='processing' selected=(item.status === 'processing')) trong quá trình 
+                  option(value="shipped" selected=(item.status === 'shipped')) Vận chuyển 
+                  option(value="delivered" selected=(item.status === 'delivered')) Đã dao 
+                  option(value="cancelled" selected=(item.status === 'cancelled')) Bị hủy 
+                  option(value="issue" selected=(item.status === 'issue')) gặp vấn đề 
               td #{item.paymentMethod} 
               td #{formatPrice(item.shippingCost)} 
               td #{formatPrice(item.totalPrice)} 
@@ -100,5 +113,8 @@ block main
                 button.btn.btn-sm.btn-danger(btn-delete=item.id)
                   i.fas.fa-trash 
                 a(href=`/admin/products/detail/${item.id}`).btn.btn-sm.btn-warning 
-                  i.fa-solid.fa-magnifying-glass    
-          
+                  i.fa-solid.fa-magnifying-glass  
+    form(action="" method='post' form-update-status).d-none 
+      input(type="text" name='status')
+    block script 
+      script(src="/admin/js/order.js")  
