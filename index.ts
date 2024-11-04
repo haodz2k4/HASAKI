@@ -18,7 +18,8 @@ import path from "path";
 import api from "./api/routers/index.router"
 import notFoundMdw from "./middleware/404.middleware"
 import { formatPrice } from "./utils/format.utils";
-
+import {createServer} from "http";
+import { Server } from "socket.io";
 
 const bootstrap = () => {
     const app: Express = express();
@@ -75,6 +76,16 @@ const bootstrap = () => {
     adminRouter(app);
     clientRouter(app);
     
+
+    //Socket 
+    const server = createServer(app) 
+    const io = new Server(server) 
+
+    io.on('connection', (socket) => {
+        console.log('a user connected')
+    })
+
+
     // Redis
     redis;
 
@@ -90,7 +101,7 @@ const bootstrap = () => {
     app.use('*', notFoundMdw)
     // Start server
     const port = config.port;
-    app.listen(port, () => {
+    server.listen(port, () => {
         console.log(`Server đang chạy trên port: http://localhost:${port}`);
     });
 }
