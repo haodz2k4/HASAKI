@@ -249,4 +249,8 @@
   0% { transform: scale(0.2); opacity: 1; }
   100% { transform: scale(1.5); opacity: 0; }
 }
-/*END CHECKOUT SUCCESS PAGE*/
+/*END CHECKOUT SUCCESS PAGE*/ 
+
+.status-cancelled {
+  background-color: red;
+}

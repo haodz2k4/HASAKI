@@ -1,4 +1,5 @@
 extends ../../layouts/default.pug 
+include 
 block styles 
     link(rel="stylesheet", href="/css/checkout.css")
 block main  
@@ -6,7 +7,7 @@ block main
   .tracking-container
     .tracking-header Theo dõi đơn hàng 
      i.fa-solid.fa-box-open
-    // Status Tracking Steps
+    // Status Tracking Steps 
     .status-container
       .status-step(class=(order.status === 'pending' ? 'active' : '') status='pending')
         .status-circle &check;
@@ -23,6 +24,10 @@ block main
       .status-step(class=(order.status === 'delivered' ? 'active' : '') status='delivered')
         .status-circle &check;
         .status-label Đã giao 
+      .status-step(class=(order.status === 'cancelled' ? 'active' : '') status='cancelled')
+        .status-circle 
+          i.fa-solid.fa-x
+        .status-label Bị hủy 
     each item in order.products
       .order-item
         img.product-image(src=(item.productId.thumbnail.length > 0 ? item.productId.thumbnail[0] : 'https://via.placeholder.com/100') alt='Product Image')

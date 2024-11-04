@@ -26,7 +26,7 @@ export const order = catchAsync(async (req: Request, res: Response) => {
     //Pagination
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
-    const total  = await orderModel.countDocuments();
+    const total  = await orderModel.countDocuments(filter);
     const pagination = paginationHelper(page, limit, total) 
 
     //sort 

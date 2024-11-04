@@ -1,5 +1,5 @@
 extends ../../layouts/default.pug 
-
+include ../../mixins/pagination.pug 
 block main 
     h1.text-center(style='margin-top: 30px;font-weight: 30px;')
      i.fa-solid.fa-cart-shopping
@@ -116,7 +116,9 @@ block main
                   i.fa-solid.fa-magnifying-glass  
     form(action="" method='post' form-update-status).d-none 
       input(type="text" name='status')
+    +pagination(pagination)
     block script 
       script(src="/socket.io/socket.io.js") 
       script(src="/common/socket.js") 
-      script(src="/admin/js/order.js")  
+      script(src="/admin/js/order.js")   
+    

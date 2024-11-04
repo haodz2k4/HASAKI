@@ -76,7 +76,7 @@ orderSchema.pre('save',async function(next) {
 orderSchema.virtual('totalPrice').get(function() {
     let total = 0
     this.products.forEach((item) => {
-        total += (item.price * (100 - item.discountPercentage) / 100)
+        total += (item.price * (100 - item.discountPercentage) / 100) * item.quantity 
     })
     total += this.shippingCost
     return total
