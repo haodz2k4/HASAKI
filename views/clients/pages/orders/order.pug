@@ -8,19 +8,19 @@ block main
      i.fa-solid.fa-box-open
     // Status Tracking Steps
     .status-container
-      .status-step.active
+      .status-step(class=(order.status === 'pending' ? 'active' : '') status='pending')
         .status-circle &check;
         .status-label Đang chờ 
-      .status-step.active
+      .status-step(class=(order.status === 'confirmed' ? 'active' : '') status='confirmed')
         .status-circle &check;
         .status-label Đã xác nhận 
-      .status-step.active
+      .status-step(class=(order.status === 'processing' ? 'active' : '') status='processing')
         .status-circle &check;
         .status-label Trong quá trình 
-      .status-step.active
+      .status-step(class=(order.status === 'shipped' ? 'active' : '') status='shipped')
         .status-circle &check;
         .status-label Đang vận chuyển 
-      .status-step
+      .status-step(class=(order.status === 'delivered' ? 'active' : '') status='delivered')
         .status-circle &check;
         .status-label Đã giao 
     each item in order.products
@@ -57,4 +57,8 @@ block main
       p
 
         strong Tổng tiền:
-        span.price  #{formatPrice(order.totalPrice)}
+        span.price  #{formatPrice(order.totalPrice)} 
+
+ block script 
+    script(src="/socket.io/socket.io.js") 
+    script(src="/js/order.js") 

@@ -80,13 +80,25 @@ export const order = catchAsync(async (req: Request, res: Response) => {
         }
     ])
 
-    io.once('connection',(socket) => {
-        console.log('a user connected')
-        socket.on('UPDATE_STATUS_ORDER',async (msg) => {
-            const {id, status} = msg;
-            await orderModel.updateOne({_id: id},{status})
-        })
-    })
+    
+    io.on('connection', (socket) => {
+        console.log('A user connected');
+        
+        socket.on('UPDATE_STATUS_ORDER', async (msg) => {
+            const { id, status } = msg;
+            await orderModel.updateOne({ _id: id }, { status });
+            
+            io.to("users").emit('UPDATE_STATUS_SUCCESS', status);
+        });
+    
+        socket.on('joinRoom', (room) => {
+            socket.join(room);
+        });
+    
+        socket.on('disconnect', () => {
+            console.log('User disconnected');
+        });
+    });
     res.render("admin/pages/orders/order.pug",{
         orders,
         activePages: 'orders',
