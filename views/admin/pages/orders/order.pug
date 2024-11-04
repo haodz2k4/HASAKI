@@ -117,5 +117,6 @@ block main
     form(action="" method='post' form-update-status).d-none 
       input(type="text" name='status')
     block script 
+      script(src="/socket.io/socket.io.js") 
+      script(src="/common/socket.js") 
       script(src="/admin/js/order.js")  
-    

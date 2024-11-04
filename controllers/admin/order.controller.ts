@@ -2,8 +2,7 @@ import { Request, Response } from "express";
 import { catchAsync } from "../../utils/catchAsync";
 import orderModel from "../../models/order.model";
 import paginationHelper from "../../helpers/pagination.helper";
-import filterHelper from "../../helpers/filter.helper";
-
+import { io } from "../..";
 //[GET] "/admin/orders"
 export const order = catchAsync(async (req: Request, res: Response) => {
     
@@ -35,7 +34,6 @@ export const order = catchAsync(async (req: Request, res: Response) => {
     const sortValue = (req.query.sortValue as  string === 'asc') ? 1 : -1
     const sort: Record<string, 1 | -1> = {[sortKey]: sortValue}
     const sortString = `${sortKey}-${req.query.sortValue}`
-    console.log(sortString)
     const orders = await orderModel.aggregate([
 
         {
@@ -81,6 +79,14 @@ export const order = catchAsync(async (req: Request, res: Response) => {
             $sort: sort
         }
     ])
+
+    io.once('connection',(socket) => {
+        console.log('a user connected')
+        socket.on('UPDATE_STATUS_ORDER',async (msg) => {
+            const {id, status} = msg;
+            await orderModel.updateOne({_id: id},{status})
+        })
+    })
     res.render("admin/pages/orders/order.pug",{
         orders,
         activePages: 'orders',
@@ -91,10 +97,3 @@ export const order = catchAsync(async (req: Request, res: Response) => {
     })
 })
 
-//[PATCH] "/admin/orders/:id/change-status"
-export const changeStatus = catchAsync(async (req: Request, res: Response) => {
-    const {status} = req.body
-    const {id} = req.params
-    await orderModel.updateOne({_id: id},{status})
-    res.redirect("back");
-})

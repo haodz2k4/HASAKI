@@ -21,8 +21,11 @@ import { formatPrice } from "./utils/format.utils";
 import {createServer} from "http";
 import { Server } from "socket.io";
 
+const app: Express = express();
+const server = createServer(app); 
+export const io = new Server(server); 
+
 const bootstrap = () => {
-    const app: Express = express();
 
     // viewengine 
     app.set('view engine', 'pug');
@@ -76,16 +79,7 @@ const bootstrap = () => {
     adminRouter(app);
     clientRouter(app);
     
-
-    //Socket 
-    const server = createServer(app) 
-    const io = new Server(server) 
-
-    io.on('connection', (socket) => {
-        console.log('a user connected')
-    })
-
-
+    
     // Redis
     redis;
 

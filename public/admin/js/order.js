@@ -1,4 +1,4 @@
-const url = new URL(window.location.href)
+
 
 const selectStatus = document.querySelector("[select-status]");
 if(selectStatus){
@@ -13,15 +13,17 @@ if(selectStatus){
     })
 }
 
-const selectUpdateStatus = document.querySelector("[select-update-status]");
-if(selectUpdateStatus){
-    selectUpdateStatus.addEventListener("change", () => {
-        const status = selectUpdateStatus.value;
-        const formUpdateStatus = document.querySelector("[form-update-status]");
-        const inp = formUpdateStatus.querySelector("input")
-        inp.value = status 
-        const id = selectUpdateStatus.closest("tr").querySelector("td input[name='id']");
-        formUpdateStatus.action = `/admin/orders/${id.value}/change-status?_method=PATCH`
-        formUpdateStatus.submit()   
+const selectUpdateStatus = document.querySelectorAll("[select-update-status]");
+if(selectUpdateStatus.length > 0){
+
+    selectUpdateStatus.forEach((item) => {
+        item.addEventListener("change", () => {
+            const status = item.value;
+            const id = item.closest("tr").querySelector("input[name='id']").value
+            socket.emit('UPDATE_STATUS_ORDER',{
+                status,
+                id
+            })
+        })
     })
 }
