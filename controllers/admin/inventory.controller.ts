@@ -83,7 +83,8 @@ export const create = catchAsync(async (req: Request, res: Response) => {
 
 //[POST] "/admin/inventories"
 export const createPost = catchAsync(async (req: Request, res: Response) => {
-    
-    console.log(req.body)
-    res.redirect("back")
+    const body = req.body
+    await inventoryModel.create(body)
+    req.flash('success','Thêm đơn hàng thành công')
+    res.redirect("/admin/inventories")
 })
