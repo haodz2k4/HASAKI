@@ -1,5 +1,5 @@
 extends ../../layouts/default.pug 
-include 
+
 block styles 
     link(rel="stylesheet", href="/css/checkout.css")
 block main  
@@ -66,4 +66,5 @@ block main
 
  block script 
     script(src="/socket.io/socket.io.js") 
+    script(src="/common/socket.js")
     script(src="/js/order.js") 
