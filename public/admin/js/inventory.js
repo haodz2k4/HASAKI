@@ -1,41 +1,63 @@
+async function fetchData(url, dataKey) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Lỗi mạng");
+        
+        const data = await response.json();
+        
+        if (!data[dataKey] || !Array.isArray(data[dataKey])) {
+            console.error(`Dữ liệu nhận được không đúng định dạng:`, data);
+            return [];
+        }
+        
+        return data[dataKey]; 
+    } catch (error) {
+        console.error("Lỗi khi fetch dữ liệu:", error);
+        return []; 
+    }
+}
 
-const products = [
-    { id: 1, name: "Product A" },
-    { id: 2, name: "Product B" },
-    { id: 3, name: "Product C" },
-    { id: 4, name: "Product D" }
-];
-const suppliers = [
-    { id: 10, name: "Supplier X" },
-    { id: 11, name: "Supplier Y" },
-    { id: 12, name: "Supplier Z" }
-];
+async function setupSuggestions() {
+   
+    const products = await fetchData('/api/products', 'products'); 
+    const suppliers = await fetchData('/api/suppliers', 'suppliers'); 
+    
+    const productSearch = document.getElementById("productSearch");
+    const productSuggestions = document.getElementById("productSuggestions");
+    const productId = document.getElementById("productId");
+    
+    productSearch.addEventListener("input", () => {
+        
+        showSuggestions(productSearch, products, productSuggestions, productId, "_id", "title");
+    });
 
-function showSuggestions(inputElement, suggestions, suggestionsContainer, hiddenInput) {
+
+    const supplierSearch = document.getElementById("supplierSearch");
+    const supplierSuggestions = document.getElementById("supplierSuggestions");
+    const supplierId = document.getElementById("supplierId");
+    
+    supplierSearch.addEventListener("input", () => {
+        showSuggestions(supplierSearch, suppliers, supplierSuggestions, supplierId, "_id", "name");
+    });
+}
+
+function showSuggestions(inputElement, suggestions, suggestionsContainer, hiddenInput, idField, nameField) {
     const query = inputElement.value.toLowerCase();
-    const filteredSuggestions = suggestions.filter(item => item.name.toLowerCase().includes(query));
+    const filteredSuggestions = suggestions.filter(item => item[nameField].toLowerCase().includes(query));
     
     suggestionsContainer.innerHTML = "";
 
     filteredSuggestions.forEach(item => {
         const suggestionItem = document.createElement("div");
         suggestionItem.classList.add("inventory-form-suggestion-item");
-        suggestionItem.textContent = item.name;
+        suggestionItem.textContent = item[nameField];
         suggestionItem.addEventListener("click", () => {
-            inputElement.value = item.name; 
-            hiddenInput.value = item.id; 
+            inputElement.value = item[nameField]; 
+            hiddenInput.value = item[idField]; 
             suggestionsContainer.innerHTML = "";
         });
         suggestionsContainer.appendChild(suggestionItem);
     });
 }
 
-const productSearch = document.getElementById("productSearch");
-const productSuggestions = document.getElementById("productSuggestions");
-const productId = document.getElementById("productId");
-productSearch.addEventListener("input", () => showSuggestions(productSearch, products, productSuggestions, productId));
-
-const supplierSearch = document.getElementById("supplierSearch");
-const supplierSuggestions = document.getElementById("supplierSuggestions");
-const supplierId = document.getElementById("supplierId");
-supplierSearch.addEventListener("input", () => showSuggestions(supplierSearch, suppliers, supplierSuggestions, supplierId))
+setupSuggestions();
