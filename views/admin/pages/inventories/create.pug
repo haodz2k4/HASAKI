@@ -1,37 +1,29 @@
 extends ../../layouts/default.pug 
 
 block main 
- .inventory-form-container
-      .form-box
-        h2 Create Inventory
-        form(action='/admin/inventories/create', method='POST')
-          // Product Selection with Search
-          .form-group
-            label(for='product') Product
-            #product-container.searchable-select
-              input#product-display.form-control(type='text', placeholder='Search for a product...', autocomplete='off', required='')
-              input#product-id(type='hidden', name='productId')
-              .options
-                .option(data-id='1') Product 1
-                .option(data-id='2') Product 2
-                .option(data-id='3') Product 3
-          // Supplier Selection with Search
-          .form-group
-            label(for='supplier') Supplier
-            #supplier-container.searchable-select
-              input#supplier-display.form-control(type='text', placeholder='Search for a supplier...', autocomplete='off', required='')
-              input#supplier-id(type='hidden', name='supplierId')
-              .options
-                .option(data-id='101') Supplier 1
-                .option(data-id='102') Supplier 2
-                .option(data-id='103') Supplier 3
-          // Warehouse Input
-          .form-group
-            label(for='warehouse') Warehouse
-            input#warehouse.form-control(type='text', name='warehouse', placeholder='Enter warehouse name', required='')
-          // Quantity Input
-          .form-group
-            label(for='quantity') Quantity
-            input#quantity.form-control(type='number', name='quantity', placeholder='Enter quantity', min='1', required='')
-          // Submit Button
-          button.btn.btn-primary(type='submit') Add Inventory
+    .inventory-form-container
+      h3.inventory-form-title Create Inventory
+      form(action='', method='POST')
+        // Product Search Field
+        .form-group.position-relative.inventory-form-group
+          label(for='productSearch') Product Search
+          input#productSearch.inventory-form-control(type='text', placeholder='Enter product name')
+          input#productId(type='hidden', name='productId')
+          #productSuggestions.inventory-form-suggestions 
+        // Supplier Search Field
+        .form-group.position-relative.inventory-form-group
+          label(for='supplierSearch') Supplier Search
+          input#supplierSearch.inventory-form-control(type='text', placeholder='Enter supplier name')
+          input#supplierId(type='hidden', name='supplierId')
+          #supplierSuggestions.inventory-form-suggestions
+        // Quantity Field
+        .form-group.inventory-form-group
+          label(for='quantity') Quantity
+          input#quantity.inventory-form-control(type='number', name='quantity', placeholder='Enter quantity', min='1')
+        // Warehouse Field
+        .form-group.inventory-form-group
+          label(for='warehouse') Warehouse
+          input#warehouse.inventory-form-control(type='text', name='warehouse', placeholder='Enter warehouse location')
+        // Submit Button
+        button.inventory-form-btn(type='submit') Create Inventory
+    script(src="/admin/js/inventory.js") 

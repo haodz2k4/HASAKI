@@ -1,6 +1,7 @@
 import { Express } from 'express';
 import  productRouter from "../routers/product.router"
 import categoryRouter from "../routers/category.router"
+import supplierRouter from "../routers/supplier.router"
 import userRouter from "../routers/user.router"
 import { serve, setup } from "swagger-ui-express";
 import { specs } from '../../swagger';
@@ -12,4 +13,5 @@ export default (app: Express) => {
     app.use(`${API_PREFIX}/products`,productRouter);
     app.use(`${API_PREFIX}/categories`,categoryRouter);
     app.use(`${API_PREFIX}/users`,userRouter);
+    app.use(`${API_PREFIX}/suppliers`,supplierRouter)
 }

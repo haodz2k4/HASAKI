@@ -488,62 +488,64 @@ body {
 
 /*FORM CREATE INVENTORY*/
 .inventory-form-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-.inventory-form-container .form-box {
   background-color: #ffffff;
-  border-radius: 8px;
   padding: 30px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: auto;
 }
-.inventory-form-container h2 {
-  font-size: 1.8em;
-  margin-bottom: 20px;
-  color: #333;
+.inventory-form-title {
   text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
 }
-.inventory-form-container .form-group input, 
-.inventory-form-container .form-group select {
-  height: 50px;
-  font-size: 16px;
-}
-.inventory-form-container .btn-primary {
-  background: #333;
-  border: none;
-  height: 50px;
-  font-size: 16px;
+.inventory-form-group label {
   font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+}
+.inventory-form-control {
+  border-radius: 8px;
+  padding: 12px 16px;
+  border: 1px solid #ccc;
   width: 100%;
+  margin-bottom: 15px;
+  font-size: 16px;
 }
-.inventory-form-container .btn-primary:hover {
-  background: #555;
-}
-/* Hide original dropdown options for custom search */
-.inventory-form-container .searchable-select .option {
-  display: none;
-}
-/* Show options when input is focused */
-.inventory-form-container .searchable-select.focused .option {
-  display: block;
-  padding: 5px 10px;
+.inventory-form-btn {
+  background-color: #007bff;
+  border-color: #007bff;
+  border-radius: 8px;
+  padding: 10px 20px;
+  color: #fff;
+  width: 100%;
+  font-size: 18px;
+  font-weight: bold;
   cursor: pointer;
 }
-.inventory-form-container .searchable-select .option:hover {
+.inventory-form-btn:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+.inventory-form-suggestions {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 1000;
+  width: 100%;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+.inventory-form-suggestion-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.inventory-form-suggestion-item:hover {
   background-color: #f0f0f0;
 }
-.inventory-form-container .searchable-select .options {
-  max-height: 150px; /* Chiều cao tối đa của danh sách tùy chọn */
-  overflow-y: auto; /* Bật cuộn dọc */
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background-color: #fff;
-  position: absolute;
-  z-index: 1000;
-}
-
 /*END FORM CREATE INVENTORY*/
