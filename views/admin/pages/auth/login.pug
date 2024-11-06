@@ -1,5 +1,4 @@
 extends ../../layouts/auth.pug 
-include ../../mixins/show-alert.pug 
 block main 
     .wrapper
       .container
@@ -13,8 +12,6 @@ block main
             a.btn(href='https://www.facebook.com/sonhaoratladepzai') Liên hệ  
         .col-right
           .login-form
-            +alertSuccess()
-            +alertError()
             h2 Đăng nhập 
             form(method="post")
               p

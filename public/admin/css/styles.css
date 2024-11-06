@@ -549,3 +549,19 @@ body {
   background-color: #f0f0f0;
 }
 /*END FORM CREATE INVENTORY*/
+/*ALERT MESSAGE*/
+.alert-custom {
+  position: fixed !important;
+  top: 20px;
+  right: 20px;
+  z-index: 1050;
+  display: none;
+  min-width: 200px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+.alert-custom.show {
+  display: block;
+  opacity: 1;
+}
+/*ALERT MESSAGE*/

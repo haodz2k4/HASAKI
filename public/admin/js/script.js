@@ -294,6 +294,14 @@ if(timeOutAlert){
     }, 3000)
 }
 
+//Close alert
+const btnCloseAlert = document.querySelector("[btn-close-alert]");
+if(btnCloseAlert){
+  btnCloseAlert.addEventListener("click",() => {
+    const alert = btnCloseAlert.closest(".alert")
+    alert.classList.add("d-none")
+  })
+}
 /*PERMISSIONS*/ 
 const tablePermission = document.querySelector("[table-permission]");
 if(tablePermission){

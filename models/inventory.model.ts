@@ -45,6 +45,8 @@ const inventorySchema = new Schema<IIventory, IInventoryModel>({
         default: false
     }
 
+},{
+    timestamps: true
 }) 
 inventorySchema.statics.substractInventory = async function(productId: string, quantity: number) {
     const inventories = await model<IIventory, IInventoryModel>(COLLECTION_INVENTORY_NAME).find({productId, deleted: false});
@@ -61,6 +63,7 @@ inventorySchema.statics.substractInventory = async function(productId: string, q
         }
     }
 }
+
 
 
 

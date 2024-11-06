@@ -105,7 +105,7 @@ block main
               td #{item.paymentMethod} 
               td #{formatPrice(item.shippingCost)} 
               td #{formatPrice(item.totalPrice)} 
-              td #{moment(item.createdAt).calendar()}
+              td #{moment(item.createdAt).format(' dddd,DD/MM/YYYY </br> HH:mm:ss')}
               
               td
                 a(href=`/admin/products/update/${item.id}`).btn.btn-sm.btn-info

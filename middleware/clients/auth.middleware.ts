@@ -27,8 +27,12 @@ export const requireAuth = catchAsync(async (req: Request, res: Response, next: 
         res.locals.user = user
         next()
     } catch (error) {
-        if(error instanceof TokenExpiredError || error instanceof JsonWebTokenError){
-            throw new RenderError(401,"Vui lòng đăng nhập lại",redirect);
+        if(error instanceof TokenExpiredError){
+            throw new RenderError(401,"Phiên đăng nhập đã hết, vui lòng đăng nhập lại",redirect);
+        }else if(error instanceof JsonWebTokenError){
+            throw new RenderError(401,"Xác thực tài khoản không hợp lệ",redirect);
+        }else{
+            next()
         }
 
     }

@@ -18,11 +18,13 @@ export const loginPost = catchAsync(async (req: Request, res: Response) => {
     }
     const adminAccessToken = await generateAdminAccessToken(account.id);
     res.cookie('adminAccessToken', adminAccessToken)
+    req.flash('success','Đăng nhập thành công')
     res.redirect("/admin/dashboard")
 }) 
 
 //[POST] "/admin/auth/logout"
 export const logout = catchAsync(async (req: Request, res: Response) => {
     res.clearCookie('adminAccessToken')
+    req.flash('success','Đang xuất thành công')
     res.redirect("/admin/auth/login")
 })

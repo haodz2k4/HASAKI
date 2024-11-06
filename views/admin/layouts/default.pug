@@ -13,14 +13,7 @@ html(lang="en")
       include ../partials/sider.pug 
       .main-content
         include ../partials/header.pug 
-        - if (messages.success)
-          .message.success
-              .alert.alert-success(role='alert' time-out-alert)
-                  | #{messages.success} 
-        -if (messages.error)
-          .message.error
-              .alert.alert-danger(role='alert' time-out-alert) 
-                  | #{messages.error}
+        include ../partials/alert.pug 
         block main 
     form(action="/admin/auth/logout" method="post" form-logout) 
     script(src="/admin/js/script.js") 

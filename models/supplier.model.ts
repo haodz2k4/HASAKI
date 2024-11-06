@@ -39,5 +39,5 @@ const supplierSchema = new Schema<ISupplier>({
     },
     deleted: {type: Boolean, default: false},
     status: {type: String, enum: ["active","inactive"],default: "active"}
-})
+},{timestamps: true})
 export default model(COLLECTION_SUPPLIER_NAME,supplierSchema)

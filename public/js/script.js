@@ -113,7 +113,8 @@ if (searchInput) {
     }
   });
 }
-console.log("SIUUU")
+
+//Close alert
 const btnCloseAlert = document.querySelector("[btn-close-alert]");
 if(btnCloseAlert){
   btnCloseAlert.addEventListener("click",() => {

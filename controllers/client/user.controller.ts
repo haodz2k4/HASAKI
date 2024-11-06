@@ -26,7 +26,7 @@ export const loginPost = catchAsync(async (req: Request, res: Response) => {
     
     const user = await userModel.findOne({email, deleted: false}).select("+password");
     if(!user || ! await user.isPasswordMatch(password)){
-        throw new RenderError(401,"Invalid email or password");
+        throw new RenderError(401,"Email hoặc password không hợp lệ");
     }
     if(user.status === 'inactive'){
         throw new RenderError(403,`Tài khoản đã bị khóa`);

@@ -18,6 +18,6 @@ const settingGeneralSchema = new Schema<ISettingGeneral>({
     address: {type: String, required: true},
     copyRight: {type: String, required: true},
 
-})
+},{timestamps: true})
 
 export default model(COLLECTION_SETTING_GENERAL_NAME,settingGeneralSchema)

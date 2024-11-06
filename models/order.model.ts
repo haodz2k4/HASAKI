@@ -62,6 +62,8 @@ const orderSchema = new Schema<IOrder>({
         type: Boolean, 
         default: false
     }
+},{
+    timestamps: true
 })
 orderSchema.pre('save',async function(next) {
     if(this.isNew){
