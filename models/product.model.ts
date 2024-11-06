@@ -3,7 +3,7 @@ import { ObjectId, Schema, model} from "mongoose"
 import { isURL } from "validator"
 import categoryModel, { COLLECTION_CATEGORY_NAME } from "./category.model"
 import { createUniqueSlug } from "../helpers/slug"
-import { totalQuantity } from "../helpers/total.helper"
+import { getTotalQuantityOfSoldByProductId, totalQuantity } from "../helpers/total.helper"
 export const COLLECTION_PRODUCT_NAME = 'Product'
 export interface IProduct {
     _id?: string 
@@ -20,6 +20,7 @@ export interface IProduct {
     status?: string
     newPrice?: number
     quantity?: number
+    sold?: number
 
 }
 
@@ -71,6 +72,7 @@ productSchema.post('find', async function (docs) {
     if(docs.length > 0) {
         for(const item of docs){
             item.quantity = await totalQuantity(item.id)
+            item.sold = await getTotalQuantityOfSoldByProductId(item.id)
         }
     }
     
@@ -78,7 +80,9 @@ productSchema.post('find', async function (docs) {
 productSchema.post('findOne', async function (doc) {
     if(doc){
         doc.quantity = await totalQuantity(doc.id)
+        doc.sold = await getTotalQuantityOfSoldByProductId(doc.id)
     }
+    console.log(doc.sold)
 })
 
 productSchema.pre('save',async function(next) {

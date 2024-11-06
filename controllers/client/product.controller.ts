@@ -4,6 +4,7 @@ import rangeCount from "../../helpers/range-count";
 import productModel from "../../models/product.model";
 import { catchAsync } from "../../utils/catchAsync";
 import { RenderError } from "../../utils/error";
+import orderModel from "../../models/order.model";
 //[GET] "/products"
 export const products = catchAsync(async (req: Request, res: Response) => {
     
@@ -62,7 +63,7 @@ export const detail = catchAsync(async (req: Request, res: Response) => {
     const favoriteList = res.locals.favoriteList 
 
     const isFaforiteList = favoriteList ? favoriteList.productIds.some((item: Record<string, any>) => item.id === product.id) : false
-    
+
     res.render("clients/pages/products/detail.pug", {
         product,
         isFaforiteList

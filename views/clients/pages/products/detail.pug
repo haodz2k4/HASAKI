@@ -33,7 +33,8 @@ block main
           |  - Ti&#x1EBF;t ki&#x1EC7;m:
           |         
           span.discount (-#{product.discountPercentage}%)
-        
+        .product-sold
+          label(for="sold") Đã bán: #{product.sold}
         .product-quantity
           label(for='quantity') Số lượng: #{product.quantity}
           input#quantity.form-control(type='number', name='quantity', value='1', min='1',max=product.quantity, style='width: 65px;')

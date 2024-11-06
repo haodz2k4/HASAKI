@@ -191,7 +191,7 @@ export const resetPasswordPost = catchAsync(async (req: Request, res: Response) 
 export const getProfiles = catchAsync(async (req: Request, res: Response) => {
     const userId = res.locals.user.id;
     const orders = await orderModel.find({'user.userId': userId, deleted: false}).populate('products.productId','title slug thumbnail');
-    console.log(orders)
+
     res.render("clients/pages/users/profile.pug",{
         orders
     })

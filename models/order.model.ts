@@ -25,6 +25,8 @@ export interface IOrder {
     shippingCost: number;
     deleted: boolean;
 }
+
+
 const orderSchema = new Schema<IOrder>({
     user: {
         type: {
@@ -45,7 +47,7 @@ const orderSchema = new Schema<IOrder>({
     paymentMethod: {type: String, enum: ['cash_on_delivery','card_payment'], required: true},
     products: {
         type: [{
-            productId: {type: Schema.Types.ObjectId, ref: COLLECTION_PRODUCT_NAME},
+            productId: {type: Schema.Types.ObjectId, ref: 'Product'},
             price: {type: Number, min: 0},
             discountPercentage: {type: Number, min: 0, max: 100},
             quantity: {type: Number, min: 1}
@@ -83,4 +85,5 @@ orderSchema.virtual('totalPrice').get(function() {
     total += this.shippingCost
     return total
 })
-export default model<IOrder>(COLLECTION_ORDER_NAME, orderSchema)
+
+export default model<IOrder>(COLLECTION_ORDER_NAME, orderSchema)    
