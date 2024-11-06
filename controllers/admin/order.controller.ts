@@ -52,7 +52,8 @@ export const order = catchAsync(async (req: Request, res: Response) => {
                 paymentMethod: 1,
                 user: 1,
                 shippingCost: 1,
-                products: 1
+                products: 1,
+                id: 1
             }
         },
         {
@@ -109,3 +110,12 @@ export const order = catchAsync(async (req: Request, res: Response) => {
     })
 })
 
+//[GET] "/admin/orders/detail/:id"
+export const getOrder = catchAsync(async (req: Request, res: Response) => {
+    const {id} = req.params;
+    const order = await orderModel.findOne({_id: id, deleted: false}).populate('products.productId');
+    res.render("admin/pages/orders/detail.pug",{
+        order,
+        activePages: 'orders'
+    })
+})

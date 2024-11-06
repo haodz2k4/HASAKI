@@ -112,7 +112,7 @@ block main
                   i.fas.fa-edit
                 button.btn.btn-sm.btn-danger(btn-delete=item.id)
                   i.fas.fa-trash 
-                a(href=`/admin/products/detail/${item.id}`).btn.btn-sm.btn-warning 
+                a(href=`/admin/orders/detail/${item._id.toString()}`).btn.btn-sm.btn-warning 
                   i.fa-solid.fa-magnifying-glass  
     form(action="" method='post' form-update-status).d-none 
       input(type="text" name='status')

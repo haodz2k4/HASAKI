@@ -9,7 +9,9 @@ block main
           .mb-3
             label.form-label(for='websiteName') Tên website 
             input#websiteName.form-control(type='text', name='websiteName', placeholder='Nhập tên website', required='', value=(settingGeneral ? settingGeneral.websiteName : ""))
-          
+          .mb-3
+            label.form-label(for='description') M&ocirc; t&#x1EA3;
+            textarea.form-control( id='my-expressjs-tinymce-app' name='description', rows='5', placeholder='Nhập mô tả trang web')
           // Hình ảnh
           .mb-3
             label.form-label Logo 

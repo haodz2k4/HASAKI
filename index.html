@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Detail - Admin</title>
+    <!-- Bootstrap 4 CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        .order-detail {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .order-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .order-info-table {
+            margin-top: 20px;
+        }
+
+        .order-info-table th,
+        .order-info-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .order-info-table th {
+            font-weight: bold;
+            color: #000;
+        }
+
+        .order-info-table td {
+            color: #555;
+        }
+
+        .product-table th,
+        .product-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .product-table th {
+            font-weight: bold;
+            color: #000;
+        }
+
+        .product-table td {
+            color: #555;
+        }
+
+        .btn-edit, .btn-delete {
+            font-size: 18px;
+            font-weight: 600;
+            padding: 10px 20px;
+            margin-top: 20px;
+        }
+
+        .btn-edit {
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            text-transform: uppercase;
+            border: none;
+        }
+
+        .btn-edit:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-delete {
+            background-color: #e74c3c;
+            color: #fff;
+            border-radius: 5px;
+            text-transform: uppercase;
+            border: none;
+        }
+
+        .btn-delete:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="order-detail">
+        <h1 class="order-title">Đơn hàng: </h1>
+
+        <!-- Thông tin người dùng -->
+        <div class="row">
+            <div class="col-md-6">
+                <h4>User Information</h4>
+                <p><strong>Email:</strong> user@example.com</p>
+                <p><strong>Phone:</strong> +1234567890</p>
+                <p><strong>Address:</strong> 1234 Main St, City, Country</p>
+            </div>
+            <div class="col-md-6">
+                <h4>Order Status & Payment</h4>
+                <p><strong>Status:</strong> <span class="text-success">Confirmed</span></p>
+                <p><strong>Payment Method:</strong> Card Payment</p>
+                <p><strong>Shipping Cost:</strong> $20.00</p>
+                <p><strong>Total Cost:</strong> $189.99</p>
+            </div>
+        </div>
+
+        <!-- Bảng thông tin đơn hàng -->
+        <table class="table order-info-table">
+            <thead>
+                <tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Order ID</strong></td>
+                    <td>#12345</td>
+                </tr>
+                <tr>
+                    <td><strong>Created At</strong></td>
+                    <td>2024-10-01</td>
+                </tr>
+                <tr>
+                    <td><strong>Updated At</strong></td>
+                    <td>2024-10-03</td>
+                </tr>
+                <tr>
+                    <td><strong>Order Status</strong></td>
+                    <td>Confirmed</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Bảng sản phẩm trong đơn hàng -->
+        <h4>Products in Order</h4>
+        <table class="table product-table">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Discount</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Product 1</td>
+                    <td>$50.00</td>
+                    <td>2</td>
+                    <td>10%</td>
+                    <td>$90.00</td>
+                </tr>
+                <tr>
+                    <td>Product 2</td>
+                    <td>$30.00</td>
+                    <td>1</td>
+                    <td>0%</td>
+                    <td>$30.00</td>
+                </tr>
+                <tr>
+                    <td>Product 3</td>
+                    <td>$80.00</td>
+                    <td>1</td>
+                    <td>5%</td>
+                    <td>$76.00</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Buttons for Admin Actions -->
+        <div>
+            <button class="btn-edit">Edit Order</button>
+            <button class="btn-delete">Delete Order</button>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap 4 JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

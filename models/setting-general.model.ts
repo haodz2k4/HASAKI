@@ -2,16 +2,18 @@ import { Schema, model } from "mongoose";
 
 export const COLLECTION_SETTING_GENERAL_NAME = 'Setting-general'
 export interface ISettingGeneral {
-    websiteName: string,
-    logo: string,
-    phone: string,
-    email: string,
-    address: string,
-    copyRight: string 
+    websiteName: string;
+    description: string;
+    logo: string;
+    phone: string;
+    email: string;
+    address: string;
+    copyRight: string; 
 }
 
 const settingGeneralSchema = new Schema<ISettingGeneral>({
     websiteName: {type: String, required: true},
+    description: String,
     logo: {type: String, required: true},
     phone: {type: String, required: true},
     email: {type: String, required: true},

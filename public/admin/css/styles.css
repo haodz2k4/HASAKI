@@ -565,3 +565,54 @@ body {
   opacity: 1;
 }
 /*ALERT MESSAGE*/
+/*ORDER DETAIL*/
+.order-detail {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin-top: 30px;
+}
+
+.order-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.order-info-table {
+  margin-top: 20px;
+}
+
+.order-info-table th,
+.order-info-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.order-info-table th {
+  font-weight: bold;
+  color: #000;
+}
+
+.order-info-table td {
+  color: #555;
+}
+
+.product-table th,
+.product-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.product-table th {
+  font-weight: bold;
+  color: #000;
+}
+
+.product-table td {
+  color: #555;
+}

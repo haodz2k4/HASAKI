@@ -5,7 +5,7 @@ import * as validation from "../../validations/clients/checkout.validation"
 
 router
     .route("/")
-    .post(controller.checkoutPost) 
+    .post(validation.checkoutPost,controller.checkoutPost) 
 router
     .route("/order")
     .post(validation.orderPost,controller.orderPost) 

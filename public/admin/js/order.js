@@ -27,3 +27,4 @@ if(selectUpdateStatus.length > 0){
         })
     })
 }
+
