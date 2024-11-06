@@ -14,7 +14,7 @@ interface IForgotPasswordMethod {
 }
 type ForgotPasswordModel = Model<IForgotPassword,{} ,IForgotPasswordMethod> 
 const forgotPasswordSchema = new Schema<IForgotPassword, ForgotPasswordModel, IForgotPasswordMethod>({
-    email: {type: String, required: true, unique: true},
+    email: {type: String, required: true},
     otp: {type: String, required: true},
     expireIn: {type: Date,required: true, expires: 5},
     isUsed: {type: Boolean, default: false}

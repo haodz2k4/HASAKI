@@ -1,5 +1,5 @@
 
-
+const socket = io()
 socket.emit('joinRoom', 'users');
 
 const statusContainer = document.querySelector(".status-container");

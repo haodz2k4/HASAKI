@@ -19,14 +19,17 @@ block main
          |  S&#x1ED1; &Dstrok;i&#x1EC7;n Tho&#x1EA1;i:
        |  #{user.phone}
      .d-flex.justify-content-between.align-items-center(address)
+      if user.addresses.length > 0
        div
          strong
            i.fas.fa-map-marker-alt
            |  &Dstrok;&#x1ECB;a Ch&#x1EC9;:
          |  #{user.addresses[user.defaultAddressIndex].city}; #{ user.addresses[user.defaultAddressIndex].street}; #{user.addresses[user.defaultAddressIndex].country}
-       button.btn.btn-outline-primary.btn-sm(btn-show-address)
+       button.btn.btn-outline-primary.btn-sm(btn-show-address type='button')
          i.fas.fa-edit
-         |  Thay &Dstrok;&#x1ED5;i 
+         |  Thay &Dstrok;&#x1ED5;i  
+      else 
+        h3.text-center(style='color: red  ') Vui lòng thêm 1 địa chỉ để đặt hàng 
      input(value=products name='products').d-none 
      table.table.d-none(table-address)
       thead
@@ -105,10 +108,11 @@ block main
       span #{formatPrice(total + 20000)}
     .text-muted.mt-1 Th&#x1EDD;i Gian D&#x1EF1; Ki&#x1EBF;n Giao H&agrave;ng: 2 - 4 ng&agrave;y l&agrave;m vi&#x1EC7;c
    // Place Order Button
-   .text-center
-    button.btn.custom-button.btn-lg(type='submit')
-      i.fas.fa-check-circle
-      |  &Dstrok;&#x1EB7;t H&agrave;ng 
+   if user.addresses.length > 0
+    .text-center
+      button.btn.custom-button.btn-lg(type='submit')
+        i.fas.fa-check-circle
+        |  &Dstrok;&#x1EB7;t H&agrave;ng 
    #paymentModal.modal.fade(tabindex='-1' aria-labelledby='paymentModalLabel' aria-hidden='true')
     .modal-dialog
       .modal-content
