@@ -53,7 +53,8 @@ export const order = catchAsync(async (req: Request, res: Response) => {
                 user: 1,
                 shippingCost: 1,
                 products: 1,
-                id: 1
+                id: 1,
+                isConfirmed: 1
             }
         },
         {

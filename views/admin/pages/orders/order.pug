@@ -79,6 +79,7 @@ block main
             th Phương thức thanh toán 
             th Giá tiền ship 
             th Tổng giá tiền 
+            th Xác nhận 
             th Ngày mua 
             th Thao tác 
         tbody
@@ -94,18 +95,21 @@ block main
                 strong 
                 | #{item.products.length} 
               td 
-                select(select-update-status disabled=(item.isConfirmed))
+                select(select-update-status  disabled=(item.isConfirmed))
                   option(value='pending' selected=(item.status === 'pending')) Đang chờ  
-                  option(value='confirmed' selected=(item.status === 'confirmed')) Đã xác nhận 
+                  option(value='confirmed' selected=(item.status === 'confirmed')) Xác nhận 
                   option(value='processing' selected=(item.status === 'processing')) trong quá trình 
                   option(value="shipped" selected=(item.status === 'shipped')) Vận chuyển 
-                  option(value="delivered" selected=(item.status === 'delivered')) Đã dao 
+                  option(value="delivered" selected=(item.status === 'delivered')) Đã giao
                   option(value="cancelled" selected=(item.status === 'cancelled')) Bị hủy 
                   option(value="issue" selected=(item.status === 'issue')) gặp vấn đề 
+              
               td #{item.paymentMethod} 
               td #{formatPrice(item.shippingCost)} 
               td #{formatPrice(item.totalPrice)} 
-              td #{moment(item.createdAt).format(' dddd,DD/MM/YYYY </br> HH:mm:ss')}
+              td 
+                span.badge(class=(item.isConfirmed ? 'badge-success' : 'badge-danger')) #{item.isConfirmed ? 'Rồi' : 'Chưa'}
+              td !{moment(item.createdAt).format(' dddd,DD/MM/YYYY </br> HH:mm:ss')}
               
               td
                 a(href=`/admin/products/update/${item.id}`).btn.btn-sm.btn-info

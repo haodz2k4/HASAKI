@@ -106,7 +106,12 @@ block main
      each order, index in orders 
       .order-item.mb-4 
         a(href=`/orders/${order.id}` style='text-decoration: none; color: black') 
-         h5 &Dstrok;&#x1A1;n h&agrave;ng ##{index + 1}- Ng&agrave;y mua: #{moment(order.createdAt).calendar()} - Tr&#x1EA1;ng th&aacute;i: #{order.status}
+         
+         h5 &Dstrok;&#x1A1;n h&agrave;ng ##{index + 1}- Ng&agrave;y mua: #{moment(order.createdAt).calendar()} - #{order.isConfirmed ? 'Đã xác nhận' : order.status}
+         if order.status === 'delivered' && !order.isConfirmed 
+          form(action=`/orders/${order.id}/confirmed?_method=PATCH` method="post") 
+            button.btn.btn-info(type='submit' disabled=(order.status !== 'delivered') btn-confirm-order=order.id) Xác nhận 
+              i.fa-solid.fa-check 
         .product-list.d-flex.flex-wrap 
          each product in order.products 
           a(href=`/products/${product.productId.slug}` style='text-decoration: none; color: black').product-card.shadow-sm.m-2

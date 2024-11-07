@@ -5,10 +5,10 @@ block styles
 block main  
  .container
   .tracking-container
-    .tracking-header Theo dõi đơn hàng 
-     i.fa-solid.fa-box-open
-    // Status Tracking Steps 
-    .status-container
+    if !order.isConfirmed 
+     .tracking-header Theo dõi đơn hàng 
+      i.fa-solid.fa-box-open
+     .status-container
       .status-step(class=(order.status === 'pending' ? 'active' : '') status='pending')
         .status-circle &check;
         .status-label Đang chờ 
@@ -28,6 +28,11 @@ block main
         .status-circle 
           i.fa-solid.fa-x
         .status-label Bị hủy 
+    else 
+     .tracking-header ĐƠN HÀNG ĐÃ ĐƯỢC XÁC NHẬN 
+      i.fa-solid.fa-check
+    
+     
     each item in order.products
       .order-item
         img.product-image(src=(item.productId.thumbnail.length > 0 ? item.productId.thumbnail[0] : 'https://via.placeholder.com/100') alt='Product Image')
@@ -63,8 +68,11 @@ block main
 
         strong Tổng tiền:
         span.price  #{formatPrice(order.totalPrice)} 
-    button.btn.btn-info(disabled=(order.status !== 'delivered') btn-confirm-order) Xác nhận 
-      i.fa-solid.fa-check 
+    if !order.isConfirmed 
+      form(action=`/orders/${order.id}/confirmed?_method=PATCH` method="post") 
+        button.btn.btn-info(type='submit' disabled=(order.status !== 'delivered') btn-confirm-order=order.id) Xác nhận 
+          i.fa-solid.fa-check 
+ 
  block script 
     script(src="/socket.io/socket.io.js") 
     script(src="/js/order.js") 
