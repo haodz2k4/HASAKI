@@ -94,7 +94,7 @@ block main
                 strong 
                 | #{item.products.length} 
               td 
-                select(select-update-status)
+                select(select-update-status disabled=(item.isConfirmed))
                   option(value='pending' selected=(item.status === 'pending')) Đang chờ  
                   option(value='confirmed' selected=(item.status === 'confirmed')) Đã xác nhận 
                   option(value='processing' selected=(item.status === 'processing')) trong quá trình 

@@ -23,6 +23,7 @@ export interface IOrder {
     paymentMethod: string;
     products: IOrderProduct[];
     shippingCost: number;
+    isConfirmed: boolean;
     deleted: boolean;
 }
 
@@ -59,6 +60,10 @@ const orderSchema = new Schema<IOrder>({
         default: 20000,
         min: 0,
         max: 100000
+    },
+    isConfirmed: {
+        type: Boolean,
+        default: false
     },
     deleted: {
         type: Boolean, 

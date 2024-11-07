@@ -63,7 +63,8 @@ block main
 
         strong Tổng tiền:
         span.price  #{formatPrice(order.totalPrice)} 
-
+    button.btn.btn-info(disabled=(order.status !== 'delivered') btn-confirm-order) Xác nhận 
+      i.fa-solid.fa-check 
  block script 
     script(src="/socket.io/socket.io.js") 
     script(src="/js/order.js") 

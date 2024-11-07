@@ -15,4 +15,10 @@ socket.on('UPDATE_STATUS_SUCCESS', (msg) => {
             item.classList.remove("active");
         }
     });
+    const btnConfirmOrder = document.querySelector("[btn-confirm-order]");
+    if(msg === 'delivered'){
+        btnConfirmOrder.removeAttribute('disabled')
+    }else{
+        btnConfirmOrder.disabled = true
+    }
 });
