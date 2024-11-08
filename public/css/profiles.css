@@ -43,6 +43,9 @@
 .product-info p {
   color: #888;
 }
+.avatar-profiles {
+  position: relative;
+}
 
 /* Heart Button */
 .btn-favorite {
@@ -52,4 +55,22 @@
   border: none;
   background: none;
   font-size: 1.2rem;
+}
+
+.icon-overlay {
+  position: absolute;
+  bottom: 5px;
+  right: 138px;
+  bottom: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border-radius: 50%;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-overlay i {
+  font-size: 18px;
 }

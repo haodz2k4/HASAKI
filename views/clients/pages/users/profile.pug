@@ -8,8 +8,13 @@ block main
     .row.g-0
       // Profile Sidebar
       .col-md-4.profile-sidebar
-        .text-center.p-4
-          img.rounded-circle.mb-3.shadow(src='https://via.placeholder.com/150' alt='User Avatar' style='width: 120px; height: 120px;')
+        form(action="/users/upload-avatar" method="post" enctype="multipart/form-data").text-center.p-4
+          .avatar-profiles 
+            img.rounded-circle.mb-3.shadow(src=(user.avatar ? user.avatar : 'https://via.placeholder.com/150') alt='User Avatar' avatar-profile style='width: 120px; height: 120px;')
+            .icon-overlay
+              i.bi.bi-camera-fill
+
+          input#fileInput.hidden-input(type='file' accept='image/*' name='avatar').d-none
           h4.text-white #{user.fullName}
           p.text-white-50 #{user.email}
           hr.text-white

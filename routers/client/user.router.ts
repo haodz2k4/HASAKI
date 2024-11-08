@@ -2,6 +2,11 @@ import { Router } from "express";
 const router: Router = Router()
 import * as controller from "../../controllers/client/user.controller"
 import { requireAuth } from "../../middleware/clients/auth.middleware";
+
+import { storage } from "../../storage/cloud";
+import multer from "multer"
+const upload = multer({ storage });
+import { uploadSingle } from "../../middleware/upload-cloud.middleware";
 router
     .route("/login")
     .get(controller.login)
@@ -36,6 +41,7 @@ router
     .get(requireAuth,controller.getProfiles)
     .patch(requireAuth,controller.updateProfiles) 
 
+router.post("/upload-avatar",upload.single('avatar'),uploadSingle,controller.uploadAvatar)
 router.post("/add-address",requireAuth,controller.addAddress)
 router.delete("/remove-address/:index",requireAuth,controller.removeAddres)
 export default router

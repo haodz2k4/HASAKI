@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from "express"
 export const uploadSingle = async (req: Request, res: Response, next: NextFunction) => {
     try {
+        console.log("<< RUN HERE")
+        console.log(req.file)
         if(req.file){
             const {path, fieldname} = req.file;
             req.body[fieldname] = path;

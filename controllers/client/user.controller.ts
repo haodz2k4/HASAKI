@@ -246,3 +246,13 @@ export const updatePassword = catchAsync(async (req: Request, res: Response) => 
     req.flash('success','Cập nhật mật khẩu thành công')
     res.redirect("back")
 })
+
+//[GET] /users/upload-avatar
+export const uploadAvatar = catchAsync(async (req: Request,res: Response) => {
+    const user = res.locals.user;
+    const {avatar} = req.body;
+    user.avatar = avatar;
+    await user.save()
+    req.flash('success','Tải ảnh đại diện lên thành công');
+    res.redirect("back")
+})

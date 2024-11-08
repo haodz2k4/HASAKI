@@ -65,3 +65,17 @@ btnUpdatePassword.addEventListener("click", () => {
   const formUpdatePassword = document.querySelector("[form-update-password]");
   formUpdatePassword.classList.toggle("d-none")
 })
+
+
+const iconOverrlay = document.querySelector(".icon-overlay");
+const fileInput = document.querySelector("#fileInput");
+if(iconOverrlay){
+  
+  iconOverrlay.addEventListener("click", () => {
+    fileInput.click()
+  })
+}
+fileInput.addEventListener("change", () => {
+  const formSubmit = fileInput.closest("form");
+  formSubmit.submit()
+})
