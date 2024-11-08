@@ -1,14 +1,14 @@
 import { model, Schema } from "mongoose";
 import { COLLECTION_USER_NAME, IUserAddress } from "./user.model";
-import { COLLECTION_PRODUCT_NAME } from "./product.model";
 import inventoryModel from "./inventory.model";
 
-const COLLECTION_ORDER_NAME = 'Orders';
+export const COLLECTION_ORDER_NAME = 'Orders';
 export interface IOrderProduct {
-    productId: Schema.Types.ObjectId,
-    quantity: number,
-    price: number,
-    discountPercentage: number
+    productId: Schema.Types.ObjectId;
+    quantity: number;
+    price: number;
+    discountPercentage: number;
+    canRating?: boolean
 }
 
 export interface IOrderUser {

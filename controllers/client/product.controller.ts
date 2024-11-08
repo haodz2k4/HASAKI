@@ -5,6 +5,7 @@ import productModel from "../../models/product.model";
 import { catchAsync } from "../../utils/catchAsync";
 import { RenderError } from "../../utils/error";
 import orderModel from "../../models/order.model";
+import productReviewModel from "../../models/product-review.model";
 //[GET] "/products"
 export const products = catchAsync(async (req: Request, res: Response) => {
     
@@ -80,3 +81,31 @@ export const toggleFavoriteList = catchAsync(async (req: Request, res: Response)
     req.flash('success','Thay đổi danh sách yêu thích thành công')
     res.redirect("back");
 }) 
+
+//[POST] "/products/:id/product-reviews"
+export const addProductReview = catchAsync(async (req: Request, res: Response) => {
+    const {id} = req.params;
+    console.log(req.body)
+    const product = await productModel.findOne({_id: id});
+    if(!product){
+        throw new RenderError(404,"Product is not found");
+    }
+    const user = res.locals.user; 
+    const countProductReview = await productReviewModel.countDocuments({productId: id});
+    const countOrder = await orderModel.countDocuments({'user.userId': user.id});
+    if(countOrder === 0 || countOrder <= countProductReview){
+        throw new RenderError(400,"Bạn không thể đánh giá sản phẩm");
+    }
+    const {rating, comment, orderId} = req.body;
+    
+    await productReviewModel.create({
+        userId: user.id, 
+        productId: id,
+        rating,
+        comment,
+        orderId
+    })
+    req.flash('success','Thêm đánh giá sản phẩm thành công')
+    res.redirect("back");
+
+})

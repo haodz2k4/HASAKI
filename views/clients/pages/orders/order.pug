@@ -37,7 +37,7 @@ block main
      .order 
       .order-item
         img.product-image(src=(item.productId.thumbnail.length > 0 ? item.productId.thumbnail[0] : 'https://via.placeholder.com/100') alt='Product Image')
-        .product-details
+        a(href=`/products/${item.productId.slug}` style='text-decoration: none').product-details
           h5.product-title #{item.productId.title}
           p.product-info 
             | Số lượng: 
@@ -45,10 +45,10 @@ block main
           p.product-info
             | Giá tiền: 
             span.price #{formatPrice(item.price * (100 - item.discountPercentage)/100)} 
-        if order.isConfirmed 
+        if order.isConfirmed && item.canRating
           button.btn.btn-outline-success(btn-show-rating)
             i.fa-solid.fa-comment
-      form(action="").rating-form.d-none
+      form(action=`/products/${item.productId.id}/product-reviews` method="post").rating-form.d-none
             // Star rating
             .stars
               span.star(data-value='1') &starf;
@@ -56,12 +56,14 @@ block main
               span.star(data-value='3') &starf;
               span.star(data-value='4') &starf;
               span.star(data-value='5') &starf;
-            // Rating content input
-            form(action=`/products/${item.id}/rating` method="post")
-              .form-group
-                textarea.form-control(rows='4', placeholder='Ghi nội dung đánh giá ở đây...')
-                button.btn.submit-btn.btn-block(type='submit') Đánh giá 
-                  i.fa-solid.fa-star
+            
+            
+            .form-group
+              input#rating-input(type='hidden', name='rating')
+              input(type='hidden' name='orderId' value=order.id)
+              textarea.form-control(rows='4',name='comment' placeholder='Ghi nội dung đánh giá ở đây...')
+              button.btn.submit-btn.btn-block(type='submit') Đánh giá 
+                i.fa-solid.fa-star
         
         
     // Additional Info

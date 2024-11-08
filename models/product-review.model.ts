@@ -2,11 +2,13 @@
 import { model, Schema } from "mongoose";
 import { COLLECTION_PRODUCT_NAME } from "./product.model";
 import { COLLECTION_USER_NAME } from "./user.model";
+import { COLLECTION_ORDER_NAME } from "./order.model";
 
 const COLLECTION_PRODUCT_REVIEW_NAME = 'product-review'
 interface IProductReview {
     productId: Schema.Types.ObjectId;
     userId: Schema.Types.ObjectId;
+    orderId: Schema.Types.ObjectId;
     rating: number;
     comment: string;
     deleted: boolean;
@@ -21,6 +23,11 @@ export const productReviewSchema = new Schema<IProductReview>({
     userId: {
         type: Schema.Types.ObjectId,
         ref: COLLECTION_USER_NAME,
+        required: true
+    },
+    orderId: {
+        type: Schema.Types.ObjectId,
+        ref: COLLECTION_ORDER_NAME,
         required: true
     },
     rating: {
@@ -40,5 +47,7 @@ export const productReviewSchema = new Schema<IProductReview>({
 },{
     timestamps: true 
 })
+
+
 
 export default model(COLLECTION_PRODUCT_REVIEW_NAME, productReviewSchema)

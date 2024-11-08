@@ -5,4 +5,5 @@ import { requireAuth } from "../../middleware/clients/auth.middleware";
 router.get("/",controller.products)
 router.get("/:slug",controller.detail)
 router.patch("/favorite-list/toggle/:id",requireAuth,controller.toggleFavoriteList)
+router.post("/:id/product-reviews",controller.addProductReview)
 export default router

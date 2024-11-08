@@ -29,17 +29,23 @@ socket.on('UPDATE_STATUS_SUCCESS', (msg) => {
     }
 });
 
+const order = document.querySelectorAll(".order");
+order.forEach((item) => {
+    const stars = item.querySelectorAll('.star');
+    if(stars.length > 0){
+        const ratingInput = item.querySelector('#rating-input');
 
-const stars = document.querySelectorAll('.star');
-if(stars.length > 0){
-    stars.forEach((star, index) => {
-        star.addEventListener('click', () => {
-            stars.forEach((s, i) => {
-            s.classList.toggle('checked', i <= index);
+        stars.forEach((star, index) => {
+            star.addEventListener('click', () => {
+                stars.forEach((s, i) => {
+                s.classList.toggle('checked', i <= index);
+                });
+                ratingInput.value = index + 1;
             });
         });
-    });
-}
+    }
+})
+
 
 const btnShowRating = document.querySelectorAll("[btn-show-rating]")
 console.log(btnShowRating)

@@ -82,7 +82,6 @@ productSchema.post('findOne', async function (doc) {
         doc.quantity = await totalQuantity(doc.id)
         doc.sold = await getTotalQuantityOfSoldByProductId(doc.id)
     }
-    console.log(doc.sold)
 })
 
 productSchema.pre('save',async function(next) {
