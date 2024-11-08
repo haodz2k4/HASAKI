@@ -1,102 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product Rating Form</title>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body {
-      background-color: #f8f9fa;
-      color: #333;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách Đánh giá Sản phẩm</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #ffffff;
+            font-family: Arial, sans-serif;
+        }
 
-    .rating-form {
-      background-color: #fff;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-      max-width: 600px;
-      margin: 50px auto;
-      border: 2px solid #336e5b;
-    }
+        /* Container chính cho danh sách đánh giá */
+        .review-list {
+            max-width: 1000px; /* Giới hạn chiều rộng */
+            margin: 0 auto; /* Căn giữa container */
+            padding: 10px;
+        }
 
-    .rating-title {
-      font-size: 24px;
-      color: #336e5b;
-      font-weight: bold;
-      text-align: center;
-      margin-bottom: 20px;
-    }
+        .review-container {
+            background-color: #ffffff;
+            color: #333;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; 
+            width: 100%;
+        }
 
-    .stars {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
+        .review-header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Căn bên trái */
+            width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng */
+            margin-bottom: 10px;
+        }
 
-    .star {
-      font-size: 30px;
-      color: #ccc;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
+        .reviewer-info {
+            display: flex;
+            align-items: center;
+        }
 
-    .star.checked {
-      color: #336e5b;
-    }
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+            border: 2px solid #336e5b;
+        }
 
-    .form-control:focus {
-      border-color: #336e5b;
-      box-shadow: none;
-    }
+        .reviewer-name {
+            font-weight: bold;
+            color: #336e5b;
+        }
 
-    .submit-btn {
-      background-color: #336e5b;
-      color: #fff;
-      border: none;
-      transition: background-color 0.2s;
-    }
+        .review-date {
+            font-size: 0.9em;
+            color: #666;
+            margin-left: auto; /* Đẩy ngày đánh giá sang bên phải */
+        }
 
-    .submit-btn:hover {
-      background-color: #285e4c;
-    }
-  </style>
+        .review-stars {
+            color: #336e5b;
+            margin-top: 5px;
+        }
+
+        .review-text {
+            margin-top: 10px;
+            line-height: 1.6;
+            text-align: left; /* Căn trái nội dung nhận xét */
+        }
+    </style>
 </head>
 <body>
 
-<div class="rating-form">
-  <div class="rating-title">Rate Our Product</div>
-  
-  <!-- Star rating -->
-  <div class="stars">
-    <span class="star" data-value="1">&#9733;</span>
-    <span class="star" data-value="2">&#9733;</span>
-    <span class="star" data-value="3">&#9733;</span>
-    <span class="star" data-value="4">&#9733;</span>
-    <span class="star" data-value="5">&#9733;</span>
-  </div>
-  
-  <!-- Rating content input -->
-  <form>
-    <div class="form-group">
-      <textarea class="form-control" rows="4" placeholder="Write your review here..."></textarea>
+<div class="container mt-5 review-list">
+    <div class="review-container">
+        <div class="review-header">
+            <div class="reviewer-info">
+                <img src="https://via.placeholder.com/40" alt="Avatar" class="avatar">
+                <span class="reviewer-name">Nguyễn Văn A</span>
+            </div>
+            <span class="review-date">12/10/2023</span>
+        </div>
+        <div class="review-stars">
+            <span>&#9733;&#9733;&#9733;&#9733;&#9734;</span> <!-- 4 sao -->
+        </div>
+        <p class="review-text">Sản phẩm rất tốt, đáp ứng được nhu cầu của tôi. Sẽ giới thiệu cho bạn bè!</p>
     </div>
-    <button type="submit" class="btn submit-btn btn-block">Submit Review</button>
-  </form>
+
+    <div class="review-container">
+        <div class="review-header">
+            <div class="reviewer-info">
+                <img src="https://via.placeholder.com/40" alt="Avatar" class="avatar">
+                <span class="reviewer-name">Trần Thị B</span>
+            </div>
+            <span class="review-date">08/11/2023</span>
+        </div>
+        <div class="review-stars">
+            <span>&#9733;&#9733;&#9733;&#9733;&#9733;</span> <!-- 5 sao -->
+        </div>
+        <p class="review-text">Chất lượng tuyệt vời, vượt mong đợi. Đóng gói cẩn thận và giao hàng nhanh chóng.</p>
+    </div>
+
+    <div class="review-container">
+        <div class="review-header">
+            <div class="reviewer-info">
+                <img src="https://via.placeholder.com/40" alt="Avatar" class="avatar">
+                <span class="reviewer-name">Lê Minh C</span>
+            </div>
+            <span class="review-date">05/11/2023</span>
+        </div>
+        <div class="review-stars">
+            <span>&#9733;&#9733;&#9733;&#9734;&#9734;</span> <!-- 3 sao -->
+        </div>
+        <p class="review-text">Sản phẩm khá ổn nhưng vẫn còn một số điểm chưa hài lòng.</p>
+    </div>
+
+    <div class="review-container">
+        <div class="review-header">
+            <div class="reviewer-info">
+                <img src="https://via.placeholder.com/40" alt="Avatar" class="avatar">
+                <span class="reviewer-name">Phạm Quốc D</span>
+            </div>
+            <span class="review-date">01/11/2023</span>
+        </div>
+        <div class="review-stars">
+            <span>&#9733;&#9733;&#9733;&#9733;&#9734;</span> <!-- 4 sao -->
+        </div>
+        <p class="review-text">Sản phẩm tốt nhưng dịch vụ khách hàng cần được cải thiện thêm.</p>
+    </div>
 </div>
 
-<script>
-  // Star rating interaction
-  const stars = document.querySelectorAll('.star');
-  stars.forEach((star, index) => {
-    star.addEventListener('click', () => {
-      stars.forEach((s, i) => {
-        s.classList.toggle('checked', i <= index);
-      });
-    });
-  });
-</script>
-
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

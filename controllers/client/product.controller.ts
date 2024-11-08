@@ -64,10 +64,11 @@ export const detail = catchAsync(async (req: Request, res: Response) => {
     const favoriteList = res.locals.favoriteList 
 
     const isFaforiteList = favoriteList ? favoriteList.productIds.some((item: Record<string, any>) => item.id === product.id) : false
-
+    const productReviews = await productReviewModel.find({productId: product.id}).populate('userId','fullName');
     res.render("clients/pages/products/detail.pug", {
         product,
-        isFaforiteList
+        isFaforiteList,
+        productReviews
     })
 })
 

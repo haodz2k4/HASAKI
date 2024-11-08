@@ -98,11 +98,8 @@ block main
                   span #{item.sold} mua
                 .recommended-product-rating
                   i.fas.fa-star
-                  i.fas.fa-star
-                  i.fas.fa-star
-                  i.fas.fa-star
-                  i.fas.fa-star-half-alt
-                  |  (120 &dstrok;&aacute;nh gi&aacute;)
+                  | #{item.averageRating}
+                  |  (#{item.countRating} &dstrok;&aacute;nh gi&aacute;)
                 .recommended-stock
                   | C&ograve;n h&agrave;ng: #{item.quantity}
                 button.recommended-add-to-cart(btn-add-cart=item.id)

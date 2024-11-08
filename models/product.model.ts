@@ -4,6 +4,7 @@ import { isURL } from "validator"
 import categoryModel, { COLLECTION_CATEGORY_NAME } from "./category.model"
 import { createUniqueSlug } from "../helpers/slug"
 import { getTotalQuantityOfSoldByProductId, totalQuantity } from "../helpers/total.helper"
+import productReviewModel from "./product-review.model"
 export const COLLECTION_PRODUCT_NAME = 'Product'
 export interface IProduct {
     _id?: string 
@@ -20,7 +21,9 @@ export interface IProduct {
     status?: string
     newPrice?: number
     quantity?: number
-    sold?: number
+    sold?: number;
+    countRating?: number;
+    averageRating?: number
 
 }
 
@@ -73,6 +76,8 @@ productSchema.post('find', async function (docs) {
         for(const item of docs){
             item.quantity = await totalQuantity(item.id)
             item.sold = await getTotalQuantityOfSoldByProductId(item.id)
+            item.countRating = await productReviewModel.countRating(item.id);
+            item.averageRating = await productReviewModel.averageRating(item.id) 
         }
     }
     
@@ -81,6 +86,8 @@ productSchema.post('findOne', async function (doc) {
     if(doc){
         doc.quantity = await totalQuantity(doc.id)
         doc.sold = await getTotalQuantityOfSoldByProductId(doc.id)
+        doc.countRating = await productReviewModel.countRating(doc.id);
+        doc.averageRating = await productReviewModel.averageRating(doc.id) 
     }
 })
 
@@ -90,7 +97,7 @@ productSchema.pre('save',async function(next) {
         this.slug = await createUniqueSlug(this.title, COLLECTION_PRODUCT_NAME);
     }
     //default position
-    if(!this.position){
+    if(!this.position && this.isNew){
         this.position = await model<IProduct>(COLLECTION_PRODUCT_NAME).countDocuments({ deleted: false })
     }
     next()

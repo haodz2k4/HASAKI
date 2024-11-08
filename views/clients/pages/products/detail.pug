@@ -84,5 +84,23 @@ block main
         section#thongtin
           .container(style='margin-left: 20px')
             |  !{product.description}
+    .container.mt-5.review-list
+      h2 Feedback của khách hàng 
+      each item in productReviews
+        .review-container
+          .review-header
+            .reviewer-info
+              img.avatar(src='https://via.placeholder.com/40', alt='Avatar')
+              span.reviewer-name #{item.userId.fullName}
+            span.review-date 12/10/2023
+          .review-stars
+            span 
+            - for(let i = 0; i < 5; i++) 
+              if item.rating <= i
+                | &star;
+              else 
+                | &starf;
+          p.review-text #{item.comment}
+
     include ../../partials/add-to-cart.pug 
     form(action="" form-favorite-list method="POST") 
