@@ -29,3 +29,4 @@ export const confirmedOrder = catchAsync(async (req: Request, res: Response) => 
     req.flash('success','Đơn hàng xác nhận thành công')
     res.redirect("back");
 })
+
