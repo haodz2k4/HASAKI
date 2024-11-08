@@ -34,6 +34,7 @@ block main
     
      
     each item in order.products
+     .order 
       .order-item
         img.product-image(src=(item.productId.thumbnail.length > 0 ? item.productId.thumbnail[0] : 'https://via.placeholder.com/100') alt='Product Image')
         .product-details
@@ -43,8 +44,26 @@ block main
             strong #{item.quantity}
           p.product-info
             | Giá tiền: 
-            span.price #{formatPrice(item.price * (100 - item.discountPercentage)/100)}
-    
+            span.price #{formatPrice(item.price * (100 - item.discountPercentage)/100)} 
+        if order.isConfirmed 
+          button.btn.btn-outline-success(btn-show-rating)
+            i.fa-solid.fa-comment
+      form(action="").rating-form.d-none
+            // Star rating
+            .stars
+              span.star(data-value='1') &starf;
+              span.star(data-value='2') &starf;
+              span.star(data-value='3') &starf;
+              span.star(data-value='4') &starf;
+              span.star(data-value='5') &starf;
+            // Rating content input
+            form(action=`/products/${item.id}/rating` method="post")
+              .form-group
+                textarea.form-control(rows='4', placeholder='Ghi nội dung đánh giá ở đây...')
+                button.btn.submit-btn.btn-block(type='submit') Đánh giá 
+                  i.fa-solid.fa-star
+        
+        
     // Additional Info
     .additional-info
       h5.info-title Thông tin vận chuyển 
@@ -69,7 +88,7 @@ block main
         strong Tổng tiền:
         span.price  #{formatPrice(order.totalPrice)} 
     if !order.isConfirmed 
-      form(action=`/orders/${order.id}/confirmed?_method=PATCH` method="post") 
+      form(action=`/orders/${order.id}/confirmed?_method=PATCH` form-confirm-order method="post") 
         button.btn.btn-info(type='submit' disabled=(order.status !== 'delivered') btn-confirm-order=order.id) Xác nhận 
           i.fa-solid.fa-check 
  

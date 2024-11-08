@@ -28,3 +28,8 @@ if(selectUpdateStatus.length > 0){
     })
 }
 
+socket.on('ORDER_CONFIRMATION_UPDATE',(msg) => {
+    console.log("RUN HERE")
+    console.log(msg)
+    window.location.reload()
+})

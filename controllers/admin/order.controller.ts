@@ -92,9 +92,13 @@ export const order = catchAsync(async (req: Request, res: Response) => {
             
             io.to("users").emit('UPDATE_STATUS_SUCCESS', status);
         });
-    
+        
+        socket.on('UPDATE_CONFIRM_ORDER', (msg) => {
+            io.to("users").emit('ORDER_CONFIRMATION_UPDATE', { redirectUrl: req.get("Referrer") || "/" });
+        })
         socket.on('joinRoom', (room) => {
             socket.join(room);
+            socket.emit('joinRoom',room)
         });
     
         socket.on('disconnect', () => {
