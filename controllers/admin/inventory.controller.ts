@@ -16,7 +16,7 @@ export const inventory = catchAsync(async (req: Request, res: Response) => {
         filter["$or"] = [
             { "product.title": new RegExp(keyword, "i") },
             { "supplier.name": new RegExp(keyword, "i") },
-            { wareHouse: new RegExp(keyword,"i")}
+            { wareHouse: new RegExp(keyword,"i")},
         ]
     }  
     const page = parseInt(req.query.page as string) || 1;

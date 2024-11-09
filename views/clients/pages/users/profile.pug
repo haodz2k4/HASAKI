@@ -163,7 +163,27 @@ block main
       button(btn-add-address).btn.btn-success 
         | Thêm địa chỉ 
         i.fa-solid.fa-plus
-    table.table
+    form(action="/users/add-address" form-update-address method="POST").d-none 
+      .row.mb-3
+        .col-md-4
+          label.form-label(for='street') T&ecirc;n &dstrok;&#x1B0;&#x1EDD;ng
+          input#street.form-control(type='text' name='street')
+        .col-md-4
+          label.form-label(for='city') T&ecirc;n th&agrave;nh ph&#x1ED1;
+          input#city.form-control(type='text' name='city')
+        .col-md-4
+          label.form-label(for='country') Qu&#x1ED1;c gia
+          select#country.form-control(name='country')
+            option(value='vietnam') Vi&#x1EC7;t Nam
+            option(value='usa') Hoa K&#x1EF3;
+            option(value='japan') Nh&#x1EAD;t B&#x1EA3;n
+            option(value='korea') H&agrave;n Qu&#x1ED1;c
+            option(value='france') Ph&aacute;p
+            // Thêm các quốc gia khác nếu cần 
+      button(btn-update-address).btn.btn-info 
+        | Cập nhật địa chỉ 
+        i.fa-solid.fa-check
+    table.table(table-address)
       thead
         tr
           th(scope='col') #
@@ -176,18 +196,19 @@ block main
        each item, index in user.addresses 
         tr
           th(scope='row') #{index + 1}
-          td #{item.street}
-          td #{item.city}
-          td #{item.country} 
+          td(street) #{item.street}
+          td(city) #{item.city}
+          td(country) #{item.country} 
           td 
            .form-check
             input#exampleRadios1.form-check-input(type='radio' inp-default-address=index name='defaultAddressIndex' checked=(user.defaultAddressIndex === index ? true : false ) value=item.id ) 
           td 
             .btn-group(role='group')
-              button.btn.btn-danger(type='button') 
+              button.btn.btn-danger(type='button' btn-update-address=index) 
                 i.fa-solid.fa-pen-to-square
               button.btn.btn-warning(type='button' btn-remove-address=index)
-                i.fa-solid.fa-trash
+                i.fa-solid.fa-trash 
+        
 
   div(my-user-id=user.id)
   form(action="" form-remove-address method="post")  

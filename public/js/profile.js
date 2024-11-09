@@ -79,3 +79,43 @@ fileInput.addEventListener("change", () => {
   const formSubmit = fileInput.closest("form");
   formSubmit.submit()
 })
+const tableAddress = document.querySelector("[table-address]");
+const getInfoAddress = (index) => {
+  const tr = tableAddress.querySelectorAll("tbody tr");
+  console.log(tr)
+  let street, city, country;
+  console.log(tableAddress)
+  tr.forEach((item, i) => {
+    if (i === index) {
+      console.log(item.querySelector("[street]"))
+      street = item.querySelector("[street]").innerHTML;
+      city = item.querySelector("[city]").innerHTML;
+      country = item.querySelector("[country]").innerHTML;
+    }
+  });
+
+  return {
+    street,
+    city,
+    country
+  };
+}
+
+const btnUpdateAddress = document.querySelectorAll("[btn-update-address]");
+let lastClickedIndex = null;
+btnUpdateAddress.forEach((item) => {
+  item.addEventListener("click", () => {
+    const index = parseInt(item.getAttribute("btn-update-address"));
+    const formUpdateAddress = document.querySelector("[form-update-address]");
+    if (index === lastClickedIndex) {
+      formUpdateAddress.classList.toggle("d-none");
+    } else {
+      formUpdateAddress.classList.remove("d-none");
+    }
+    const {street, city, country} = getInfoAddress(index);
+    formUpdateAddress.querySelector('input[name="street"]').value = street;
+    formUpdateAddress.querySelector('input[name="city"]').value = city;
+    formUpdateAddress.querySelector(`select option[value=${country}]`).setAttribute('selected', true) 
+    lastClickedIndex = index
+  })
+})

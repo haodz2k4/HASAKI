@@ -75,4 +75,4 @@ export const update = catchAsync(async (req: Request, res: Response) => {
         throw new RenderError(404,"User is not found")
     }
     res.render("admin/pages/users/update.pug")
-})
+}) 

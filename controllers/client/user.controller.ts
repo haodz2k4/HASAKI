@@ -256,3 +256,15 @@ export const uploadAvatar = catchAsync(async (req: Request,res: Response) => {
     req.flash('success','Tải ảnh đại diện lên thành công');
     res.redirect("back")
 })
+
+//[PATCH] "/users/update-address/:index"
+export const updateAddress = catchAsync(async (req: Request, res: Response) => {
+    const {index} = req.params;
+    const user = res.locals.user;
+    const body = req.body
+    user.addresses[index] = body;
+    await user.save()
+    req.flash('success','Cập nhật địa chỉ thành công')
+    res.redirect("back");
+
+})
