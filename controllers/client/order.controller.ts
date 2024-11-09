@@ -43,3 +43,15 @@ export const confirmedOrder = catchAsync(async (req: Request, res: Response) => 
     res.redirect("back");
 })
 
+//[PATCH] "/orders/:id/cancel"
+export const cancelOrder = catchAsync(async (req: Request, res: Response) => {
+    const {id} = req.params;
+    const order = await orderModel.findOne({_id: id});
+    if(!order){
+        throw new RenderError(404,"Order is not found")
+    }
+    order.status = 'cancelled';
+    await order.save()
+    req.flash('success','Đơn hàng đã bị hủy thành công')
+    res.redirect("back");
+})

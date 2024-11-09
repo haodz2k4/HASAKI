@@ -98,7 +98,7 @@ block main
           i.fa-solid.fa-check 
         button.btn.btn-danger(type='button' disabled=(['shipped','delivered','cancelled'].includes(order.status)) btn-cancel-order) Hủy đơn hàng 
           i.fa-solid.fa-ban
- 
+    form(action=`/orders/${order.id}/cancel?_method=PATCH` method="post" form-cancel-order) 
  block script 
     script(src="/socket.io/socket.io.js") 
     script(src="/js/order.js") 
