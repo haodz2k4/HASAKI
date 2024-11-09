@@ -11,6 +11,9 @@ if(formConfirmOrder){
 }
 const btnConfirmOrder = document.querySelector("[btn-confirm-order]")
 const statusContainer = document.querySelector(".status-container");
+const btnCancelOrder = document.querySelector("[btn-cancel-order]");
+
+
 
 socket.on('UPDATE_STATUS_SUCCESS', (msg) => {
     const statusStep = statusContainer.querySelectorAll(".status-step");
@@ -26,6 +29,11 @@ socket.on('UPDATE_STATUS_SUCCESS', (msg) => {
         btnConfirmOrder.removeAttribute('disabled')
     }else{
         btnConfirmOrder.disabled = true
+    }
+    if(['shipped','delivered','cancelled'].includes(msg)) {
+        btnCancelOrder.disabled = true 
+    }else{
+        btnCancelOrder.disabled = false
     }
 });
 

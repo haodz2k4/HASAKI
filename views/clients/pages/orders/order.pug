@@ -7,7 +7,8 @@ block main
   .tracking-container
     if !order.isConfirmed 
      .tracking-header Theo dõi đơn hàng 
-      i.fa-solid.fa-box-open
+      i.fa-solid.fa-box-open 
+      
      .status-container
       .status-step(class=(order.status === 'pending' ? 'active' : '') status='pending')
         .status-circle &check;
@@ -28,6 +29,7 @@ block main
         .status-circle 
           i.fa-solid.fa-x
         .status-label Bị hủy 
+     
     else 
      .tracking-header ĐƠN HÀNG ĐÃ ĐƯỢC XÁC NHẬN 
       i.fa-solid.fa-check
@@ -91,8 +93,11 @@ block main
         span.price  #{formatPrice(order.totalPrice)} 
     if !order.isConfirmed 
       form(action=`/orders/${order.id}/confirmed?_method=PATCH` form-confirm-order method="post") 
+       .btn-group(role='group', aria-label='Basic mixed styles example')
         button.btn.btn-info(type='submit' disabled=(order.status !== 'delivered') btn-confirm-order=order.id) Xác nhận 
           i.fa-solid.fa-check 
+        button.btn.btn-danger(type='button' disabled=(['shipped','delivered','cancelled'].includes(order.status)) btn-cancel-order) Hủy đơn hàng 
+          i.fa-solid.fa-ban
  
  block script 
     script(src="/socket.io/socket.io.js") 

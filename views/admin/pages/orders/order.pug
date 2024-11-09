@@ -102,7 +102,6 @@ block main
                   option(value="shipped" selected=(item.status === 'shipped')) Vận chuyển 
                   option(value="delivered" selected=(item.status === 'delivered')) Đã giao
                   option(value="cancelled" selected=(item.status === 'cancelled')) Bị hủy 
-                  option(value="issue" selected=(item.status === 'issue')) gặp vấn đề 
               
               td #{item.paymentMethod} 
               td #{formatPrice(item.shippingCost)} 
