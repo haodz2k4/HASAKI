@@ -14,6 +14,7 @@ import config from "../../config/config";
 import ms from "ms";
 import { getDomain } from "../../helpers/domain.helper";
 import orderModel from "../../models/order.model";
+import pick from "../../utils/pick";
 
 //[GET] "/users/login"
 export const login = catchAsync(async (req: Request, res: Response) => {
@@ -262,7 +263,10 @@ export const updateAddress = catchAsync(async (req: Request, res: Response) => {
     const {index} = req.params;
     const user = res.locals.user;
     const body = req.body
-    user.addresses[index] = body;
+    console.log(body)
+    const data = pick(body,["city","street","country"])
+    console.log(data)
+    Object.assign(user.addresses[index], data)
     await user.save()
     req.flash('success','Cập nhật địa chỉ thành công')
     res.redirect("back");

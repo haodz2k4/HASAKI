@@ -113,9 +113,10 @@ btnUpdateAddress.forEach((item) => {
       formUpdateAddress.classList.remove("d-none");
     }
     const {street, city, country} = getInfoAddress(index);
-    formUpdateAddress.querySelector('input[name="street"]').value = street;
-    formUpdateAddress.querySelector('input[name="city"]').value = city;
+    formUpdateAddress.querySelector('input[name="street"]').setAttribute('value', street);
+  formUpdateAddress.querySelector('input[name="city"]').setAttribute('value', city);
     formUpdateAddress.querySelector(`select option[value=${country}]`).setAttribute('selected', true) 
+    formUpdateAddress.action = `/users/update-address/${index}?_method=PATCH`
     lastClickedIndex = index
   })
 })

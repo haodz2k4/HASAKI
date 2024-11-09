@@ -41,7 +41,8 @@ router
     .get(requireAuth,controller.getProfiles)
     .patch(requireAuth,controller.updateProfiles) 
 
-router.post("/upload-avatar",upload.single('avatar'),uploadSingle,controller.uploadAvatar)
+router.post("/upload-avatar",requireAuth,upload.single('avatar'),uploadSingle,controller.uploadAvatar)
 router.post("/add-address",requireAuth,controller.addAddress)
+router.patch("/update-address/:index",requireAuth,controller.updateAddress)
 router.delete("/remove-address/:index",requireAuth,controller.removeAddres)
 export default router
