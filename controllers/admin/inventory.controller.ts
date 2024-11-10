@@ -4,6 +4,7 @@ import inventoryModel from "../../models/inventory.model";
 import paginationHelper from "../../helpers/pagination.helper";
 import productModel from "../../models/product.model";
 import supplierModel from "../../models/supplier.model";
+import rangeCountHelper from "../../helpers/range-count";
 
 //[GET] "/admin/inventories"
 export const inventory = catchAsync(async (req: Request, res: Response) => {
@@ -11,6 +12,9 @@ export const inventory = catchAsync(async (req: Request, res: Response) => {
         deleted: false
     }
     
+    const minQuantity = parseInt(req.query.minQuantity as string) || 0;
+    const maxQuantity = parseInt(req.query.maxQuantity as string);
+    filter["$and"] = rangeCountHelper('quantity',minQuantity, maxQuantity)
     const keyword = req.query.keyword as string;
     if (keyword) {
         filter["$or"] = [
@@ -65,7 +69,9 @@ export const inventory = catchAsync(async (req: Request, res: Response) => {
         activePages: 'inventories',
         pageTitle: 'Quản lý kho hàng',
         pagination,
-        keyword
+        keyword,
+        minQuantity,
+        maxQuantity
     });
 });
 
