@@ -5,5 +5,9 @@ router.get("/",controller.inventory)
 router  
     .route("/create")
     .get(controller.create)
-    .post(controller.createPost)
+    .post(controller.createPost) 
+router
+    .route("/update/:id")
+    .get(controller.update)
+    .patch(controller.updatePatch)
 export default router;

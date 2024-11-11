@@ -10,7 +10,8 @@ import userModel from "../../models/user.model";
 export const requireAuth = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     
     const token = req.cookies.accessToken;
-    const redirect = `/users/login?redirect=${req.originalUrl}`
+    const redirectUrl = req.method === 'GET' ? req.originalUrl : '/'
+    const redirect = `/users/login?redirect=${redirectUrl}`
     if(!token){
         throw new RenderError(401,"Vui lòng đăng nhập",redirect)
     }

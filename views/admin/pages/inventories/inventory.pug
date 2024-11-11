@@ -9,14 +9,14 @@ block main
         .row.tool-section
           form(action="").col-md-4.mb-3
             .input-group
-              input.form-control(type='text', placeholder='Tìm kiếm Nhà cung cấp',name='keyword', value=keyword)  
+              input.form-control(type='text', placeholder='Tìm kiếm...',name='keyword', value=keyword)  
               .input-group-append
                 button.btn.btn-dark(type='submit') Tìm     
                           
           form(action="").col-md-4.mb-3
             .d-flex
-              input.form-control.mr-2(type='number', placeholder='Giá từ', name='minQuantity', value=minQuantity)
-              input.form-control.mr-2(type='number', placeholder='Giá đến' name='maxQuantity', value=maxQuantity)
+              input.form-control.mr-2(type='number', placeholder='Số lượng từ', name='minQuantity', value=minQuantity)
+              input.form-control.mr-2(type='number', placeholder='Số lượng đến' name='maxQuantity', value=maxQuantity)
               button.btn.btn-dark(type='submit') Lọc 
           
           .col-md-4.mb-3
@@ -62,11 +62,11 @@ block main
               td
                 strong Hồ Sơn Hào 
               td
-                a(href=`/admin/suppliers/update/${item.id}`).btn.btn-sm.btn-info
+                a(href=`/admin/inventories/update/${item._id.toString()}`).btn.btn-sm.btn-info
                   i.fas.fa-edit
                 button.btn.btn-sm.btn-danger(btn-delete=item.id)
                   i.fas.fa-trash 
-                a(href=`/admin/suppliers/detail/${item.id}`).btn.btn-sm.btn-warning 
+                a(href=`/admin/inventories/detail/${item.id}`).btn.btn-sm.btn-warning 
                   i.fa-solid.fa-magnifying-glass 
     +pagination(pagination)
     div(path='suppliers').my-path 

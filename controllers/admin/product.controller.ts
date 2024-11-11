@@ -10,13 +10,9 @@ import excelJs from "exceljs"
 export const products = catchAsync(async (req: Request, res: Response) => {
     
     const keyword = req.query.keyword as string 
-    const filter: Record<string, unknown> = {deleted: false}
+    const filter: Record<string, any> = {deleted: false}
     if(keyword){
-        filter["$or"] = [
-            {title: new RegExp(keyword,"i")},
-            {price: new RegExp(keyword,"i")},
-            {discountPercentage: new RegExp(keyword,"i")},
-        ]
+        filter.title = new RegExp(keyword,"i")
     }
     const minPrice = req.query.minPrice as string;
     const maxPrice = req.query.maxPrice as string;

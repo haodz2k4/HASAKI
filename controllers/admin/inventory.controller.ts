@@ -1,10 +1,11 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { catchAsync } from "../../utils/catchAsync";
 import inventoryModel from "../../models/inventory.model";
 import paginationHelper from "../../helpers/pagination.helper";
 import productModel from "../../models/product.model";
 import supplierModel from "../../models/supplier.model";
 import rangeCountHelper from "../../helpers/range-count";
+import { RenderError } from "../../utils/error";
 
 //[GET] "/admin/inventories"
 export const inventory = catchAsync(async (req: Request, res: Response) => {
@@ -58,12 +59,11 @@ export const inventory = catchAsync(async (req: Request, res: Response) => {
     ];
 
     const result = await inventoryModel.aggregate(aggregatePipeline);
-
+    
     const inventories = result[0].data;
     const totalDocuments = result[0].totalCount.length > 0 ? result[0].totalCount[0].count : 0;
 
     const pagination = paginationHelper(page, limit, totalDocuments);
-
     res.render("admin/pages/inventories/inventory.pug", {
         inventories,
         activePages: 'inventories',
@@ -93,4 +93,32 @@ export const createPost = catchAsync(async (req: Request, res: Response) => {
     await inventoryModel.create(body)
     req.flash('success','Thêm đơn hàng thành công')
     res.redirect("/admin/inventories")
+})
+
+//[GET] "/admin/inventories/update/:id"
+export const update = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    const {id} = req.params;
+    const inventory = await inventoryModel.findOne({_id: id})
+        .populate('productId','title')
+        .populate('supplierId','name')
+    if(!inventory){
+        throw new RenderError(404,"Inventory is not found")
+    }
+    res.render("admin/pages/inventories/update.pug",{
+        inventory,
+        activePages: 'inventories'
+    })
+}) 
+
+//[PATCH] "/admin/inventories/update/:id"
+export const updatePatch = catchAsync(async (req: Request, res: Response) => {
+    const {id} = req.params
+    const body = req.body; 
+    const inventory = await inventoryModel.findOne({_id: id});
+    if(!inventory){
+        throw new RenderError(404,"Inventory is not found");
+    }
+    Object.assign(inventory, body)
+    await inventory.save()
+    res.redirect("/admin/inventories");
 })

@@ -1,0 +1,29 @@
+extends ../../layouts/default.pug 
+
+block main 
+    .inventory-form-container
+      h3.inventory-form-title Chỉnh sửa đơn hàng 
+      form(action='?_method=PATCH', method='POST')
+        // Product Search Field
+        .form-group.position-relative.inventory-form-group
+          label(for='productSearch') Tìm kiếm sản phẩm 
+          input#productSearch.inventory-form-control(type='text', placeholder='Điền tên sản phẩm' value=inventory.productId.title)
+          input#productId(type='hidden', name='productId' value=inventory.productId.id)
+          #productSuggestions.inventory-form-suggestions 
+        // Supplier Search Field
+        .form-group.position-relative.inventory-form-group
+          label(for='supplierSearch') Tìm kiếm nhà cung cấp 
+          input#supplierSearch.inventory-form-control(type='text', placeholder='Điền tên nhà cung cấp' value=inventory.supplierId.name)
+          input#supplierId(type='hidden', name='supplierId' value=inventory.supplierId.id)
+          #supplierSuggestions.inventory-form-suggestions
+        // Quantity Field
+        .form-group.inventory-form-group
+          label(for='quantity') Số lượng 
+          input#quantity.inventory-form-control(type='number', name='quantity', placeholder='Nhập số lượng', min='1', value=inventory.quantity)
+        // Warehouse Field
+        .form-group.inventory-form-group
+          label(for='warehouse') Địa chỉ nhà kho 
+          input#warehouse.inventory-form-control(type='text', name='wareHouse', placeholder='Nhập địa chỉ nhà kho' value=inventory.wareHouse)
+        // Submit Button
+        button.inventory-form-btn(type='submit') Cập nhật đơn hàng 
+    script(src="/admin/js/inventory.js") 
