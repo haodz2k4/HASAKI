@@ -106,16 +106,7 @@ btnRemoveProductInactive.addEventListener("click",() => {
     if(!isConfirm){
         return;
     }
-    const infoStatus = document.querySelectorAll("[info-status=inactive]");
-    const ids = []
-    infoStatus.forEach((item) => {
-        const value = item.getAttribute("id");
-        ids.push(value)
-        
-    })
     const formChangeMultiCart = document.querySelector("[form-change-multi-cart]") 
-    const inpIds = formChangeMultiCart.querySelector("input");
-    inpIds.value = JSON.stringify(ids);
     const path = `/cart/update/multi/inactive?_method=PATCH`
     formChangeMultiCart.action = path;
     formChangeMultiCart.submit()
@@ -125,21 +116,13 @@ btnRemoveProductInactive.addEventListener("click",() => {
 const btnOutOfStock = document.querySelector("[btn-remove-out-of-stock]");
 if(btnOutOfStock){
     btnOutOfStock.addEventListener("click",() => {
-        const isConfirm = confirm("Bạn có chắc muốn bỏ các sản phẩm không hoạt động không");
+
+        const isConfirm = confirm("Bạn có chắc muốn bỏ các sản phẩm đã hết hàng ko");
         if(!isConfirm){
             return;
         }
-        const infoQuantity = document.querySelectorAll("[info-quantity='0']");
-        const ids = []
-        infoQuantity.forEach((item) => {
-            const value = item.getAttribute("id");
-            ids.push(value)
-            
-        })
-        const formChangeMultiCart = document.querySelector("[form-change-multi-cart]") 
-        const inpIds = formChangeMultiCart.querySelector("input");
-        inpIds.value = JSON.stringify(ids);
-        const path = `/cart/update/multi/oufof-stock?_method=PATCH`
+        const formChangeMultiCart = document.querySelector("[form-change-multi-cart]")
+        const path = `/cart/update/multi/outof-stock?_method=PATCH`
         formChangeMultiCart.action = path;
         formChangeMultiCart.submit()
     })

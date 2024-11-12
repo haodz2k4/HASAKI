@@ -236,7 +236,8 @@ export const removeAddres = catchAsync(async (req: Request, res: Response) => {
 export const updatePassword = catchAsync(async (req: Request, res: Response) => {
     const {currentPassword, newPassword, repeatPassword} =req.body;
     const user = res.locals.user;
-    if(!await user.isPasswordMatch(currentPassword)){
+    console.log(currentPassword)
+    if(! await user.isPasswordMatch(currentPassword)){
         throw new RenderError(401,"Mật khẩu hiện tại không đúng yêu cầu nhập lại");
     }
     if(newPassword !== repeatPassword){

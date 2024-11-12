@@ -49,43 +49,41 @@ export const removeProductFormcart = catchAsync(async (req: Request, res: Respon
 })
 
 //[PATCH] "/cart/update/multi/:type"
+// [PATCH] "/cart/update/multi/:type"
 export const updateMulti = catchAsync(async (req: Request, res: Response) => {
-    const ids = JSON.parse(req.body.ids)
-    const {type} = req.params
+    const { type } = req.params;
     const cart = res.locals.cart;
     switch(type) {
-        case 'remove': 
-            cart.products.forEach((item: Record<string, any>, index: number) => {
-                if(ids.includes(item.productId.id.toString())){
-                    cart.products.splice(index,1)
-                }
-            })
-            await cart.save()
+        case 'remove':
+            const ids = JSON.parse(req.body.ids);
+            cart.products = cart.products.filter((item: Record<string, any>) => {
+                return !ids.includes(item.productId._id.toString());
+            });
+            await cart.save();
             break;
-        case 'inactive': 
-            cart.products.forEach((item: Record<string, any>, index: number) => {
-                if(ids.includes(item.productId.id.toString())){
-                    cart.products.splice(index,1)
-                }
-            })
-            await cart.save()
+            
+        case 'inactive':
+            cart.products = cart.products.filter((item: Record<string, any>) => item.productId.status !== 'inactive');
+            await cart.save();
+            req.flash('success','Loại bỏ các sản phẩm không hoạt động thành công')
             break;
-        case 'oufof-stock': 
-            cart.products.forEach((item: Record<string, any>, index: number) => {
-                if(ids.includes(item.productId.id.toString())){
-                    cart.products.splice(index,1)
-                }
-            })
-            await cart.save()
+            
+        case 'outof-stock':
+            cart.products = cart.products.filter((item: Record<string, any>) => item.productId.quantity !== 0);
+            await cart.save();
+            req.flash('success','Loại bỏ các sản phẩm hết hàng thành công')
             break;
-        case 'favorite-list': 
-            const favoriteList = await res.locals.favoriteList;
-            await favoriteList.addMultiFavorite(ids)
-            req.flash('success','Thêm vào danh sách yêu thích thành công')
+
+        case 'favorite-list':
+            const favoriteList = res.locals.favoriteList;
+            await favoriteList.addMultiFavorite(ids);
+            req.flash('success', 'Thêm vào danh sách yêu thích thành công');
             break;
     }
-    res.redirect("back")
-})
+    
+    res.redirect("back");
+});
+
 
 //[PATCH] "/cart/change/quantity/:productId"
 export const updateCartItemQuantity = catchAsync(async (req: Request, res: Response) => {
