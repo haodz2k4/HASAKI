@@ -18,7 +18,7 @@ block main
               | Danh m&#x1EE5;c: 
               strong #{product.categoryId.title}
             .d-flex.align-items-center.mb-3
-              span.old-price #{product.oldPrice}
+              span.old-price #{formatPrice(product.price)}
               span.price #{product.newPrice}
               span.discount-badge #{product.discountPercentage}% GI&#x1EA2;M
             p.description

@@ -15,7 +15,7 @@ export const inventory = catchAsync(async (req: Request, res: Response) => {
     
     const minQuantity = parseInt(req.query.minQuantity as string) || 0;
     const maxQuantity = parseInt(req.query.maxQuantity as string);
-    filter["$and"] = rangeCountHelper('quantity',minQuantity, maxQuantity)
+    filter.$and = rangeCountHelper('quantity',minQuantity, maxQuantity)
     const keyword = req.query.keyword as string;
     if (keyword) {
         filter["$or"] = [

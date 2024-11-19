@@ -53,9 +53,9 @@ export const removeProductFormcart = catchAsync(async (req: Request, res: Respon
 export const updateMulti = catchAsync(async (req: Request, res: Response) => {
     const { type } = req.params;
     const cart = res.locals.cart;
+    const ids = JSON.parse(req.body.ids || '');
     switch(type) {
         case 'remove':
-            const ids = JSON.parse(req.body.ids);
             cart.products = cart.products.filter((item: Record<string, any>) => {
                 return !ids.includes(item.productId._id.toString());
             });

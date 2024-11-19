@@ -20,9 +20,8 @@ export const products = catchAsync(async (req: Request, res: Response) => {
     }
     const sortString = `${sortKey}-${sortValue}`;
     //range price 
-    const minPrice = parseInt(req.query.minPrice as string)
+    const minPrice = parseInt(req.query.minPrice as string) || 0
     const maxPrice = parseInt(req.query.maxPrice as string);
-    
     filter.$and = rangeCount('price',minPrice, maxPrice)
     //Search 
     const keyword = req.query.keyword as string;

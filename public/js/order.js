@@ -12,13 +12,15 @@ if(formConfirmOrder){
 const btnConfirmOrder = document.querySelector("[btn-confirm-order]")
 const statusContainer = document.querySelector(".status-container");
 const btnCancelOrder = document.querySelector("[btn-cancel-order]");
-btnCancelOrder.addEventListener("click", () => {
-    const isConfirm = confirm("Bạn có chắc muốn hủy đơn hàng không ?");
-    if(isConfirm){
-        const formCancelOrder = document.querySelector("[form-cancel-order]");
-        formCancelOrder.submit()
-    }
-})
+if(btnCancelOrder){
+    btnCancelOrder.addEventListener("click", () => {
+        const isConfirm = confirm("Bạn có chắc muốn hủy đơn hàng không ?");
+        if(isConfirm){
+            const formCancelOrder = document.querySelector("[form-cancel-order]");
+            formCancelOrder.submit()
+        }
+    })
+}
 
 
 socket.on('UPDATE_STATUS_SUCCESS', (msg) => {

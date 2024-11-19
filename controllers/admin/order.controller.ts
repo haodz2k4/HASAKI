@@ -33,6 +33,7 @@ export const order = catchAsync(async (req: Request, res: Response) => {
     const sortKey = req.query.sortKey as string || 'createdAt' 
     const sortValue = (req.query.sortValue as  string === 'asc') ? 1 : -1
     const sort: Record<string, 1 | -1> = {[sortKey]: sortValue}
+    console.log(sort)
     const sortString = `${sortKey}-${req.query.sortValue}`
     const orders = await orderModel.aggregate([
 
@@ -54,7 +55,9 @@ export const order = catchAsync(async (req: Request, res: Response) => {
                 shippingCost: 1,
                 products: 1,
                 id: 1,
-                isConfirmed: 1
+                isConfirmed: 1,
+                createdAt: 1,
+                updatedAt: 1
             }
         },
         {
@@ -81,7 +84,6 @@ export const order = catchAsync(async (req: Request, res: Response) => {
             $sort: sort
         }
     ])
-
     
     io.on('connection', (socket) => {
         console.log('A user connected');
