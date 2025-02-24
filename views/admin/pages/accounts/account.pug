@@ -55,7 +55,7 @@ block main
             th Thao tác 
         tbody
           each item, index in accounts  
-            tr
+            tr(class=(item.id === account.id) ? 'd-none' : '')
               td 
                 input(type="checkbox",value=item.id, name="")
               td #{pagination.skip + 1 + index}

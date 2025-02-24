@@ -41,8 +41,7 @@ export const products = catchAsync(async (req: Request, res: Response) => {
         productModel.countDocuments(filter)
     ])
     const pagination = paginationHelper(page, limit,totalDocument)
-    
-    res.render("clients/pages/products/product.pug",{
+    const jsonObject = {
         products,
         pagination,
         sortString,
@@ -50,7 +49,9 @@ export const products = catchAsync(async (req: Request, res: Response) => {
         maxPrice,
         keyword,
         
-    })
+    }
+
+    res.render("clients/pages/products/product.pug",jsonObject)
 })
 //[GET] "/products/:slug"
 export const detail = catchAsync(async (req: Request, res: Response) => {

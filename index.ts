@@ -4,7 +4,6 @@ dotenv.config();
 import config from "./config/config";
 import { getConnection } from "./config/mongodb";
 import clientRouter from "./routers/client/index.router";
-import redis from "./config/redis";
 import bodyParser from "body-parser";
 import flash from "express-flash";
 import cookieParser from "cookie-parser";
@@ -81,8 +80,6 @@ const bootstrap = () => {
     
     
     // Redis
-    redis;
-
     // Error Middleware 
     app.use(errorMiddleware);
 

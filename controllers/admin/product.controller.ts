@@ -5,7 +5,7 @@ import productModel from "../../models/product.model";
 import { catchAsync } from "../../utils/catchAsync";
 import categoryModel from "../../models/category.model";
 import { RenderError } from "../../utils/error";
-import excelJs from "exceljs"
+import excelJs from "exceljs";
 //[GET] "/admin/products"
 export const products = catchAsync(async (req: Request, res: Response) => {
     
