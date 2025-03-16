@@ -1,5 +1,45 @@
-extends ../../layouts/default.pug 
+extends ../../layouts/default.pug  
 
+block main  
+  .container  
+    h1.text-xl.font-bold.mb-4 Dashboard - Thống kê đơn hàng  
 
-block main 
-    
+    .grid.grid-cols-3.gap-4  
+      // Tổng số đơn hàng
+      .p-4.border.rounded-lg.shadow-md.bg-blue-100
+        h3.text-lg.font-semibold Tổng đơn hàng
+        p.text-3xl.font-bold= totalOrders
+
+      // Tổng doanh thu
+      .p-4.border.rounded-lg.shadow-md.bg-green-100
+        h3.text-lg.font-semibold Tổng doanh thu
+        p.text-3xl.font-bold= totalRevenue.toLocaleString() + " VNĐ"
+
+      // Thống kê theo trạng thái đơn hàng
+      each item in stats
+        .p-4.border.rounded-lg.shadow-md(class=`status-${item.status}`)
+          h3.text-lg.font-semibold= item.status.toUpperCase()
+          p.text-3xl.font-bold= item.count
+
+    h2.text-xl.font-bold.mt-6 Thống kê phương thức thanh toán
+    .grid.grid-cols-2.gap-4
+      each item in paymentStats
+        .p-4.border.rounded-lg.shadow-md.bg-gray-100
+          h3.text-lg.font-semibold= item._id === "cash_on_delivery" ? "Tiền mặt" : "Thẻ"
+          p.text-2xl.font-bold= item.count
+
+    h2.text-xl.font-bold.mt-6 Xu hướng đơn hàng theo tháng
+    .p-4.border.rounded-lg.shadow-md.bg-white
+      canvas#monthlyOrdersChart(width="400" height="200")
+
+    h2.text-xl.font-bold.mt-6 Top sản phẩm bán chạy
+    table.w-full.border-collapse.border
+      thead
+        tr.bg-gray-200
+          th.p-2.border.text-left Tên sản phẩm
+          th.p-2.border.text-center Số lượng bán
+      tbody
+        each item in bestSellingProducts
+          tr
+            td.p-2.border= item._id
+            td.p-2.border.text-center= item.totalSold
