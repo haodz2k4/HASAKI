@@ -2,7 +2,7 @@ extends ../../layouts/default.pug
 block styles 
     link(rel="stylesheet", href="/css/checkout.css")
 block main 
- form(action="/checkout/order" method="post") 
+ form(action="/checkout/order" handleCheckout method="post") 
   .container.checkout-box.my-5
    .checkout-header-title.mb-4 Thanh To&aacute;n
    // User Information
@@ -87,7 +87,7 @@ block main
           i.fas.fa-truck.payment-icon
           span Thanh to&aacute;n khi nh&#x1EAD;n h&agrave;ng
     .form-check
-      input#online.form-check-input(type='radio' name='paymentMethod' value='card_payment' onclick='showPaymentModal()')
+      input#online.form-check-input(type='radio' name='paymentMethod' value='card_payment')
       label.form-check-label(for='online')
         .payment-option
           i.fas.fa-credit-card.payment-icon

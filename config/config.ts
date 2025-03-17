@@ -1,6 +1,7 @@
 export default {
     port: process.env.PORT,
     mongodb: process.env.MONGODB_URL,
+    appUrl: process.env.APP_URL,
     redis: {
         port: parseInt(process.env.REDIS_PORT as string),
         host: process.env.REDIS_HOST,
@@ -39,6 +40,12 @@ export default {
             user: process.env.SMTP_USERNAME,
             pass: process.env.SMTP_PASS
         }
+    },
+    momo: {
+        partnerCode: process.env.MOMO_PARTNER_CODE,
+        accessKey: process.env.MOMO_ACCESS_KEY,
+        secretKey: process.env.MOMO_SECRET_KEY,
+        endpoint: process.env.MOMO_ENDPOINT
     }
 
 }

@@ -10,4 +10,5 @@ router
     .route("/order")
     .post(validation.orderPost,controller.orderPost) 
 router.get("/order/:id/success",controller.orderSuccess)
+router.post("/order/momo/payment",controller.checkOutMomo);
 export default router
